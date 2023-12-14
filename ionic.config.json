@@ -1,0 +1,7 @@
+{
+  "name": "app-teams",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
