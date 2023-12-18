@@ -12,6 +12,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@axios': path.resolve(__dirname, './src/utils/apis/axios.ts'),
+      '@actions': path.resolve(__dirname, './src/utils/actions'),
+      '@apitypes': path.resolve(__dirname, './src/utils/types'),
+      '@transformers': path.resolve(__dirname, './src/utils/transformers'),
+      '@apiEndpoints': path.resolve(__dirname, './src/utils/apis/apiEndpoints'),
     },
   },
   test: {

@@ -1,9 +1,8 @@
 import ApiEndpoints from "@/utils/apis/apiEndpoints";
 import {
   Catched,
-  invalidPayload,
-  eveTechApi,
-} from "@/utils/actions/global";
+  appTeamsAPI,
+} from "@actions";
 // import * as _ from "lodash";
 
 const UserAPI: any = {
@@ -12,7 +11,7 @@ const UserAPI: any = {
       const options: any = {
         params: payload,
       };
-      const response = await eveTechApi.get(
+      const response = await appTeamsAPI.get(
         `${ApiEndpoints.GET_USER_SETTINGS}`,
         options
       );
@@ -26,7 +25,7 @@ const UserAPI: any = {
       const options: any = {
         params: payload,
       };
-      const response = await eveTechApi.get(
+      const response = await appTeamsAPI.get(
         `${ApiEndpoints.GET_USER_ORGANIZATION}`,
         options
       );
@@ -40,7 +39,7 @@ const UserAPI: any = {
       const options: any = {
         params: payload,
       };
-      const response = await eveTechApi.get(
+      const response = await appTeamsAPI.get(
         `${ApiEndpoints.GET_USER_ORGANIZATION_MEMBERS}`,
         options
       );
@@ -54,7 +53,7 @@ const UserAPI: any = {
       const options: any = {
         params: payload,
       };
-      const response = await eveTechApi.get(
+      const response = await appTeamsAPI.get(
         `${ApiEndpoints.GET_USER_ORGANIZATION_LEADERS}`,
         options
       );
@@ -68,7 +67,7 @@ const UserAPI: any = {
       const options: any = {
         params: payload,
       };
-      const response = await eveTechApi.get(
+      const response = await appTeamsAPI.get(
         `${ApiEndpoints.GET_USER_ORGANIZATION_COACHES}`,
         options
       );

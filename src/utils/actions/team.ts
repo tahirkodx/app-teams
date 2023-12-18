@@ -1,9 +1,8 @@
 import ApiEndpoints from "@/utils/apis/apiEndpoints";
 import {
   Catched,
-  invalidPayload,
-  eveTechApi,
-} from "@/utils/actions/global";
+  appTeamsAPI,
+} from "@actions";
 // import * as _ from "lodash";
 
 const TeamAPI: any = {
@@ -12,7 +11,7 @@ const TeamAPI: any = {
       const options: any = {
         params: payload,
       };
-      const response = await eveTechApi.get(
+      const response = await appTeamsAPI.get(
         `${ApiEndpoints.GET_TEAMS}`,
         options
       );

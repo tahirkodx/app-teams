@@ -1,5 +1,5 @@
 import { ref, reactive, computed, ComputedRef } from 'vue'
-import { get, post, put, patch, del } from '@/utils/APIInteraction';
+import { appTeamsAPI } from '@actions';
 
 
 class APIGeneralObject{
@@ -45,7 +45,7 @@ class APIGeneralObject{
 
   async _fetchValueFromServer() {
     try {
-      const response = await get(this.endpoint, this.name);
+      const response = await appTeamsAPI.get(this.endpoint, this.name);
       return response;
     } catch (error) {
       console.error('Error fetching value from the server:', error);
@@ -54,7 +54,7 @@ class APIGeneralObject{
   }
 
   create(json: object){
-    post(this.endpoint, json, 'post' + this.name)
+    appTeamsAPI.post(this.endpoint, json, 'post' + this.name)
       .then(response => this.responseToValue(response))
       .then(() => console.log(this.value))
       .catch((e) => console.log(this.name, 'Error in create', e))
@@ -62,14 +62,14 @@ class APIGeneralObject{
 
   update_object(id: string, json: object){
     this.fetch()
-      .then(() => put(this.endpoint + id + '/', json, 'put' + this.name))
+      .then(() => appTeamsAPI.put(this.endpoint + id + '/', json, 'put' + this.name))
       .then(response => this.responseToValue(response))
       .catch(() => console.log(this.name, 'Error in update object'))
   }
 
   update_values(id: string, json: object){
     this.fetch()
-      .then(() => patch(this.endpoint + id + '/', json, 'patch' + this.name))
+      .then(() => appTeamsAPI.patch(this.endpoint + id + '/', json, 'patch' + this.name))
       .then(response => this.responseToValue(response))
       .catch(() => console.log(this.name, 'Error in update value'))
   }
@@ -82,7 +82,7 @@ class APIGeneralObject{
 
   delete(id: string){
     this.fetch()
-      .then(() => del(this.endpoint + id + '/', 'delete' + this.name))
+      .then(() => appTeamsAPI.delete(this.endpoint + id + '/', 'delete' + this.name))
       .then(response => this.value.delete(id))
       .catch(() => console.log(this.name, 'Error in delete'))
   }
@@ -167,7 +167,7 @@ class APIDictObject extends APIMapObject {
 
   delete(key: string){    
     this.fetch()
-      .then(() => del(this.endpoint + key + '/', 'delete' + this.name))
+      .then(() => appTeamsAPI.delete(this.endpoint + key + '/', 'delete' + this.name))
       .then(response => this.value.delete(key))
       console.log(this.name)
   } 

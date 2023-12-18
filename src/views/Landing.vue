@@ -4,12 +4,14 @@
 
 <script lang="ts" setup>
   import router from '@/router/index'
-  const token = localStorage.getItem('user:token');
+  import { useUserStore } from '@/stores/user'
 
-  if (token){
-      router.push({name: 'team'})
-    } else {
-      router.push({name: 'login'})
+  const userStore = useUserStore()
+
+  if (!userStore.logged_in){
+    router.push({name: 'authentication'})
+  } else {
+    router.push({name: 'team'})
   }
 
 </script>

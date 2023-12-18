@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "ionic serve --port=8100",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test:e2e": "cypress run",
@@ -21,13 +22,17 @@
     "@ionic/vue-router": "^7.0.0",
     "axios": "^1.6.2",
     "ionicons": "^7.0.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "query-string": "^8.1.0",
+    "swiper": "^11.0.5",
     "vue": "^3.3.0",
+    "vue-chartjs": "^5.3.0",
     "vue-router": "^4.2.0"
   },
   "devDependencies": {
     "@capacitor/cli": "5.5.1",
+    "@types/lodash": "^4.14.202",
     "@vitejs/plugin-legacy": "^5.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",

@@ -1,15 +1,15 @@
-import axios from "@/utils/apis/axios";
+import axios, { Response, Error } from "@axios";
 import * as _ from "lodash";
-import qs from "query-string";
-export const invalidPayload = (message: string) => {
-  return {
-    success: false,
-    message:
-      message ||
-      "Invalid parameters. Please try again with correct parameters.",
-    result: [],
-  };
-};
+
+// export const invalidPayload = (message: string) => {
+//   return {
+//     success: false,
+//     message:
+//       message ||
+//       "Invalid parameters. Please try again with correct parameters.",
+//     result: [],
+//   };
+// };
 
 export const Catched = (error: any) => {
   try {
@@ -31,103 +31,120 @@ export const Catched = (error: any) => {
   }
 };
 
-const convertValuesToUrl = (values: string) => {
-  return Object.values(values)
-    .map((value) => encodeURIComponent(value))
-    .join("/");
+// const convertValuesToUrl = (values: string) => {
+//   return Object.values(values)
+//     .map((value) => encodeURIComponent(value))
+//     .join("/");
+// };
+
+// ======================================================
+// Create functions for handling succes and failure
+// ======================================================
+
+const handler = {
+  succes(response: Response, nametag: String, log: Boolean = false) {
+    if (log) {
+      console.log("Succesful connection for " + nametag);
+      console.log(response);
+    }
+    return response;
+  },
+
+  failure(error: Error, nametag: String, json: Object | undefined = undefined) {
+    if (error.response) {
+      console.log("Failur in connection");
+      console.log(nametag);
+      if (!(json === undefined)) {
+        console.log(json);
+      }
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.statusText);
+      console.log(error.response.config);
+      console.log(error.response.headers);
+      return error.response;
+    }
+    return error;
+  },
 };
 
-export const eveTechApi = {
-  get: async (
-    url: string,
-    options: any = {
-      params: {},
-      useQueryString: false,
-    }
-  ) => {
+// ======================================================
+// Create get and post functions that handle key
+// ======================================================
+
+const appTeamsAPI = {
+  get: async (url: string, nametag: string = "", log: boolean = false) => {
+    // console.log('get ', url)
     try {
-      const { params, useQueryString } = options;
-      let payload = params;
-      let updateUrl = url;
-      if (params) {
-        if (!useQueryString) {
-          payload = convertValuesToUrl(params);
-          updateUrl = `${url}/${payload}`;
-        } else {
-          payload = qs.stringify(params, { arrayFormat: "bracket" });
-        }
-      } else {
-        payload = {};
-      }
-      const { data } = await axios.get(
-        // API URL
-        updateUrl,
-        // API Params and Query string handling
-        _.isEmpty(params) ? {} : payload
-      );
-      if (_.isEmpty(data)) {
-        throw new Error("Empty GET response received");
-      }
-      
-      return {  data };
+      const response = await axios.get(url);
+      return handler.succes(response, nametag, log);
     } catch (error: any) {
-      console.log(error.message);
-      handleApiError(error);
-      return { result: null };
+      handler.failure(error, nametag);
+      throw error;
     }
   },
 
-  post: async (url: string, body = {}, config = {}) => {
+  post: async (
+    url: string,
+    json: object,
+    nametag: string,
+    log: boolean = false
+  ) => {
+    console.log("post at ", url, " : ", json);
     try {
-      const { data } = await axios.post(url, body, config);
-      
-      if (_.isEmpty(data)) {
-        throw new Error("Empty POST response received");
-      }
-      return data;
-    } catch (error) {
-      
-      handleApiError(error);
+      const response = await axios.post(url, json);
+      return handler.succes(response, nametag, log);
+    } catch (error: any) {
+      handler.failure(error, nametag);
+      throw error;
     }
   },
 
-  put: async (url: string, body = {}, config = {}) => {
+  put: async (
+    url: string,
+    json: object,
+    nametag: string,
+    log: boolean = false
+  ) => {
+    console.log("put at ", url, " : ", json);
     try {
-      const { data } = await axios.put(url, body, config);
-      if (_.isEmpty(data.result)) {
-        throw new Error("Empty PUT response received");
-      }
-      return data;
-    } catch (error) {
-      handleApiError(error);
+      const response = await axios.put(url, json);
+      return handler.succes(response, nametag, log);
+    } catch (error: any) {
+      handler.failure(error, nametag);
+      throw error;
     }
   },
 
-  patch: async (url: string, body = {}, config = {}) => {
+  patch: async (
+    url: string,
+    json: object,
+    nametag: string,
+    log: boolean = false
+  ) => {
+    console.log("patch at ", url, " : ", json);
     try {
-      const { data } = await axios.patch(url, body, config);
-      if (_.isEmpty(data.result)) {
-        throw new Error("Empty PATCH response received");
-      }
-      return data;
-    } catch (error) {
-      handleApiError(error);
+      const response = await axios.patch(url, json);
+      return handler.succes(response, nametag, log);
+    } catch (error: any) {
+      handler.failure(error, nametag);
+      throw error;
     }
   },
 
-  delete: async (url: string, config = {}) => {
+  delete: async (url: string, nametag: string, log: boolean=false) => {
+    console.log('delete ', url)
     try {
-      const { data } = await axios.delete(url, config);
-      if (_.isEmpty(data.result)) {
-        throw new Error("Empty DELETE response received");
-      }
-      return data;
-    } catch (error) {
-      handleApiError(error);
+        const response = await axios.delete(url)
+        return handler.succes(response, nametag, log)
     }
-  },
+    catch (error: any) {
+      handler.failure(error, nametag)
+        throw error
+    }
+},
 };
-
-const handleApiError = (error: any) => {
-  return Catched(error);
-};
+export default appTeamsAPI;
+// const handleApiError = (error: any) => {
+//   return Catched(error);
+// };

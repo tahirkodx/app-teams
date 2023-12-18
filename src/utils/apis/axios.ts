@@ -1,7 +1,11 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import CONFIG from "@/utils/config";
 import token from "@/utils/token";
 
+// Define and export the types
+export type RequestConfig = AxiosRequestConfig;
+export type Response<T = any> = AxiosResponse<T>;
+export type Error = AxiosError;
 const gotToLogin = () => {
   localStorage.removeItem("user:token");
   window.location.href = "login";
@@ -36,6 +40,7 @@ axiosInstance.interceptors.request.use(
 
     // If there is no token, delete if from the header before making a request
     if (!userToken()) {
+      delete config.defaults.headers.common.Authorization
       delete config.headers.Authorization;
     }
 
