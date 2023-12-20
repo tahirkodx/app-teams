@@ -3,6 +3,7 @@
     <ion-header>
       <score />
     </ion-header>
+    <chart />
     <ion-content class="ion-padding">
       <ion-fab
         slot="fixed"
@@ -40,6 +41,7 @@ import { chevronForwardOutline, add } from "ionicons/icons";
 //import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
+// import chart from "@/components/Global/Chart.vue"
 
 </script>
 
