@@ -14,7 +14,7 @@
         </ion-tab-button>
 
         <ion-tab-button tab="Survey" href="/tabs/surveys">
-          <ion-icon :icon="clipboardOutline" />
+          <ion-icon :icon="documentTextOutline" />
           <ion-label>Surveys</ion-label>
         </ion-tab-button>
 
@@ -42,7 +42,8 @@ import {
   IonTabButton,
   IonTabs,
   IonLabel,
+  IonImg
 } from '@ionic/vue';
-import {  } from '@ionic/vue';
-import { libraryOutline, peopleOutline, barbellOutline, ribbonOutline, clipboardOutline } from 'ionicons/icons';
+import { } from '@ionic/vue';
+import { libraryOutline, peopleOutline, barbellOutline, documentTextOutline, ribbonOutline, clipboardOutline } from 'ionicons/icons';
 </script>
