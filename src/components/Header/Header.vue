@@ -1,9 +1,9 @@
 <template>
   <ion-header>
     <ion-toolbar class="custom-toolbar">
-      <ion-buttons slot="start">
+      <ion-buttons class="startIcon" slot="start">
         <ion-button>
-          <ion-icon :icon="peopleOutline" class="toolbar-icon"></ion-icon>
+          <ion-icon size="large" :icon="people" class="toolbar-icon"></ion-icon>
         </ion-button>
       </ion-buttons>
 
@@ -16,9 +16,9 @@
         </ion-select>
       </div>
 
-      <ion-buttons slot="end">
+      <ion-buttons class="endIcon" slot="end">
         <ion-button>
-          <ion-icon :icon="personCircleSharp" class="toolbar-icon"></ion-icon>
+          <ion-icon size="medium" :icon="personCircleOutline" class="toolbar-icon"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
-import { peopleOutline, personCircleSharp } from 'ionicons/icons';
+import { people, personCircleSharp,personCircleOutline} from 'ionicons/icons';
 </script>
 
 <style scoped>
@@ -47,16 +47,24 @@ import { peopleOutline, personCircleSharp } from 'ionicons/icons';
 }
 
 .header-select {
-  width: 100%;
-  max-width: 200px; /* Adjust the width as needed */
+  width: 127px;
+  max-width: 127px; /* Adjust the width as needed */
+  min-height:32px;
   --background: #4B4B4B;
-  --placeholder-color: #bcbcbc;
+  --placeholder-color: #ffffff;
   --placeholder-opacity: 1;
   --color: #fff;
   --padding-start: 10px;
   --padding-end: 10px;
-  --border-radius: 5px;
+  --border-radius: 8px;
   --border: none;
+ color: white;
+ font-size: 16px;
+ font-family: 'Cabin', sans-serif;
+ font-weight: 700;
+ line-height: 24px;
+ letter-spacing: 0.15px;
+ word-wrap: break-word;
 }
 
 ion-select::part(placeholder) {
@@ -75,11 +83,16 @@ ion-select::part(icon) {
   color: #fff;
   font-size: 24px;
 }
-
 ion-button {
   --background: transparent;
   --background-activated: transparent;
   --background-hover: transparent;
   --ripple-color: transparent;
+}
+.startIcon{
+  padding-right: 10px;
+}
+.endIcon{
+  padding-right: 22px;
 }
 </style>
