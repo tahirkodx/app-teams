@@ -3,10 +3,8 @@ import App from './App.vue'
 import router from './router';
 
 import { IonicVue } from '@ionic/vue';
-import { createPinia } from 'pinia';
 import { register } from 'swiper/element/bundle';
-import { LoginApi } from './utils/actions';
-import { useUserStore } from './stores/user';
+
     
 
 /* Core CSS required for Ionic components to work properly */
@@ -32,33 +30,10 @@ import { Buffer } from 'buffer';
 import token from "./utils/token";
 // @ts-ignore
 window.Buffer = Buffer;
-
-
-const pinia = createPinia()
 register();
-  
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(pinia);
-
-if (import.meta.env.DEV) {
-  const userStore = useUserStore()
-  // const login = {
-  //   email: "0@0.com",
-  //    password: "Newton123!",
-  // }
-  // const isLogin = await LoginApi.post({ login });
-  // console.log("Here is here : " , isLogin)
-  // if (isLogin.key) {
-  //   console.log("sucessss");
-  //   token.set("user:token", isLogin.key);
-  //   //await this.handleResponse('Logged in Sucessfully', "login", "POST", { name: 'assessments' });
-    
-  // } 
-  // await userStore.login("0@0.com", "Newton123!")  
-}
-
 router.isReady().then(() => {
   app.mount('#app');
 });
