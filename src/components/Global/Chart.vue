@@ -1,5 +1,8 @@
 <template>
-  <Radar :data="chartData" :options="chartOptions" />
+  <div class="graph-box">
+    <Radar :data="chartData" :options="chartOptions" />
+  </div>
+  
 </template>
 
 <script setup lang="ts">
@@ -63,6 +66,11 @@ const chartData = {
   box-sizing: border-box;
   width: 390px; /* Adjust as needed */
   height: 793.333px; /* Adjust as needed */
+  /* Additional styles */
+}
+.graph-box {
+  
+  height: 300px; /* Adjust as needed */
   /* Additional styles */
 }
 </style>

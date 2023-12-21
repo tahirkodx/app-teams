@@ -6,6 +6,7 @@ export const options = {
       }
     },
   scales: {
+    
     r: {
       grid: {
         color: 'rgba(255, 255, 255, 0.5)' // Lighter grid lines against the dark background
@@ -19,6 +20,7 @@ export const options = {
       ticks: {
         display: false // This will hide the tick labels such as 100, 90, 80, etc.
       },
+      
       
     }
   },
