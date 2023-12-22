@@ -4,30 +4,41 @@ import TabsPage from '../views/TabsPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    component: () => import("@/views/Landing.vue"),
+    path: '/',
+    component: () => import('@/views/Landing.vue')
   },
+    
+  
+  
+  
+  
+  
   {
-    path: "/tabs/",
+    path: '/tabs/',
     component: TabsPage,
     children: [
       {
-        path: "",
-        redirect: "/tabs/team",
+        path: '/',
+        redirect: '/tabs/team'
       },
       {
-        name: "team",
-        path: "team",
-        component: () => import("@/views/Teams/Team.vue"),
+        name: 'team',
+        path: 'team',
+        component: () => import('@/views/Teams/Team.vue'),
       },
+      
+      
+      
+      
       {
-        name: "exercises",
-        path: "exercises",
-        component: () => import("@/views/Exercises/Exercise.vue"),
+        name: 'exercises',
+        path: 'exercises',
+        component: () => import('@/views/Exercises/Exercise.vue'),
       },
-    ],
-  },
-];
+      
+    ]
+  }
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

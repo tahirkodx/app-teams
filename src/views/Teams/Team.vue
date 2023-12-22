@@ -3,8 +3,23 @@
     <ion-header>
       <score />
     </ion-header>
-    <chart />
     <ion-content class="ion-padding">
+      <chart />
+      <clickbutton />
+      <teamwidget />
+      <ion-reorder-group >
+                <ion-card v-for="(item, index) in practiceItems" :key="index" class="practice-card">
+                    <div class="card-content">
+                        <ion-reorder slot="start"></ion-reorder>
+                        
+                        <ion-label>{{ item.title }}</ion-label>
+                        <ion-icon :icon="chevronForward" slot="end" />
+                    </div>
+                    <div class="progress-container">
+                        <ion-progress-bar  ></ion-progress-bar>
+                    </div>
+                </ion-card>
+            </ion-reorder-group>
       <ion-fab
         slot="fixed"
         horizontal="end"
@@ -35,18 +50,80 @@ import {
   IonDatetime,
   IonFabButton,
   IonList,
+  IonCard,
+  IonThumbnail,
+  IonProgressBar,
+  IonReorderGroup,
+  IonReorder,
 } from "@ionic/vue";
-import { chevronForwardOutline, add } from "ionicons/icons";
+
+import { chevronForward, add, arrowUpOutline } from "ionicons/icons";
 //import 'vue3-carousel/dist/carousel.css'
 //import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
-import chart from "@/components/Global/Chart.vue"
-
+import chart from "@/components/Global/Chart.vue";
+import clickbutton from "@/components/Buttons/Button.vue";
+import teamwidget from "@/components/Widgets/TeamWidget.vue";
+const practiceItems = ref([
+  { title: "Team A", subtitle: "20" },
+  { title: "Team B", subtitle: ""},
+  { title: "Team C", subtitle: ""},
+  { title: "Team D", subtitle: ""},
+  // ... other items
+]);
 </script>
 
 <style scoped>
 ion-datetime {
   --background: unset: !important;
+}
+.practice-card {
+    margin-bottom: 8px;
+    --ion-item-background: transparent;
+    --ion-item-padding: 0;
+    --background: transparent;
+    box-shadow: none;
+    /* Remove shadow if present */
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+}
+
+ion-item {
+    --padding-start: 0;
+    --padding-end: 0;
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+}
+
+ion-label {
+    flex-grow: 1;
+    font-size: 1rem;
+    padding: 16px 0;
+    color: #FFFFFF;
+}
+
+.progress-container {
+    width: 100%;
+
+}
+
+ion-progress-bar {
+    height: 2px;
+    /* Height of progress bar, adjust as needed */
+    --background: #7F7F7F;
+}
+
+ion-reorder {
+    color: var(--ion-color-medium);
+}
+
+ion-icon {
+    font-size: 1.5em;
+    width: 24px;
+    height: 24px;
 }
 </style>
