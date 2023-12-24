@@ -21,6 +21,7 @@
                 </ion-card>
             </ion-reorder-group>
       <ion-fab
+      class="addStyle"
         slot="fixed"
         horizontal="end"
         vertical="bottom"
@@ -125,5 +126,9 @@ ion-icon {
     font-size: 1.5em;
     width: 24px;
     height: 24px;
+}
+.addStyle{
+    margin-bottom: 40px;
+    margin: 10px ;
 }
 </style>
