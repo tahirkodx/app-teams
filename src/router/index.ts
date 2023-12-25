@@ -26,14 +26,20 @@ const routes: Array<RouteRecordRaw> = [
         path: 'team',
         component: () => import('@/views/Teams/Team.vue'),
       },
-      
-      
-      
-      
+      {
+        name: 'teamsupport',
+        path: 'teams/support',
+        component: () => import('@/views/Support/TeamSupport.vue')
+      },
       {
         name: 'exercises',
         path: 'exercises',
         component: () => import('@/views/Exercises/Exercise.vue'),
+      },
+      {
+        name: 'academy',
+        path: 'academy',
+        component: () => import('@/views/Academy/Academy.vue'),
       },
       
     ]

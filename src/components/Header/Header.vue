@@ -20,14 +20,31 @@
         <ion-button>
           <ion-icon size="medium" :icon="personCircleOutline" class="toolbar-icon"></ion-icon>
         </ion-button>
+        <!-- <ion-button>
+          <ion-toggle :checked="themeToggle" @ionChange="toggleChange($event)" justify="space-between"
+          ></ion-toggle
+        >
+        </ion-button> -->
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 </template>
 
 <script setup lang="ts">
+import { defineComponent, ref } from 'vue';
+
 import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
 import { people, personCircleSharp,personCircleOutline} from 'ionicons/icons';
+import type { ToggleCustomEvent } from '@ionic/vue';
+
+const themeToggle = ref(false);
+const toggleDarkTheme = (shouldAdd) => {
+        document.body.classList.toggle('dark', shouldAdd);
+      };
+const toggleChange = (ev: ToggleCustomEvent) => {
+        toggleDarkTheme(ev.detail.checked);
+      };
+
 </script>
 
 <style scoped>
@@ -93,6 +110,6 @@ ion-button {
   padding-right: 10px;
 }
 .endIcon{
-  padding-right: 22px;
+  /* padding-right: 22px; */
 }
 </style>
