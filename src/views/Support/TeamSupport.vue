@@ -38,53 +38,16 @@
         <div class="content">
           <!-- Content based on the active tab -->
           <div v-if="activeTab === 'team'">
-            <div v-for="(item, index) in masgList" class="chat-container">
-              <div
-                class="chat-bubble"
-                :class="{
-                  left: item.status === 'send',
-                  right: item.status === 'recieve',
-                }"
-              >
-                {{ item.message }}
-              </div>
-              <span
-                class="customTime"
-                :class="{ customTimeLeft: item.status === 'send' }"
-                >{{ item.time }}</span
-              >
-            </div>
-            <div class="chat-input">
-              <ion-input
-                label-placement="stacked"
-                placeholder="Ask me anything..."
-              >
-                <ion-button
-                  fill="clear"
-                  slot="end"
-                  class="send-button"
-                  @click="sendMessage"
-                >
-                  <ion-icon :icon="sendOutline"></ion-icon>
-                </ion-button>
-              </ion-input>
-            </div>
+            <chat />
           </div>
           <div v-if="activeTab === 'others'">Other tabs</div>
         </div>
       </div>
       <!-- Rest of your content -->
-
-      <ion-fab
-        slot="fixed"
-        horizontal="end"
-        vertical=""
-        @click="() => router.push({ name: 'addteam' })"
-      >
-        <ion-fab-button>
-          <ion-icon :icon="calendarClearOutline"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
+      <fixedicon
+        path="/src/pictures/today_24px.svg"
+        :onClick="alertClick"
+      ></fixedicon>
     </ion-content>
   </ion-page>
 </template>
@@ -113,19 +76,13 @@ import {
   IonChip,
 } from "@ionic/vue";
 
-import { sendOutline, calendarClearOutline } from "ionicons/icons";
+import { sendOutline, add } from "ionicons/icons";
 //import 'vue3-carousel/dist/carousel.css'
 //import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
-
-const masgList = ref([
-  { message: "Hi are you there?", time: "02:30 PM", status: "send" },
-  { message: "I need help realted to teams", time: "02:30 PM", status: "send" },
-  { message: "Yes! how I can help you?", time: "02:31 PM", status: "recieve" },
-  { message: "How I can create a team?", time: "02:31 PM", status: "send" },
-  // ... other items
-]);
+import fixedicon from "@/components/Icons/FixedIcon.vue";
+import Chat from "@/components/Widgets/Chat.vue";
 
 const activeTab = ref("team"); // default active tab
 const cardContainer = ref(null);
@@ -134,11 +91,6 @@ const cardContainer = ref(null);
 const segmentChanged = (tabName) => {
   activeTab.value = tabName;
 };
-const sendMessage = () => {
-  // Add the logic to handle sending a message
-  console.log("Message sent");
-};
-
 const scrollLeft = () => {
   if (cardContainer.value) {
     cardContainer.value.scrollLeft += 200; // scroll by 200 pixels; adjust as necessary
@@ -170,70 +122,6 @@ const scrollLeft = () => {
   padding: 20px 15px 0px 15px;
   min-height: 200px; /* Adjust as needed */
 }
-
-.chat-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.chat-bubble {
-  max-width: 80%;
-  padding: 12px 20px;
-  border-radius: 20px;
-  position: relative;
-  margin-top: 20px;
-}
-
-.left {
-  align-self: end;
-  border-radius: 16px 16px 4px 16px;
-  background: var(--my-masg-background);
-}
-
-.right {
-  align-self: start;
-  border-radius: 16px 16px 4px 16px;
-  background: var(--my-masg-background);
-}
-
-.chat-input {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  position: fixed;
-  bottom: 10px;
-  left: 15px;
-  right: 15px;
-  background: var(--my-masg-background);
-  border-radius: 17px;
-  box-shadow: 3.766px 3.766px 7.532px 0px rgba(212, 192, 192, 0.25);
-}
-
-ion-textarea {
-  flex: 1 1 auto; /* Allow the textarea to grow and shrink, but also fill the space */
-  margin-right: 10px; /* Add some margin to the right of the textarea */
-}
-
-.send-button {
-  flex: 0 0 auto; /* Do not allow the button to grow, keep its size based on its content */
-}
-
-ion-button {
-  --padding-start: 0; /* Remove padding start */
-  --padding-end: 0; /* Remove padding end */
-  --padding-top: 0; /* Remove padding top */
-  --padding-bottom: 0; /* Remove padding bottom */
-  min-width: 40px; /* You can adjust this value */
-}
-ion-fab {
-  bottom: 100px;
-}
-.customTime {
-  font-size: 12px;
-}
-.customTimeLeft {
-  align-self: end;
-}
 ion-chip {
   --background: #8289d5;
 }
@@ -249,8 +137,8 @@ ion-chip {
 .custom-tags {
   flex: 0 0 auto; /* Do not grow or shrink */
   margin: 0 8px; /* Spacing between cards */
-  border-radius: 20px; /* Rounded corners */
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); /* Card shadow */
-  border: solid 1px #bcbed5;
+  border-radius: 17px;
+  border: 1.5px solid #8289d5;
 }
 </style>

@@ -20,16 +20,7 @@
                     </div>
                 </ion-card>
             </ion-reorder-group>
-      <ion-fab
-        slot="fixed"
-        horizontal="end"
-        vertical="bottom"
-        @click="() => router.push({ name: 'addteam' })"
-      >
-        <ion-fab-button>
-          <ion-icon :icon="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
+      <fixedicon path="/src/pictures/answer-correct-icon.svg" link="team"></fixedicon>
     </ion-content>
   </ion-page>
 </template>
@@ -65,6 +56,7 @@ import score from "@/components/Header/Header.vue";
 import chart from "@/components/Global/Chart.vue";
 import linkbutton from "@/components/Buttons/LinkButton.vue";
 import teamwidget from "@/components/Widgets/TeamWidget.vue";
+import fixedicon from "@/components/Icons/FixedIcon.vue";
 const practiceItems = ref([
   { title: "Team A", subtitle: "20" },
   { title: "Team B", subtitle: ""},
