@@ -53,8 +53,7 @@ onMounted(() => {
   flex: 0 0 auto; /* Do not grow or shrink */
   margin: 0 8px; /* Spacing between cards */
   border-radius: 20px; /* Rounded corners */
-  background: #373737; /* Dark background color */
-  color: white; /* Text color */
+  /* background: #373737; */
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); /* Card shadow */
   border: solid 1px #7f7f7f;
   width: 250px;

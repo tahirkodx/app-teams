@@ -5,7 +5,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <chart />
-      <clickbutton />
+      <linkbutton label="Ask Help" expend="block" link="teamsupport" />
       <teamwidget />
       <ion-reorder-group >
                 <ion-card v-for="(item, index) in practiceItems" :key="index" class="practice-card">
@@ -63,7 +63,7 @@ import { chevronForward, add, arrowUpOutline } from "ionicons/icons";
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import chart from "@/components/Global/Chart.vue";
-import clickbutton from "@/components/Buttons/Button.vue";
+import linkbutton from "@/components/Buttons/LinkButton.vue";
 import teamwidget from "@/components/Widgets/TeamWidget.vue";
 const practiceItems = ref([
   { title: "Team A", subtitle: "20" },
@@ -103,7 +103,7 @@ ion-label {
     flex-grow: 1;
     font-size: 1rem;
     padding: 16px 0;
-    color: #FFFFFF;
+    
 }
 
 .progress-container {
