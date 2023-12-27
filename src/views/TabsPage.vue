@@ -18,7 +18,7 @@
           <ion-label>Surveys</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="Academy" href="/tabs/academy">
+        <ion-tab-button tab="Academy" href="/tabs/academys">
           <ion-icon :icon="libraryOutline" />
           <ion-label>Academy</ion-label>
         </ion-tab-button>

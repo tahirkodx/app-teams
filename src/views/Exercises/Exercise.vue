@@ -31,7 +31,7 @@
           @click="() => router.push({ name: 'addteam' })"
         >
           <ion-fab-button>
-            <ion-icon :icon="add"></ion-icon>
+            <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
           </ion-fab-button>
         </ion-fab>
     </ion-content>
