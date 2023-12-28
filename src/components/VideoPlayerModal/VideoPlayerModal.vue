@@ -11,7 +11,7 @@
     </div>
     <ion-content class="ion-padding">
       <video width="100%" controls v-if="resource.videoUrl">
-        <source :src=resource.videoUrl type="video/mp4">
+        <source :src='resource.videoUrl' type="video/mp4">
         Your browser does not support the video tag.
       </video>
       <p v-if="!resource.videoUrl">No video available for this resource.</p>

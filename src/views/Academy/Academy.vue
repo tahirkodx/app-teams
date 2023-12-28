@@ -80,7 +80,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -90,7 +90,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -100,7 +100,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -110,7 +110,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -120,7 +120,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -130,7 +130,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -140,7 +140,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -150,7 +150,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -160,7 +160,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: `https://youtu.be/UIZAiXYceBI`,
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
