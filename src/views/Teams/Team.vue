@@ -5,7 +5,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <chart />
-      <clickbutton />
+      <linkbutton label="Ask Help" expend="block" link="teamsupport" />
       <teamwidget />
       <ion-reorder-group >
                 <ion-card v-for="(item, index) in practiceItems" :key="index" class="practice-card">
@@ -20,17 +20,7 @@
                     </div>
                 </ion-card>
             </ion-reorder-group>
-      <ion-fab
-      class="addStyle"
-        slot="fixed"
-        horizontal="end"
-        vertical="bottom"
-        @click="() => router.push({ name: 'addteam' })"
-      >
-        <ion-fab-button>
-          <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
+      <fixedicon path="/src/pictures/answer-correct-icon.svg" link="team"></fixedicon>
     </ion-content>
   </ion-page>
 </template>
@@ -64,8 +54,9 @@ import { chevronForward, add, arrowUpOutline } from "ionicons/icons";
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import chart from "@/components/Global/Chart.vue";
-import clickbutton from "@/components/Buttons/Button.vue";
+import linkbutton from "@/components/Buttons/LinkButton.vue";
 import teamwidget from "@/components/Widgets/TeamWidget.vue";
+import fixedicon from "@/components/Icons/FixedIcon.vue";
 const practiceItems = ref([
   { title: "Team A", subtitle: "20" },
   { title: "Team B", subtitle: ""},
@@ -104,7 +95,7 @@ ion-label {
     flex-grow: 1;
     font-size: 1rem;
     padding: 16px 0;
-    color: #FFFFFF;
+    
 }
 
 .progress-container {
