@@ -1,8 +1,9 @@
 <template>
+  <div>
   <ion-grid>
     <ion-row>
       <ion-col size="auto">
-        <ion-checkbox label-placement="end">Create value</ion-checkbox>
+        <ion-checkbox label-placement="end" @click="showRecommendedVideos">Create value</ion-checkbox>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -127,6 +128,8 @@
         </ion-col>
     </ion-row>
   </ion-grid>
+  <recommendedvideos v-if="showVideos" ></recommendedvideos>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -158,6 +161,7 @@ import {
 } from "@ionic/vue";
 
 import { sendOutline, add } from "ionicons/icons";
+import recommendedvideos from "@/components/Widgets/RecommendedVideos.vue"
 const masgList = ref([
   { message: "Hi are you there?", time: "02:30 PM", status: "send" },
   { message: "I need help realted to teams", time: "02:30 PM", status: "send" },
@@ -166,7 +170,11 @@ const masgList = ref([
   // ... other items
 ]);
 
-const showAtctions = ref(false);
+const showVideos = ref(false);
+const showRecommendedVideos = () => {
+  // Add the logic to handle sending a message
+  showVideos.value = !showVideos.value;
+};
 </script>
 
 <style scoped>

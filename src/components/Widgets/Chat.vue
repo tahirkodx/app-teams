@@ -17,7 +17,7 @@
       >
     </div>
     <div>
-      <ion-button @click="showActionIems">
+      <ion-button v-if="!showAtctions" @click="showActionIems">
         <ion-icon slot="start" :icon="add"></ion-icon>
         Action Items
       </ion-button>
