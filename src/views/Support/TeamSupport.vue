@@ -121,6 +121,8 @@ const scrollLeft = () => {
 .content {
   padding: 20px 15px 0px 15px;
   min-height: 200px; /* Adjust as needed */
+  overflow-y: scroll;
+    height: 520px;
 }
 ion-chip {
   --background: #8289d5;
