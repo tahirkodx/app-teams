@@ -11,7 +11,8 @@
       class="custom-searchbar"></ion-searchbar>
 
       <ion-list class="list-ios">
-        <ion-item v-for="(resource, index) in resources" :key="index" lines="none" class="resource-item">
+       
+        <ion-item v-for="(resource, index) in resources" :key="index" lines="none" class="resource-item" @click="openModal(resource)">
           <ion-thumbnail slot="start" class="resource-thumbnail">
             <ion-img :src="resource.img"></ion-img>
           </ion-thumbnail>
@@ -28,12 +29,15 @@
           </ion-label>
         </ion-item>
       </ion-list>
+        
       <ion-fab class="addStyle" slot="fixed" horizontal="end" vertical="bottom"
         @click="() => router.push({ name: 'addteam' })">
         <ion-fab-button>
           <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
         </ion-fab-button>
       </ion-fab>
+
+       <myMyModal :is-visible="isModalVisible" :resource="selectedResource" @update:isVisible="isModalVisible = $event"></myMyModal>
     </ion-content>
   </ion-page>
 </template>
@@ -45,6 +49,7 @@ import {
   IonHeader,
   IonSearchbar,
   IonToolbar,
+  IonButton,
   IonTitle,
   IonContent,
   IonList,
@@ -54,10 +59,18 @@ import {
   IonLabel,
   IonIcon,
 } from "@ionic/vue";
-import { playCircleOutline, add } from "ionicons/icons";
+
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
+import myMyModal from "@/components/VideoPlayerModal/VideoPlayerModal.vue";
+ 
+const isModalVisible = ref(false);
+const selectedResource = ref({});
 
+const openModal = (resource: any) => {
+   selectedResource.value = resource;
+isModalVisible.value = true;
+};
 const resources = ref([
   // Populate this array with your resources
   // Example resource:
@@ -67,6 +80,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -76,6 +90,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -85,6 +100,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -94,6 +110,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -103,6 +120,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -112,6 +130,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -121,6 +140,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -130,6 +150,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -139,11 +160,14 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
+    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
   // ... add more resources as needed
 ]);
+
+ 
 </script>
 
 <style scoped>
