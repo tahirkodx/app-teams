@@ -17,8 +17,8 @@
       </div>
 
       <ion-buttons class="endIcon" slot="end">
-        <ion-button>
-          <ion-icon size="medium" :icon="personCircleOutline" class="toolbar-icon"></ion-icon>
+        <ion-button @click="navigateToProfile">
+          <ion-icon size="medium" :icon="personCircleOutline" class="toolbar-icon-profile"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -28,6 +28,13 @@
 <script setup lang="ts">
 import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
 import { people, personCircleSharp,personCircleOutline} from 'ionicons/icons';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+// Define the method to navigate to the profile page
+const navigateToProfile = () => {
+  router.push('/profile'); // The path '/profile' should match the path defined in your router for the profile component
+};
 </script>
 
 <style scoped>
@@ -76,12 +83,24 @@ ion-select::part(placeholder) {
 
 ion-select::part(icon) {
   color: #fff;
-  margin-end: 0; /* Align the dropdown icon to the right */
+  marker-end: 0; /* Align the dropdown icon to the right */
 }
 
 .toolbar-icon {
   color: #fff;
-  font-size: 24px;
+  /* font-size: 24px; */
+  width: 30px;
+height: 22.222px;
+flex-shrink: 0;
+  
+}
+.toolbar-icon-profile {
+  color: #fff;
+  /* font-size: 24px; */
+  width: 24px;
+height: 24px;
+flex-shrink: 0;
+  
 }
 ion-button {
   --background: transparent;

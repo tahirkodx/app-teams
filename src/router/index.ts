@@ -7,6 +7,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     component: () => import("@/views/Landing.vue"),
   },
+  {
+    path: "/profile",
+    component: () => import("@/views/Profile/Profile.vue"),
+  },
 
   {
     path: "/tabs/",
