@@ -104,12 +104,12 @@ ion-select::part(placeholder) {
 }
 
 ion-select::part(icon) {
-  color: #fff;
+  /* color: #f4f4f4; */
   marker-end: 0; /* Align the dropdown icon to the right */
 }
 
 .toolbar-icon {
-  color: #fff;
+  /* color: #fff; */
   /* font-size: 24px; */
   width: 30px;
 height: 22.222px;
@@ -117,7 +117,7 @@ flex-shrink: 0;
   
 }
 .toolbar-icon-profile {
-  color: #fff;
+  /* color: #fff; */
   /* font-size: 24px; */
   width: 24px;
 height: 24px;
