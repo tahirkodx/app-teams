@@ -81,7 +81,12 @@ http://ionicframework.com/docs/theming/ */
 
   /* custom background */
   --my-masg-background: #eceaea;
-  
+
+  --my-chart-background : rgba(130, 137, 213, 0.10);
+  --my-chart-border : rgba(130, 137, 213, 0.10);
+  --my-chart-border-color : #BDBDBD;
+  --my-chart-lines : rgba(255, 255, 255, 1);
+  --my-canvas-background : #dcdce7;
 }
 /*
  * Dark Colors
@@ -154,6 +159,12 @@ http://ionicframework.com/docs/theming/ */
 
   /* custom css */
   --my-masg-background: #373737;
+
+  --my-chart-background : rgba(130, 137, 213, 0.10);
+  --my-chart-border : rgba(255, 255, 255, 0.5);
+  --my-chart-border-color : #8289D5;
+  --my-chart-lines : rgba(0, 0, 0, 1);
+  --my-canvas-background : #3e3f46;
 }
 
 /*

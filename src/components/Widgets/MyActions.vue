@@ -162,13 +162,7 @@ import {
 
 import { sendOutline, add } from "ionicons/icons";
 import recommendedvideos from "@/components/Widgets/RecommendedVideos.vue"
-const masgList = ref([
-  { message: "Hi are you there?", time: "02:30 PM", status: "send" },
-  { message: "I need help realted to teams", time: "02:30 PM", status: "send" },
-  { message: "Yes! how I can help you?", time: "02:31 PM", status: "recieve" },
-  { message: "How I can create a team?", time: "02:31 PM", status: "send" },
-  // ... other items
-]);
+
 
 const showVideos = ref(false);
 const showRecommendedVideos = () => {

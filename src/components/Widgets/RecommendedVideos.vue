@@ -2,8 +2,7 @@
   <div>
     <ion-row>
       <ion-col
-        ><ion-text >
-          <p>Coach recommended a video</p> </ion-text
+        ><ion-text> <p>Coach recommended a video</p> </ion-text
         ><ion-icon name="today"></ion-icon>
       </ion-col>
       <ion-col size="auto"
@@ -13,135 +12,27 @@
         </ion-button></ion-col
       >
     </ion-row>
-</div>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="auto">
-        <ion-checkbox label-placement="end">Create value</ion-checkbox>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="auto">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="11"
-          height="16"
-          viewBox="0 0 11 16"
-          fill="none"
-        >
-          <ellipse
-            cx="8.19605"
-            cy="1.97115"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
+  </div>
+  <div>
+    <div v-for="(resource, index) in resources"
+        :key="index" class="resource-card">
+      <img class="thumbnail" :src="resource?.imgPath" alt="Thumbnail" />
+      
+      <div class="content">
+        <div class="title-section">
+          <img
+            class="icon"
+            :src="resource.icon"
+            alt="Play Icon"
           />
-          <ellipse
-            cx="8.19605"
-            cy="8.27883"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="8.19605"
-            cy="13.7981"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="2.19605"
-            cy="1.97115"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="2.19605"
-            cy="8.27883"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="2.19605"
-            cy="13.7981"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-        </svg>
-      </ion-col>
-      <ion-col>
-        <p class="ion-text-capitalize">Creating a team value sheet</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="auto">
-        <ion-checkbox label-placement="end">Create value</ion-checkbox>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="auto">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="11"
-          height="16"
-          viewBox="0 0 11 16"
-          fill="none"
-        >
-          <ellipse
-            cx="8.19605"
-            cy="1.97115"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="8.19605"
-            cy="8.27883"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="8.19605"
-            cy="13.7981"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="2.19605"
-            cy="1.97115"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="2.19605"
-            cy="8.27883"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-          <ellipse
-            cx="2.19605"
-            cy="13.7981"
-            rx="2.19605"
-            ry="1.97115"
-            fill="#D8DEF3"
-          />
-        </svg>
-      </ion-col>
-      <ion-col>
-        <p class="ion-text-capitalize">Creating a team value sheet</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+          <span class="title">{{resource.title}}</span>
+        </div>
+        <p class="snippet">
+          {{resource.snippet}}
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -173,15 +64,39 @@ import {
 } from "@ionic/vue";
 
 import { sendOutline, add } from "ionicons/icons";
-const masgList = ref([
-  { message: "Hi are you there?", time: "02:30 PM", status: "send" },
-  { message: "I need help realted to teams", time: "02:30 PM", status: "send" },
-  { message: "Yes! how I can help you?", time: "02:31 PM", status: "recieve" },
-  { message: "How I can create a team?", time: "02:31 PM", status: "send" },
-  // ... other items
-]);
 
-const showAtctions = ref(false);
+const resources = ref([
+  // Populate this array with your resources
+  // Example resource:
+  {
+    imgPath: "/src/pictures/dogYellow.svg",
+    title: "Resource title",
+    snippet: "Resource snippet: Lorem ipsum dolor",
+    duration: "Length 4:25 min",
+    updated: "6",
+    icon: "/src/pictures/videoPlayIcon.svg",
+  },
+  {
+    imgPath: "/src/pictures/handPic.svg",
+    title: "Resource title",
+    snippet:
+      "Resource snippet: Lorem ipsum dolor",
+    duration: "Length 4:25 min",
+    updated: "6",
+    icon: "/src/pictures/videoPlayIcon.svg",
+  },
+  // {
+  //   imgPath: "/src/pictures/dogYellow.svg",
+  //   title: "Resource title",
+  //   snippet:
+  //     "Resource snippet: Lorem ipsum dolor",
+  //   duration: "Length 4:25 min",
+  //   updated: "6",
+  //   icon: "/src/pictures/videoicon.svg",
+  // }
+
+  // ... add more resources as needed
+]);
 </script>
 
 <style scoped>
@@ -211,13 +126,53 @@ ion-checkbox::part(container) {
   width: 18px;
   height: 18px;
 }
+
 p {
   font-size: 14px;
 }
-.ion-text-capitalize {
-  padding-left: 25px;
-}
+
 ion-row {
   padding: 5px;
+}
+
+/* new from chat */
+.resource-card {
+  display: flex;
+  align-items: center;
+  border-radius: 0px 15px 15px 0px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #8289d5;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.thumbnail {
+  width: 100px; /* Adjust as needed */
+  height: auto;
+  object-fit: cover;
+}
+
+.content {
+  padding-left: 10px;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 24px; /* Adjust as needed */
+  height: auto;
+  margin-right: 10px;
+}
+
+/*  */
+.title{
+  color: #a5ce3e;
+}
+.snippet {
+  margin: 10px;
 }
 </style>

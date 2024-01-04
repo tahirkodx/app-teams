@@ -46,8 +46,11 @@
       <!-- Rest of your content -->
       <fixedicon
         path="/src/pictures/today_24px.svg"
-        :onClick="alertClick"
+        @click="openModal"
       ></fixedicon>
+
+      <datepickermodel :is-visible="isModalVisible"  @update:isVisible="isModalVisible = $event"></datepickermodel>
+    
     </ion-content>
   </ion-page>
 </template>
@@ -83,13 +86,17 @@ import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import fixedicon from "@/components/Icons/FixedIcon.vue";
 import Chat from "@/components/Widgets/Chat.vue";
-
+import datepickermodel from "@/components/Widgets/DatePicker.vue"
 const activeTab = ref("team"); // default active tab
 const cardContainer = ref(null);
-
+const isModalVisible = ref(false);
 // Methods
 const segmentChanged = (tabName) => {
   activeTab.value = tabName;
+};
+const openModal = () => {
+   console.log("sdfasdfs")
+isModalVisible.value = true;
 };
 const scrollLeft = () => {
   if (cardContainer.value) {

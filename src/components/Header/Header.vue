@@ -2,12 +2,15 @@
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons class="startIcon" slot="start">
+        
         <ion-button>
           <ion-icon size="large" :icon="people" class="toolbar-icon"></ion-icon>
         </ion-button>
       </ion-buttons>
 
       <div class="title-select-container">
+        <!-- {{ headerTitle }} -->
+        
         <ion-select interface="popover" placeholder="Team dep..." class="header-select">
           <ion-select-option value="team1">Team 1 department</ion-select-option>
           <ion-select-option value="team2">Team 2 department</ion-select-option>
@@ -20,31 +23,22 @@
         <ion-button @click="navigateToProfile">
           <ion-icon size="medium" :icon="personCircleOutline" class="toolbar-icon-profile"></ion-icon>
         </ion-button>
-        <!-- <ion-button>
+        <ion-button>
           <ion-toggle :checked="themeToggle" @ionChange="toggleChange($event)" justify="space-between"
           ></ion-toggle
         >
-        </ion-button> -->
+        </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref,inject } from 'vue';
 
 import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
 import { people, personCircleSharp,personCircleOutline} from 'ionicons/icons';
 import type { ToggleCustomEvent } from '@ionic/vue';
-
-// const themeToggle = ref(false);
-// const toggleDarkTheme = (shouldAdd) => {
-//         document.body.classList.toggle('dark', shouldAdd);
-//       };
-// const toggleChange = (ev: ToggleCustomEvent) => {
-//         toggleDarkTheme(ev.detail.checked);
-//       };
-
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
@@ -52,12 +46,26 @@ const router = useRouter();
 const navigateToProfile = () => {
   router.push('/profile'); // The path '/profile' should match the path defined in your router for the profile component
 };
+const themeToggle = ref(false);
+const toggleDarkTheme = (shouldAdd) => {
+        document.body.classList.toggle('dark', shouldAdd);
+      };
+const toggleChange = (ev: ToggleCustomEvent) => {
+        toggleDarkTheme(ev.detail.checked);
+      };
+      
+      // const message = inject('message')
+const iconHedaer = ref(people)
+const headerTitle = inject('headerIcon');
+if(headerTitle === 'Team'){
+  iconHedaer.value = people
+}else if (headerTitle === 'Team'){
+  
+}
 </script>
 
 <style scoped>
 .custom-toolbar {
-  --background: #000; /* Black background */
-  --ion-color-base: #000; /* Black background for the toolbar as well */
   --min-height: 50px;
   display: flex;
   align-items: center;
@@ -74,15 +82,12 @@ const navigateToProfile = () => {
   width: 127px;
   max-width: 127px; /* Adjust the width as needed */
   min-height:32px;
-  --background: #4B4B4B;
-  --placeholder-color: #ffffff;
+  background: var(--my-masg-background);
   --placeholder-opacity: 1;
-  --color: #fff;
   --padding-start: 10px;
   --padding-end: 10px;
-  --border-radius: 8px;
+  border-radius: 8px;
   --border: none;
- color: white;
  font-size: 16px;
  font-family: 'Cabin', sans-serif;
  font-weight: 700;
@@ -118,6 +123,11 @@ flex-shrink: 0;
 height: 24px;
 flex-shrink: 0;
   
+  margin-end: 0; /* Align the dropdown icon to the right */
+}
+
+.toolbar-icon {
+  font-size: 24px;
 }
 ion-button {
   --background: transparent;
