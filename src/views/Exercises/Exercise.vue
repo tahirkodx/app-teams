@@ -126,7 +126,7 @@ const doReorder = (event: CustomEvent<ReorderEventDetail>) => {
 
 ion-label {
   font-size: 1rem;
-  margin-bottom: 4px;
+  margin-bottom: 11px;
   /* Space between title and progress bar */
 }
 
@@ -134,7 +134,9 @@ ion-label {
   --progress-background: #e6e0e9;
   /* --buffer-background: transparent; */
   --progress-color: #a5ce3e;
-  width: 50%;
+  width: 60%;
+      margin-bottom: 15px;
+
   /* Adjust width as needed */
 }
 
