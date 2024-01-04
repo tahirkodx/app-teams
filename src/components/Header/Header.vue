@@ -2,12 +2,15 @@
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons class="startIcon" slot="start">
+        
         <ion-button>
           <ion-icon size="large" :icon="people" class="toolbar-icon"></ion-icon>
         </ion-button>
       </ion-buttons>
 
       <div class="title-select-container">
+        <!-- {{ headerTitle }} -->
+        
         <ion-select interface="popover" placeholder="Team dep..." class="header-select">
           <ion-select-option value="team1">Team 1 department</ion-select-option>
           <ion-select-option value="team2">Team 2 department</ion-select-option>
@@ -31,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref,inject } from 'vue';
 
 import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
 import { people, personCircleSharp,personCircleOutline} from 'ionicons/icons';
@@ -44,13 +47,19 @@ const toggleDarkTheme = (shouldAdd) => {
 const toggleChange = (ev: ToggleCustomEvent) => {
         toggleDarkTheme(ev.detail.checked);
       };
-
+      
+      // const message = inject('message')
+const iconHedaer = ref(people)
+const headerTitle = inject('headerIcon');
+if(headerTitle === 'Team'){
+  iconHedaer.value = people
+}else if (headerTitle === 'Team'){
+  
+}
 </script>
 
 <style scoped>
 .custom-toolbar {
-  --background: #000; /* Black background */
-  --ion-color-base: #000; /* Black background for the toolbar as well */
   --min-height: 50px;
   display: flex;
   align-items: center;
@@ -67,15 +76,12 @@ const toggleChange = (ev: ToggleCustomEvent) => {
   width: 127px;
   max-width: 127px; /* Adjust the width as needed */
   min-height:32px;
-  --background: #4B4B4B;
-  --placeholder-color: #ffffff;
+  background: var(--my-masg-background);
   --placeholder-opacity: 1;
-  --color: #fff;
   --padding-start: 10px;
   --padding-end: 10px;
-  --border-radius: 8px;
+  border-radius: 8px;
   --border: none;
- color: white;
  font-size: 16px;
  font-family: 'Cabin', sans-serif;
  font-weight: 700;
@@ -92,12 +98,10 @@ ion-select::part(placeholder) {
 }
 
 ion-select::part(icon) {
-  color: #fff;
   margin-end: 0; /* Align the dropdown icon to the right */
 }
 
 .toolbar-icon {
-  color: #fff;
   font-size: 24px;
 }
 ion-button {

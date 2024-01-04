@@ -26,9 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps,defineEmits,watch } from "vue";
 import { useRouter } from "vue-router";
 const props = defineProps({
+    isVisible: Boolean,
   link: {
     type: String,
     default: "",
@@ -37,14 +38,16 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  onClick: {
-    type: Function,
-    required: false,
-  },
+  
 });
+const emit = defineEmits(['update:isVisible']);
 
 const router = useRouter();
-
+watch(() => props.isVisible, (newValue) => {
+  if (!newValue) {
+    emit('update:isVisible', false);
+  }
+});
 const clickHandler = () => {
   console.log(props);
   if (props.link) {
@@ -55,5 +58,7 @@ const clickHandler = () => {
 };
 </script>
 <style scoped>
-
+ion-fab{
+    bottom : 80px;
+}
 </style>

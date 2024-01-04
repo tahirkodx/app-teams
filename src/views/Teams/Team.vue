@@ -4,7 +4,8 @@
       <score />
     </ion-header>
     <ion-content class="ion-padding">
-      <chart />
+      <!-- <chart /> -->
+      <techart />
       <linkbutton label="Ask Help" expend="block" link="teamsupport" />
       <teamwidget />
       <ion-reorder-group >
@@ -54,6 +55,7 @@ import { chevronForward, add, arrowUpOutline } from "ionicons/icons";
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import chart from "@/components/Global/Chart.vue";
+import techart from "@/components/Global/TeChart.vue";
 import linkbutton from "@/components/Buttons/LinkButton.vue";
 import teamwidget from "@/components/Widgets/TeamWidget.vue";
 import fixedicon from "@/components/Icons/FixedIcon.vue";
