@@ -2,28 +2,32 @@
   <ion-page>
     <div class="goals-header">
       <h1>Manage team</h1>
-      
-           <ion-icon :icon="chevronForwardOutline" ></ion-icon>
-     
+      <div >
+           <ion-icon src="/src/pictures/angle-right-b.svg" class="chevron-icon" ></ion-icon>
+     </div>   
     </div>
+     <div class="add-team-container">
+    <ion-avatar class="existing-member-avatar">
+      <img src="/src/pictures/avatar.svg" />
+    </ion-avatar>
+    <ion-button class="add-team-button" @click="addMember">
+      <ion-icon :icon="addIcon" />
+    </ion-button>
+  </div>
     <ion-content>
-    </ion-content>
+    </ion-content> 
   </ion-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { chevronForwardOutline } from "ionicons/icons";
-const goals = ref([
-  { text: "Improve listening" },
-  { text: "Speak out more and explore ideas with team" },
-  // ... add more goals here
-]);
-
-const selectedGoal = ref(null);
-
-const selectGoal = (index : any) => {
-  selectedGoal.value = index;
+import { IonAvatar, IonButton, IonIcon } from '@ionic/vue';
+import { add } from 'ionicons/icons';
+ 
+const addIcon = ref(add);
+const addMember = () => {
+  // Define the method to add a team member
+  console.log('Add team member button clicked');
 };
 </script>
 
@@ -56,20 +60,44 @@ h1 {
   letter-spacing: 0.15px;
   margin-left: -10px;
 }
-ion-icon{
-  padding: 10px;
-  width: 10px;
-height: 10px;
-flex-shrink: 0;
+.chevron-icon{
+  
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  margin-right: 16px;
-  /* Space between the status indicator and text */
+  margin-right: 0px;
   background: #eae9e9;
-  /* Full dot color */
   border: 2px solid #eae9e9;
-  /* Border color for half dot */
   position: relative;
-  margin-left: 10px;
+  margin-top: 10px;
+}
+
+/* |||||||||||||| */
+.add-team-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.existing-member-avatar {
+  --border-radius: 50%;
+  --size: 48px; /* Size of the avatar */
+  position: relative; /* Needed for z-index */
+  z-index: 2; /* Ensures the avatar overlaps the add button */
+}
+
+.add-team-button {
+  --border-radius: 50%;
+  --background: #28ba62; /* Your desired button color */
+  --size: 48px; /* Match the avatar size if you want them the same */
+  position: absolute;
+  right: -24px; /* Half of the button's size to overlap */
+  z-index: 1; /* Ensures the button is behind the avatar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow to the button */
+}
+
+ion-icon {
+  font-size: 32px; /* Size of the plus icon */
 }
 
 </style>
