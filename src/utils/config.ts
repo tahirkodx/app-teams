@@ -9,9 +9,9 @@
 var siteurl = ''
 if (import.meta.env.DEV) {
   siteurl = 'http://localhost:8000/'
-  siteurl = 'https://epicus-395019.ew.r.appspot.com/'
+  siteurl = 'https://dev.api.epicus.ai/'
 } else {
-  siteurl = 'https://epicus-395019.ew.r.appspot.com/'
+  siteurl = 'https://dev.api.epicus.ai/'
 }
 const CONFIG = {
   BASE_URL: siteurl,
