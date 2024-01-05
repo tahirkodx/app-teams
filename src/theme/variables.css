@@ -159,7 +159,8 @@ http://ionicframework.com/docs/theming/ */
 
   /* custom css */
   --my-masg-background: #373737;
-
+  --my-theme-background : #ffffff;
+  
   --my-chart-background : rgba(130, 137, 213, 0.10);
   --my-chart-border : rgba(255, 255, 255, 0.5);
   --my-chart-border-color : #8289D5;

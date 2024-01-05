@@ -8,6 +8,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Landing.vue"),
   },
   {
+    name: 'login',
+    path: '/login',
+    component: () => import('@/views/Auth/Login.vue')
+  },
+  {
     path: "/profile",
     component: () => import("@/views/Profile/Profile.vue"),
   },

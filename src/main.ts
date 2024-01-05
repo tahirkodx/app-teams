@@ -4,7 +4,7 @@ import router from './router';
 
 import { IonicVue } from '@ionic/vue';
 import { register } from 'swiper/element/bundle';
-
+import { createPinia } from 'pinia';
     
 
 /* Core CSS required for Ionic components to work properly */
@@ -30,10 +30,12 @@ import { Buffer } from 'buffer';
 import token from "./utils/token";
 // @ts-ignore
 window.Buffer = Buffer;
+const pinia = createPinia()
 register();
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
+  .use(pinia);
 router.isReady().then(() => {
   app.mount('#app');
 });

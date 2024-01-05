@@ -1,144 +1,273 @@
 <template>
-  <ion-header>
-    <ion-toolbar class="custom-toolbar">
-      <ion-buttons class="startIcon" slot="start">
-        
+  <!--div v-show="userStore.settings.showScores"-->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2">
+        <ion-icon size="large" :icon="people" class="toolbar-icon"></ion-icon>
+      </ion-col>
+      <ion-col size="8">
+        <div class="title-select-container">
+          <!-- {{ headerTitle }} -->
+          
+          <ion-select  
+                v-model="teamSelected"
+                interface="action-sheet"
+                @ion-change="changeTeam"
+                  class="header-select">
+                 <div v-for="(id_team_tuple, index) in teamStore.teams.value" v-bind:key="index">
+                  <ion-select-option :value="id_team_tuple[0]">{{
+                    id_team_tuple[1].name
+                  }}</ion-select-option>
+                </div>
+          </ion-select>
+        </div>
+      </ion-col>
+      <ion-col size="2">
+        <ion-icon size="medium" :icon="personCircleOutline" class="toolbar-icon"></ion-icon>
         <ion-button>
-          <ion-icon size="large" :icon="people" class="toolbar-icon"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-
-      <div class="title-select-container">
-        <!-- {{ headerTitle }} -->
+            <ion-toggle :checked="themeToggle" @ionChange="toggleChange($event)" justify="space-between"
+            ></ion-toggle
+          >
+          </ion-button>
         
-        <ion-select interface="popover" placeholder="Team dep..." class="header-select">
-          <ion-select-option value="team1">Team 1 department</ion-select-option>
-          <ion-select-option value="team2">Team 2 department</ion-select-option>
-          <ion-select-option value="team3">Team 3 department</ion-select-option>
-          <ion-select-option value="team4">Team 4 department</ion-select-option>
-        </ion-select>
-      </div>
+        <!-- <ion-icon
+          :icon="menuOutline"
+          @click="() => router.push({ name: 'settings' })"
+          size="large"
+        ></ion-icon> -->
+      </ion-col>
+    </ion-row>
+    <div
+      v-show="
+        teamStore.isTeamlead(teamID, userStore.user) &&
+        statusStore.teamHasDimScores
+      "
+    >
+      <ion-row>
+        <ion-col id="level-indicator">
+          <div style="float: left">
+            <ion-icon :icon="prismOutline" size="large"></ion-icon>
+          </div>
+          <div style="font-size: 20px; float: left">
+            <div>
+              Level {{ Math.floor(statusStore.teamCurrentScore(teamID) / 10) }}
+            </div>
+            <ion-progress-bar
+              style="width: 100%"
+              :buffer="1"
+              :value="
+                statusStore.teamCurrentScore(teamID) / 10 -
+                Math.floor(statusStore.teamCurrentScore(teamID) / 10)
+              "
+            />
+          </div>
+          <ion-popover trigger="level-indicator" trigger-action="click">
+            <ion-content class="ion-padding"
+              >Indication of team level and progress bar to next
+              level</ion-content
+            >
+          </ion-popover>
+        </ion-col>
 
-      <ion-buttons class="endIcon" slot="end">
-        <ion-button @click="navigateToProfile">
-          <ion-icon size="medium" :icon="personCircleOutline" class="toolbar-icon-profile"></ion-icon>
-        </ion-button>
-        <ion-button>
-          <ion-toggle :checked="themeToggle" @ionChange="toggleChange($event)" justify="space-between"
-          ></ion-toggle
+        <ion-col
+          id="growth-indicator"
+          size="auto"
+          v-show="statusStore.teamActiveScoreGrowth(teamID)"
         >
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+          <div style="float: left">
+            <ion-icon :icon="arrowUpCircleOutline" size="large"></ion-icon>
+          </div>
+          <div style="float: left; width: auto" :class="{ pump: animate }">
+            <div style="font-size: 20px; width: 100%; text-align: center">
+              {{
+                Math.round(
+                  statusStore.teamActiveScoreGrowth(teamID)
+                    ? statusStore.teamActiveScoreGrowth(teamID)
+                    : 0
+                )
+              }}%
+            </div>
+          </div>
+          <ion-popover trigger="growth-indicator" trigger-action="click">
+            <ion-content class="ion-padding"
+              >Score growth with respect to previous survey</ion-content
+            >
+          </ion-popover>
+        </ion-col>
+
+        <ion-col id="rank-indicator">
+          <div style="float: left; width: auto">
+            <ion-icon
+              :icon="cellularOutline"
+              size="large"
+              style="transform: rotate(90deg)"
+            ></ion-icon>
+          </div>
+          <div style="float: left">
+            <div style="font-size: 20px; width: 100%; text-align: center">
+              Top
+              {{ Math.max(Math.round(statusStore.teamActiveRank(teamID)), 1) }}%
+            </div>
+          </div>
+          <ion-popover trigger="rank-indicator" trigger-action="click">
+            <ion-content class="ion-padding"
+              >Rank with respect to all other teams</ion-content
+            >
+          </ion-popover>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+
+  <!--ion-item v-show="surveysStore.activeSurveys.length > 0" @click="() => router.push({name: 'surveys'})">
+        <ion-badge slot="start">{{ surveysStore.activeSurveys.length }}</ion-badge>
+        <ion-label>Open surveys</ion-label>
+    </ion-item-->
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref,inject } from 'vue';
-
-import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
-import { people, personCircleSharp,personCircleOutline} from 'ionicons/icons';
+import { ref, watch } from "vue";
+import {
+  IonTitle,
+  IonIcon,
+  IonProgressBar,
+  IonSelect,
+  IonSelectOption,
+  IonPopover,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+} from "@ionic/vue";
+import {
+  arrowUpCircleOutline,
+  prismOutline,
+  menuOutline,
+  cellularOutline,
+  personCircleOutline,
+  people
+} from "ionicons/icons";
+import router from "@/router/index";
+import { useUserStore } from "@/stores/user";
+import { useStatusStore } from "@/stores/status";
+import { useTeamStore } from "@/stores/teams";
+import { fetchCurrent, teamID, team } from "@/stores/current";
 import type { ToggleCustomEvent } from '@ionic/vue';
-import { useRouter } from 'vue-router';
-const router = useRouter();
+const userStore = useUserStore();
+const teamStore = useTeamStore();
+const statusStore = useStatusStore();
 
-// Define the method to navigate to the profile page
-const navigateToProfile = () => {
-  router.push('/profile'); // The path '/profile' should match the path defined in your router for the profile component
-};
+await Promise.all([
+  userStore.fetch(),
+  statusStore.fetch(),
+  teamStore.fetch(),
+  fetchCurrent(),
+]);
+const buffer = 1.0;
+
+const teamSelected = ref(teamID.value);
+console.log(teamSelected.value);
+
+function changeTeam() {
+  if (teamSelected.value == "add") {
+    router.push({ name: "addteam" });
+  } else {
+    userStore.settings.update_value("last_team_used", teamSelected.value);
+  }
+}
 const themeToggle = ref(false);
-const toggleDarkTheme = (shouldAdd) => {
-        document.body.classList.toggle('dark', shouldAdd);
-      };
-const toggleChange = (ev: ToggleCustomEvent) => {
-        toggleDarkTheme(ev.detail.checked);
-      };
-      
-      // const message = inject('message')
-const iconHedaer = ref(people)
-const headerTitle = inject('headerIcon');
-if(headerTitle === 'Team'){
-  iconHedaer.value = people
-}else if (headerTitle === 'Team'){
-  
+  const toggleDarkTheme = (shouldAdd) => {
+          document.body.classList.toggle('dark', shouldAdd);
+        };
+  const toggleChange = (ev: ToggleCustomEvent) => {
+          toggleDarkTheme(ev.detail.checked);
+        };
+        
+        // const message = inject('message')
+  // const iconHedaer = ref(people)
+  // const headerTitle = inject('headerIcon');
+  // if(headerTitle === 'Team'){
+  //   iconHedaer.value = people
+  // }else if (headerTitle === 'Team'){
+    
+  // }
+const animate = ref(false);
+function animateIncrease() {
+  animate.value = true;
+  setTimeout(() => {
+    animate.value = false;
+  }, 820);
 }
 </script>
 
 <style scoped>
-.custom-toolbar {
-  --min-height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.pump {
+  animation: pump 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-.title-select-container {
-  flex: 1;
-  display: inline-grid;
-  justify-content: center;
+@keyframes pump {
+  50% {
+    transform: scale(1.4, 1.4);
+  }
 }
-
-.header-select {
-  width: 127px;
-  max-width: 127px; /* Adjust the width as needed */
-  min-height:32px;
+ion-grid{
   background: var(--my-masg-background);
-  --placeholder-opacity: 1;
-  --padding-start: 10px;
-  --padding-end: 10px;
-  border-radius: 8px;
-  --border: none;
- font-size: 16px;
- font-family: 'Cabin', sans-serif;
- font-weight: 700;
- line-height: 24px;
- letter-spacing: 0.15px;
- word-wrap: break-word;
 }
-
-ion-select::part(placeholder) {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-ion-select::part(icon) {
-  /* color: #f4f4f4; */
-  marker-end: 0; /* Align the dropdown icon to the right */
-}
-
-.toolbar-icon {
-  /* color: #fff; */
-  /* font-size: 24px; */
-  width: 30px;
-height: 22.222px;
-flex-shrink: 0;
+.custom-toolbar {
+    --min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   
-}
-.toolbar-icon-profile {
-  /* color: #fff; */
-  /* font-size: 24px; */
-  width: 24px;
-height: 24px;
-flex-shrink: 0;
+  .title-select-container {
+    flex: 1;
+    display: inline-grid;
+    justify-content: center;
+  }
   
-  margin-end: 0; /* Align the dropdown icon to the right */
-}
-
-.toolbar-icon {
-  font-size: 24px;
-}
-ion-button {
-  --background: transparent;
-  --background-activated: transparent;
-  --background-hover: transparent;
-  --ripple-color: transparent;
-}
-.startIcon{
-  padding-right: 10px;
-}
-.endIcon{
-  /* padding-right: 22px; */
-}
+  .header-select {
+    width: 127px;
+    max-width: 127px; /* Adjust the width as needed */
+    min-height:32px;
+    background: var(--my-masg-background);
+    --placeholder-opacity: 1;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    border-radius: 8px;
+    --border: none;
+   font-size: 16px;
+   font-family: 'Cabin', sans-serif;
+   font-weight: 700;
+   line-height: 24px;
+   letter-spacing: 0.15px;
+   word-wrap: break-word;
+  }
+  
+  ion-select::part(placeholder) {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  ion-select::part(icon) {
+    margin-end: 0; /* Align the dropdown icon to the right */
+  }
+  
+  .toolbar-icon {
+    font-size: 24px;
+  }
+  ion-button {
+    --background: transparent;
+    --background-activated: transparent;
+    --background-hover: transparent;
+    --ripple-color: transparent;
+  }
+  .startIcon{
+    padding-right: 10px;
+  }
+  .endIcon{
+    /* padding-right: 22px; */
+  }
 </style>
