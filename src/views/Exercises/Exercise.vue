@@ -6,18 +6,28 @@
     <ion-content :fullscreen="true">
       <h4 class="titleStyle">Practice</h4>
       <ion-reorder-group @ionItemReorder="doReorder" :disabled="false">
-        <ion-card v-for="(item, index) in practiceItems" :key="index" class="practice-card">
+        <ion-card 
+        v-for="[exerciseID, exercise] in [
+              ...playbookStore.exercises.value.entries(),
+            ].filter((l) => l[1].team == teamID)"
+            @click="() =>
+                router.push({
+                  name: 'exercise',
+                  params: { exerciseid: exerciseID },
+                })
+            "
+        class="practice-card">
           <div class="card-content">
             <ion-reorder slot="end">
               <img src="/src/pictures/threeDot.svg" class="drag-handle-icon" />
             </ion-reorder>
 
             <ion-thumbnail slot="end">
-              <img :src="item.imgSrc" />
+              <img src="/src/pictures/Illustration 6.svg" />
             </ion-thumbnail>
             <div class="title-progress-container">
-              <ion-label>{{ item.title }}</ion-label>
-              <ion-progress-bar :value="item.progress" color="success" class="progress-bar"></ion-progress-bar>
+              <ion-label>  {{ playbookStore.playbook.value.get(exercise.play).title }} </ion-label>
+              <ion-progress-bar :value="playbookStore.teamExerciseScore(teamID, exerciseID).score / 10" color="success" class="progress-bar"></ion-progress-bar>
             </div>
             <ion-icon :icon="chevronForwardOutline" slot="end" class="arrow-icon" />
           </div>
@@ -59,7 +69,20 @@ import { chevronForwardOutline, add } from "ionicons/icons";
 import type { ReorderEventDetail } from "@ionic/core";
 import score from "@/components/Header/Header.vue";
 import router from "@/router/index";
+import { usePlaybookStore } from "@/stores/playbook";
+import { useTeamStore } from "@/stores/teams";
+import { useUserStore } from "@/stores/user";
+import { fetchCurrent, teamID } from "@/stores/current";
 
+const userStore = useUserStore();
+const teamStore = useTeamStore();
+const playbookStore = usePlaybookStore();
+await Promise.all([
+  userStore.fetch(),
+  playbookStore.fetch(),
+  teamStore.fetch(),
+  // fetchCurrent(),
+]);
 const practiceItems = ref([
   {
     title: "Communication",
