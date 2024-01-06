@@ -80,7 +80,7 @@ const playbookStore = usePlaybookStore();
 await Promise.all([
   userStore.fetch(),
   playbookStore.fetch(),
-  teamStore.fetch(),
+  // teamStore.fetch(),
   // fetchCurrent(),
 ]);
 const practiceItems = ref([
