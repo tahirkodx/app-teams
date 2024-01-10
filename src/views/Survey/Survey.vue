@@ -5,22 +5,20 @@
         </ion-header>
         <ion-content :fullscreen="true">
             <h4 class="titleStyle">Survery</h4>
-            <ion-card v-for="survey in surveys" :key="survey.id" class="ion-margin-vertical">
+            <ion-card v-for="[id , survey] in Array.from(statusStore.schedulers)" :key="id" class="ion-margin-vertical">
                 <IonGrid :fixed="true">
                     <IonRow>
                         <IonCol>
                             <ion-card-header>
-                                <ion-card-title class="ion-text-capitalize">{{
-                                    survey.name
-                                }}</ion-card-title>
+                                <ion-card-title class="ion-text-capitalize">Name</ion-card-title>
                             </ion-card-header>
                             <ion-card-content class="ion-flex ion-align-items-center ion-justify-content-between">
                                 <span class="ion-text-capitalize">
                                     <ion-chip>
-                                        <ion-label>{{ survey.type }}</ion-label>
+                                        <ion-label>{{survey.start_date}}</ion-label>
                                     </ion-chip>
                                     <ion-chip>
-                                        <ion-label>{{ survey.date }}</ion-label>
+                                        <ion-label>{{survey.period}}</ion-label>
                                     </ion-chip>
                                 </span>
                             </ion-card-content>
@@ -64,7 +62,17 @@ import { ref } from "vue";
 import { chevronDownOutline, add } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
 import router from "@/router/index";
+import { useUserStore ,useStatusStore } from "@/store";
 
+
+const statusStore = useStatusStore()
+
+  await Promise.all([
+    statusStore.getDimensions(),
+    statusStore.getQuestionNaire(),
+    statusStore.getSchedulers(),
+ ])
+ console.log(statusStore.schedulers)
 const surveys = ref([
     { id: "01A", name: "Survey 01A", type: "Critical", date: "12 December" },
     { id: "02", name: "Survey 02", type: "Periodic", date: "01 November" },

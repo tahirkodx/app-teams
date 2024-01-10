@@ -7,14 +7,14 @@ import {
 } from "@/utils/actions/global";
 // import * as _ from "lodash";
     
-const StatusAPI: any = {
-    getQuestionNaire: async (payload: any) => {
+const PlaybookAPI: any = {
+  getPlaybook: async (payload: any) => {
     try {
       const options: any = {
         params: payload,
       };
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_QUESTION_NAIRE}`,
+        `${ApiEndpoints.GET_PLAYBOOK}`,
         options
       );
       return reactive(new Map(Object.entries(response.data)));
@@ -23,13 +23,13 @@ const StatusAPI: any = {
       return Catched(error);
     }
   },
-  getDimensions: async (payload: any) => {
+  getExercises: async (payload: any) => {
     try {
       const options: any = {
         params: payload,
       };
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_DIMENSIONS}`,
+        `${ApiEndpoints.GET_EXERCISES}`,
         options
       );
       return reactive(new Map(Object.entries(response.data)));
@@ -37,13 +37,13 @@ const StatusAPI: any = {
       return Catched(error);
     }
   },
-  getSchedulers: async (payload: any) => {
+  getExerciseResponses: async (payload: any) => {
     try {
       const options: any = {
         params: payload,
       };
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_SCHEDULERS}`,
+        `${ApiEndpoints.GET_EXERCISES_RESPONSES}`,
         options
       );
       return reactive(new Map(Object.entries(response.data)));
@@ -51,9 +51,22 @@ const StatusAPI: any = {
       return Catched(error);
     }
   },
-  
+  getTeamExerciseScores: async (payload: any) => {
+    try {
+      const options: any = {
+        params: payload,
+      };
+      const response = await eveTechApi.get(
+        `${ApiEndpoints.GET_TEAM_EXERCISE_SCORES}`,
+        options
+      );
+      return reactive(new Map(Object.entries(response.data)));
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
 
   
 };
 
-export default StatusAPI;
+export default PlaybookAPI;

@@ -63,36 +63,39 @@ import {
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import myMyModal from "@/components/VideoPlayerModal/VideoPlayerModal.vue";
-import { useTeamStore } from "@/stores/teams";
-  import { useAcademyStore } from '@/stores/academy'
-  import { fetchCurrent, teamID } from '@/stores/current'
-  import { ICourse } from "@/stores/academy";
+import { useUserStore ,useAcademyStore } from "@/store";
+
+// import { useTeamStore } from "@/stores/teams";
+//   import { useAcademyStore } from '@/stores/academy'
+//   import { fetchCurrent, teamID } from '@/stores/current'
+//   import { ICourse } from "@/stores/academy";
   
 
-  const route = useRoute()
-  const teamStore = useTeamStore()
+  // const route = useRoute()
+  //  const teamStore = useTeamStore()
   const academyStore = useAcademyStore()
 
   await Promise.all([
-    academyStore.fetch(),
-    teamStore.fetch(),
-    fetchCurrent(),
+    academyStore.getCourses(),
+    academyStore.getCoursesScores(),
+    academyStore.getCoursesStatus(),
+    
   ])
-
-  const focus = ref(route.params.focus as string)
-  if (focus.value == '') focus.value = 'all'
+  console.log("Satre: " , academyStore.courses)
+  // const focus = ref(route.params.focus as string)
+  // if (focus.value == '') focus.value = 'all'
 
   /**
    * Get ordered list of courses. Order by score, either of the current team or of all teams
    */
-  const orderedCourses = computed(() => {
-    let courseList = academyStore.courses.list
-    if (focus.value == 'all') {
-      return courseList.sort((c: ICourse) => -academyStore.getAllTeamCourseScore(c.id))
-    } else {
-      return courseList.sort((c: ICourse) => -academyStore.getTeamCourseScore(c.id, teamID.value))
-    }
-  })
+  // const orderedCourses = computed(() => {
+  //   let courseList = academyStore.courses.list
+  //   if (focus.value == 'all') {
+  //     return courseList.sort((c: ICourse) => -academyStore.getAllTeamCourseScore(c.id))
+  //   } else {
+  //     return courseList.sort((c: ICourse) => -academyStore.getTeamCourseScore(c.id, teamID.value))
+  //   }
+  // })
  
 const isModalVisible = ref(false);
 const selectedResource = ref({});

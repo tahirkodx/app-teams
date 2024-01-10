@@ -2,10 +2,14 @@
     <ion-page>
       <ion-header>
         <score></score>
-        <ion-breadcrumbs>
-            <ion-breadcrumb @click="() => router.push({name: 'exercises'})">Exercises</ion-breadcrumb>
-            <ion-breadcrumb >A-team</ion-breadcrumb>
-          </ion-breadcrumbs>
+        <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button >
+        <ion-icon :icon="createOutline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">A-Team</ion-title>
+  </ion-toolbar>
       </ion-header>
       <ion-content>
         <div class="ion-padding">

@@ -8,12 +8,12 @@
       <techart />
       <linkbutton label="Ask Help" expend="block" link="teamsupport" />
       <teamwidget />
-      <ion-reorder-group >
-                <ion-card v-for="(item, index) in practiceItems" :key="index" class="practice-card">
+      <ion-reorder-group v-if="loading">
+                <ion-card v-for="[id , team] in Array.from(teamStore.teams)" :key="id" class="practice-card">
                     <div class="card-content">
                         <ion-reorder slot="start"></ion-reorder>
                         
-                        <ion-label>{{ item.title }}</ion-label>
+                        <ion-label>{{team.name}}</ion-label>
                         <ion-icon :icon="chevronForward" slot="end" />
                     </div>
                     <div class="progress-container">
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 import {
   IonPage,
   IonHeader,
@@ -59,6 +59,19 @@ import techart from "@/components/Global/TeChart.vue";
 import linkbutton from "@/components/Buttons/LinkButton.vue";
 import teamwidget from "@/components/Widgets/TeamWidget.vue";
 import fixedicon from "@/components/Icons/FixedIcon.vue";
+
+import { useUserStore, useTeamStore } from "@/store";
+const userStore = useUserStore();
+const teamStore = useTeamStore();
+const loading = ref(false);
+
+onMounted(async () => {
+  await Promise.all([
+    teamStore.getTeams(),
+    userStore.getUserSettings()
+  ]);
+  loading.value = true;
+});
 const practiceItems = ref([
   { title: "Team A", subtitle: "20" },
   { title: "Team B", subtitle: ""},

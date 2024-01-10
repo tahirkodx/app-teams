@@ -1,8 +1,10 @@
+import { reactive } from 'vue'
 import ApiEndpoints from "@/utils/apis/apiEndpoints";
 import {
   Catched,
-  appTeamsAPI,
-} from "@/utils/actions";
+  invalidPayload,
+  eveTechApi,
+} from "@/utils/actions/global";
 // import * as _ from "lodash";
 
 const TeamAPI: any = {
@@ -11,11 +13,11 @@ const TeamAPI: any = {
       const options: any = {
         params: payload,
       };
-      const response = await appTeamsAPI.get(
+      const response = await eveTechApi.get(
         `${ApiEndpoints.GET_TEAMS}`,
         options
       );
-      return response.data;
+      return reactive(new Map(Object.entries(response.data)));
     } catch (error: any) {
       return Catched(error);
     }

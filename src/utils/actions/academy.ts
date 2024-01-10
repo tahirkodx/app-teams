@@ -7,14 +7,14 @@ import {
 } from "@/utils/actions/global";
 // import * as _ from "lodash";
     
-const StatusAPI: any = {
-    getQuestionNaire: async (payload: any) => {
+const AcademyAPI: any = {
+  getCourses: async (payload: any) => {
     try {
       const options: any = {
         params: payload,
       };
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_QUESTION_NAIRE}`,
+        `${ApiEndpoints.GET_COURSES}`,
         options
       );
       return reactive(new Map(Object.entries(response.data)));
@@ -23,13 +23,13 @@ const StatusAPI: any = {
       return Catched(error);
     }
   },
-  getDimensions: async (payload: any) => {
+  getCoursesStatus: async (payload: any) => {
     try {
       const options: any = {
         params: payload,
       };
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_DIMENSIONS}`,
+        `${ApiEndpoints.GET_COURSES_STATUS}`,
         options
       );
       return reactive(new Map(Object.entries(response.data)));
@@ -37,13 +37,13 @@ const StatusAPI: any = {
       return Catched(error);
     }
   },
-  getSchedulers: async (payload: any) => {
+  getCoursesScores: async (payload: any) => {
     try {
       const options: any = {
         params: payload,
       };
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_SCHEDULERS}`,
+        `${ApiEndpoints.GET_COURSES_SCORES}`,
         options
       );
       return reactive(new Map(Object.entries(response.data)));
@@ -52,8 +52,7 @@ const StatusAPI: any = {
     }
   },
   
-
   
 };
 
-export default StatusAPI;
+export default AcademyAPI;

@@ -1,42 +1,37 @@
 export enum ApiEndpoints {
   // Auth Endpoints
-  LOGIN = 'accounts/login/',
-  LOGOUT = 'auth/logout/',
-  REGISTRATION = 'accounts/registration/',
+  LOGIN = "accounts/login/",
+  GET_USER_SETTINGS = "v1/user/",
+  GET_USER_ORGANIZATION = "v1/user/organization/",
+  GET_USER_ORGANIZATION_MEMBERS = "v1/user/organization/members/",
+  GET_USER_ORGANIZATION_LEADERS = "v1/user/organization/leaders/",
+  GET_USER_ORGANIZATION_COACHES = "v1/user/organization/coaches/",
 
-  // STATUS Endpoints
-  QUESTIONNAIRE = 'v1/status/team/questionnaire/active/',
-  DIMENSIONS = 'v1/status/team/dimensions/active/',
-  SCHEDULERS = 'v1/status/team/scheduler/',
-  REQUESTS = 'v1/status/team/request/',
-  DEFAULTRESPONSES = 'v1/status/team/response/default/',
-  RESPONSE = 'v1/status/team/response/',
-  SCORES = 'v1/status/team/score/',
-  NOTES = 'v1/status/team/notes/',
+  GET_TEAMS = "v1/team/team/",
 
+  // playbook end points
+  GET_PLAYBOOK = "v1/playbook/team/",
+  GET_EXERCISES = "v1/playbook/team/exercises/",
+  GET_EXERCISES_RESPONSES = "v1/playbook/team/exercises/response/",
+  GET_TEAM_EXERCISE_SCORES = "v1/playbook/team/exercises/scores/",
 
-  // User Endpoints
-  GET_USER = 'v1/user/',
-  GET_USER_SETTINGS = 'v1/user/',
-  GET_USER_ORGANIZATION = 'v1/user/organization/',
-  GET_USER_ORGANIZATION_MEMBERS = 'v1/user/organization/members/',
-  GET_USER_ORGANIZATION_LEADERS = 'v1/user/organization/leaders/',
-  GET_USER_ORGANIZATION_COACHES = 'v1/user/organization/coaches/',
+  // academy endpoints
+  GET_COURSES = "v1/academy/team/courses/",
+  GET_COURSES_STATUS = "v1/academy/team/lessons/status/",
+  GET_COURSES_SCORES = "v1/academy/team/courses/scores/",
+  // Status endpoints
+  // Object list for map
+  GET_QUESTION_NAIRE = "v1/status/team/questionnaire/active/",
+  GET_DIMENSIONS = "v1/status/team/dimensions/",
+  GET_SCHEDULERS = "v1/status/team/scheduler/",
 
-  GET_TEAMS = 'v1/team/',
-}
-export enum NameTags {
-  // Auth Endpoints
-  LOGIN = 'login',
-  REGISTER = 'register',
-  QUESTIONNAIRE = 'questionnaire',
-  DIMENSIONS = 'dimensions',
-  SCHEDULER = 'scheduler',
-  REQUEST = 'request',
-  RESPONSE = 'response',
-  SCORE = 'score',
-  EXERCISENOTES = 'exerciseNotes',
+  // requests is of type Map<TTeamID, IRequest>
+  GET_REQUESTS = "v1/status/team/request/",
+
+  // defaultResponses is of type Map<TTeamID, IResponse>
+  GET_DEFAULT_RESPONSES = "v1/status/team/response/default/",
+
+  // responses is of type Map<TResponseID, IQuestionnaireResponse>
 }
 
 export default ApiEndpoints;
-

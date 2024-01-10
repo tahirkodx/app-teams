@@ -41,7 +41,7 @@
       } from '@ionic/vue';
       import router from '@/router/index'
       import { presentToast } from "@/utils/toast";
-      import { useUserStore } from '@/stores/user';
+      import { useUserStore } from '@/store';
       const userStore  = useUserStore()
   
       const email = ref("")
@@ -51,16 +51,16 @@
        * Send details to the login function. If an error then present toast of failed login
        */
       async function auth_login() {
-        await userStore.login(email.value, password.value)
-          .then(() => {
-            email.value = ''
-            password.value = ''
-            router.push({name: 'team'})
-          })
-          .catch(error => {
-            console.log(error)
-            presentToast('User password combination incorrect')
-          })
+        // await userStore.login(email.value, password.value)
+        //   .then(() => {
+        //     email.value = ''
+        //     password.value = ''
+        //     router.push({name: 'team'})
+        //   })
+        //   .catch(error => {
+        //     console.log(error)
+        //     presentToast('User password combination incorrect')
+        //   })
       }
     </script>
     
