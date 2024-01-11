@@ -34,12 +34,14 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref,inject } from 'vue';
+import { defineComponent, ref,inject ,onMounted} from 'vue';
 
 import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
 import { people, personCircleSharp,personCircleOutline} from 'ionicons/icons';
 import type { ToggleCustomEvent } from '@ionic/vue';
-
+import { useTeamStore , useUserStore } from '@/store';
+const userStore = useUserStore();
+const teamStore = useTeamStore();
 const themeToggle = ref(false);
 const toggleDarkTheme = (shouldAdd) => {
         document.body.classList.toggle('dark', shouldAdd);
@@ -56,6 +58,14 @@ if(headerTitle === 'Team'){
 }else if (headerTitle === 'Team'){
   
 }
+onMounted(async () => {
+  await Promise.all([
+    teamStore.getTeams(),
+    userStore.getUserSettings(),
+    
+  ]);
+  
+});
 </script>
 
 <style scoped>
