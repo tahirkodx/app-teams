@@ -57,6 +57,9 @@ import {
     IonGrid,
     IonRow,
     IonCol,
+    IonIcon,
+  IonFab, 
+  IonFabButton,
 } from "@ionic/vue";
 import { ref } from "vue";
 import { chevronDownOutline, add } from "ionicons/icons";

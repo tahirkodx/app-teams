@@ -27,7 +27,11 @@
 
 <script setup lang="ts">
 import { defineProps,defineEmits,watch } from "vue";
+import {
+  IonFab
+} from "@ionic/vue";
 import { useRouter } from "vue-router";
+
 const props = defineProps({
     isVisible: Boolean,
   link: {

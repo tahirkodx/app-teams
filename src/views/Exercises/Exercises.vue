@@ -49,7 +49,7 @@
     <ion-content :fullscreen="true" v-if="!loading">
       <h4 class="titleStyle"> <ion-skeleton-text :animated="true" style="width: 100px"></ion-skeleton-text></h4>
       <ion-reorder-group @ionItemReorder="doReorder" :disabled="false">
-        <ion-card 
+        <ion-card v-for="index in 10" :key="index"
         class="practice-card">
           <div class="card-content">
             <ion-reorder slot="end">
@@ -60,10 +60,10 @@
               <ion-skeleton-text :animated="true"></ion-skeleton-text>
             </ion-thumbnail>
             <div class="title-progress-container">
-              <ion-label>  <ion-skeleton-text :animated="true"></ion-skeleton-text> </ion-label>
+              <ion-label>  <ion-skeleton-text :animated="true" style="width: 80px"></ion-skeleton-text> </ion-label>
               <ion-progress-bar value="12" color="success" class="progress-bar"></ion-progress-bar>
             </div>
-            <ion-skeleton-text :animated="true" slot="end" class="arrow-icon"></ion-skeleton-text>
+            <ion-skeleton-text :animated="true" style="width: 10px" slot="end" class="arrow-icon"></ion-skeleton-text>
           </div>
         </ion-card>
        
@@ -99,6 +99,9 @@ import {
   IonReorderGroup,
   IonReorder,
   IonIcon,
+  IonFab, 
+  IonFabButton,
+  IonSkeletonText
 } from "@ionic/vue";
 import { chevronForwardOutline, add } from "ionicons/icons";
 import type { ReorderEventDetail } from "@ionic/core";
