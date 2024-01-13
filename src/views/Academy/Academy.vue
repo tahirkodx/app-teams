@@ -123,7 +123,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
+    videoUrl: 'https://www.youtube.com/watch?v=jejBQ_K2xyI&ab_channel=cricket.com.au',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },
@@ -133,7 +133,7 @@ const resources = ref([
     snippet:
       "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
+    videoUrl: 'https://www.youtube.com/watch?v=k-trrJYXOG8&pp=ygUJaW9uaWMgbmV3',
     updated: "6",
     icon: "/src/pictures/videoPlayIcon.svg",
   },

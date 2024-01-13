@@ -9,11 +9,16 @@
         <ion-icon :icon="heartOutline"></ion-icon>
       </ion-button>
     </div>
+    
     <ion-content class="ion-padding">
-      <video width="100%" controls v-if="resource.videoUrl">
-        <source :src='resource.videoUrl' type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <iframe width="100%" height="200"
+        v-if="resource"
+        :src="youtubeEmbedUrl(resource.videoUrl)"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+
       <p v-if="!resource.videoUrl">No video available for this resource.</p>
     </ion-content>
   </ion-modal>
@@ -23,6 +28,7 @@
 import { IonModal, IonHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonContent } from '@ionic/vue';
 import { defineProps, watch, defineEmits } from 'vue';
 import { closeOutline, heartOutline } from 'ionicons/icons';
+
 
 const props = defineProps({
   isVisible: Boolean,
@@ -42,6 +48,18 @@ watch(() => props.isVisible, (newValue) => {
 
 const closeModal = () => {
   emit('update:isVisible', false);
+};
+
+
+const youtubeEmbedUrl = (url) => {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+
+  if (match && match[2].length == 11) {
+    return `https://www.youtube.com/embed/${match[2]}`;
+  } else {
+    return ''; // Handle the error appropriately
+  }
 };
 </script>
 
@@ -78,49 +96,3 @@ ion-icon {
 }
 </style>
 
-<!-- <style scoped>
-/* Modal Header Styles */
-ion-header {
-  background-color: #4a90e2; /* Blue header background */
-  color: white;
-}
-
-ion-toolbar {
-  --background: #4a90e2; /* Ensuring the toolbar matches the header background */
-}
-
-ion-title {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-/* Modal Content Styles */
-ion-content {
-  background-color: #f4f4f4; /* Light gray background for the content */
-  color: #333; /* Darker text for contrast */
-}
-
-/* Paragraph inside the modal */
-p {
-  font-size: 1em;
-  line-height: 1.5;
-  padding: 15px; /* Adds some padding around the text */
-}
-
-/* Button Styles */
-ion-button {
-  --background: #ef476f; /* Pinkish-red background for the button */
-  --background-hover: #ff6b8a; /* Lighter pink for hover state */
-  --color: white; /* White text on the button */
-  margin: 10px; /* Spacing around the button */
-  border-radius: 5px; /* Rounded corners for the button */
-}
-
-/* Custom class for padding */
-.ion-padding {
-  padding: 20px;
-}
-</style> -->
-
-
- 
