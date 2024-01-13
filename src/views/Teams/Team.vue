@@ -5,7 +5,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <!-- <chart /> -->
-      <techart />
+      <radarchart />
       <linkbutton label="Ask Help" expend="block" link="teamsupport" />
       <teamwidget />
       <ion-reorder-group v-if="loading">
@@ -54,8 +54,7 @@ import { chevronForward, add, arrowUpOutline } from "ionicons/icons";
 //import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
-import chart from "@/components/Global/Chart.vue";
-import techart from "@/components/Global/TeChart.vue";
+import radarchart from "@/components/Charts/RadarChart.vue";
 import linkbutton from "@/components/Buttons/LinkButton.vue";
 import teamwidget from "@/components/Widgets/TeamWidget.vue";
 import fixedicon from "@/components/Icons/FixedIcon.vue";

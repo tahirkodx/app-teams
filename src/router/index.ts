@@ -43,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: 'exercise',
         path: 'exercises/exercise/:exerciseid',
-        component: () => import('@/views/Exercises/test.vue'),
+        component: () => import('@/views/Exercises/newDe.vue'),
       },
       {
         name: "survey",
