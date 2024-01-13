@@ -58,6 +58,9 @@ import {
   IonImg,
   IonLabel,
   IonIcon,
+  
+  IonFab, 
+  IonFabButton,
 } from "@ionic/vue";
 
 import router from "@/router/index";

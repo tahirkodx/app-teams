@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonModal, IonHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonContent } from '@ionic/vue';
+import { IonModal, IonHeader, IonToolbar, IonIcon, IonButton, IonTitle, IonContent } from '@ionic/vue';
 import { defineProps, watch, defineEmits } from 'vue';
 import { closeOutline, heartOutline } from 'ionicons/icons';
 

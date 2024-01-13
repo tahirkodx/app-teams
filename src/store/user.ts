@@ -95,7 +95,22 @@ const useUserStore = defineStore("user", () => {
   const organizationMembers: any = ref(null);
   const organizationLeaders: any = ref(null);
   const organizationCoaches: any = ref(null);
-
+  // computed data
+  const teamID = computed<TTeamID>(() => {
+    if (settings?.value?.last_team_used) {
+        return settings?.value.last_team_used
+      }else {
+        return ''
+      }
+    });
+  const userID = computed<TUserID>(() => {
+      if(settings?.value?.id){
+        return settings?.value?.id
+      }else{
+        return ""
+      }
+  });
+    // functions
   async function getUserSettings() {
     settings.value = await UserAPI.getUserSettings();
   }
@@ -114,44 +129,24 @@ const useUserStore = defineStore("user", () => {
     organizationCoaches.value = await UserAPI.getUserOrganizationCoaches();
     console.log("User organization coaches:", organizationCoaches.value);
   }
-  async function update_value(key: string, value: any) {
+  
+  async function update_value(key: string, value: any, userID : TUserID) {
+    const data = {
+      [key] : value
+    }
+    settings.value = await UserAPI.updateValue(data, userID)
+  }
+  async function update_values(key: string, value: any) {
     console.log(key);
     console.log(value);
-    // if (value.get('id') !== undefined){
-    //   super.update_value(
-    //     this.value.get('id'),
-    //     key,
-    //     value
-    //   )
-    // } else {
-    //   console.log(this.name, 'Update while ID is undefined')
-    // }
+    
   }
 
   // eslint-disable-next-line vue/return-in-computed-property
-  const teamID = computed<TTeamID>(() => {
-    if (settings?.value?.last_team_used) {
-        return settings?.value.last_team_used
-      }
-    //   else if (teamStore.teams.value.size > 0) {
-    //     setNextActiveTeam()
-    //   } 
-      else {
-        return ''
-      }
-
-    // const lastTeamUsed = settings.value?.last_team_used
-    //   ? settings.value.last_team_used
-    //   : null;
-
-    // if (lastTeamUsed) {
-    //   return lastTeamUsed;
-    // } else {
-    //   return "";
-    // }
-  });
+  
   return {
     teamID,
+    userID,
     settings,
     organization,
     organizationMembers,

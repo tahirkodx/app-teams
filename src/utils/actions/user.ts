@@ -77,6 +77,18 @@ const UserAPI: any = {
       return Catched(error);
     }
   },
+  updateValue: async (payload: any , userID: any) => {
+    const url  = ApiEndpoints.GET_USER_SETTINGS + userID + "/";
+    try {
+      const response = await eveTechApi.patch(
+        `${url}`,
+        payload
+      );
+      return response;
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
   
 };
 
