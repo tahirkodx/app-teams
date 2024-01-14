@@ -52,14 +52,16 @@
                   <ion-label>Survey 1</ion-label>
                   <ion-icon :icon="chevronForward" slot="end" />
                 </div>
-                <p>Date : 23 Dec</p>
-                <div class="progress-container">
-                  <ion-progress-bar></ion-progress-bar>
-                </div>
+                <p>
+                  Date : 23 Dec Score :
+                  <span> 4/5 </span>
+                </p>
               </ion-card>
             </ion-reorder-group>
           </div>
-          <div v-if="activeTab === 'description'">Other tabs</div>
+          <div v-if="activeTab === 'description'">
+          <VideoPlayer />
+          </div>
           <div v-if="activeTab === 'details'">sf tabs</div>
         </div>
       </div>
@@ -96,6 +98,7 @@ import router from "@/router/index";
 import { pencilOutline, chevronForward } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
 import LineChart from "@/components/Charts/LineChart.vue";
+import VideoPlayer from "@/components/Exercise/VideoPlayer.vue";
 //   import PlayDetails from '@/components/PlayDetails.vue';
 //   import { usePlaybookStore } from '@/stores/playbook';
 //   import { useStatusStore } from '@/stores/status';
@@ -187,7 +190,7 @@ ion-card-content {
 }
 
 .content {
-  padding: 20px 15px 0px 15px;
+  padding: 20px 0px 0px 0px;
   min-height: 200px; /* Adjust as needed */
   overflow-y: scroll;
     height: 520px;
@@ -198,17 +201,32 @@ ion-datetime {
   --background: unset: !important;
 }
 .practice-card {
-    margin-bottom: 8px;
     --ion-item-background: transparent;
     --ion-item-padding: 0;
     --background: transparent;
     box-shadow: none;
+    border-bottom: 1px solid #F2F2F2;
+    border-radius: 0px;
+    margin: 10px 0px 0px 0px;
     /* Remove shadow if present */
 }
 
 .card-content {
     display: flex;
     align-items: center;
+    padding: 0px 15px 0px 15px;
+  }
+  p{
+  padding: 0px 15px 0px 15px;
+  margin: 0px 0px 10px 0px;
+
+font-size: 12px;
+line-height: 16px;
+
+}
+  span{
+  color: var(--secondary, #FF8512);
+
 }
 
 ion-item {
@@ -244,6 +262,7 @@ ion-icon {
     font-size: 1.5em;
     width: 24px;
     height: 24px;
+    margin-top: 20px;;
 }
 .addStyle{
     margin-bottom: 40px;
