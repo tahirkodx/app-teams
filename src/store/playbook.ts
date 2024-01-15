@@ -162,9 +162,13 @@ export interface IUsage {
       });
     const teamExerciseScore = computed(() => {
         return (teamID: TTeamID, exerciseID: string) => {
-            let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID)
-            if (!currentTeamExercisesScores) return undefined
-            return currentTeamExercisesScores.find((e: any) => e.exercise=exerciseID)
+            // console.log(teamExerciseScores?.value?.get(teamID))
+            return 4
+            // let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID)
+            // console.log(currentTeamExercisesScores.find('1032de8b60f04700bcd6b945c8287ba1'))
+            // return 20;
+            // if (!currentTeamExercisesScores) return undefined
+            // return currentTeamExercisesScores.find((e: any) => e.exercise=exerciseID)
         }
         
     })  
