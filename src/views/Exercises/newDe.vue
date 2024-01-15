@@ -62,7 +62,9 @@
           <div v-if="activeTab === 'description'">
           <VideoPlayer />
           </div>
-          <div v-if="activeTab === 'details'">sf tabs</div>
+          <div v-if="activeTab === 'details'">
+            <ExerciseDetails />
+          </div>
         </div>
       </div>
       <!-- ... more content ... -->
@@ -99,6 +101,7 @@ import { pencilOutline, chevronForward } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
 import LineChart from "@/components/Charts/LineChart.vue";
 import VideoPlayer from "@/components/Exercise/VideoPlayer.vue";
+import ExerciseDetails from "@/components/Exercise/ExerciseDetails.vue";
 //   import PlayDetails from '@/components/PlayDetails.vue';
 //   import { usePlaybookStore } from '@/stores/playbook';
 //   import { useStatusStore } from '@/stores/status';
