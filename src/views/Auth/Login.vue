@@ -42,6 +42,7 @@
       import router from '@/router/index'
       import { presentToast } from "@/utils/toast";
       import { useUserStore } from '@/store';
+import { AuthAPI } from "@/utils/actions";
       const userStore  = useUserStore()
   
       const email = ref("")
@@ -51,6 +52,8 @@
        * Send details to the login function. If an error then present toast of failed login
        */
       async function auth_login() {
+        const res = await AuthAPI.userLogin(email.value, password.value)
+        console.log(res)
         // await userStore.login(email.value, password.value)
         //   .then(() => {
         //     email.value = ''

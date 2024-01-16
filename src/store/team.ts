@@ -1,11 +1,12 @@
 import { computed ,ref } from 'vue'
 import { defineStore } from "pinia";
-import { IUser } from '@/store/user'
+import { IUser  } from '@/store/user'
+import {  useUserStore } from "@/store";
 
 import { TRoleString, TRoleNumber, TTeamID, TUserID } from '@/utils/types';
 import { TeamAPI } from '@/utils/actions';
 
-
+const userStore = useUserStore();
 // ==========================================================
 // Interfaces
 // ==========================================================
@@ -74,10 +75,16 @@ const useTeamStore = defineStore("Teams store", () => {
   const teams : any = ref(null);
   // const teams = new APIMapObject('teams', 'v1/team/', {name: '', members:[]})
 
-
+  // new data 
+  const teamMembers = computed<ITeam>(() => {
+    if (teams.value.has(userStore.teamID)){
+      return teams.value.get(userStore.teamID)
+    } else {
+      return {name: '', members: []}
+    }
+  })
   async function getTeams() {
     teams.value = await TeamAPI.getTeams();
-    console.log("teams:", teams.value);
   }
   // async function fetch() {
   //   await Promise.all([
@@ -125,6 +132,7 @@ const useTeamStore = defineStore("Teams store", () => {
 
   return {
     teams,
+    teamMembers,
     isTeamlead,
     coaches,
     hasCoach,

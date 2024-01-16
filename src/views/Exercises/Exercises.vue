@@ -122,6 +122,7 @@ onMounted(async () => {
   ]);
   loading.value = true;
 });
+console.log(playbookStore.exercises)
 // import { usePlaybookStore } from "@/stores/playbook";
 // import { useTeamStore } from "@/stores/teams";
 // import { useUserStore } from "@/stores/user";

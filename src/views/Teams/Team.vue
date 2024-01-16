@@ -9,11 +9,18 @@
       <linkbutton label="Ask Help" expend="block" link="teamsupport" />
       <teamwidget />
       <ion-reorder-group v-if="loading">
-                <ion-card v-for="[id , team] in Array.from(teamStore.teams)" :key="id" class="practice-card">
+                <ion-card v-for="(member, index) in teamStore.teamMembers.members" :key="index" class="practice-card"
+                @click="() =>
+                router.push({
+                  name: 'editteam',
+                  
+                })
+            "
+                >
                     <div class="card-content">
                         <ion-reorder slot="start"></ion-reorder>
                         
-                        <ion-label>{{team.name}}</ion-label>
+                        <ion-label>{{member.last_name}}</ion-label>
                         <ion-icon :icon="chevronForward" slot="end" />
                     </div>
                     <div class="progress-container">
@@ -27,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref,onMounted } from "vue";
+import { ref,onMounted,watch } from "vue";
 import {
   IonPage,
   IonHeader,
@@ -71,13 +78,8 @@ onMounted(async () => {
   ]);
   loading.value = true;
 });
-const practiceItems = ref([
-  { title: "Team A", subtitle: "20" },
-  { title: "Team B", subtitle: ""},
-  { title: "Team C", subtitle: ""},
-  { title: "Team D", subtitle: ""},
-  // ... other items
-]);
+
+
 </script>
 
 <style scoped>

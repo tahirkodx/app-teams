@@ -160,18 +160,34 @@ export interface IUsage {
         });
         
       });
-    const teamExerciseScore = computed(() => {
-        return (teamID: TTeamID, exerciseID: string) => {
-            // console.log(teamExerciseScores?.value?.get(teamID))
-            return 4
-            // let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID)
+    async function teamExerciseScore (teamID: TTeamID, exerciseID: string) {
+        
+            let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID)
+            for (const key in currentTeamExercisesScores) {
+                if(key === exerciseID){
+                     console.log(currentTeamExercisesScores[key])
+                     console.log("Exexr id" , exerciseID)
+                    return currentTeamExercisesScores[key]
+                 }
+                // if (currentTeamExercisesScores.hasOwnProperty(key)) {
+                //     const items = currentTeamExercisesScores[key];
+                //     // console.log(items)
+                //   const foundItem = items.find(item => item.request ==  exerciseID);
+                //   if (foundItem) {
+                //     console.log(foundItem);
+                //   }else{
+                //     console.log("here")
+                //   }
+                // }
+              
+            // return 4
             // console.log(currentTeamExercisesScores.find('1032de8b60f04700bcd6b945c8287ba1'))
             // return 20;
             // if (!currentTeamExercisesScores) return undefined
             // return currentTeamExercisesScores.find((e: any) => e.exercise=exerciseID)
         }
         
-    })  
+    }  
     return {
         playbook,
         exercises,
