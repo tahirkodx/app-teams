@@ -21,13 +21,11 @@
               <img src="/src/pictures/threeDot.svg" class="drag-handle-icon" />
             </ion-reorder>
 
-            <ion-thumbnail slot="end">
-              <img src="/src/pictures/Illustration 6.svg" />
-            </ion-thumbnail>
+            
             <div class="title-progress-container">
               <ion-label>  {{ playbookStore?.playbook?.get(exercise.play).title }} </ion-label>
               <!-- todo need to consider again -->
-              <ion-progress-bar :value="playbookStore.teamExerciseScore(userStore.teamID, exercise.id)?.score / 10" color="success" class="progress-bar"></ion-progress-bar>
+              <ion-progress-bar :buffer=1.0 color="success" class="progress-bar" :value="playbookStore.teamExerciseScore(teamID, exercise.id) / 10" ></ion-progress-bar>
             </div>
             <ion-icon :icon="chevronForwardOutline" slot="end" class="arrow-icon" />
           </div>
@@ -199,6 +197,7 @@ const doReorder = (event: CustomEvent<ReorderEventDetail>) => {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
 }
 
 ion-label {

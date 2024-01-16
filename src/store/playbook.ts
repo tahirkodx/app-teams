@@ -160,31 +160,19 @@ export interface IUsage {
         });
         
       });
-    async function teamExerciseScore (teamID: TTeamID, exerciseID: string) {
+     function teamExerciseScore (teamID: TTeamID, exerciseID: string) {
         
             let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID)
             for (const key in currentTeamExercisesScores) {
                 if(key === exerciseID){
-                     console.log(currentTeamExercisesScores[key])
-                     console.log("Exexr id" , exerciseID)
-                    return currentTeamExercisesScores[key]
-                 }
-                // if (currentTeamExercisesScores.hasOwnProperty(key)) {
-                //     const items = currentTeamExercisesScores[key];
-                //     // console.log(items)
-                //   const foundItem = items.find(item => item.request ==  exerciseID);
-                //   if (foundItem) {
-                //     console.log(foundItem);
-                //   }else{
-                //     console.log("here")
-                //   }
-                // }
-              
-            // return 4
-            // console.log(currentTeamExercisesScores.find('1032de8b60f04700bcd6b945c8287ba1'))
-            // return 20;
-            // if (!currentTeamExercisesScores) return undefined
-            // return currentTeamExercisesScores.find((e: any) => e.exercise=exerciseID)
+                    let score = 0;
+                    currentTeamExercisesScores[key].forEach(element => {
+                        score =  element.score
+                    });
+                    
+                    return score
+                }
+                
         }
         
     }  
