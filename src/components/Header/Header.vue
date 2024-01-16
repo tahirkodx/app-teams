@@ -84,8 +84,10 @@ const toggleChange = (ev: ToggleCustomEvent) => {
 const buffer = 1.0;
 
 const teamSelected = ref(userStore.teamID);
-console.log(userStore.userID)
+
 const changeTeam = (value: any) => {
+  console.log(userStore.userID)
+
   if (value.detail.value) {
     userStore.update_value("last_team_used", value.detail.value, userStore.userID);
   }

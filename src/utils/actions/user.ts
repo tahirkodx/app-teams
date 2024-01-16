@@ -1,3 +1,4 @@
+import { reactive } from "vue";
 import ApiEndpoints from "@/utils/apis/apiEndpoints";
 import {
   Catched,
@@ -16,7 +17,7 @@ const UserAPI: any = {
         `${ApiEndpoints.GET_USER_SETTINGS}`,
         options
       );
-      return response.data;
+      return reactive(new Map(Object.entries(response.data)));
     } catch (error: any) {
       return Catched(error);
     }

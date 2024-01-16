@@ -31,6 +31,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Teams/Team.vue"),
       },
       {
+        name: 'editteam',
+        // path: 'teams/edit',
+        path: 'teams/id/:id',
+        component: () => import('@/views/Teams/EditTeam.vue')
+      },
+      {
         name: 'teamsupport',
         path: 'teams/support',
         component: () => import('@/views/Support/TeamSupport.vue')

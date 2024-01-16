@@ -97,15 +97,16 @@ const useUserStore = defineStore("user", () => {
   const organizationCoaches: any = ref(null);
   // computed data
   const teamID = computed<TTeamID>(() => {
-    if (settings?.value?.last_team_used) {
-        return settings?.value.last_team_used
+    if (settings?.value?.get('last_team_used')) {
+        return settings?.value?.get('last_team_used')
       }else {
         return ''
       }
     });
   const userID = computed<TUserID>(() => {
-      if(settings?.value?.id){
-        return settings?.value?.id
+    console.log("user id is here " , settings?.value)  
+    if(settings?.value?.get('id')){
+        return settings?.value?.get('id')
       }else{
         return ""
       }
@@ -130,12 +131,14 @@ const useUserStore = defineStore("user", () => {
     console.log("User organization coaches:", organizationCoaches.value);
   }
   
-  async function update_value(key: string, value: any, userID : TUserID) {
+  async function update_value(key: string, value: any, id : TUserID) {
     const data = {
       [key] : value
     }
-    settings.value = await UserAPI.updateValue(data, userID)
-  }
+    await UserAPI.updateValue(data, id)
+    // update last team id in store for use
+    settings.value?.set(key, value)
+    }
   async function update_values(key: string, value: any) {
     console.log(key);
     console.log(value);
