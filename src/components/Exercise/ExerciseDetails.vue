@@ -23,14 +23,15 @@
       </ion-card>
     </div>
 
-    <div class="links-section">
-      <h3>Academy Courses Links:</h3>
+    
+    <div class="header-container">
+      <h3 class="title">Academy Courses Links:</h3>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
     </div>
-    <div class="links-section">
-      <h3>External Materials:</h3>
+    <div class="header-container">
+      <h3 class="title">External Materials:</h3>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
@@ -55,13 +56,11 @@ export default {
 </script>
 <style scoped>
 .header-container {
-  margin: 16px; /* Spacing from the edges of the screen */
-  margin-top: -15px;
+  margin: 0px 15px 0px 15px;
 }
 
 .header-title {
 color: var(--tietiary, rgba(44, 58, 209, 0.50));
-
 /* Title Medium */
 font-family: 'Cabin',sans-serif;
 font-size: 16px;
@@ -70,11 +69,22 @@ font-weight: 500;
 line-height: 24px; /* 150% */
 letter-spacing: 0.15px;
 }
+.title{
+color: #303030;
+/* Lable large */
+font-family: "Cabin",sans-serif;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
+}
 
 .card-container {
   display: flex;
   justify-content: center;
   margin-top: -30px;
+  margin-bottom: -25px;
   padding: 5px 
   /* align-items: left; */
 }
@@ -85,6 +95,9 @@ letter-spacing: 0.15px;
   width: 100%; /* Take full width of the container */
   max-width: 600px; /* Maximum width of the card */
   border-radius: 5px; /* Rounded corners */
+    box-shadow: none; /* This line removes the shadow */
+  --box-shadow: none; /* This line is for overriding shadow in Ionic's shadow DOM */
+  --ion-shadow: none; 
 }
 
 .info-section {
