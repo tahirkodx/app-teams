@@ -189,7 +189,7 @@ ion-card-content {
 }
 
 .tab.active {
-  border-bottom: 3px solid #A5CE3E; /* Color of the active tab indicator */
+ border-bottom: 2px solid var(--tietiary, rgba(44, 58, 209, 0.50));
 }
 
 .content {

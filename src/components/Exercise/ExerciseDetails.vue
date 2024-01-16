@@ -1,23 +1,27 @@
 <template>
   <div class="exercise-details-container">
-    <div class="detail-header">
-      <h2>Exercise Details</h2>
+    <div class="header-container">
+        <h1 class="header-title">Exercise Details</h1>
+      </div>
+
+    <div class="card-container">
+      <ion-card class="info-card">
+        <div class="info-section">
+          <div class="info-label">Owner:</div>
+          <div class="info-content">Ralph Edwards</div>
+        </div>
+        <div class="divider"></div>
+        <div class="info-section">
+          <div class="info-label">Created at:</div>
+          <div class="info-content">2023-11-06</div>
+        </div>
+        <div class="divider"></div>
+        <div class="info-section">
+          <div class="info-label">Play Type:</div>
+          <div class="info-content">Team</div>
+        </div>
+      </ion-card>
     </div>
-   
-<div class="info-container">
-  <div class="info-row">
-    <div class="info-label">Owner:</div>
-    <div class="info-value">Ralph Edwards</div>
-  </div>
-  <div class="info-row">
-    <div class="info-label">Created at:</div>
-    <div class="info-value">2023-11-06</div>
-  </div>
-  <div class="info-row">
-    <div class="info-label">Play Type:</div>
-    <div class="info-value">Team</div>
-  </div>
-</div>
 
     <div class="links-section">
       <h3>Academy Courses Links:</h3>
@@ -26,8 +30,7 @@
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
     </div>
     <div class="links-section">
-     
-<h3>External Materials:</h3>
+      <h3>External Materials:</h3>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
       <a href="#" class="link">Www.Loremsitiposuerenuncullamcorperamet.com</a>
@@ -42,7 +45,7 @@
   </div>
 </template>
 <script>
-import { IonIcon } from '@ionic/vue';
+import { IonIcon } from "@ionic/vue";
 
 export default {
   components: {
@@ -51,101 +54,78 @@ export default {
 };
 </script>
 <style scoped>
-.exercise-details-container {
-  font-family: 'Arial', sans-serif;
+.header-container {
+  margin: 16px; /* Spacing from the edges of the screen */
+  margin-top: -15px;
 }
 
-.detail-header h2 {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 1em;
+.header-title {
+color: var(--tietiary, rgba(44, 58, 209, 0.50));
+
+/* Title Medium */
+font-family: 'Cabin',sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 150% */
+letter-spacing: 0.15px;
 }
 
-.details-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5em;
-  background: #FFFFFF;
-  border: 1px solid #DDDDDD;
-  padding: 1em;
-}
-
-.detail-item {
+.card-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  margin-top: -30px;
+  padding: 5px 
+  /* align-items: left; */
 }
 
-.detail-label {
-  font-size: 0.8em;
-  color: #666666;
-}
-
-.links-section h3, .status-section h3 {
-  font-size: 1em;
-  font-weight: bold;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-}
-
-.link {
- 
-color: #007bff;
-text-decoration: none;
-word-break: break-all; /* This will ensure that the links will wrap and not overflow the container /
-display: block; / This makes each link appear on a new line /
-margin-bottom: 0.5em; / Add some space between the links */
-}
-
-.status-section {
-background: #A5D6A7;
-padding: 1.5em; /* Increase padding for better spacing /
-margin-top: 1em;
-border-radius: 4px;
-display: flex;
-justify-content: space-between; / This will position the status text and icon on opposite ends /
-align-items: center; / This will vertically center the items in the status badge */
-}
-
-.status-badge {
-display: flex;
-align-items: center;
-font-weight: bold;
-color: #2e7d32; /* Adjust the color to match the screenshot */
-}
-
-ion-icon {
-margin-right: 0.5em;
-font-size: 1.5em;
-color: #2e7d32; /* Adjust the color to match the screenshot */
-}
-
-
-
-.info-container {
+.info-card {
   display: flex;
-  justify-content: space-between;
-  background-color: #fff; /* Assuming a white background */
-  border-bottom: 1px solid #eaeaea; /* Light grey border at the bottom */
-  padding: 10px; /* Add padding for some space inside the container */
+  flex-direction: row; /* Align children horizontally */
+  width: 100%; /* Take full width of the container */
+  max-width: 600px; /* Maximum width of the card */
+  border-radius: 5px; /* Rounded corners */
 }
 
-.info-row {
+.info-section {
   display: flex;
-  flex-direction: column; /* Stack label and value vertically */
-  align-items: start;
+  flex-direction: column; /* Align children vertically */
+  flex: 1; /* Distribute space evenly */
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: #303030;
+  font-family: "Cabin", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: 0.1px;
+padding: 0px 10px;
+  background: #f7f7f7;
 }
- 
+
+.divider {
+  height: 70%; /* Height of the divider relative to its parent */
+  width: 1px; /* Thin line */
+  /* background-color: #d7d8da; */
+  align-self: center; /* Center the divider */
+  border-right: 0.5px solid rgba(204, 204, 204, 0.8);
+}
+
 .info-label {
   font-size: 0.8em; /* Smaller font size for labels */
-  color: #999; /* Light grey color for text */
-  margin-bottom: 2px; /* Small space between label and value */
+  color: #707070; /* Grey color for labels */
+  margin-bottom: 8px; /* Space between label and content */
 }
 
-.info-value {
-  font-size: 1em; /* Regular font size for values */
-  font-weight: bold; /* Make the value text bold */
-  color: #333; /* Darker color for better readability */
+.info-content {
+  margin-top: -10px;
+  color: #404040;
+  font-family: "Cabin", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: 0.25px;
 }
-
-
 </style>
