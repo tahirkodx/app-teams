@@ -73,7 +73,6 @@ const selectGoal = (index : any) => {
 
   color: #ff8512;
   /* Title small */
-  font-family: "Cabin", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -129,7 +128,7 @@ h1 {
   color: var(--Neutrals-black, #303030);
 
   /* Title Medium */
-  font-family: "Cabin", sans-serif;
+ 
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -140,7 +139,6 @@ h1 {
 
 .show-all-button {
   color: var(--text-colors-color-text-blue, #2b7ff2);
-  font-family: "Cabin", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

@@ -77,7 +77,6 @@ const youtubeEmbedUrl = (url) => {
   color: #000;
 
 /* Title small */
-font-family: "Cabin", sans-serif;
 font-size: 14px;
 font-style: normal;
 font-weight: 500;

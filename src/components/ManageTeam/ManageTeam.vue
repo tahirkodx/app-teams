@@ -51,7 +51,6 @@ const addMember = () => {
 h1 {
   color: var(--Neutrals-black, #303030);
   /* Title Medium */
-  font-family: "Cabin", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;

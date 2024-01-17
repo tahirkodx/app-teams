@@ -246,7 +246,6 @@ ion-reorder {
 .contentHeader {
   color: var(--Neutrals-black, #303030);
   /* Title Large */
-  font-family: "Cabin", sans-serif;
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -257,7 +256,6 @@ ion-reorder {
 .titleStyle {
   color: var(--Neutrals-black, #303030);
   /* Keep the color as is */
-  font-family: "Cabin", sans-serif;
   /* No change needed */
   font-size: 22px;
   /* Keep the font size as is unless it needs to change */

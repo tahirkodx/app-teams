@@ -170,7 +170,6 @@ const formatTime = (timeInSeconds: number) => {
 .pStyle{
 color: #303030;
 /* Lable large */
-font-family: "Cabin",sans-serif;
 font-size: 14px;
 font-style: normal;
 font-weight: 500;
@@ -188,7 +187,6 @@ ion-button {
 .card-text{
   color: #000;
 /* Body medium */
-font-family: 'Cabin', sans-serif;
 font-size: 14px;
 font-style: normal;
 font-weight: 400;
@@ -229,7 +227,6 @@ background-color: #fff; /* Assuming you want a white background for the lower se
 .custom-section p {
 color: #303030;
 /* Lable large */
-font-family: "Cabin",sans-serif;
 font-size: 14px;
 font-style: normal;
 font-weight: 500;
@@ -246,7 +243,6 @@ padding: 18px;
 margin-top: -35px;
  color: #404040;
 /* Body medium */
-font-family: "Cabin",sans-serif;
 font-size: 14px;
 font-style: normal;
 font-weight: 400;

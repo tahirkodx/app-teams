@@ -4,18 +4,17 @@
       <score></score>
     </ion-header>
     <ion-content>
-      <div class="custom-card-container" ref="cardContainer">
-        <!-- todo backgound-color need to change for dark and light theme  -->
-        <!-- Dynamically create cards using v-for loop -->
-        <ion-card class="custom-card">
-          <ion-card-header>
-            <ion-card-title>exercise title</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Supporting line text lorem ipsum dolor sit amet...
-          </ion-card-content>
-        </ion-card>
+      <div class="header-container">
+        <h1>Celebrate and Collaborate</h1>
+        <h2>Recognising Individual and Team Achievements</h2>
+        <div class="owner-container">
+          <ion-avatar>
+            <img src="/src/pictures/Ellipse 72.svg" />
+          </ion-avatar>
+          <h3>Owner: Guy Hawkins</h3>
+        </div>
       </div>
+
       <div class="tab-container">
         <div class="tabs">
           <div
@@ -60,7 +59,7 @@
             </ion-reorder-group>
           </div>
           <div v-if="activeTab === 'description'">
-          <VideoPlayer />
+            <VideoPlayer />
           </div>
           <div v-if="activeTab === 'details'">
             <ExerciseDetails />
@@ -81,12 +80,7 @@ import {
   IonList,
   IonItem,
   IonContent,
-  IonDatetime,
-  IonBreadcrumbs,
-  IonBreadcrumb,
-  IonButton,
-  IonAccordionGroup,
-  IonAccordion,
+  IonAvatar,
   IonLabel,
   IonCard,
   IonCardTitle,
@@ -270,5 +264,71 @@ ion-icon {
 .addStyle{
     margin-bottom: 40px;
     margin: 10px ;
+}
+
+
+
+
+
+
+.header-container {
+  text-align: center;
+  border-bottom: 1px solid #F2F2F2;
+background: #F7F7F7;
+}
+
+.header-container h1 {
+color: var(--Neutrals-black, #303030);
+text-align: center;
+/* Title small */
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
+padding-top: 8px;
+margin-bottom: -15px;
+}
+
+.header-container h2 {
+color: #7C7C7C;
+text-align: center;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 150% */
+letter-spacing: 0.15px;
+ padding: 0px 80px; 
+}
+
+.owner-container {
+display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -8px; /* Adjust this value as needed for top margin */
+  
+}
+
+.owner-container h3 {
+color: #808080;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px; /* 133.333% */
+margin-left: 8px;
+margin-bottom: 15px;
+}
+
+ion-avatar {
+--border-radius: 50%;
+--size: 50px; /* Adjust the size of the avatar */
+width: 20px;
+height: 20px;
+}
+
+/* Additional styling for avatar image if needed */
+ion-avatar img {
+border-radius: 50%;
+
 }
 </style>

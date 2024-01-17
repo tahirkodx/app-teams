@@ -127,7 +127,6 @@ function animateIncrease() {
   border-radius: 8px;
   --border: none;
   font-size: 16px;
-  font-family: "Cabin", sans-serif;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0.15px;

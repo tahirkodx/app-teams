@@ -133,7 +133,6 @@ ion-chip {
     text-align: center;
 
     /* Body small */
-    font-family: "Cabin", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -150,9 +149,6 @@ ion-chip[color="secondary"] {
 
 .titleStyle {
     color: var(--Neutrals-black, #303030);
-
-    font-family: "Cabin", sans-serif;
-
     font-size: 22px;
     font-weight: 500;
     line-height: 28px;
@@ -167,7 +163,6 @@ ion-chip[color="secondary"] {
 .ion-text-capitalize {
     color: #000;
     /* Body medium */
-    font-family: "Cabin", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

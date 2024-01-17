@@ -221,9 +221,6 @@ const resources = ref([
 
 .titleStyle {
   color: var(--Neutrals-black, #303030);
-
-  font-family: "Cabin", sans-serif;
-
   font-size: 22px;
   font-weight: 500;
   line-height: 28px;
@@ -247,7 +244,6 @@ const resources = ref([
   
   color: var(--M3-sys-light-on-surface-variant, #49454f);
   /* Body large */
-  font-family: "Cabin" ,sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -276,9 +272,7 @@ const resources = ref([
 
 .resource-title h2 {
   color: #a5ce3e;
-
   /* Lable medium */
-  font-family: "Cabin", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -313,7 +307,6 @@ p {
   color: var(--text-colors-color-text-dark, #343a40);
 
   /* Body small */
-  font-family: "Cabin", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

@@ -70,7 +70,6 @@ ion-toolbar {
 ion-title {
     color: var(--Neutrals-black, #303030);
     /* Title Medium */
-    font-family: "Cabin", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -138,7 +137,6 @@ ion-icon {
     color: #ff8512;
 
     /* Title Large */
-    font-family: "Cabin", sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 500;
@@ -150,7 +148,6 @@ ion-icon {
     color: #868686;
 
     /* Body small */
-    font-family: "Cabin", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -162,7 +159,6 @@ ion-icon {
     color: #c9c9c9;
     /* margin: 25px 0 0; */
     /* Body small */
-    font-family: "Cabin", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
