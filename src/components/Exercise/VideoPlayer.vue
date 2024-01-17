@@ -253,5 +253,8 @@ font-weight: 400;
 line-height: 20px; /* 142.857% */
 letter-spacing: 0.25px;
 }
+.controls{
+  padding: 0px 20px 20px 0px;
+}
 /* } */
 </style>

@@ -4,51 +4,80 @@
       <score />
     </ion-header>
     <ion-content :fullscreen="true" v-if="loading">
-      <h4 class="titleStyle">Practice</h4>
-      <ion-reorder-group @ionItemReorder="doReorder" :disabled="false" v-if="playbookStore.exercises">
-        <span v-for="[teamID, exercises] in playbookStore.filteredExercises" :key="teamID">
-        <ion-card 
-        v-for="exercise in exercises" :key="exercise.id"
-        @click="() =>
+      <h4 class="titleStyle">Excercise Progress</h4>
+      <ion-reorder-group
+        @ionItemReorder="doReorder"
+        :disabled="false"
+        v-if="playbookStore.exercises"
+      >
+        <span
+          v-for="[teamID, exercises] in playbookStore.filteredExercises"
+          :key="teamID"
+        >
+          <ion-card
+            v-for="exercise in exercises"
+            :key="exercise.id"
+            @click="
+              () =>
                 router.push({
                   name: 'exercise',
                   params: { exerciseid: exercise.id },
                 })
             "
-        class="practice-card">
-          <div class="card-content">
-            <ion-reorder slot="end">
-              <img src="/src/pictures/threeDot.svg" class="drag-handle-icon" />
-            </ion-reorder>
+            class="practice-card"
+          >
+            <div class="card-content">
+              <ion-reorder slot="end">
+                <img
+                  src="/src/pictures/threeDot.svg"
+                  class="drag-handle-icon"
+                />
+              </ion-reorder>
 
-            
-            <div class="title-progress-container">
-              <ion-label>  {{ playbookStore?.playbook?.get(exercise.play).title }} </ion-label>
-              <!-- todo need to consider again -->
-              <ion-progress-bar :buffer=1.0 color="success" class="progress-bar" :value="playbookStore.teamExerciseScore(teamID, exercise.id) / 10" ></ion-progress-bar>
+              <div class="title-progress-container">
+                <ion-label>
+                  {{ playbookStore?.playbook?.get(exercise.play).title }}
+                </ion-label>
+                <!-- todo need to consider again -->
+                <ion-progress-bar
+                  :buffer="1.0"
+                  color="success"
+                  class="progress-bar"
+                  :value="
+                    playbookStore.teamExerciseScore(teamID, exercise.id) / 10
+                  "
+                ></ion-progress-bar>
+              </div>
+              <ion-icon
+                :icon="chevronForwardOutline"
+                slot="end"
+                class="arrow-icon"
+              />
             </div>
-            <ion-icon :icon="chevronForwardOutline" slot="end" class="arrow-icon" />
-          </div>
-        </ion-card>
+          </ion-card>
         </span>
       </ion-reorder-group>
-       <ion-fab
-       class="addStyle"
-          slot="fixed"
-          horizontal="end"
-          vertical="bottom"
-          @click="() => router.push({ name: 'addteam' })"
-        >
-          <ion-fab-button>
-            <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+      <ion-fab
+        class="addStyle"
+        slot="fixed"
+        horizontal="end"
+        vertical="bottom"
+        @click="() => router.push({ name: 'addteam' })"
+      >
+        <ion-fab-button>
+          <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-content>
     <ion-content :fullscreen="true" v-if="!loading">
-      <h4 class="titleStyle"> <ion-skeleton-text :animated="true" style="width: 100px"></ion-skeleton-text></h4>
+      <h4 class="titleStyle">
+        <ion-skeleton-text
+          :animated="true"
+          style="width: 100px"
+        ></ion-skeleton-text>
+      </h4>
       <ion-reorder-group @ionItemReorder="doReorder" :disabled="false">
-        <ion-card v-for="index in 10" :key="index"
-        class="practice-card">
+        <ion-card v-for="index in 10" :key="index" class="practice-card">
           <div class="card-content">
             <ion-reorder slot="end">
               <ion-skeleton-text :animated="true"></ion-skeleton-text>
@@ -58,32 +87,44 @@
               <ion-skeleton-text :animated="true"></ion-skeleton-text>
             </ion-thumbnail>
             <div class="title-progress-container">
-              <ion-label>  <ion-skeleton-text :animated="true" style="width: 80px"></ion-skeleton-text> </ion-label>
-              <ion-progress-bar value="12" color="success" class="progress-bar"></ion-progress-bar>
+              <ion-label>
+                <ion-skeleton-text
+                  :animated="true"
+                  style="width: 80px"
+                ></ion-skeleton-text>
+              </ion-label>
+              <ion-progress-bar
+                value="12"
+                color="success"
+                class="progress-bar"
+              ></ion-progress-bar>
             </div>
-            <ion-skeleton-text :animated="true" style="width: 10px" slot="end" class="arrow-icon"></ion-skeleton-text>
+            <ion-skeleton-text
+              :animated="true"
+              style="width: 10px"
+              slot="end"
+              class="arrow-icon"
+            ></ion-skeleton-text>
           </div>
         </ion-card>
-       
       </ion-reorder-group>
-       <ion-fab
-       class="addStyle"
-          slot="fixed"
-          horizontal="end"
-          vertical="bottom"
-          @click="() => router.push({ name: 'addteam' })"
-        >
-          <ion-fab-button>
-            <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+      <ion-fab
+        class="addStyle"
+        slot="fixed"
+        horizontal="end"
+        vertical="bottom"
+        @click="() => router.push({ name: 'addteam' })"
+      >
+        <ion-fab-button>
+          <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-content>
-    
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { ref,onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import {
   IonPage,
   IonHeader,
@@ -97,15 +138,15 @@ import {
   IonReorderGroup,
   IonReorder,
   IonIcon,
-  IonFab, 
+  IonFab,
   IonFabButton,
-  IonSkeletonText
+  IonSkeletonText,
 } from "@ionic/vue";
 import { chevronForwardOutline, add } from "ionicons/icons";
 import type { ReorderEventDetail } from "@ionic/core";
 import score from "@/components/Header/Header.vue";
 import router from "@/router/index";
-import { useUserStore, useTeamStore ,usePlaybookStore } from "@/store";
+import { useUserStore, useTeamStore, usePlaybookStore } from "@/store";
 const userStore = useUserStore();
 const teamStore = useTeamStore();
 const playbookStore = usePlaybookStore();
@@ -120,7 +161,7 @@ onMounted(async () => {
   ]);
   loading.value = true;
 });
-console.log(playbookStore.exercises)
+console.log(playbookStore.exercises);
 // import { usePlaybookStore } from "@/stores/playbook";
 // import { useTeamStore } from "@/stores/teams";
 // import { useUserStore } from "@/stores/user";
@@ -211,7 +252,7 @@ ion-label {
   /* --buffer-background: transparent; */
   --progress-color: #a5ce3e;
   width: 60%;
-      margin-bottom: 15px;
+  margin-bottom: 15px;
 
   /* Adjust width as needed */
 }
@@ -257,7 +298,6 @@ ion-reorder {
 .titleStyle {
   color: var(--Neutrals-black, #303030);
   /* Keep the color as is */
-  font-family: "Cabin", sans-serif;
   /* No change needed */
   font-size: 22px;
   /* Keep the font size as is unless it needs to change */
@@ -272,15 +312,14 @@ ion-reorder {
   padding-left: 15px;
 }
 
-
 .practiceBox {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
 }
-.addStyle{
-    margin-bottom: 40px;
-    margin: 10px ;
+.addStyle {
+  margin-bottom: 40px;
+  margin: 10px;
 }
 </style>

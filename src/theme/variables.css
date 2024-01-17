@@ -1,3 +1,19 @@
+
+@font-face {
+  font-family: 'Cabin';
+  src: url('../assets/fonts/cabin/static/Cabin-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html.ios {
+  --ion-default-font: 'Cabin', sans-serif;
+}
+
+html.md {
+  --ion-default-font: 'Cabin', 'Roboto', sans-serif;
+}
+
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 :root {
@@ -95,6 +111,7 @@ http://ionicframework.com/docs/theming/ */
  */
 
  body.dark {
+  --ion-font-family:  'Cabin' ,sans-serif;
   --ion-color-primary: #A5CE3E;
   --ion-color-primary-rgb: 66, 140, 255;
   --ion-color-primary-contrast: #ffffff;
@@ -175,6 +192,7 @@ http://ionicframework.com/docs/theming/ */
  */
 
 .ios body.dark {
+  --ion-font-family:  'Cabin' ,sans-serif;
   --ion-background-color: #000000;
   --ion-background-color-rgb: 0, 0, 0;
 
