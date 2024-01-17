@@ -6,6 +6,8 @@ import token from "@/utils/token";
 const AuthAPI: any = {
   userLogin: async (payload: any) => {
     try {
+      console.log("Here is play load " , payload)
+      // return 
       const response = await eveTechApi.post(`${ApiEndpoints.LOGIN}`, payload);
       // Save token in local storage if found
       if(response.key){

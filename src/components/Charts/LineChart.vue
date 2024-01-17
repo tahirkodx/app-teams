@@ -37,16 +37,16 @@ const createLineChart = () => {
       labels: ["1", "2", "3", "4", "5", "6", "7"],
       datasets: [
         {
-          label: "Dataset 1",
-          backgroundColor: "rgba(165,206,61,0.5)",
-          borderColor: "rgba(165,206,61,0.5)",
-          data: [0, 10, 5, 2, 20, 30, 45],
-
-          pointBackgroundColor: "rgba(165,206,61,1)",
-          pointBorderColor: "#fff",
+          borderColor: "rgba(44, 58, 209, 0.50)",
+          data: [1, 3, 5, 7.5, 4.2, 7.3, 8],
+          fill: true,
+          backgroundColor: "rgba(44, 58, 209, 0.10)",
+          
           pointHoverBackgroundColor: "#000",
-          pointHoverBorderColor: "rgba(165,206,61,1)",
-          tension: 0.5,
+          tension: 0,
+          
+          stepped: false
+          
           
         },
       ],
@@ -63,14 +63,14 @@ const createLineChart = () => {
           grid: {
             circular: true,
             color: stline,
-            lineWidth: 10,
+            lineWidth:10
+
           },
           ticks: {
             display: false, // Hide the ticks
-            stepSize: 50,
-
-            // stepSize: .9,
+            
           },
+          
         },
       },
       plugins: {
@@ -80,11 +80,13 @@ const createLineChart = () => {
       },
       elements: {
         line: {
-          borderWidth: 5, // Radius of the points on the radar
+          borderWidth: 3, // Radius of the points on the radar
         },
-        bar :{
-          borderWidth :10,
-          borderColor : "rgba(165,206,61,1)",
+        point:{
+          radius : 6,
+          borderColor : "rgba(44, 58, 209, 0.50)",
+          backgroundColor : "white",
+          borderWidth : 3,
           
         }
       },
@@ -106,6 +108,7 @@ onMounted(createLineChart);
 <style scoped>
 .chart-container {
   height: 300px;
+  margin: 10px;
 }
 .chart-container-outer {
   height: 350px;
