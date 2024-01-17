@@ -24,16 +24,13 @@
     </div>
 
     <div class="header-container">
-      <h3 class="title">Academy Courses Links:</h3>
-      <a href="#" class="links-container"
-        >Www.Loremsitiposuerenuncullamcorperamet.com</a
-      >
-      <a href="#" class="links-container"
-        >Www.Loremsitiposuerenuncullamcorperamet.com</a
-      >
-      <a href="#" class="links-container"
-        >Www.Loremsitiposuerenuncullamcorperamet.com</a
-      >
+      <h3 class="title">Relevant Academy Lessons:</h3>
+ <ion-list lines="none">
+        <ion-item v-for="lesson in lessons" :key="lesson">
+          <ion-icon :icon="caretUpOutline" slot="start" class="custom-bullet"></ion-icon>
+          <ion-label>{{ lesson }}</ion-label>
+        </ion-item>
+      </ion-list>
     </div>
     <div class="header-container">
       <h3 class="title">External Materials:</h3>
@@ -71,26 +68,16 @@
     </div>
   </div>
 </template>
-<script>
+<script setup lang="ts">
 import {
-  IonPage,
-  IonContent,
   IonCard,
-  IonBadge,
   IonIcon,
   IonButton,
+   IonList, IonItem, IonLabel
 } from "@ionic/vue";
-
-export default {
-  components: {
-    IonPage,
-    IonContent,
-    IonCard,
-    IonBadge,
-    IonIcon,
-    IonButton,
-  },
-};
+import { caretUpOutline } from 'ionicons/icons';
+import { ref } from "vue";
+ const lessons = ref(['Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum']);
 </script>
 <style scoped>
 .header-container {
@@ -98,15 +85,12 @@ export default {
 }
 
 .header-title {
-  color: var(--tietiary, rgba(44, 58, 209, 0.5));
-  /* Title Medium */
-
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  /* 150% */
-  letter-spacing: 0.15px;
+color: #303030;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
 }
 
 .title {
@@ -285,4 +269,31 @@ export default {
 .custom-icon-right {
   font-size: 1.5em; /* Smaller icons on smaller screens */
 }
+
+
+
+
+h2 {
+  color: var(--black, #000);
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.25px;
+}
+
+.custom-bullet {
+  color: #A5CE3E; /* Adjust the color to match the design */
+  margin-right: 0.5em; /* Adjust spacing between bullet and text */
+  transform: rotate(90deg); /* Rotate the icon to point right */
+}
+
+ion-item {
+  --padding-start: 0; /* Removes padding from the start of the item */
+  --inner-padding-start: 0; /* Additional inner padding start */
+  --min-height: 0; /* Adjusts the minimum height of the item */
+  font-size: 1em; /* Adjust font size as needed */
+}
+
+ 
 </style>

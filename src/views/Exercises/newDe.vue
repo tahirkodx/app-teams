@@ -89,6 +89,7 @@ import {
   IonProgressBar,
   IonReorderGroup,
   IonReorder,
+  IonIcon
 } from "@ionic/vue";
 import router from "@/router/index";
 import { pencilOutline, chevronForward } from "ionicons/icons";
