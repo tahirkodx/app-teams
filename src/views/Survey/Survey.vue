@@ -10,7 +10,8 @@
                     <IonRow>
                         <IonCol>
                             <ion-card-header>
-                                <ion-card-title class="ion-text-capitalize">Name</ion-card-title>
+                                <ion-card-title class="ion-text-capitalize">{{ teamStore?.teams?.get(survey.team).name }}</ion-card-title>
+                                
                             </ion-card-header>
                             <ion-card-content class="ion-flex ion-align-items-center ion-justify-content-between">
                                 <span class="ion-text-capitalize">
@@ -23,11 +24,11 @@
                                 </span>
                             </ion-card-content>
                         </IonCol>
-                        <IonCol size="auto">
+                        <!-- <IonCol size="auto">
                             <div style="width: 30px">
                                 <ion-icon :icon="chevronDownOutline" class="chevron-icon"></ion-icon>
                             </div>
-                        </IonCol>
+                        </IonCol> -->
                     </IonRow>
                 </IonGrid>
             </ion-card>
@@ -65,11 +66,11 @@ import { ref } from "vue";
 import { chevronDownOutline, add } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
 import router from "@/router/index";
-import { useUserStore ,useStatusStore } from "@/store";
+import { useUserStore , useTeamStore ,useStatusStore } from "@/store";
 
 
 const statusStore = useStatusStore()
-
+const teamStore = useTeamStore();
   await Promise.all([
     statusStore.getDimensions(),
     statusStore.getQuestionNaire(),
@@ -104,10 +105,17 @@ ion-title {
 }
 
 ion-card {
-    --background: #f9f9f9;
+    --background: #FAFAFA;
     border-radius: 5px;
     background: #fff;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    border: 1px solid rgba(242, 242, 242, 0.95);
+    background: #FAFAFA;
+    display: flex;
+    
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
     /* Light grey background */
 }
 
@@ -154,7 +162,7 @@ ion-chip[color="secondary"] {
     line-height: 28px;
     text-align: left;
     margin-top: 25px;
-    margin-bottom: -12px;
+    margin-bottom: 25px;
     padding-left: 16px;
 
     font-style: normal;
