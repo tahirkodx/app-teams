@@ -39,6 +39,12 @@
             class="toolbar-icon"
           ></ion-icon>
         </ion-button>
+        <ion-button @click="navigateFunction">
+
+         
+            <ion-icon :icon="documentTextOutline" />
+            
+         </ion-button>
         <ion-button>
           <ion-toggle
             :checked="themeToggle"
@@ -68,13 +74,14 @@ import {
   IonSelectOption,
   IonToggle,
 } from "@ionic/vue";
-import { people, personCircleSharp, personCircleOutline } from "ionicons/icons";
+import { people, personCircleSharp, personCircleOutline,documentTextOutline } from "ionicons/icons";
 import type { ToggleCustomEvent } from "@ionic/vue";
 import { useTeamStore, useUserStore } from "@/store";
 const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
 await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
+import router from '@/router/index'
 const toggleDarkTheme = (shouldAdd) => {
   document.body.classList.toggle("dark", shouldAdd);
 };
@@ -92,7 +99,9 @@ const changeTeam = (value: any) => {
     userStore.update_value("last_team_used", value.detail.value, userStore.userID);
   }
 };
-
+const navigateFunction = () =>{
+  router.push({name: 'survey'})
+}
 const animate = ref(false);
 function animateIncrease() {
   animate.value = true;

@@ -6,7 +6,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <div class="ion-flex ion-justify-content-center ion-align-items-center" style="height: 100%;">
+      <div >
         <div style="width: 100%; max-width: 330px;">
           <ion-list lines="full">
             <ion-item>
@@ -18,7 +18,7 @@
               <ion-input type="password" v-model="password"></ion-input>
             </ion-item>
           </ion-list>
-          <ion-button expand="block" class="ion-margin-top" @click="auth_login">Login</ion-button>
+          <ion-button expand="block"  @click="auth_login">Login</ion-button>
           <ion-button expand="block" fill="outline" class="ion-margin-top" @click="() => router.push({ name: 'registration' })">
             Register as new user
           </ion-button>
@@ -38,6 +38,9 @@
       IonContent,
       IonButton,
       IonInput,
+      IonLabel,
+      IonItem,
+      IonList
     } from '@ionic/vue';
     import router from '@/router/index'
     import { presentToast } from "@/utils/toast";

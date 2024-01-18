@@ -13,10 +13,10 @@
           <ion-label>Exercises</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="Survey" href="/tabs/surveys" @click="updateHeader('Surveys')">
+        <!-- <ion-tab-button tab="Survey" href="/tabs/surveys" @click="updateHeader('Surveys')">
           <ion-icon :icon="documentTextOutline" />
           <ion-label>Surveys</ion-label>
-        </ion-tab-button>
+        </ion-tab-button> -->
 
         <ion-tab-button tab="Academy" href="/tabs/academys" @click="updateHeader('Academy')">
           <ion-icon :icon="libraryOutline" />

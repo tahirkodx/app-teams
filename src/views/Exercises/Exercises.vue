@@ -35,8 +35,38 @@
 
               <div class="title-progress-container">
                 <ion-label>
-                  {{ playbookStore?.playbook?.get(exercise.play).title }}
+                  {{ exercise.play_title }}
                 </ion-label>
+                <div class="owner-container">
+                  <ion-avatar>
+                    <img src="/src/pictures/Ellipse 72.svg" />
+                  </ion-avatar>
+                  <h3>
+                    Owner: Guy Hawkins
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="8"
+                      height="8"
+                      viewBox="0 0 2 2"
+                      fill="none"
+                    >
+                      <circle cx="1" cy="1" r="1" fill="#D9D9D9" />
+                      </svg>
+                    <span
+                      class="completed"
+                      v-if="exercise.is_active"
+                      color="success"
+                    >
+                      Completed
+                    </span>
+                    <span
+                      v-else
+                      color="success"
+                    >
+                      Ongoing
+                    </span>
+                  </h3>
+                </div>
                 <!-- todo need to consider again -->
                 <ion-progress-bar
                   :buffer="1.0"
@@ -160,21 +190,6 @@ onMounted(async () => {
   ]);
   loading.value = true;
 });
-console.log(playbookStore.exercises);
-// import { usePlaybookStore } from "@/stores/playbook";
-// import { useTeamStore } from "@/stores/teams";
-// import { useUserStore } from "@/stores/user";
-// import { fetchCurrent, teamID } from "@/stores/current";
-
-// const userStore = useUserStore();
-// const teamStore = useTeamStore();
-// const playbookStore = usePlaybookStore();
-// await Promise.all([
-//   userStore.fetch(),
-//   playbookStore.fetch(),
-//   // teamStore.fetch(),
-//   // fetchCurrent(),
-// ]);
 const practiceItems = ref([
   {
     title: "Communication",
@@ -229,7 +244,6 @@ const doReorder = (event: CustomEvent<ReorderEventDetail>) => {
   padding: 16px;
   /* Add padding if needed */
   border-radius: 5px;
-  background: #ffffff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -242,7 +256,7 @@ const doReorder = (event: CustomEvent<ReorderEventDetail>) => {
 
 ion-label {
   font-size: 1rem;
-  margin-bottom: 11px;
+
   /* Space between title and progress bar */
 }
 
@@ -319,5 +333,33 @@ ion-reorder {
 .addStyle {
   margin-bottom: 40px;
   margin: 10px;
+}
+.owner-container {
+  display: flex;
+  align-items: center;
+  margin-top: -8px; /* Adjust this value as needed for top margin */
+}
+.owner-container h3 {
+  color: #808080;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  margin-left: 8px;
+  margin-bottom: 15px;
+}
+.completed {
+  color: var(--ion-color-primary);
+}
+ion-avatar {
+  --border-radius: 50%;
+  --size: 50px; /* Adjust the size of the avatar */
+  width: 20px;
+  height: 20px;
+}
+
+/* Additional styling for avatar image if needed */
+ion-avatar img {
+  border-radius: 50%;
 }
 </style>
