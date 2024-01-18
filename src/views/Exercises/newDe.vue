@@ -180,11 +180,12 @@ ion-card-content {
   padding: 10px 33px;
   cursor: pointer;
   text-align: center;
-  border-bottom: 3px solid transparent; /* Makes the tab seem "inactive" */
+  border-bottom: 1px solid #eaeaea; /* Makes the tab seem "inactive" */
 }
 
 .tab.active {
  border-bottom: 2px solid var(--tietiary, rgba(44, 58, 209, 0.50));
+ width: 50%;
 }
 
 .content {
@@ -243,7 +244,6 @@ ion-label {
 
 .progress-container {
     width: 100%;
-
 }
 
 ion-progress-bar {

@@ -24,8 +24,7 @@
                   params: { exerciseid: exercise.id },
                 })
             "
-            class="practice-card"
-          >
+            class="practice-card">
             <div class="card-content">
               <ion-reorder slot="end">
                 <img

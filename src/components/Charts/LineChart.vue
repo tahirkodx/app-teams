@@ -21,10 +21,9 @@ const createLineChart = () => {
   console.log(body.classList.contains("dark"));
   if (body.classList.contains("dark")) {
     stline = "#fff";
-    console.log("light");
+    
   } else {
-    stline = "#BDBDBD";
-    console.log("dark");
+    stline = "#BDBDBD"; 
   }
 
   if (lineChartInstance) {
@@ -34,20 +33,16 @@ const createLineChart = () => {
   lineChartInstance = new Chart(context, {
     type: "line",
     data: {
-      labels: ["1", "2", "3", "4", "5", "6", "7"],
+      labels: ["JAN", "FEB", "MAR", "ARP", "MAY", "JUN"],
       datasets: [
         {
           borderColor: "rgba(44, 58, 209, 0.50)",
           data: [1, 3, 5, 7.5, 4.2, 7.3, 8],
           fill: true,
           backgroundColor: "rgba(44, 58, 209, 0.10)",
-          
           pointHoverBackgroundColor: "#000",
           tension: 0,
-          
           stepped: false
-          
-          
         },
       ],
     },
@@ -80,13 +75,13 @@ const createLineChart = () => {
       },
       elements: {
         line: {
-          borderWidth: 3, // Radius of the points on the radar
+          borderWidth: 2, // Radius of the points on the radar
         },
         point:{
           radius : 6,
           borderColor : "rgba(44, 58, 209, 0.50)",
           backgroundColor : "white",
-          borderWidth : 3,
+          borderWidth : 1,
           
         }
       },
