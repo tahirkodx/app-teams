@@ -309,8 +309,6 @@ ion-reorder {
 
 .titleStyle {
   color: var(--Neutrals-black, #303030);
-  /* Keep the color as is */
-  /* No change needed */
   font-size: 22px;
   /* Keep the font size as is unless it needs to change */
   font-weight: 500;

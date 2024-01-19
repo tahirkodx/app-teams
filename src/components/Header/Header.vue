@@ -17,21 +17,17 @@
           @ion-change="changeTeam"
           placeholder="Team dep..."
           class="header-select"
-          
         >
-        <div v-for="[id, team] in Array.from(teamStore.teams)"
-          :key="id">
-
-          <ion-select-option
-          :value="id"
-          
-          >{{ team.name }}</ion-select-option
-          >
-        </div>
+          <div v-for="[id, team] in Array.from(teamStore.teams)" :key="id">
+            <ion-select-option :value="id">{{ team.name }}</ion-select-option>
+          </div>
         </ion-select>
       </div>
 
       <ion-buttons class="endIcon" slot="end">
+        <ion-button @click="navigateFunction">
+          <ion-icon :icon="documentTextOutline" />
+        </ion-button>
         <ion-button>
           <ion-icon
             size="medium"
@@ -39,12 +35,7 @@
             class="toolbar-icon"
           ></ion-icon>
         </ion-button>
-        <ion-button @click="navigateFunction">
 
-         
-            <ion-icon :icon="documentTextOutline" />
-            
-         </ion-button>
         <ion-button>
           <ion-toggle
             :checked="themeToggle"
@@ -74,14 +65,19 @@ import {
   IonSelectOption,
   IonToggle,
 } from "@ionic/vue";
-import { people, personCircleSharp, personCircleOutline,documentTextOutline } from "ionicons/icons";
+import {
+  people,
+  personCircleSharp,
+  personCircleOutline,
+  documentTextOutline,
+} from "ionicons/icons";
 import type { ToggleCustomEvent } from "@ionic/vue";
 import { useTeamStore, useUserStore } from "@/store";
 const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
 await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
-import router from '@/router/index'
+import router from "@/router/index";
 const toggleDarkTheme = (shouldAdd) => {
   document.body.classList.toggle("dark", shouldAdd);
 };
@@ -93,15 +89,19 @@ const buffer = 1.0;
 const teamSelected = ref(userStore.teamID);
 
 const changeTeam = (value: any) => {
-  console.log(userStore.userID)
+  console.log(userStore.userID);
 
   if (value.detail.value) {
-    userStore.update_value("last_team_used", value.detail.value, userStore.userID);
+    userStore.update_value(
+      "last_team_used",
+      value.detail.value,
+      userStore.userID
+    );
   }
 };
-const navigateFunction = () =>{
-  router.push({name: 'survey'})
-}
+const navigateFunction = () => {
+  router.push({ name: "survey" });
+};
 const animate = ref(false);
 function animateIncrease() {
   animate.value = true;
