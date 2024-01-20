@@ -9,13 +9,13 @@
                 <IonGrid :fixed="true">
                     <IonRow>
                         <IonCol>
-                            <ion-card-header>
+                           <ion-card-header>
                                 <ion-card-title class="ion-text-capitalize">{{ teamStore?.teams?.get(survey.team).name }}</ion-card-title>
                                 
                             </ion-card-header>
                             <ion-card-content class="ion-flex ion-align-items-center ion-justify-content-between">
                                 <span class="ion-text-capitalize">
-                                    <ion-chip>
+                                    <ion-chip hip>
                                         <ion-label>{{survey.start_date}}</ion-label>
                                     </ion-chip>
                                     <ion-chip>
@@ -24,11 +24,11 @@
                                 </span>
                             </ion-card-content>
                         </IonCol>
-                        <!-- <IonCol size="auto">
+                        <IonCol size="auto">
                             <div style="width: 30px">
                                 <ion-icon :icon="chevronDownOutline" class="chevron-icon"></ion-icon>
                             </div>
-                        </IonCol> -->
+                        </IonCol>
                     </IonRow>
                 </IonGrid>
             </ion-card>
@@ -169,14 +169,12 @@ ion-chip[color="secondary"] {
 }
 
 .ion-text-capitalize {
-    color: #000;
-    /* Body medium */
-    font-size: 14px;
+    color: var(--Neutrals-black, #303030);
+    font-size: 16px;
     font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: 0.25px;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.15px;
     margin-top: -25px;
     margin-bottom: -12px;
     margin-left: -5px;
