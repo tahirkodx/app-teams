@@ -3,15 +3,18 @@
     <ion-header>
       <score></score>
     </ion-header>
-    <ion-content>
+    <ion-content v-if="loading">
       <div class="header-container">
-        <h1>Celebrate and Collaborate</h1>
-        <h2>Recognising Individual and Team Achievements</h2>
+        <!-- <h1>Celebrate and Collaborate</h1> -->
+        <h1>{{playbookStore?.singleExercise?.play_title}}</h1>
+        <h2>{{playbookStore.playbook.get(playbookStore?.singleExercise?.play).area}}</h2>
         <div class="owner-container">
           <ion-avatar>
             <img src="/src/pictures/Ellipse 72.svg" />
           </ion-avatar>
-          <h3>Owner: Guy Hawkins</h3>
+          <h3> Owner : 
+            {{playbookStore.responsiblePerson.first_name + " "+ playbookStore.responsiblePerson.last_name }}
+          </h3>
         </div>
       </div>
 
@@ -42,21 +45,27 @@
         <div class="content">
           <!-- Content based on the active tab -->
           <div v-if="activeTab === 'timeline'">
-            <LineChart />
-            <ion-reorder-group>
-              <ion-card class="practice-card" v-for="index in 6" :key="index">
-                <div class="card-content">
-                  <ion-reorder slot="start"></ion-reorder>
-
-                  <ion-label>Survey 1</ion-label>
-                  <ion-icon :icon="chevronForward" slot="end" />
-                </div>
-                <p>
-                  Date : 23 Dec Score :
-                  <span> 4/5 </span>
-                </p>
+            <LineChart :data="chartData" @update="handleUpdate" />
+            <ion-reorder-group v-if="scoreValue">
+              <ion-card class="practice-card">
+                <ion-text>
+                  <p class="score-date">Date : {{dateValue}}</p>
+                </ion-text>
+                <ion-text>
+                  <p>Score : <span>{{ scoreValue }}/10</span></p>
+                </ion-text>
+                
               </ion-card>
             </ion-reorder-group>
+            <div>
+   
+
+    <div v-if="playbookStore.notesByDate" class="custom-section" v-for="(item, index) in playbookStore.notesByDate?.notes" :key="index">
+      <p >
+      {{ item }}
+    </p>
+    </div>
+  </div>
           </div>
           <div v-if="activeTab === 'description'">
             <VideoPlayer />
@@ -73,7 +82,7 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { ref } from "vue";
+import { ref , onMounted} from "vue";
 import {
   IonPage,
   IonHeader,
@@ -89,7 +98,7 @@ import {
   IonProgressBar,
   IonReorderGroup,
   IonReorder,
-  IonIcon
+  IonIcon,
 } from "@ionic/vue";
 import router from "@/router/index";
 import { pencilOutline, chevronForward } from "ionicons/icons";
@@ -97,39 +106,47 @@ import score from "@/components/Header/Header.vue";
 import LineChart from "@/components/Charts/LineChart.vue";
 import VideoPlayer from "@/components/Exercise/VideoPlayer.vue";
 import ExerciseDetails from "@/components/Exercise/ExerciseDetails.vue";
-//   import PlayDetails from '@/components/PlayDetails.vue';
-//   import { usePlaybookStore } from '@/stores/playbook';
-//   import { useStatusStore } from '@/stores/status';
-import { useTeamStore, usePlaybookStore, useStatusStore } from "@/store";
-//   import { fetchCurrent, teamID } from '@/stores/current'
-const activeTab = ref("timeline"); // default active tab
-
+import { usePlaybookStore ,useUserStore,useTeamStore} from "@/store";
+ const userStore = useUserStore();
+ const teamStore = useTeamStore();
+const playbookStore = usePlaybookStore();
+const loading = ref(false);
+const scoreValue = ref();
+const dateValue = ref();
+const chartData = ref();
 const route = useRoute();
 const exerciseID = route.params.exerciseid as string;
-const segmentChanged = (tabName) => {
+const activeTab = ref("timeline"); // default active tab
+const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  
+});
+const segmentChanged = (tabName : any) => {
   activeTab.value = tabName;
 };
-//   const playbookStore = usePlaybookStore()
-const statusStore = useStatusStore();
-const teamStore = useTeamStore();
-
-//   const exercise = playbookStore.exercises.value.get(exerciseID)
-//   const play = playbookStore.playbook.value.get(exercise.play)
-//   const showCalendar = ref(false)
-//   const dateISOFormat = new Date().toISOString()
-console.log(exerciseID);
-const editExercise = () => {
-  // Logic to edit exercise
-};
-const alterExercise = () => {
-  // Logic to alter exercise
-};
-const editNotes = () => {
-  // Logic to edit notes
-};
-const deleteExercise = () => {
-  // Logic to delete the exercise
-};
+const handleUpdate = (score : any , date : any) => {
+      dateValue.value = formatter.format(new Date(date))
+      scoreValue.value = score;
+    }
+onMounted(async () => {
+  
+  await Promise.all([
+    playbookStore.getPlaybook(),
+    playbookStore.getExercises(),
+    playbookStore.getTeamExerciseScores(),
+    playbookStore.getTeamExerciseNotes(),
+  ]);
+  
+  loading.value = true;
+  playbookStore.getSingleExercise(userStore.teamID,exerciseID)
+  playbookStore.getResponsiblePerson(userStore.teamID,playbookStore?.singleExercise?.responsible)
+  playbookStore.getSingleExerciseNotes(userStore.teamID,exerciseID)
+  chartData.value = playbookStore.teamExerciseScoreChart(userStore.teamID,exerciseID)
+});
+if(loading.value){
+}
 </script>
 
 <style scoped>
@@ -192,7 +209,7 @@ ion-card-content {
   padding: 20px 0px 0px 0px;
   min-height: 200px; /* Adjust as needed */
   overflow-y: scroll;
-    height: 520px;
+    height: auto;
 }
 
 /* style for survey  */
@@ -215,12 +232,22 @@ ion-datetime {
     align-items: center;
     padding: 0px 15px 0px 15px;
   }
-  p{
+.score-date{
+    color: var(--tietiary, rgba(44, 58, 209, 0.50));
+
+
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
+
+
+}
+p{
   padding: 0px 15px 0px 15px;
   margin: 0px 0px 10px 0px;
 
-font-size: 12px;
-line-height: 16px;
 
 }
   span{
@@ -299,7 +326,7 @@ font-style: normal;
 font-weight: 500;
 line-height: 24px; /* 150% */
 letter-spacing: 0.15px;
- padding: 0px 80px; 
+ padding: 0px 80px;
 }
 
 .owner-container {
@@ -307,7 +334,7 @@ display: flex;
   align-items: center;
   justify-content: center;
   margin-top: -8px; /* Adjust this value as needed for top margin */
-  
+
 }
 
 .owner-container h3 {
@@ -331,5 +358,34 @@ height: 20px;
 ion-avatar img {
 border-radius: 50%;
 
+}
+
+/* custom css */
+
+.custom-section p {
+  color: #303030;
+  /* Lable large */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
+  margin-bottom: 2px;
+  /* Style your 'Exercise Objective:' paragraph */
+}
+
+/* You may want to add media queries to adjust the layout on different screen sizes  */
+/* @media (max-width: 768px) { */
+.custom-section {
+  padding: 18px;
+  background: #F7F7F7;
+  color: #404040;
+  /* Body medium */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.25px;
+  margin-bottom: 10px;
 }
 </style>

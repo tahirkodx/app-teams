@@ -47,9 +47,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Exercises/Exercises.vue"),
       },
       {
-        name: "exercise",
-        path: "exercises/exercise/:exerciseid",
-        component: () => import("@/views/Exercises/newDe.vue"),
+        name: 'exercise',
+        path: 'exercises/exercise/:exerciseid',
+        component: () => import('@/views/Exercises/Exercise.vue'),
       },
       {
         name: "survey",

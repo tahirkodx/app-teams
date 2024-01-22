@@ -50,6 +50,8 @@ const createChart = () =>{
     options: {
       scales: {
         r: {
+          beginAtZero: true,
+
           //   angleLines: {
           //     display: false // Hide angle lines
           //   },

@@ -14,6 +14,7 @@ export enum ApiEndpoints {
   GET_EXERCISES = "v1/playbook/team/exercise/selected/",
   GET_EXERCISES_RESPONSES = "v1/playbook/team/exercises/response/",
   GET_TEAM_EXERCISE_SCORES = "v1/playbook/team/exercise/score/",
+  GET_TEAM_EXERCISE_NOTES = "v1/playbook/team/exercise/note/",
 
   // academy endpoints
   GET_COURSES = "v1/academy/team/courses/",

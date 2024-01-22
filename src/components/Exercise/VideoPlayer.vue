@@ -34,8 +34,8 @@
             ></ion-icon>
           </ion-button>
           <!-- Fullscreen Toggle Button -->
-          <ion-button slot="end" @click="toggleFullscreen">
-            <ion-icon :icon="scanOutline"></ion-icon>
+          <ion-button slot="end" @click="fastForward">
+            <ion-icon :icon="refreshOutline"></ion-icon>
           </ion-button>
         </div>
       </div>
@@ -51,42 +51,50 @@
       <!-- Add here -->
     </div>
   </div>
-  <div>   
+  <div>
+    <ion-card
+      class="custom-card"
+      v-if="
+        playbookStore.playbook.get(playbookStore.singleExercise.play).summary
+      "
+    >
+      <ion-card-content class="card-text">
+        {{
+          playbookStore.playbook.get(playbookStore.singleExercise.play).summary
+        }}
+      </ion-card-content>
+    </ion-card>
+
+    <div class="custom-section">
+      <p>Exercise Objective:</p>
      
-      <ion-card class="custom-card">
-        <ion-card-content class="card-text">
-          Lorem ipsum dolor sit amet consectetur. At a orci molestie tincidunt nulla non feugiat blandit. 
-          Tincidunt sed eget enim donec est. Amet aenean ut sed mi. Rutrum id habitant diam nunc egestas.
-          Lorem sit in posuere nunc ullamcorper amet velit bibendum amet.
-        </ion-card-content>
-      </ion-card>
-    
-
-   <div class="custom-section">
-        <p>Exercise Objective:</p>
-        Lorem ipsum dolor sit amet consectetur. At a orci molestie tincidunt nulla non feugiat blandit.
-        Tincidunt sed eget enim donec est. Amet aenean ut sed mi. Rutrum id habitant diam nunc egestas.
-        Lorem sit in posuere nunc ullamcorper amet velit bibendum amet.
-      </div>
-
-
+      <p
+        v-html="
+          converter.makeHtml(
+            playbookStore.playbook.get(playbookStore?.singleExercise?.play)
+              .description
+          )
+        "
+      ></p>
+    </div>
   </div>
- 
-  
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed } from "vue";
-import { IonButton, IonIcon } from "@ionic/vue";
+import { IonButton, IonIcon,IonRange,IonCard,IonCardContent } from "@ionic/vue";
 import {
   play as playIcon,
   pause as pauseIcon,
   volumeHigh as volumeHighIcon,
   volumeOff as volumeOffIcon,
   contract as contractIcon,
-  scanOutline,
+  refreshOutline,
 } from "ionicons/icons";
-
+import showdown from "showdown";
+import { usePlaybookStore } from "@/store";
+const playbookStore = usePlaybookStore();
+var converter = new showdown.Converter();
 const videoElement = ref<HTMLVideoElement | null>(null);
 const duration = ref(0);
 const currentTime = ref(0);
@@ -152,6 +160,13 @@ const toggleFullscreen = () => {
     }
   }
 };
+const fastForward = () => {
+  if (videoElement.value) {
+    let newTime = videoElement.value.currentTime + 5;
+    const duration = videoElement.value.duration;
+    videoElement.value.currentTime = newTime > duration ? duration : newTime;
+  }
+};
 // A computed property to format the current time
 const currentTimeFormatted = computed(() => formatTime(currentTime.value));
 
@@ -167,14 +182,14 @@ const formatTime = (timeInSeconds: number) => {
 </script>
 
 <style scoped>
-.pStyle{
-color: #303030;
-/* Lable large */
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: 20px; /* 142.857% */
-letter-spacing: 0.1px;
+.pStyle {
+  color: #303030;
+  /* Lable large */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
 }
 /* Your styles here */
 ion-range {
@@ -183,15 +198,16 @@ ion-range {
 ion-button {
   --background: none;
   --color: #a5ce3e;
+  --background-activated: none;
 }
-.card-text{
+.card-text {
   color: #000;
-/* Body medium */
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 20px; /* 142.857% */
-letter-spacing: 0.25px;
+  /* Body medium */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.25px;
 }
 .control-outer {
   display: flex;
@@ -201,7 +217,6 @@ letter-spacing: 0.25px;
 
 .control-inner {
   display: flex;
-  gap: 5px; /* Adjust the gap as needed */
 }
 span {
   margin-top: 20px;
@@ -214,43 +229,42 @@ span {
   --padding-end: 20px; /* Right padding */
   --padding-top: 20px; /* Top padding */
   --padding-bottom: 20px; /* Bottom padding */
- border: 1px solid var(--main-green, #A5CE3E);
+  border: 1px solid var(--main-green, #a5ce3e);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust or remove shadow as needed */
 }
 
 .custom-section {
- 
-background-color: #fff; /* Assuming you want a white background for the lower section /
+  background-color: #fff; /* Assuming you want a white background for the lower section /
 / Adjust the padding, and add any other styles as needed */
 }
 
 .custom-section p {
-color: #303030;
-/* Lable large */
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: 20px; /* 142.857% */
-letter-spacing: 0.1px;
- margin-bottom:2px
-/* Style your 'Exercise Objective:' paragraph */
+  color: #303030;
+  /* Lable large */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
+  margin-bottom: 2px;
+  /* Style your 'Exercise Objective:' paragraph */
 }
 
 /* You may want to add media queries to adjust the layout on different screen sizes  */
 /* @media (max-width: 768px) { */
 .custom-section {
-padding: 18px;
-margin-top: -35px;
- color: #404040;
-/* Body medium */
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 20px; /* 142.857% */
-letter-spacing: 0.25px;
+  padding: 18px;
+  margin-top: -35px;
+  color: #404040;
+  /* Body medium */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.25px;
 }
-.controls{
-  padding: 0px 20px 20px 0px;
+.controls {
+  padding: 0px 15px 0px 15px;
 }
 /* } */
 </style>
