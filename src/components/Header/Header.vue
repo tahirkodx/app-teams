@@ -127,7 +127,8 @@ function animateIncrease() {
 
 .header-select {
   width: 127px;
-  max-width: 127px; /* Adjust the width as needed */
+  max-width: 127px;
+  /* Adjust the width as needed */
   min-height: 32px;
   background: var(--my-masg-background);
   --placeholder-opacity: 1;
@@ -150,21 +151,25 @@ ion-select::part(placeholder) {
 }
 
 ion-select::part(icon) {
-  margin-end: 0; /* Align the dropdown icon to the right */
+  margin-end: 0;
+  /* Align the dropdown icon to the right */
 }
 
 .toolbar-icon {
   font-size: 24px;
 }
+
 ion-button {
   --background: transparent;
   --background-activated: transparent;
   --background-hover: transparent;
   --ripple-color: transparent;
 }
+
 .startIcon {
   padding-right: 10px;
 }
+
 .endIcon {
   /* padding-right: 22px; */
 }

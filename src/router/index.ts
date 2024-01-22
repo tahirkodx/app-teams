@@ -8,9 +8,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Landing.vue"),
   },
   {
-    name: 'login',
-    path: '/login',
-    component: () => import('@/views/Auth/Login.vue')
+    name: "login",
+    path: "/login",
+    component: () => import("@/views/Auth/Login.vue"),
   },
   {
     path: "/profile",
@@ -31,15 +31,15 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Teams/Team.vue"),
       },
       {
-        name: 'editteam',
+        name: "editteam",
         // path: 'teams/edit',
-        path: 'teams/id/:id',
-        component: () => import('@/views/Teams/EditTeam.vue')
+        path: "teams/id/:id",
+        component: () => import("@/views/Teams/EditTeam.vue"),
       },
       {
-        name: 'teamsupport',
-        path: 'teams/support',
-        component: () => import('@/views/Support/TeamSupport.vue')
+        name: "teamsupport",
+        path: "teams/support",
+        component: () => import("@/views/Support/TeamSupport.vue"),
       },
       {
         name: "exercises",
@@ -47,14 +47,19 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Exercises/Exercises.vue"),
       },
       {
-        name: 'exercise',
-        path: 'exercises/exercise/:exerciseid',
-        component: () => import('@/views/Exercises/newDe.vue'),
+        name: "exercise",
+        path: "exercises/exercise/:exerciseid",
+        component: () => import("@/views/Exercises/newDe.vue"),
       },
       {
         name: "survey",
         path: "surveys",
         component: () => import("@/views/Survey/Survey.vue"),
+      },
+      {
+        name: "surveyQuestion",
+        path: "surveyQuestion",
+        component: () => import("@/views/Survey/SurveyQuestion.vue"),
       },
       {
         name: "academy",
