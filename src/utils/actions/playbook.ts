@@ -65,6 +65,20 @@ const PlaybookAPI: any = {
       return Catched(error);
     }
   },
+  getTeamExerciseNotes :async (payload:any) => {
+    try {
+      const options: any = {
+        params: payload,
+      };
+      const response = await eveTechApi.get(
+        `${ApiEndpoints.GET_TEAM_EXERCISE_NOTES}`,
+        options
+      );
+      return reactive(new Map(Object.entries(response.data)));
+    } catch (error: any) {
+      return Catched(error);
+    }
+  }
 
   
 };

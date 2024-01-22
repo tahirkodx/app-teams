@@ -4,7 +4,16 @@
       <score />
     </ion-header>
     <ion-content :fullscreen="true" v-if="loading">
-      <h4 class="titleStyle">Excercise Progress</h4>
+      <div class="page-header">
+        <div>
+          <h4 class="titleStyle">Excercise Progress</h4>
+        </div>
+        <!-- <div>
+          <ion-select class="select-option">
+            <ion-select-option value="Adil">Adil</ion-select-option>
+          </ion-select>
+        </div> -->
+      </div>
       <ion-reorder-group
         @ionItemReorder="doReorder"
         :disabled="false"
@@ -24,7 +33,8 @@
                   params: { exerciseid: exercise.id },
                 })
             "
-            class="practice-card">
+            class="practice-card"
+          >
             <div class="card-content">
               <ion-reorder slot="end">
                 <img
@@ -51,7 +61,7 @@
                       fill="none"
                     >
                       <circle cx="1" cy="1" r="1" fill="#D9D9D9" />
-                      </svg>
+                    </svg>
                     <span
                       class="completed"
                       v-if="exercise.is_active"
@@ -59,12 +69,7 @@
                     >
                       Completed
                     </span>
-                    <span
-                      v-else
-                      color="success"
-                    >
-                      Ongoing
-                    </span>
+                    <span v-else color="success"> Ongoing </span>
                   </h3>
                 </div>
                 <!-- todo need to consider again -->
@@ -170,6 +175,8 @@ import {
   IonFab,
   IonFabButton,
   IonSkeletonText,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/vue";
 import { chevronForwardOutline, add } from "ionicons/icons";
 import type { ReorderEventDetail } from "@ionic/core";
@@ -182,8 +189,8 @@ const playbookStore = usePlaybookStore();
 const loading = ref(false);
 onMounted(async () => {
   await Promise.all([
-    teamStore.getTeams(),
-    userStore.getUserSettings(),
+    // teamStore.getTeams(),
+    // userStore.getUserSettings(),
     playbookStore.getPlaybook(),
     playbookStore.getExercises(),
     playbookStore.getTeamExerciseScores(),
@@ -361,5 +368,25 @@ ion-avatar {
 /* Additional styling for avatar image if needed */
 ion-avatar img {
   border-radius: 50%;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+}
+.select-option {
+  width: 127px;
+  max-width: 127px; /* Adjust the width as needed */
+  min-height: 32px;
+  background: var(--my-masg-background);
+  --placeholder-opacity: 1;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  border-radius: 8px;
+  --border: none;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  word-wrap: break-word;
 }
 </style>

@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch ,onMounted} from "vue";
 import {
   IonHeader,
   IonToolbar,
@@ -80,7 +80,11 @@ import { useTeamStore, useUserStore } from "@/store";
 const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
-await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
+onMounted(async () => {
+  if(teamStore.teams === null ){
+  await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
+  }
+})
 import router from '@/router/index'
 const toggleDarkTheme = (shouldAdd) => {
   document.body.classList.toggle("dark", shouldAdd);

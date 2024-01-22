@@ -1,6 +1,6 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
-import { useUserStore } from "@/store";
+import { useTeamStore, useUserStore } from "@/store";
 import {
   TUserID,
   TTeamID,
@@ -15,8 +15,9 @@ import {
   TPlayUsageID,
 } from "@/utils/types";
 import { PlaybookAPI } from "@/utils/actions";
-import { forEach } from "lodash";
+import { find, forEach } from "lodash";
 const userStore = useUserStore();
+const teamStore = useTeamStore();
 
 // ==========================================================
 // Interfaces
@@ -117,16 +118,26 @@ export interface IUsage {
 // ==========================================================
 
 const usePlaybookStore = defineStore("Playbook", () => {
-  const playbook = ref<any>();
+  const playbook = ref<any>(null);
+  const singleExercise = ref<any>();
   const exercises: any = ref(null);
+  const allNotes: any = ref(null);
+  const singleExerciseNotes : any = ref(null);
+  const notesByDate : any = ref(null);
   const filteredTeamExercises: any = ref(null);
   const exerciseResponses: any = ref(null);
   const teamExerciseScores: any = ref(null);
+  const responsiblePerson : any = ref(null);
   async function getPlaybook() {
+    console.log("Here is data" , playbook.value)
+    if(playbook.value === null){
     playbook.value = await PlaybookAPI.getPlaybook();
+    }
   }
   async function getExercises() {
+    if(exercises.value === null){
     exercises.value = await PlaybookAPI.getExercises();
+    }
   }
   // Only for POST, not for GET Todo need to set new map to something esle
   async function getExerciseResponses() {
@@ -137,12 +148,16 @@ const usePlaybookStore = defineStore("Playbook", () => {
   }
 
   // teamPlayScores is of type Map<TTeamID, {[key: TPlayID]: number}>
-  async function teamPlayScores() {
+  async function getTeamExerciseNotes() {
+    allNotes.value = await PlaybookAPI.getTeamExerciseNotes();
     // const teamPlayScores = new APIMapObject('playScores', 'v1/playbook/team/plays/scores/')
   }
   async function getTeamExerciseScores() {
     // const teamExerciseScores = new APIMapObject('exerciseScores', 'v1/playbook/team/exercises/scores/')
+    console.log("Here is data d" ,teamExerciseScores.value)
+    if(teamExerciseScores.value === null){
     teamExerciseScores.value = await PlaybookAPI.getTeamExerciseScores();
+    }
   }
   // teamExerciseScores is of type Map<TTeamID, IScores>
 
@@ -152,9 +167,19 @@ const usePlaybookStore = defineStore("Playbook", () => {
   const filteredExercises = computed(() => {
     const iterableArray = Array.from(exercises.value);
     return iterableArray.filter(([key, valueArray]) => {
+      // console.log(valueArray)
+      // console.log(key)
       return key === userStore.teamID;
     });
   });
+  
+  
+  function getSingleExercise(teamID: TTeamID, exerciseID: string) {
+    if (exercises.value.has(teamID)) {
+      const teamExercises = exercises.value.get(teamID);
+      singleExercise.value = teamExercises.find(exercise => exercise.id === exerciseID);
+    }
+  }
   function teamExerciseScore(teamID: TTeamID, exerciseID: string) {
     let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID);
     for (const key in currentTeamExercisesScores) {
@@ -163,16 +188,54 @@ const usePlaybookStore = defineStore("Playbook", () => {
       }
     }
   }
+  function teamExerciseScoreChart(teamID: TTeamID, exerciseID: string) {
+    let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID);
+    for (const key in currentTeamExercisesScores) {
+      if (key === exerciseID) {
+        return currentTeamExercisesScores[key];
+      }
+    }
+  }
+  function getResponsiblePerson(teamID : TTeamID, emailID :any ){
+      let data = teamStore.teams.get(teamID)
+      responsiblePerson.value = Array.from(data.members).find(element => element.email === emailID);
+  }
+  function getSingleExerciseNotes(teamID : TTeamID, exerciseID :any ){
+      const data  = allNotes.value.get(teamID);
+      for (const key in data) {
+        if (key === exerciseID) {
+          singleExerciseNotes.value =  data[key]
+          // const test = Array.from(data[key]).find(element => element.date ==="2023-09-21T21:25:34.744123Z");
+        }
+      }
+  }
+  function filteredNotesByDate (date : any) {
+    notesByDate.value = Array.from(singleExerciseNotes.value).find(element => element.date === date);
+    
+  };
+
+
+
   return {
     playbook,
     exercises,
+    singleExercise,
+    responsiblePerson,
+    notesByDate,
     exerciseResponses,
     filteredExercises,
+    getSingleExercise,
     teamExerciseScore,
     getPlaybook,
     getExercises,
     getExerciseResponses,
     getTeamExerciseScores,
+    teamExerciseScoreChart,
+    getResponsiblePerson,
+    getTeamExerciseNotes,
+    getSingleExerciseNotes,
+    filteredNotesByDate
+    
   };
 });
 

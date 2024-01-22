@@ -8,25 +8,27 @@
       <ion-card class="info-card">
         <div class="info-section">
           <div class="info-label">Owner:</div>
-          <div class="info-content">Ralph Edwards</div>
+          <div class="info-content">{{playbookStore.responsiblePerson.first_name + " "+ playbookStore.responsiblePerson.last_name }}</div>
         </div>
         <div class="divider"></div>
         <div class="info-section">
           <div class="info-label">Created at:</div>
-          <div class="info-content">2023-11-06</div>
+          <div class="info-content">{{formatter.format(new Date(playbookStore.singleExercise.created_at))}}</div>
         </div>
         <div class="divider"></div>
         <div class="info-section">
           <div class="info-label">Play Type:</div>
-          <div class="info-content">Team</div>
+          <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).when === 'IN'" class="info-content">Individual</div>
+          <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).when === 'TE'" class="info-content">Team</div>
+          <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).when === 'IV'" class="info-content">Intervention</div>
         </div>
       </ion-card>
     </div>
 
-    <div class="header-container">
+    <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).lessons" class="header-container">
       <h3 class="title">Relevant Academy Lessons:</h3>
  <ion-list lines="none">
-        <ion-item v-for="lesson in lessons" :key="lesson">
+        <ion-item v-for="lesson in playbookStore.playbook.get(playbookStore.singleExercise.play).lessons" :key="lesson">
           <ion-icon :icon="caretUpOutline" slot="start" class="custom-bullet"></ion-icon>
           <ion-label>{{ lesson }}</ion-label>
         </ion-item>
@@ -34,17 +36,15 @@
     </div>
     <div class="header-container">
       <h3 class="title">External Materials:</h3>
-      <a href="#" class="links-container"
-        >Www.Loremsitiposuerenuncullamcorperamet.com</a
+      <p>{{ playbookStore.playbook.get(playbookStore.singleExercise.play).information_text }}</p>
+      <a :href="playbookStore.playbook.get(playbookStore.singleExercise.play).information_url" class="links-container"
+        >{{playbookStore.playbook.get(playbookStore.singleExercise.play).information_url}}</a
       >
-      <a href="#" class="links-container"
-        >Www.Loremsitiposuerenuncullamcorperamet.com</a
-      >
-      <a href="#" class="links-container"
-        >Www.Loremsitiposuerenuncullamcorperamet.com</a
-      >
+      
+      
     </div>
     <div class="header-container">
+      <!-- todo need to confirm -->
       <h3 class="title">What Is The Status Of Your Exercise?</h3>
       <div >
         <div class="custom-card">
@@ -54,6 +54,7 @@
             class="custom-icon-left"
           ></ion-icon>
           <!-- Title in the center -->
+          <!-- todo need to do confirm -->
           <span class="custom-title">Completed - 100%</span>
           <!-- Three dots icon on the right, clickable -->
           <ion-button fill="clear" class="custom-icon-right">
@@ -77,7 +78,14 @@ import {
 } from "@ionic/vue";
 import { caretUpOutline } from 'ionicons/icons';
 import { ref } from "vue";
- const lessons = ref(['Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum']);
+import { usePlaybookStore } from "@/store";
+const playbookStore = usePlaybookStore();
+const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+const lessons = ref(['Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum']);
 </script>
 <style scoped>
 .header-container {
