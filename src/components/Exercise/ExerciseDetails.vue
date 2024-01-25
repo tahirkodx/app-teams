@@ -18,17 +18,17 @@
         <div class="divider"></div>
         <div class="info-section">
           <div class="info-label">Play Type:</div>
-          <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).when === 'IN'" class="info-content">Individual</div>
-          <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).when === 'TE'" class="info-content">Team</div>
-          <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).when === 'IV'" class="info-content">Intervention</div>
+          <div v-if="playbookStore.playbook.get(props.id).when === 'IN'" class="info-content">Individual</div>
+          <div v-if="playbookStore.playbook.get(props.id).when === 'TE'" class="info-content">Team</div>
+          <div v-if="playbookStore.playbook.get(props.id).when === 'IV'" class="info-content">Intervention</div>
         </div>
       </ion-card>
     </div>
 
-    <div v-if="playbookStore.playbook.get(playbookStore.singleExercise.play).lessons" class="header-container">
+    <div v-if="playbookStore.playbook.get(props.id).lessons" class="header-container">
       <h3 class="title">Relevant Academy Lessons:</h3>
  <ion-list lines="none">
-        <ion-item v-for="lesson in playbookStore.playbook.get(playbookStore.singleExercise.play).lessons" :key="lesson">
+        <ion-item v-for="lesson in playbookStore.playbook.get(props.id).lessons" :key="lesson">
           <ion-icon :icon="caretUpOutline" slot="start" class="custom-bullet"></ion-icon>
           <ion-label>{{ lesson }}</ion-label>
         </ion-item>
@@ -36,9 +36,8 @@
     </div>
     <div class="header-container">
       <h3 class="title">External Materials:</h3>
-      <p>{{ playbookStore.playbook.get(playbookStore.singleExercise.play).information_text }}</p>
-      <a :href="playbookStore.playbook.get(playbookStore.singleExercise.play).information_url" class="links-container"
-        >{{playbookStore.playbook.get(playbookStore.singleExercise.play).information_url}}</a
+      <a :href="playbookStore.playbook.get(props.id).information_url" class="links-container"
+        >{{ playbookStore.playbook.get(props.id).information_text }}</a
       >
       
       
@@ -55,7 +54,8 @@
           ></ion-icon>
           <!-- Title in the center -->
           <!-- todo need to do confirm -->
-          <span class="custom-title">Completed - 100%</span>
+          <span v-if="playbookStore.singleExercise.is_completed" class="custom-title">Completed</span>
+          <span v-else class="custom-title">Ongoing</span>
           <!-- Three dots icon on the right, clickable -->
           <ion-button fill="clear" class="custom-icon-right">
             <ion-icon
@@ -79,6 +79,8 @@ import {
 import { caretUpOutline } from 'ionicons/icons';
 import { ref } from "vue";
 import { usePlaybookStore } from "@/store";
+const props = defineProps(["id"]);
+
 const playbookStore = usePlaybookStore();
 const formatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',

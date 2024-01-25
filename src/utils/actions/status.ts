@@ -51,6 +51,21 @@ const StatusAPI: any = {
       return Catched(error);
     }
   },
+  getRequests: async (payload: any) => {
+    try {
+      const options: any = {
+        params: payload,
+        
+      };
+      const response = await eveTechApi.get(
+        `${ApiEndpoints.GET_REQUESTS}`,
+        options
+      );
+      return reactive(new Map(Object.entries(response.data)));
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
   
 
   

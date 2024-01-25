@@ -1,45 +1,31 @@
-import axios from "@axios";
-import _ from "lodash";
-
-export const FetchReactInfo = (
-  url: string,
-  columnId: any,
-  retries = 2,
-  delay = 1000
-) => {
-  return axios;
-  // return fetch(url, {
-  //   method: "POST",
-  //   body: JSON.stringify({
-  //     id: columnId,
-  //   }),
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Accept: "application/json",
-  //   },
-  // })
-  //   .then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not ok");
-  //     }
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     if (_.isEmpty(data.result)) {
-  //       throw new Error("Empty response received");
-  //     }
-  //     return data;
-  //   })
-  //   .catch((error) => {
-  //     if (retries > 0) {
-  //       return new Promise((resolve) => {
-  //         setTimeout(
-  //           () => resolve(FetchReactInfo(url, columnId, retries - 1, delay)),
-  //           delay
-  //         );
-  //       });
-  //     } else {
-  //       throw new Error("Max retries reached");
-  //     }
-  //   });
+const formatter = new Intl.DateTimeFormat("en-US", {
+  year: 'numeric',
+  month: "short",
+  day: 'numeric',
+});
+export const DateFormate = (date: string) => {
+  return formatter.format(new Date(date))
 };
+// export const checkIfDateIsPast = (dateString: string) => {
+//   const date = new Date(dateString);
+//   const formattedDate = formatter.format(date);
+
+//   // Create a new date object for comparison (set to start of the day for accurate comparison)
+//   const today = new Date();
+//   today.setHours(0, 0, 0, 0);
+
+//   // Set the hours, minutes, seconds, and milliseconds to 0 for accurate date comparison
+//   date.setHours(0, 0, 0, 0);
+
+//   // Check if the date is in the past
+//   const isPast = date < today;
+//   if(date < today){
+//     return true
+//   }else{
+//     return false
+//   }
+//   return {
+//       formattedDate,
+//       isPast
+//   };
+// };

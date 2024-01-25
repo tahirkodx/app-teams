@@ -49,43 +49,52 @@
           </ion-chip>
         </ion-buttons>
       </ion-toolbar>
-
-      <ion-card
-        v-for="survey in surveys"
-        :key="survey.id"
+      
+        <ion-card
+        v-for="[id , survey] in statusStore.requests" :key="id"
         class="ion-margin-vertical"
         @click="
               () =>
-                router.push({
-                  name: 'surveyQuestion',
-                })"
+              router.push({
+                name: 'surveyQuestion',
+              })"
       >
-        <IonGrid :fixed="true">
-          <IonRow>
-            <IonCol>
-              <ion-card-header>
-                <ion-card-title class="ion-text-capitalize">{{
-                  survey.name
-                }}</ion-card-title>
+      <IonGrid :fixed="true">
+        <IonRow>
+          <IonCol>
+            <ion-card-header>
+              <ion-card-title class="ion-text-capitalize">{{
+                  teamStore?.teams?.get(userStore.teamID).name 
+              }}</ion-card-title>
               </ion-card-header>
               <ion-card-content
-                class="ion-flex ion-align-items-center ion-justify-content-between"
+              class="ion-flex ion-align-items-center ion-justify-content-between"
               >
-                <span class="ion-text-capitalize">
-                  <ion-chip :class="getChipClass(survey.type)">
-                    <ion-label>{{ survey.type }}</ion-label>
-                  </ion-chip>
-                </span>
-              </ion-card-content>
-            </IonCol>
-            <IonCol class="dateStyle" size="auto">
-              <span>
-                <ion-label>{{ survey.date }}</ion-label>
+              <span class="ion-text-capitalize">
+                <ion-chip v-if="survey.responded" class="chip-complete">
+                  <ion-label>Completed</ion-label>
+                </ion-chip>
+                <ion-chip v-else class="chip-pending">
+                  <ion-label>Pending</ion-label>
+                </ion-chip>
+                <!-- <ion-chip :class="getChipClass(survey.responded,survey.start)">
+                  <ion-label>Test </ion-label>
+                </ion-chip> -->
               </span>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </ion-card>
+            </ion-card-content>
+          </IonCol>
+          <IonCol class="dateStyle" size="auto">
+            <span>
+              <ion-label>
+                 
+                {{ DateFormate(survey.start)  }}
+              </ion-label>
+            </span>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </ion-card>
+  
       <ion-fab
         class="addStyle"
         slot="fixed"
@@ -127,26 +136,29 @@ import {
   IonAccordion,
   IonAccordionGroup,
 } from "@ionic/vue";
-import { ref, defineComponent } from "vue";
-import { arrowBackOutline, documentTextOutline } from "ionicons/icons";
+import { ref, defineComponent,onMounted } from "vue";
+import { arrowBackOutline, documentTextOutline,add } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
+import { DateFormate } from "@/utils/Helper";
 import router from "@/router/index";
+import { useUserStore ,useStatusStore ,useTeamStore} from "@/store";
 
-const surveys = ref([
-  { id: "01A", name: "Team 01A", type: "Pending", date: "Jan 10,2024" },
-  { id: "02", name: "Team 02", type: "Upcoming", date: "Jan 10,2024" },
-  { id: "03", name: "Team 03", type: "Complete", date: "Jan 10,2024" },
-  { id: "04", name: "Team 04", type: "Pending", date: "Jan 10,2024" },
-  { id: "05", name: "Team 05", type: "Upcoming", date: "Jan 10,2024" },
-  { id: "06", name: "Team 06", type: "Pending", date: "Jan 10,2024" },
-  { id: "07", name: "Team 07", type: "Complete", date: "Jan 10,2024" },
-  { id: "08", name: "Team 08", type: "Upcoming", date: "Jan 10,2024" },
-  { id: "09", name: "Team 09", type: "Complete", date: "Jan 10,2024" },
-  { id: "10", name: "Team 10", type: "Upcoming", date: "Jan 10,2024" },
-  { id: "11", name: "Team 11", type: "Pending", date: "Jan 10,2024" },
-  // ... other survey items
-]);
-const getChipClass = (type: string) => {
+
+const statusStore = useStatusStore()
+const teamStore = useTeamStore()
+const userStore = useUserStore()
+onMounted(async () => {
+  await Promise.all([
+    statusStore.getDimensions(),
+    statusStore.getQuestionNaire(),
+    statusStore.getSchedulers(),
+    statusStore.getRequests(),
+ ])
+ console.log(statusStore.schedulers)
+})
+  
+const getChipClass = (type: string, date : string) => {
+
   switch (type) {
     case "Pending":
       return "chip-pending";

@@ -4,33 +4,43 @@
       <score />
     </ion-header>
     <ion-content :fullscreen="true" v-if="loading">
-      <div class="page-header">
-        <div>
-          <h4 class="titleStyle">Excercise Progress</h4>
-        </div>
-        <!-- <div>
-          <ion-select class="select-option">
-            <ion-select-option value="Adil">Adil</ion-select-option>
-          </ion-select>
-        </div> -->
-      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h4 class="page-heading">Excercise Progress</h4>
+          </ion-col>
+          <ion-col size="auto">
+            <div style="width: 70px">
+              <ion-select
+                v-model="selectedFilter"
+                interface="popover"
+                @ion-change="getSelectedFilterExericse"
+                placeholder="Select..."
+                class="select-option"
+              >
+                <ion-select-option value="all">All</ion-select-option>
+                <ion-select-option :value="true">Active</ion-select-option>
+                <ion-select-option :value="false">Inactive</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <ion-reorder-group
         @ionItemReorder="doReorder"
         :disabled="false"
-        v-if="playbookStore.exercises"
+        v-if="Object.entries(playbookStore?.filteredExercises(selectedFilter) || {}).length > 0"
       >
-        <span
-          v-for="[teamID, exercises] in playbookStore.filteredExercises"
-          :key="teamID"
-        >
+        
           <ion-card
-            v-for="exercise in exercises"
+          v-for="[key, exercise] in Object.entries(playbookStore?.filteredExercises(selectedFilter))"
             :key="exercise.id"
             @click="
               () =>
                 router.push({
                   name: 'exercise',
-                  params: { exerciseid: exercise.id },
+                  params: { exerciseid: key },
                 })
             "
             class="practice-card"
@@ -64,7 +74,7 @@
                     </svg>
                     <span
                       class="completed"
-                      v-if="exercise.is_active"
+                      v-if="exercise.is_completed"
                       color="success"
                     >
                       Completed
@@ -78,7 +88,7 @@
                   color="success"
                   class="progress-bar"
                   :value="
-                    playbookStore.teamExerciseScore(teamID, exercise.id) / 10
+                    playbookStore.teamExerciseScore(userStore.teamID, exercise.id) / 10
                   "
                 ></ion-progress-bar>
               </div>
@@ -89,7 +99,7 @@
               />
             </div>
           </ion-card>
-        </span>
+       
       </ion-reorder-group>
       <ion-fab
         class="addStyle"
@@ -177,6 +187,9 @@ import {
   IonSkeletonText,
   IonSelect,
   IonSelectOption,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from "@ionic/vue";
 import { chevronForwardOutline, add } from "ionicons/icons";
 import type { ReorderEventDetail } from "@ionic/core";
@@ -187,6 +200,13 @@ const userStore = useUserStore();
 const teamStore = useTeamStore();
 const playbookStore = usePlaybookStore();
 const loading = ref(false);
+const selectedFilter = ref("all");
+const getSelectedFilterExericse = (value: any) => {
+  if (value.detail.value) {
+    console.log(value.detail.value);
+    playbookStore.filteredExercises(value.detail.value)
+  }
+};
 onMounted(async () => {
   await Promise.all([
     // teamStore.getTeams(),
@@ -196,6 +216,7 @@ onMounted(async () => {
     playbookStore.getTeamExerciseScores(),
   ]);
   loading.value = true;
+  
 });
 const practiceItems = ref([
   {
@@ -328,6 +349,19 @@ ion-reorder {
   margin-bottom: -20px;
   padding-left: 15px;
 }
+.page-heading {
+  color: var(--Neutrals-black, #303030);
+  font-size: 22px;
+  /* Keep the font size as is unless it needs to change */
+  font-weight: 500;
+  /* Keep the font weight as is */
+  line-height: 28px;
+  /* Keep the line height as is */
+  text-align: left;
+  /* Align to the left, right or center as per your design */
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
 .practiceBox {
   display: inline-flex;
@@ -367,13 +401,10 @@ ion-avatar {
 ion-avatar img {
   border-radius: 50%;
 }
-.page-header {
-  display: flex;
-  justify-content: space-between;
-}
+
 .select-option {
-  width: 127px;
-  max-width: 127px; /* Adjust the width as needed */
+  width: 100%;
+  max-width: 100%; /* Adjust the width as needed */
   min-height: 32px;
   background: var(--my-masg-background);
   --placeholder-opacity: 1;
@@ -386,5 +417,8 @@ ion-avatar img {
   line-height: 24px;
   letter-spacing: 0.15px;
   word-wrap: break-word;
+}
+ion-grid {
+  padding-top: 20px;
 }
 </style>

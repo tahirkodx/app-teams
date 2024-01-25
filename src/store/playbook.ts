@@ -122,21 +122,20 @@ const usePlaybookStore = defineStore("Playbook", () => {
   const singleExercise = ref<any>();
   const exercises: any = ref(null);
   const allNotes: any = ref(null);
-  const singleExerciseNotes : any = ref(null);
-  const notesByDate : any = ref(null);
+  const singleExerciseNotes: any = ref(null);
+  const notesByDate: any = ref(null);
   const filteredTeamExercises: any = ref(null);
   const exerciseResponses: any = ref(null);
   const teamExerciseScores: any = ref(null);
-  const responsiblePerson : any = ref(null);
+  const responsiblePerson: any = ref(null);
   async function getPlaybook() {
-    console.log("Here is data" , playbook.value)
-    if(playbook.value === null){
-    playbook.value = await PlaybookAPI.getPlaybook();
+    if (playbook.value === null) {
+      playbook.value = await PlaybookAPI.getPlaybook();
     }
   }
   async function getExercises() {
-    if(exercises.value === null){
-    exercises.value = await PlaybookAPI.getExercises();
+    if (exercises.value === null) {
+      exercises.value = await PlaybookAPI.getExercises();
     }
   }
   // Only for POST, not for GET Todo need to set new map to something esle
@@ -149,14 +148,14 @@ const usePlaybookStore = defineStore("Playbook", () => {
 
   // teamPlayScores is of type Map<TTeamID, {[key: TPlayID]: number}>
   async function getTeamExerciseNotes() {
-    allNotes.value = await PlaybookAPI.getTeamExerciseNotes();
+    if (allNotes.value === null) {
+      allNotes.value = await PlaybookAPI.getTeamExerciseNotes();
+    }
     // const teamPlayScores = new APIMapObject('playScores', 'v1/playbook/team/plays/scores/')
   }
   async function getTeamExerciseScores() {
-    // const teamExerciseScores = new APIMapObject('exerciseScores', 'v1/playbook/team/exercises/scores/')
-    console.log("Here is data d" ,teamExerciseScores.value)
-    if(teamExerciseScores.value === null){
-    teamExerciseScores.value = await PlaybookAPI.getTeamExerciseScores();
+    if (teamExerciseScores.value === null) {
+      teamExerciseScores.value = await PlaybookAPI.getTeamExerciseScores();
     }
   }
   // teamExerciseScores is of type Map<TTeamID, IScores>
@@ -165,20 +164,37 @@ const usePlaybookStore = defineStore("Playbook", () => {
   // const usage = new APIListObject('playbookusage', 'v1/playbook/team/plays/usage/')
 
   const filteredExercises = computed(() => {
-    const iterableArray = Array.from(exercises.value);
-    return iterableArray.filter(([key, valueArray]) => {
-      // console.log(valueArray)
-      // console.log(key)
-      return key === userStore.teamID;
-    });
+    return (filter: any) => {
+      const teamExercises = exercises.value.get(userStore.teamID);
+      if (filter === "all") {
+        return teamExercises;
+      } else {
+        const filteredData = Object.entries(teamExercises).reduce(
+          (acc, [key, value]) => {
+            if (value.is_active === filter) {
+              acc[key] = value;
+            }
+            return acc;
+          },
+          {}
+        );
+
+        return filteredData;
+      }
+    };
   });
-  
-  
-  function getSingleExercise(teamID: TTeamID, exerciseID: string) {
-    if (exercises.value.has(teamID)) {
-      const teamExercises = exercises.value.get(teamID);
-      singleExercise.value = teamExercises.find(exercise => exercise.id === exerciseID);
-    }
+  function getFilteredTeamExercises() {}
+
+  async function getSingleExercise(teamID: TTeamID, exerciseID: string) {
+    singleExercise.value = await PlaybookAPI.getSingleExercise(
+      teamID,
+      exerciseID
+    );
+    // if (exercises.value.has(teamID)) {
+    //   const teamExercises = exercises.value.get(teamID);
+    //   const arrayFromTeamExercises = Array.from(teamExercises);
+    //   console.log(arrayFromTeamExercises)
+    //   singleExercise.value = arrayFromTeamExercises.find(exercise => exercise.id === exerciseID);
   }
   function teamExerciseScore(teamID: TTeamID, exerciseID: string) {
     let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID);
@@ -190,31 +206,33 @@ const usePlaybookStore = defineStore("Playbook", () => {
   }
   function teamExerciseScoreChart(teamID: TTeamID, exerciseID: string) {
     let currentTeamExercisesScores = teamExerciseScores?.value?.get(teamID);
+    console.log("Here are you", currentTeamExercisesScores);
     for (const key in currentTeamExercisesScores) {
       if (key === exerciseID) {
         return currentTeamExercisesScores[key];
       }
     }
   }
-  function getResponsiblePerson(teamID : TTeamID, emailID :any ){
-      let data = teamStore.teams.get(teamID)
-      responsiblePerson.value = Array.from(data.members).find(element => element.email === emailID);
+  function getResponsiblePerson(teamID: TTeamID, emailID: any) {
+    let data = teamStore.teams.get(teamID);
+    responsiblePerson.value = Array.from(data.members).find(
+      (element) => element.email === emailID
+    );
   }
-  function getSingleExerciseNotes(teamID : TTeamID, exerciseID :any ){
-      const data  = allNotes.value.get(teamID);
-      for (const key in data) {
-        if (key === exerciseID) {
-          singleExerciseNotes.value =  data[key]
-          // const test = Array.from(data[key]).find(element => element.date ==="2023-09-21T21:25:34.744123Z");
-        }
+  function getSingleExerciseNotes(teamID: TTeamID, exerciseID: any) {
+    const data = allNotes.value.get(teamID);
+    for (const key in data) {
+      if (key === exerciseID) {
+        singleExerciseNotes.value = data[key];
+        // const test = Array.from(data[key]).find(element => element.date ==="2023-09-21T21:25:34.744123Z");
       }
+    }
   }
-  function filteredNotesByDate (date : any) {
-    notesByDate.value = Array.from(singleExerciseNotes.value).find(element => element.date === date);
-    
-  };
-
-
+  function filteredNotesByDate(date: any) {
+    notesByDate.value = Array.from(singleExerciseNotes.value).find(
+      (element) => element.date === date
+    );
+  }
 
   return {
     playbook,
@@ -234,8 +252,7 @@ const usePlaybookStore = defineStore("Playbook", () => {
     getResponsiblePerson,
     getTeamExerciseNotes,
     getSingleExerciseNotes,
-    filteredNotesByDate
-    
+    filteredNotesByDate,
   };
 });
 
