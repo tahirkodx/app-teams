@@ -22,20 +22,19 @@
                 </ion-col>
                 <ion-button id="trigger-button" class="compact-filter-chip" style="--background: white;">
                     <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
-                    <span style="font-size: 14px; color: #808080; margin-left: 10px;">Team (2)</span>
+                    <span class="text">Team (2)</span>
                 </ion-button>
                 <ion-popover trigger="trigger-button">
                     <ion-content>
                         <ion-accordion-group>
                             <ion-accordion value="first">
                                 <ion-item slot="header" color="light">
-                                    <ion-label>Teams</ion-label>
-
+                                    <ion-label class="ion-color">Teams</ion-label>
                                 </ion-item>
-                                <div class="ion-padding" slot="content">
+                                <div slot="content">
                                     <ion-list>
                                         <ion-item v-for="team in teams" :key="team.title">
-                                            <ion-checkbox slot="start"></ion-checkbox>
+                                            <ion-checkbox class="ion-border"></ion-checkbox>
                                             <ion-label>{{ team.title }}</ion-label>
                                         </ion-item>
                                     </ion-list>
@@ -43,30 +42,27 @@
                             </ion-accordion>
                             <ion-accordion value="second">
                                 <ion-item slot="header" color="light">
-                                    <ion-label>Dates</ion-label>
+                                    <ion-label class="ion-color">Dates</ion-label>
                                 </ion-item>
-                                <div class="ion-padding" slot="content"> <ion-radio-group v-model="selectedOption">
-                                        <ion-item>
-                                            <ion-label>Today</ion-label>
-                                            <ion-radio value="Today" slot="start"></ion-radio>
+                                <div slot="content">
+                                    <ion-radio-group v-model="selectedOption">
+                                        <ion-item><ion-radio value="Today" ></ion-radio>
+                                            <ion-label class="ion-text">Today</ion-label>  
                                         </ion-item>
                                         <ion-item>
-                                            <ion-label> <ion-datetime-button v-if="!calendarModel.visible"
-                                                    datetime="datetime" color="success"
-                                                    @click="openModal"></ion-datetime-button>
-
-                                                <ion-modal :is-open="calendarModel.visible" @close="closeModal">
-
-                                                    <ion-datetime id="datetime" display-format="MMM DD, YYYY h:mm A"
-                                                        picker-format="MMM DD, YYYY h:mm A"
-                                                        placeholder="Select date and time"
-                                                        @ionChange="updateDate"></ion-datetime>
+                                            <ion-label>
+                                                <ion-radio value="Text"></ion-radio>
+                                                <ion-datetime-button datetime="datetime" class="ion-date"></ion-datetime-button>
+                                                <ion-modal :keep-contents-mounted="true">
+                                                    <ion-datetime presentation="date" id="datetime"
+                                                        display-format="DD MMM YYYY">
+                                                    </ion-datetime>
                                                 </ion-modal>
-
                                             </ion-label>
-                                            <ion-radio value="Text" slot="start"></ion-radio>
+                                            
                                         </ion-item>
-                                    </ion-radio-group></div>
+                                    </ion-radio-group>
+                                </div>
                             </ion-accordion>
                         </ion-accordion-group>
                     </ion-content>
@@ -84,9 +80,9 @@
                     <IonRow style="height: 70px;">
                         <IonCol>
                             <ion-card-header>
-                                <ion-card-title class="title">{{ survey.title }}<ion-card-title class="ion-text-small"
-                                        style="display: inline; float: right;">{{ survey.date
-                                        }}</ion-card-title></ion-card-title>
+                                <ion-card-title class="title">{{ survey.title }}<ion-card-title class="ion-text-small">{{
+                                    survey.date
+                                }}</ion-card-title></ion-card-title>
                             </ion-card-header>
                             <ion-card-content class="ion-flex ion-align-items-center ion-justify-content-between">
                                 <span class="ion-text-capitalize">
@@ -106,9 +102,8 @@
                 </ion-fab-button>
             </ion-fab>
         </ion-content>
-    </ion-page>ion-page>
+    </ion-page>
 </template>
-
 <script setup lang="ts">
 import {
     ref,
@@ -187,7 +182,6 @@ const toggleDropdown = () => {
     isDropdownOpen.value = true;
 };
 const selectedOption = ref("");
-
 // Add a watcher to observe changes to the selectedOption
 watch(() => {
     console.log("Selected option changed:", selectedOption.value);
@@ -317,6 +311,28 @@ ion-chip[color="secondary"] {
     font-style: normal;
 }
 
+.ion-color {
+    color: gray;
+    font-weight: bold;
+}
+.ion-text{
+    margin-left: 15px;
+    font-size: large;
+}
+.ion-date{
+    margin-right: 40px;
+    margin-top:-34px ;
+}
+.ion-border {
+    --border-radius: 5px;
+    margin-right: 10px;
+}
+
+.ion-margin-vertical {
+    margin: 5px;
+    box-shadow: none;
+}
+
 .ion-text-capitalize {
     color: #000;
     /* Body medium */
@@ -364,6 +380,8 @@ ion-chip[color="secondary"] {
     flex-grow: 0;
     /* Add right margin */
     margin-right: -20px;
+    display: inline;
+    float: right;
     /* Adjust the value as needed */
 }
 
@@ -425,10 +443,16 @@ ion-chip[color="secondary"] {
     background: #F0F0F0;
     /* Change the background on hover */
 }
-.icon{
-   color: black;
-   font-size: 18px;
+
+.icon {
+    color: black;
+    font-size: 18px;
     position: absolute;
     margin-left: -75px;
 }
-</style>
+
+.text {
+    font-size: 12px;
+    color: #808080;
+    margin-left: 12px;
+}</style>
