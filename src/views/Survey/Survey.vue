@@ -143,6 +143,7 @@ import {
     IonRadio,
     IonRadioGroup,
     IonModal,
+    IonButtons,
     IonDatetimeButton
 } from "@ionic/vue";
 import { optionsOutline, documentTextOutline, arrowBackOutline, } from "ionicons/icons";
@@ -232,16 +233,6 @@ const toggleCalendarModel = () => {
 
 
 <style scoped>
-ion-header {
-  --background: #yourColor;
-  /* Replace with your header background color */
-}
-
-ion-button {
-  --color: #yourColor;
-  /* Replace with your icon color */
-}
-
 ion-toolbar {
   --background: #fff;
   /* Adjust if needed */

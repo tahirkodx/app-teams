@@ -45,9 +45,9 @@
       ></ion-textarea>
     </div>
     <div class="title-line"></div>
-
 </div>
-    <div class="button-container">
+<ion-footer>
+   <div class="button-container">
       <ion-button
         class="previousButton"
         @click="
@@ -69,6 +69,10 @@
         >Next</ion-button
       >
     </div>
+
+</ion-footer>
+
+ 
   </ion-content>
 </template>
 
@@ -79,7 +83,7 @@ import {
   IonContent,
   IonIcon,
   IonHeader,
-  IonItem,
+  IonFooter,
   IonLabel,
   IonButton,
   IonRange,
