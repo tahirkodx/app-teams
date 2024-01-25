@@ -3,17 +3,27 @@
     <ion-header>
       <score></score>
     </ion-header>
-    <ion-content v-if="loading">
+    <ion-content >
       <div class="header-container">
         <!-- <h1>Celebrate and Collaborate</h1> -->
-        <h1>{{playbookStore?.singleExercise?.play_title}}</h1>
-        <h2>{{playbookStore.playbook.get(playbookStore?.singleExercise?.play).area}}</h2>
+        <h1>{{ playbookStore?.singleExercise?.play_title }}</h1>
+        <h2>
+          {{
+            playbookStore.playbook.get(playbookStore?.singleExercise?.play)
+              ?.area
+          }}
+        </h2>
         <div class="owner-container">
           <ion-avatar>
             <img src="/src/pictures/Ellipse 72.svg" />
           </ion-avatar>
-          <h3> Owner : 
-            {{playbookStore.responsiblePerson.first_name + " "+ playbookStore.responsiblePerson.last_name }}
+          <h3>
+            Owner :
+            {{
+              playbookStore?.responsiblePerson?.first_name +
+              " " +
+              playbookStore?.responsiblePerson?.last_name
+            }}
           </h3>
         </div>
       </div>
@@ -42,36 +52,30 @@
             Details
           </div>
         </div>
-        <div class="content">
+        <div class="content" v-if="loading">
           <!-- Content based on the active tab -->
           <div v-if="activeTab === 'timeline'">
             <LineChart :data="chartData" @update="handleUpdate" />
             <ion-reorder-group v-if="scoreValue">
               <ion-card class="practice-card">
                 <ion-text>
-                  <p class="score-date">Date : {{dateValue}}</p>
+                  <p class="score-date">Date : {{ dateValue }}</p>
                 </ion-text>
                 <ion-text>
-                  <p>Score : <span>{{ scoreValue }}/10</span></p>
+                  <p>
+                    Score : <span>{{ scoreValue }}/10</span>
+                  </p>
                 </ion-text>
-                
               </ion-card>
             </ion-reorder-group>
-            <div>
-   
-
-            <div v-if="scoreValue" class="custom-section" v-for="(item, index) in playbookStore.notesByDate?.notes" :key="index">
-              <p >
-              {{ item }}
-            </p>
-    </div>
-  </div>
+            <Notes v-if="scoreValue" />
           </div>
           <div v-if="activeTab === 'description'">
             <VideoPlayer />
+            <SummaryDescription :id="exerciseID" />
           </div>
           <div v-if="activeTab === 'details'">
-            <ExerciseDetails />
+            <ExerciseDetails :id="exerciseID" />
           </div>
         </div>
       </div>
@@ -82,7 +86,7 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { ref , onMounted} from "vue";
+import { ref, onMounted } from "vue";
 import {
   IonPage,
   IonHeader,
@@ -99,17 +103,18 @@ import {
   IonReorderGroup,
   IonReorder,
   IonIcon,
-  IonText
+  IonText,
 } from "@ionic/vue";
 import router from "@/router/index";
 import { pencilOutline, chevronForward } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
+import Notes from "@/components/Exercise/Notes.vue"
+import SummaryDescription from "@/components/Exercise/SummaryDescription.vue"
 import LineChart from "@/components/Charts/LineChart.vue";
 import VideoPlayer from "@/components/Exercise/VideoPlayer.vue";
 import ExerciseDetails from "@/components/Exercise/ExerciseDetails.vue";
-import { usePlaybookStore ,useUserStore,useTeamStore} from "@/store";
- const userStore = useUserStore();
- const teamStore = useTeamStore();
+import { usePlaybookStore, useUserStore, useTeamStore } from "@/store";
+const userStore = useUserStore();
 const playbookStore = usePlaybookStore();
 const loading = ref(false);
 const scoreValue = ref();
@@ -118,33 +123,40 @@ const chartData = ref();
 const route = useRoute();
 const exerciseID = route.params.exerciseid as string;
 const activeTab = ref("timeline"); // default active tab
-const formatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-  
+const formatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
 });
-const segmentChanged = (tabName : any) => {
+const segmentChanged = (tabName: any) => {
   activeTab.value = tabName;
 };
-const handleUpdate = (score : any , date : any) => {
-      dateValue.value = formatter.format(new Date(date))
-      scoreValue.value = score;
-    }
+const handleUpdate = (score: any, date: any) => {
+  dateValue.value = formatter.format(new Date(date));
+  scoreValue.value = score;
+};
 onMounted(async () => {
-  
   await Promise.all([
+    playbookStore.getSingleExercise(userStore.teamID, exerciseID),
     playbookStore.getPlaybook(),
     playbookStore.getExercises(),
     playbookStore.getTeamExerciseScores(),
     playbookStore.getTeamExerciseNotes(),
   ]);
-  
+
   loading.value = true;
-  playbookStore.getSingleExercise(userStore.teamID,exerciseID)
-  playbookStore.getResponsiblePerson(userStore.teamID,playbookStore?.singleExercise?.responsible)
-  playbookStore.getSingleExerciseNotes(userStore.teamID,exerciseID)
-  chartData.value = playbookStore.teamExerciseScoreChart(userStore.teamID,exerciseID)
+  playbookStore.getResponsiblePerson(
+    userStore.teamID,
+    playbookStore?.singleExercise?.responsible
+  );
+  playbookStore.getSingleExerciseNotes(
+    userStore.teamID,
+    playbookStore.singleExercise.id
+  );
+  chartData.value = playbookStore.teamExerciseScoreChart(
+    userStore.teamID,
+    playbookStore.singleExercise.id
+  );
 });
 </script>
 
@@ -361,30 +373,5 @@ border-radius: 50%;
 
 /* custom css */
 
-.custom-section p {
-  color: #303030;
-  /* Lable large */
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: 0.1px;
-  margin-bottom: 2px;
-  /* Style your 'Exercise Objective:' paragraph */
-}
 
-/* You may want to add media queries to adjust the layout on different screen sizes  */
-/* @media (max-width: 768px) { */
-.custom-section {
-  padding: 18px;
-  background: #F7F7F7;
-  color: #404040;
-  /* Body medium */
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: 0.25px;
-  margin-bottom: 10px;
-}
 </style>

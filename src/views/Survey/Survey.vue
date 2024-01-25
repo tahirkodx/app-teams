@@ -79,41 +79,52 @@
         </ion-popover>
       </IonRow>
       <ion-card
-        v-for="survey in surveys"
+        v-for="[id , survey] in statusStore.requests"  
         :key="survey.id"
         class="ion-margin-vertical"
         style="margin: 25px; box-shadow: none"
         @click="
-          () =>
-            router.push({
-              name: 'surveyQuestion',
-            })
-        "
+              () =>
+              router.push({
+                name: 'surveyQuestion',
+              })"
       >
-        <IonGrid :fixed="true">
-          <IonRow style="height: 70px">
-            <IonCol>
-              <ion-card-header>
-                <ion-card-title class="title"
-                  >{{ survey.title
-                  }}<ion-card-title class="ion-text-small">{{
-                    survey.date
-                  }}</ion-card-title></ion-card-title
-                >
+      <IonGrid :fixed="true">
+        <IonRow>
+          <IonCol>
+            <ion-card-header>
+              <ion-card-title class="ion-text-capitalize">{{
+                  teamStore?.teams?.get(userStore.teamID).name 
+              }}</ion-card-title>
               </ion-card-header>
               <ion-card-content
-                class="ion-flex ion-align-items-center ion-justify-content-between"
+              class="ion-flex ion-align-items-center ion-justify-content-between"
               >
-                <span class="ion-text-capitalize">
-                  <ion-chip :style="{ background: survey.color }">
-                    <ion-label class="label-text">{{ survey.label }}</ion-label>
-                  </ion-chip>
-                </span>
-              </ion-card-content>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </ion-card>
+              <span class="ion-text-capitalize">
+                <ion-chip v-if="survey?.responded" class="chip-complete">
+                  <ion-label>Completed</ion-label>
+                </ion-chip>
+                <ion-chip v-else class="chip-pending">
+                  <ion-label>Pending</ion-label>
+                </ion-chip>
+                <!-- <ion-chip :class="getChipClass(survey.responded,survey.start)">
+                  <ion-label>Test </ion-label>
+                </ion-chip> -->
+              </span>
+            </ion-card-content>
+          </IonCol>
+          <IonCol class="dateStyle" size="auto">
+            <span>
+              <ion-label>
+                 
+                {{ DateFormate(survey.start)  }}
+              </ion-label>
+            </span>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </ion-card>
+  
       <ion-fab
         class="addStyle"
         slot="fixed"
@@ -129,7 +140,6 @@
   </ion-page>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
 import {
   IonPage,
   IonHeader,
@@ -162,16 +172,12 @@ import {
   IonButtons,
   IonDatetimeButton,
 } from "@ionic/vue";
-import {
-  optionsOutline,
-  documentTextOutline,
-  arrowBackOutline,
-} from "ionicons/icons";
+import { ref, defineComponent,onMounted } from "vue";
+import { arrowBackOutline, documentTextOutline,add,optionsOutline } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
+import { DateFormate } from "@/utils/Helper";
 import router from "@/router/index";
-import { useStatusStore } from "@/store";
 
-const statusStore = useStatusStore();
 const surveys = ref([
   {
     id: "01A",
@@ -260,6 +266,36 @@ const teams = ref([
   { title: "Team A" },
   { title: "Team A" },
 ]);
+import { useUserStore ,useStatusStore ,useTeamStore} from "@/store";
+
+
+const statusStore = useStatusStore()
+const teamStore = useTeamStore()
+const userStore = useUserStore()
+onMounted(async () => {
+  await Promise.all([
+    statusStore.getDimensions(),
+    statusStore.getQuestionNaire(),
+    statusStore.getSchedulers(),
+    statusStore.getRequests(),
+ ])
+ console.log(statusStore.schedulers)
+})
+  
+const getChipClass = (type: string, date : string) => {
+
+  switch (type) {
+    case "Pending":
+      return "chip-pending";
+    case "Complete":
+      return "chip-complete";
+    case "Upcoming":
+      return "chip-upcoming";
+    default:
+      return ""; // Default case if none of the types match
+  }
+};
+
 const navigateFunction = () => {
   router.push({ name: "team" });
 };

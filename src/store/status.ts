@@ -1,7 +1,7 @@
 import { ref, computed, reactive } from "vue";
 import { defineStore } from "pinia";
 
-import { useTeamStore } from "@/store";
+import { useTeamStore, useUserStore } from "@/store";
 import {
   TQuestionID,
   TQuestionOptionID,
@@ -14,6 +14,7 @@ import {
 import { StatusAPI } from "@/utils/actions";
 
 const teamStore = useTeamStore()
+const userStore = useUserStore()
 // ==========================================================
 // Interfaces
 // ==========================================================
@@ -166,6 +167,13 @@ async function getDimensions() {
 async function getSchedulers() {
   schedulers.value = await StatusAPI.getSchedulers();
 }
+async function getRequests() {
+  const payload = {
+    id : '60d84fb36d8e42838966350ddc3ac956'
+  }
+  // todo need to change that id 
+  requests.value = await StatusAPI.getRequests('60d84fb36d8e42838966350ddc3ac956');
+}
   
  
   const schedulerPeriodDict: ISchedulerPeriodDict = {
@@ -176,6 +184,7 @@ interface IData {
     labels: string[],
     data: number[]
   }
+  
 
 
 
@@ -191,6 +200,7 @@ interface IData {
     getDimensions,
     getQuestionNaire,
     getSchedulers,
+    getRequests
     
   }
 })

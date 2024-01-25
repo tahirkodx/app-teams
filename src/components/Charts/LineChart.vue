@@ -17,6 +17,7 @@ const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   // day: 'numeric',
 });
+console.log(props.data)
 const scoresArray = props.data.map(
   (element: { score: any; date: any }) => element.score
 );
@@ -24,6 +25,7 @@ const datesArray = props.data.map((element: { score: any; date: any }) =>
   formatter.format(new Date(element.date))
 );
 const showScoreOnClick = () => {
+  console.log(selectedData.value.date)
   playbookStore.filteredNotesByDate(selectedData.value.date)
   // todo need to correct login about date and onclick functuon
   emit("update", selectedData.value.score, selectedData.value.date);

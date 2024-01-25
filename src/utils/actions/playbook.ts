@@ -37,6 +37,21 @@ const PlaybookAPI: any = {
       return Catched(error);
     }
   },
+  getSingleExercise: async (teamID: any , exerciseID:any) => {
+    console.log("Here is palload" , teamID)
+    console.log("Here is palload" , exerciseID)
+    const url = ApiEndpoints.GET_EXERCISES + teamID + "/" + exerciseID 
+    try {
+      
+      const response = await eveTechApi.get(
+        url
+        
+      );
+      return response.data;
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
   getExerciseResponses: async (payload: any) => {
     try {
       const options: any = {
