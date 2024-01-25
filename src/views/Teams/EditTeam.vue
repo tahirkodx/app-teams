@@ -15,7 +15,6 @@
         </div>
           <div class="content">
             <!-- Content based on the active tab -->
-            
               <ion-reorder-group>
                 <ion-card class="practice-card" v-for="index in 6" :key="index">
                   <div class="card-content">
@@ -32,7 +31,6 @@
               </ion-reorder-group>
            
         </div>
-        <!-- ... more content ... -->
       </ion-content>
     </ion-page>
   </template>
