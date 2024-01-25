@@ -128,7 +128,7 @@ import {
   IonAccordionGroup,
 } from "@ionic/vue";
 import { ref, defineComponent } from "vue";
-import { arrowBackOutline, documentTextOutline } from "ionicons/icons";
+import { arrowBackOutline, documentTextOutline,add } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
 import router from "@/router/index";
 
