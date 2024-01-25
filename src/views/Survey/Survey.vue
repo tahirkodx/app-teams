@@ -19,11 +19,11 @@
                                 <ion-item slot="header" color="light">
                                     <ion-label class="ion-color">Teams</ion-label>
                                 </ion-item>
-                                <div  slot="content">
+                                <div slot="content">
                                     <ion-list>
                                         <ion-item v-for="team in teams" :key="team.title">
-                                            <ion-checkbox slot="start" class="ion-border"></ion-checkbox>
-                                            <ion-label class="ion-margin-end">{{ team.title }}</ion-label>
+                                            <ion-checkbox class="ion-border"></ion-checkbox>
+                                            <ion-label>{{ team.title }}</ion-label>
                                         </ion-item>
                                     </ion-list>
                                 </div>
@@ -32,22 +32,22 @@
                                 <ion-item slot="header" color="light">
                                     <ion-label class="ion-color">Dates</ion-label>
                                 </ion-item>
-                                <div  slot="content">
+                                <div slot="content">
                                     <ion-radio-group v-model="selectedOption">
-                                        <ion-item>
-                                            <ion-label>Today</ion-label>
-                                            <ion-radio value="Today" slot="start"></ion-radio>
+                                        <ion-item><ion-radio value="Today" ></ion-radio>
+                                            <ion-label class="ion-text">Today</ion-label>  
                                         </ion-item>
                                         <ion-item>
-                                            <ion-label class="ion-margin">
-                                                <ion-datetime-button
-                                                    datetime="datetime"></ion-datetime-button>
+                                            <ion-label>
+                                                <ion-radio value="Text"></ion-radio>
+                                                <ion-datetime-button datetime="datetime" class="ion-date"></ion-datetime-button>
                                                 <ion-modal :keep-contents-mounted="true">
-                                                    <ion-datetime presentation="date" id="datetime" display-format="DD MMM YYYY">
+                                                    <ion-datetime presentation="date" id="datetime"
+                                                        display-format="DD MMM YYYY">
                                                     </ion-datetime>
                                                 </ion-modal>
                                             </ion-label>
-                                            <ion-radio value="Text" slot="start"></ion-radio>
+                                            
                                         </ion-item>
                                     </ion-radio-group>
                                 </div>
@@ -56,15 +56,14 @@
                     </ion-content>
                 </ion-popover>
             </IonRow>
-            <ion-card v-for="survey in surveys" :key="survey.id" class="ion-margin-vertical"
-                >
+            <ion-card v-for="survey in surveys" :key="survey.id" class="ion-margin-vertical">
                 <IonGrid :fixed="true">
                     <IonRow style="height: 70px;">
                         <IonCol>
                             <ion-card-header>
-                                <ion-card-title class="title">{{ survey.title }}<ion-card-title class="ion-text-small"
-                                        >{{ survey.date
-                                        }}</ion-card-title></ion-card-title>
+                                <ion-card-title class="title">{{ survey.title }}<ion-card-title class="ion-text-small">{{
+                                    survey.date
+                                }}</ion-card-title></ion-card-title>
                             </ion-card-header>
                             <ion-card-content class="ion-flex ion-align-items-center ion-justify-content-between">
                                 <span class="ion-text-capitalize">
@@ -260,17 +259,29 @@ ion-chip[color="secondary"] {
     padding-left: 20px;
     font-style: normal;
 }
+
 .ion-color {
-  color: gray;
-  font-weight: bold;
+    color: gray;
+    font-weight: bold;
 }
-.ion-border{
-   --border-radius:5px
+.ion-text{
+    margin-left: 15px;
+    font-size: large;
 }
-.ion-margin-vertical{
-    margin: 25px; 
+.ion-date{
+    margin-right: 40px;
+    margin-top:-34px ;
+}
+.ion-border {
+    --border-radius: 5px;
+    margin-right: 10px;
+}
+
+.ion-margin-vertical {
+    margin: 5px;
     box-shadow: none;
 }
+
 .ion-text-capitalize {
     color: #000;
     /* Body medium */
@@ -284,6 +295,7 @@ ion-chip[color="secondary"] {
     margin-bottom: -12px;
     margin-left: -20px;
 }
+
 .chevron-icon {
     font-size: 1.5em;
     /* Adjust size as necessary */
@@ -318,7 +330,7 @@ ion-chip[color="secondary"] {
     /* Add right margin */
     margin-right: -20px;
     display: inline;
-     float: right;
+    float: right;
     /* Adjust the value as needed */
 }
 
@@ -392,5 +404,4 @@ ion-chip[color="secondary"] {
     font-size: 12px;
     color: #808080;
     margin-left: 12px;
-}
-</style>
+}</style>
