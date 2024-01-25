@@ -145,7 +145,7 @@ import {
     IonModal,
     IonDatetimeButton
 } from "@ionic/vue";
-import { optionsOutline, chevronForwardOutline, chevronDownOutline, chevronUpOutline } from "ionicons/icons";
+import { optionsOutline, documentTextOutline, arrowBackOutline, } from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
 import router from "@/router/index";
 import { useStatusStore } from "@/store";
