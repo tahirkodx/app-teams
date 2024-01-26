@@ -67,6 +67,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Survey/SurveyQuestionRange.vue"),
       },
       {
+        name: "surveyFinished",
+        path: "surveyFinished",
+        component: () => import("@/views/Survey/surveyFinished.vue"),
+      },
+      {
         name: "academy",
         path: "academys",
         component: () => import("@/views/Academy/Academy.vue"),

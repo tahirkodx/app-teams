@@ -54,8 +54,9 @@
         <div class="title-line"></div>
       </div>
     </div>
+<ion-footer>
 
-     <div class="button-container">
+<div class="button-container">
     <ion-button class="previousButton">Previous</ion-button>
     <ion-button class="nextButton"    
     @click="
@@ -65,6 +66,8 @@
                 })"
       >Next</ion-button>
   </div>
+</ion-footer>
+     
   </ion-content>
 </template>
 
@@ -73,7 +76,7 @@ import { ref } from "vue";
 
 import {
   IonContent,
-  IonSelect,
+  IonFooter,
   IonIcon,
   IonHeader,
   IonList,
