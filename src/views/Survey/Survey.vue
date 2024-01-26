@@ -10,135 +10,127 @@
 
         <ion-buttons class="endIcon" slot="end">
           <ion-button>
+            <!-- <ion-badge color="primary">22k</ion-badge> -->
             <ion-icon :icon="documentTextOutline" />
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <IonRow>
-        <ion-col>
-          <h4 class="titleStyle">Survey</h4>
-        </ion-col>
-        <ion-button
-          id="trigger-button"
-          class="compact-filter-chip"
-          style="--background: white"
-        >
-          <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
-          <span class="text">Team (2)</span>
-        </ion-button>
-        <ion-popover trigger="trigger-button">
-          <ion-content>
-            <ion-accordion-group>
-              <ion-accordion value="first">
-                <ion-item slot="header" color="light">
-                  <ion-label class="ion-color">Teams</ion-label>
-                </ion-item>
-                <div slot="content">
-                  <ion-list>
-                    <ion-item v-for="team in teams" :key="team.title">
-                      <ion-checkbox class="ion-border"></ion-checkbox>
-                      <ion-label>{{ team.title }}</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </div>
-              </ion-accordion>
-              <ion-accordion value="second">
-                <ion-item slot="header" color="light">
-                  <ion-label class="ion-color">Dates</ion-label>
-                </ion-item>
-                <div slot="content">
-                  <ion-radio-group v-model="selectedOption">
-                    <ion-item
-                      ><ion-radio value="Today"></ion-radio>
-                      <ion-label class="ion-text">Today</ion-label>
-                    </ion-item>
-                    <ion-item>
-                      <ion-label>
-                        <ion-radio value="Text"></ion-radio>
-                        <ion-datetime-button
-                          datetime="datetime"
-                          class="ion-date"
-                        ></ion-datetime-button>
-                        <ion-modal :keep-contents-mounted="true">
-                          <ion-datetime
-                            presentation="date"
-                            id="datetime"
-                            display-format="DD MMM YYYY"
-                          >
-                          </ion-datetime>
-                        </ion-modal>
-                      </ion-label>
-                    </ion-item>
-                  </ion-radio-group>
-                </div>
-              </ion-accordion>
-            </ion-accordion-group>
-          </ion-content>
-        </ion-popover>
-      </IonRow>
-      <ion-card
-        v-for="[id , survey] in statusStore.requests"  
-        :key="survey.id"
-        class="ion-margin-vertical"
-        style="margin: 25px; box-shadow: none"
-        @click="
-              () =>
-              router.push({
-                name: 'surveyQuestion',
-              })"
-      >
-      <IonGrid :fixed="true">
+      <IonGrid>
         <IonRow>
-          <IonCol>
-            <ion-card-header>
-              <ion-card-title class="ion-text-capitalize">{{
-                  teamStore?.teams?.get(userStore.teamID).name 
-              }}</ion-card-title>
-              </ion-card-header>
-              <ion-card-content
-              class="ion-flex ion-align-items-center ion-justify-content-between"
-              >
-              <span class="ion-text-capitalize">
-                <ion-chip v-if="survey?.responded" class="chip-complete">
-                  <ion-label>Completed</ion-label>
-                </ion-chip>
-                <ion-chip v-else class="chip-pending">
-                  <ion-label>Pending</ion-label>
-                </ion-chip>
-                <!-- <ion-chip :class="getChipClass(survey.responded,survey.start)">
-                  <ion-label>Test </ion-label>
-                </ion-chip> -->
-              </span>
-            </ion-card-content>
-          </IonCol>
-          <IonCol class="dateStyle" size="auto">
-            <span>
-              <ion-label>
-                 
-                {{ DateFormate(survey.start)  }}
-              </ion-label>
-            </span>
-          </IonCol>
+          <ion-col>
+            <h4 class="titleStyle">Survey</h4>
+          </ion-col>
+          <ion-button id="trigger-button" class="compact-filter-chip" style="--background: white">
+            <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
+            <span class="text">Team (2)</span>
+          </ion-button>
+          <ion-popover trigger="trigger-button">
+            <ion-content>
+              <ion-accordion-group>
+                <ion-accordion value="first">
+                  <ion-item slot="header" color="light">
+                    <ion-label class="ion-color">Teams</ion-label>
+                  </ion-item>
+                  <div slot="content">
+                    <ion-list>
+                      <ion-item v-for="[id, team] in Array.from(teamStore.teams)" :key="id">
+                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
+                          :checked="selectedTeams.includes(id)"
+                          @ionChange="handleCheckboxChange(id)">{{ team.name }}</ion-checkbox>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </ion-accordion>
+                <ion-accordion value="second">
+                  <ion-item slot="header" color="light">
+                    <ion-label class="ion-color">Dates</ion-label>
+                  </ion-item>
+                  <div slot="content">
+                    <ion-radio-group v-model="selectedOption">
+                      <ion-item><ion-radio value="Today"></ion-radio>
+                        <ion-label class="ion-text">Today</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>
+                          <ion-radio value="Text">Data</ion-radio>
+                          <!-- <ion-datetime-button
+                            datetime="datetime"
+                            class="ion-date"
+                          ></ion-datetime-button>
+                          <ion-modal :keep-contents-mounted="true">
+                            <ion-datetime
+                              presentation="date"
+                              id="datetime"
+                              display-format="DD MMM YYYY"
+                            >
+                            </ion-datetime>
+                          </ion-modal> -->
+                        </ion-label>
+                      </ion-item>
+                    </ion-radio-group>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group>
+            </ion-content>
+          </ion-popover>
         </IonRow>
       </IonGrid>
-    </ion-card>
-  
-      <ion-fab
-        class="addStyle"
-        slot="fixed"
-        horizontal="end"
-        vertical="bottom"
-        @click="() => router.push({ name: 'addteam' })"
-      >
+      <ion-card v-for="[id, survey] in statusStore.requests" :key="id" class="ion-margin-vertical" @click="() =>
+          router.push({
+            name: 'surveyQuestion',
+          })
+        ">
+        <IonGrid :fixed="true">
+          <IonRow>
+            <IonCol>
+              <ion-card-header>
+                <ion-card-title class="ion-text-capitalize">{{
+                  teamStore?.teams?.get(userStore.teamID)?.name
+                }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content class="ion-flex ion-align-items-center ion-justify-content-between">
+                <span class="ion-text-capitalize">
+                  <ion-chip v-if="survey.responded" class="chip-complete">
+                    <ion-label>Completed</ion-label>
+                  </ion-chip>
+                  <ion-chip v-else-if="survey.responded === false" class="chip-pending">
+                    <ion-label>Missed</ion-label>
+                  </ion-chip>
+                  <span v-else>
+                    <ion-chip class="chip-upcoming">
+                      <ion-label>Upcoming</ion-label>
+                    </ion-chip>
+                  </span>
+                  <!-- Completed: responded is true
+                pending: responded is null or false, end < now, start > now
+                upcoming:  start < now
+                missed: end > now, responded is null or false -->
+                </span>
+              </ion-card-content>
+            </IonCol>
+            <IonCol class="dateStyle" size="auto">
+              <span>
+                <ion-label>
+                  {{ DateFormate(survey.start) }}
+                </ion-label>
+              </span>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </ion-card>
+
+      <ion-fab class="addStyle" slot="fixed" horizontal="end" vertical="bottom"
+        @click="() => router.push({ name: 'addteam' })">
         <ion-fab-button>
-          <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
+          <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
     </ion-content>
   </ion-page>
 </template>
+
 <script setup lang="ts">
 import {
   IonPage,
@@ -155,135 +147,60 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonIcon,
-  IonFab,
-  IonFabButton,
-  IonDatetime,
+  IonButtons,
   IonButton,
-  IonAccordionGroup,
-  IonAccordion,
-  IonPopover,
-  IonList,
+  IonIcon,
   IonItem,
+  IonList,
+  IonPopover,
+  IonFab,
+  IonAccordion,
+  IonAccordionGroup,
   IonCheckbox,
   IonRadio,
   IonRadioGroup,
   IonModal,
-  IonButtons,
+  IonDatetime,
   IonDatetimeButton,
+  IonFabButton,
 } from "@ionic/vue";
-import { ref, defineComponent,onMounted } from "vue";
-import { arrowBackOutline, documentTextOutline,add,optionsOutline } from "ionicons/icons";
+import { ref, defineComponent, onMounted } from "vue";
+import {
+  arrowBackOutline,
+  documentTextOutline,
+  add,
+  optionsOutline,
+} from "ionicons/icons";
 import score from "@/components/Header/Header.vue";
 import { DateFormate } from "@/utils/Helper";
 import router from "@/router/index";
+import { useUserStore, useStatusStore, useTeamStore } from "@/store";
 
-const surveys = ref([
-  {
-    id: "01A",
-    title: "Team A",
-    label: "Pending",
-    date: "jan 10,2024",
-    color: "#ff8512",
-  },
-  {
-    id: "02",
-    title: "Team A",
-    label: "Upcoming",
-    date: "jan 10,2024",
-    color: "#d5d5d5",
-  },
-  {
-    id: "03",
-    title: "Team A",
-    label: "Completed",
-    date: "jan 10,2024",
-    color: "#abd14a",
-  },
-  {
-    id: "04",
-    title: "Team A",
-    label: "Pending",
-    date: "jan 10,2024",
-    color: "#ff8512",
-  },
-  {
-    id: "05",
-    title: "Team A",
-    label: "Upcoming",
-    date: "jan 10,2024",
-    color: "#d5d5d5",
-  },
-  {
-    id: "06",
-    title: "Team A",
-    label: "Pending",
-    date: "jan 10,2024",
-    color: "#ff8512",
-  },
-  {
-    id: "07",
-    title: "Team A",
-    label: "Pending",
-    date: "jan 10,2024",
-    color: "#ff8512",
-  },
-  {
-    id: "08",
-    title: "Team A",
-    label: "Upcoming",
-    date: "jan 10,2024",
-    color: "#d5d5d5",
-  },
-  {
-    id: "09",
-    title: "Team A",
-    label: "Completed",
-    date: "jan 10,2024",
-    color: "#abd14a",
-  },
-  {
-    id: "10",
-    title: "Team A",
-    label: "Upcoming",
-    date: "jan 10,2024",
-    color: "#d5d5d5",
-  },
-  {
-    id: "11",
-    title: "Team A",
-    label: "Pending",
-    date: "jan 10,2024",
-    color: "#ff8512",
-  },
-  // ... other survey items
-]);
-const teams = ref([
-  { title: "Team A" },
-  { title: "Team B" },
-  { title: "Team C" },
-  { title: "Team D" },
-  { title: "Team A" },
-  { title: "Team A" },
-]);
-import { useUserStore ,useStatusStore ,useTeamStore} from "@/store";
-
-
-const statusStore = useStatusStore()
-const teamStore = useTeamStore()
-const userStore = useUserStore()
+const statusStore = useStatusStore();
+const teamStore = useTeamStore();
+const userStore = useUserStore();
+const selectedTeams: any = ref([]);
 onMounted(async () => {
   await Promise.all([
+    teamStore.getTeams(),
     statusStore.getDimensions(),
     statusStore.getQuestionNaire(),
     statusStore.getSchedulers(),
     statusStore.getRequests(),
- ])
- console.log(statusStore.schedulers)
-})
+  ]);
   
-const getChipClass = (type: string, date : string) => {
+});
+const handleCheckboxChange = (teamId: any) => {
 
+  const index = selectedTeams.value.indexOf(teamId);
+  if (index >= 0) {
+    selectedTeams.value.splice(index, 1);
+  } else {
+    selectedTeams.value.push(teamId);
+  } 
+  console.log(selectedTeams.value);
+}
+const getChipClass = (type: string, date: string) => {
   switch (type) {
     case "Pending":
       return "chip-pending";
@@ -309,18 +226,19 @@ const toggleDropdown = () => {
   isDropdownOpen.value = true;
 };
 const selectedOption = ref("");
-
-async () => {
-  await Promise.all([
-    statusStore.getDimensions(),
-    statusStore.getQuestionNaire(),
-    statusStore.getSchedulers(),
-  ]);
-  console.log(statusStore.schedulers);
-};
 </script>
 
 <style scoped>
+ion-header {
+  --background: #yourColor;
+  /* Replace with your header background color */
+}
+
+ion-button {
+  --color: #yourColor;
+  /* Replace with your icon color */
+}
+
 ion-toolbar {
   --background: #fff;
   /* Adjust if needed */
@@ -331,22 +249,11 @@ ion-title {
   /* Adjust if needed */
 }
 
-ion-card-content {
-  margin-top: -10px;
-  /* Adjust the value as needed */
-}
-
 ion-card {
-  --background: #fafafa;
   border-radius: 5px;
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid rgba(242, 242, 242, 0.95);
-  background: #fafafa;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  --background: #fafafa;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+  /* Light grey background */
 }
 
 ion-card-title {
@@ -354,12 +261,8 @@ ion-card-title {
   /* Large font size for card title */
   font-weight: bold;
   color: #222;
-  /* Adjust if needed */
-}
 
-ion-card-header {
-  margin-top: -16px;
-  /* Adjust the value as needed */
+  /* Adjust if needed */
 }
 
 .date-label {
@@ -368,16 +271,14 @@ ion-card-header {
   /* Date label color */
 }
 
-.rounded-item {
-  border-radius: 10px;
-}
-
 ion-chip {
   --color: #fff;
   /* White text on chip */
   --background: #ffac5f;
   text-align: center;
+  margin-left: 0px;
   /* Body small */
+  font-family: "Cabin", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -386,49 +287,35 @@ ion-chip {
   /* Use your primary color here */
 }
 
+.iocChip {
+  color: #000;
+}
+
 ion-chip[color="secondary"] {
   --background: #5bc0de;
+
   /* Use your secondary color here */
 }
 
 .titleStyle {
   color: var(--Neutrals-black, #303030);
-  font-family: "Cabin";
-  font-size: 26px;
-  font-weight: 580;
+
+  font-family: "Cabin", sans-serif;
+
+  font-size: 22px;
+  font-weight: 500;
   line-height: 28px;
   text-align: left;
-  margin-top: 28px;
-  margin-bottom: 25px;
-  padding-left: 20px;
+  margin-top: 10px;
+  padding-left: 16px;
+
   font-style: normal;
-}
-
-.ion-color {
-  color: gray;
-  font-weight: bold;
-}
-.ion-text {
-  margin-left: 15px;
-  font-size: large;
-}
-.ion-date {
-  margin-right: 40px;
-  margin-top: -34px;
-}
-.ion-border {
-  --border-radius: 5px;
-  margin-right: 10px;
-}
-
-.ion-margin-vertical {
-  margin: 5px;
-  box-shadow: none;
 }
 
 .ion-text-capitalize {
   color: #000;
   /* Body medium */
+  font-family: "Cabin", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -437,7 +324,7 @@ ion-chip[color="secondary"] {
   letter-spacing: 0.25px;
   margin-top: -25px;
   margin-bottom: -12px;
-  margin-left: -20px;
+  margin-left: -5px;
 }
 
 .chevron-icon {
@@ -454,60 +341,49 @@ ion-chip[color="secondary"] {
   margin: 10px;
 }
 
-.ion-text-small {
-  /* Jan 10, 2024 */
-  width: 67px;
-  height: 16px;
-  /* Label medium */
-  font-family: "Cabin";
-  font-style: normal;
-  font-weight: 550;
-  font-size: 12px;
-  line-height: 16px;
-  /* Identical to box height, or 133% */
-  letter-spacing: 0.5px;
-  color: #7c7c7c;
-  /* Inside auto layout */
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  /* Add right margin */
-  margin-right: -20px;
-  display: inline;
-  float: right;
-  /* Adjust the value as needed */
+.dateStyle {
+  margin-top: 10px;
 }
 
-.label-text {
-  width: 60px;
-  height: 12px;
-  /* Adjusted height, add a specific value */
-  font-family: "Cabin";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #ffffff;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  padding: auto;
-  /* Adjust the padding as needed */
+.chip-pending {
+  --background: #ff8512;
+  /* Orange color for Pending */
 }
 
-.title {
-  margin-top: -6px;
-  font-family: "Cabin";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.15px;
-  color: #303030;
-  margin-left: -11px;
+.chip-complete {
+  --background: #a5ce3e;
+  /* Green color for Complete */
+}
+
+.chip-upcoming {
+  --background: #cccccccc;
+  /* Grey color for Upcoming */
+  color: #4d4d4d;
+}
+
+/* ... rest of your styles ... */
+
+/* Add any additional custom styles needed to match your screenshot */
+
+/* new css */
+.ion-color {
+  color: gray;
+  font-weight: bold;
+}
+
+.ion-text {
+  margin-left: 15px;
+  font-size: large;
+}
+
+.ion-date {
+  margin-right: 40px;
+  margin-top: -34px;
+}
+
+.ion-border {
+  --border-radius: 5px;
+  margin-right: 10px;
 }
 
 .compact-filter-chip {
@@ -520,7 +396,6 @@ ion-chip[color="secondary"] {
   float: inline-end;
   width: 107px;
   height: 32px;
-  margin-top: 23px;
   margin-right: 23px;
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(51, 51, 51, 0.3);
@@ -534,18 +409,5 @@ ion-chip[color="secondary"] {
 .compact-filter-chip:hover {
   background: #f0f0f0;
   /* Change the background on hover */
-}
-
-.icon {
-  color: black;
-  font-size: 18px;
-  position: absolute;
-  margin-left: -75px;
-}
-
-.text {
-  font-size: 12px;
-  color: #808080;
-  margin-left: 12px;
 }
 </style>

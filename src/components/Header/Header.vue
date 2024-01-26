@@ -36,13 +36,13 @@
           ></ion-icon>
         </ion-button>
 
-        <ion-button>
+        <!-- <ion-button>
           <ion-toggle
             :checked="themeToggle"
             @ionChange="toggleChange($event)"
             justify="space-between"
           ></ion-toggle>
-        </ion-button>
+        </ion-button> -->
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
