@@ -63,10 +63,10 @@
         @click="
           () =>
             router.push({
-              name: 'surveyQuestionRange',
+              name: 'surveyFinished',
             })
         "
-        >Next</ion-button
+        >Submit</ion-button
       >
     </div>
 
