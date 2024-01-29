@@ -9,7 +9,7 @@
         <h1>{{ playbookStore?.singleExercise?.play_title }}</h1>
         <h2>
           {{
-            playbookStore.playbook.get(playbookStore?.singleExercise?.play)
+            playbookStore?.playbook?.get(playbookStore?.singleExercise?.play)
               ?.area
           }}
         </h2>

@@ -104,7 +104,7 @@ const changeTeam = (value: any) => {
   }
 };
 const navigateFunction = () => {
-  router.push({ name: "survey" });
+  router.push({ name: "surveys" });
 };
 const animate = ref(false);
 function animateIncrease() {
