@@ -6,217 +6,113 @@
     <ion-content :fullscreen="true">
       <h4 class="titleStyle">Academy</h4>
 
-      <ion-searchbar placeholder="Search here" 
-      show-clear-button="never"
-      class="custom-searchbar"></ion-searchbar>
+      <SearchBar />
 
-      <ion-list class="list-ios">
-       
-        <ion-item v-for="(resource, index) in resources" :key="index" lines="none" class="resource-item" @click="openModal(resource)">
-          <ion-thumbnail slot="start" class="resource-thumbnail">
-            <ion-img :src="resource.img"></ion-img>
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <div class="resource-title">
-              <ion-icon :icon="resource.icon" class="play-icon"></ion-icon>
-              <h2>{{ resource.title }}</h2>
-            </div>
-            <p class="desClass">{{ resource.snippet }}</p>
-            <p class="resource-info">
-              {{ resource.duration }} • Updated {{ resource.updated }} months
-              ago
-            </p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-        
-      <ion-fab class="addStyle" slot="fixed" horizontal="end" vertical="bottom"
-        @click="() => router.push({ name: 'addteam' })">
+      <div class="lesson-header">
+        <div class="lesson-title">All Lessons</div>
+        <ion-button class="all-button">
+          All
+          <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <LessonsCard />
+
+      <ion-fab
+        class="addStyle"
+        slot="fixed"
+        horizontal="end"
+        vertical="bottom"
+        @click="() => router.push({ name: 'addteam' })"
+      >
         <ion-fab-button>
           <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-
-       <myMyModal :is-visible="isModalVisible" :resource="selectedResource" @update:isVisible="isModalVisible = $event"></myMyModal>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { ref,computed } from "vue";
 import {
   IonPage,
   IonHeader,
-  IonSearchbar,
-  IonToolbar,
   IonButton,
-  IonTitle,
   IonContent,
-  IonList,
-  IonItem,
-  IonThumbnail,
-  IonImg,
-  IonLabel,
   IonIcon,
-  
-  IonFab, 
+  IonFab,
   IonFabButton,
 } from "@ionic/vue";
 
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import myMyModal from "@/components/VideoPlayerModal/VideoPlayerModal.vue";
-import { useUserStore ,useAcademyStore } from "@/store";
+import { useUserStore, useAcademyStore } from "@/store";
+import SearchBar from "@/components/Widgets/SearchBar.vue";
+import LessonsCard from "@/components/Widgets/LessonCard.vue";
 
 // import { useTeamStore } from "@/stores/teams";
 //   import { useAcademyStore } from '@/stores/academy'
 //   import { fetchCurrent, teamID } from '@/stores/current'
 //   import { ICourse } from "@/stores/academy";
-  
 
-  // const route = useRoute()
-  //  const teamStore = useTeamStore()
-  const academyStore = useAcademyStore()
+// const route = useRoute()
+//  const teamStore = useTeamStore()
+const academyStore = useAcademyStore();
 
-  await Promise.all([
-    academyStore.getCourses(),
-    academyStore.getCoursesScores(),
-    academyStore.getCoursesStatus(),
-    
-  ])
-  console.log("Satre: " , academyStore.courses)
-  // const focus = ref(route.params.focus as string)
-  // if (focus.value == '') focus.value = 'all'
-
-  /**
-   * Get ordered list of courses. Order by score, either of the current team or of all teams
-   */
-  // const orderedCourses = computed(() => {
-  //   let courseList = academyStore.courses.list
-  //   if (focus.value == 'all') {
-  //     return courseList.sort((c: ICourse) => -academyStore.getAllTeamCourseScore(c.id))
-  //   } else {
-  //     return courseList.sort((c: ICourse) => -academyStore.getTeamCourseScore(c.id, teamID.value))
-  //   }
-  // })
- 
-const isModalVisible = ref(false);
-const selectedResource = ref({});
-
-const openModal = (resource: any) => {
-   selectedResource.value = resource;
-isModalVisible.value = true;
-};
-const resources = ref([
-  // Populate this array with your resources
-  // Example resource:
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 1: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/handPic.svg",
-    title: "Resource title 2: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://www.youtube.com/watch?v=jejBQ_K2xyI&ab_channel=cricket.com.au',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 3: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://www.youtube.com/watch?v=k-trrJYXOG8&pp=ygUJaW9uaWMgbmV3',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/person.svg",
-    title: "Resource title 4: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/handPic.svg",
-    title: "Resource title 5: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/handPic.svg",
-    title: "Resource title 6: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/person.svg",
-    title: "Resource title 7: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 8: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 9: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: 'https://youtu.be/UIZAiXYceBI?feature=shared',
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  // ... add more resources as needed
+await Promise.all([
+  academyStore.getCourses(),
+  academyStore.getCoursesScores(),
+  academyStore.getCoursesStatus(),
 ]);
+console.log("Satre: ", academyStore.courses);
+// const focus = ref(route.params.focus as string)
+// if (focus.value == '') focus.value = 'all'
 
- 
+/**
+ * Get ordered list of courses. Order by score, either of the current team or of all teams
+ */
+// const orderedCourses = computed(() => {
+//   let courseList = academyStore.courses.list
+//   if (focus.value == 'all') {
+//     return courseList.sort((c: ICourse) => -academyStore.getAllTeamCourseScore(c.id))
+//   } else {
+//     return courseList.sort((c: ICourse) => -academyStore.getTeamCourseScore(c.id, teamID.value))
+//   }
+// })
 </script>
 
 <style scoped>
-.list-ios {
-  background: #fff;
+.lesson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  padding: 16px;
 }
 
+.lesson-title {
+  color: #303030;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 55px; /* 142.857% */
+  letter-spacing: 0.1px;
+}
 
-.resource-item {
-  --background: #ffffff;
-  --border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 10px;
+.all-button {
+  color: #8b8b8b;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
+  --background: #f7f7f7; /* Set your desired background color */
+  --background-activated: grey; /* Background color for activated state */
+  --background-focused: grey; /* Background color for focused state */
+  --background-hover: grey; /* Background color for hover state */
+  --border-radius: 8px; /* Adjust border-radius as needed */
+  --color: #8b8b8b; /* Text color */
 }
 
 .titleStyle {
@@ -228,90 +124,7 @@ const resources = ref([
   margin-top: 25px;
   margin-bottom: 0px;
   padding-left: 16px;
-
   font-style: normal;
-}
-
-.custom-searchbar {
-  --background: #ffffff;
-  --border-radius: 30px;
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --placeholder-color: #49454F;
-  --placeholder-opacity: 1;
-  --clear-icon-color: #49454F;
-  position: relative;
-
-  
-  color: var(--M3-sys-light-on-surface-variant, #49454f);
-  /* Body large */
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-  /* 150% */
-  letter-spacing: 0.5px;
-}
-
-
-
-.resource-thumbnail {
-  --size: 90px;
-  border-radius: 4px;
-  background-color: #ffd700;
-  /* Yellow background */
-}
-
-.resource-thumbnail ion-img {
-  border-radius: 4px;
-}
-
-.resource-title {
-  display: flex;
-  align-items: center;
-}
-
-.resource-title h2 {
-  color: #a5ce3e;
-  /* Lable medium */
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  /* 133.333% */
-  letter-spacing: 0.5px;
-}
-
-p {
-  font-size: 0.9em;
-  color: #666;
-}
-
-.resource-info {
-  color: #979797;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-  /* Equivalent to 200% of 10px */
-}
-
-.play-icon {
-  margin-right: 10px;
-  font-size: 20px;
-  /* color: #ff0000; */
-  /* Hex code for red */
-}
-
-.desClass {
-  color: var(--text-colors-color-text-dark, #343a40);
-
-  /* Body small */
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
-  /* 133.333% */
 }
 
 .addStyle {

@@ -76,6 +76,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "academys",
         component: () => import("@/views/Academy/Academy.vue"),
       },
+      {
+        name: "academyLesson",
+        path: "academysLesson",
+        component: () => import("@/views/Academy/AcademyLesson.vue"),
+      },
     ],
   },
 ];
