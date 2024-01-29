@@ -135,7 +135,7 @@ export interface INotes {
 const useStatusStore = defineStore('status', () => {
   
   // questionnaire is of type IQuestionnaire
-  const questionnaire  = ref();
+  const questionnaire  : any = ref(null);
   const dimensions  = ref();
   // schedulers is of type ISchedule[]
   const schedulers = ref();
@@ -162,15 +162,12 @@ const useStatusStore = defineStore('status', () => {
 // dimensions is of type IDimensions
 // const dimensions = new APIListObject('dimensions', 'v1/status/team/dimensions/active/')
 async function getDimensions() {
-  questionnaire.value = await StatusAPI.getDimensions();
+  dimensions.value = await StatusAPI.getDimensions();
 }
 async function getSchedulers() {
   schedulers.value = await StatusAPI.getSchedulers();
 }
 async function getRequests() {
-  const payload = {
-    id : '60d84fb36d8e42838966350ddc3ac956'
-  }
   // todo need to change that id 
   requests.value = await StatusAPI.getRequests('60d84fb36d8e42838966350ddc3ac956');
 }

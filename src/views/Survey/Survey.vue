@@ -24,7 +24,7 @@
           </ion-col>
           <ion-button id="trigger-button" class="compact-filter-chip" style="--background: white">
             <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
-            <span class="text">Team (2)</span>
+            <span class="text">Team ({{ selectedTeams.length }})</span>
           </ion-button>
           <ion-popover trigger="trigger-button">
             <ion-content>
@@ -77,11 +77,12 @@
           </ion-popover>
         </IonRow>
       </IonGrid>
-      <ion-card v-for="[id, survey] in statusStore.requests" :key="id" class="ion-margin-vertical" @click="() =>
-          router.push({
-            name: 'surveyQuestion',
-          })
-        ">
+      <!-- todo need to get team id is here -->
+      <ion-card v-for="[id, survey] in statusStore.requests" :key="id" class="ion-margin-vertical" 
+      @click="() => router.push({name: 'survey', params: { teamid: '60d84fb36d8e42838966350ddc3ac956', surveyid: survey.id}})"
+
+      
+        >
         <IonGrid :fixed="true">
           <IonRow>
             <IonCol>

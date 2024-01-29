@@ -186,6 +186,7 @@ const usePlaybookStore = defineStore("Playbook", () => {
   function getFilteredTeamExercises() {}
 
   async function getSingleExercise(teamID: TTeamID, exerciseID: string) {
+    // todo need to change this prams 
     singleExercise.value = await PlaybookAPI.getSingleExercise(
       teamID,
       exerciseID

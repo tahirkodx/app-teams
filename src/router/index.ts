@@ -16,6 +16,26 @@ const routes: Array<RouteRecordRaw> = [
     path: "/profile",
     component: () => import("@/views/Profile/Profile.vue"),
   },
+  {
+    name: "surveys",
+    path: "/surveys",
+    component: () => import("@/views/Survey/Survey.vue"),
+  },
+  {
+    name: 'survey',
+    path: '/surveys/personal/:teamid/survey/:surveyid',
+    component: () => import('@/views/Survey/SurveyQuestion.vue')
+  },
+  {
+    name: "surveyQuestionRange",
+    path: "/surveyQuestionRange",
+    component: () => import("@/views/Survey/SurveyQuestionRange.vue"),
+  },
+  {
+    name: "surveyFinished",
+    path: "/surveyFinished",
+    component: () => import("@/views/Survey/surveyFinished.vue"),
+  },
 
   {
     path: "/tabs/",
@@ -51,26 +71,26 @@ const routes: Array<RouteRecordRaw> = [
         path: "exercises/exercise/:exerciseid",
         component: () => import("@/views/Exercises/Exercise.vue"),
       },
-      {
-        name: "survey",
-        path: "surveys",
-        component: () => import("@/views/Survey/Survey.vue"),
-      },
-      {
-        name: "surveyQuestion",
-        path: "surveyQuestion",
-        component: () => import("@/views/Survey/SurveyQuestion.vue"),
-      },
-      {
-        name: "surveyQuestionRange",
-        path: "surveyQuestionRange",
-        component: () => import("@/views/Survey/SurveyQuestionRange.vue"),
-      },
-      {
-        name: "surveyFinished",
-        path: "surveyFinished",
-        component: () => import("@/views/Survey/surveyFinished.vue"),
-      },
+      // {
+      //   name: "surveys",
+      //   path: "surveys",
+      //   component: () => import("@/views/Survey/Survey.vue"),
+      // },
+      // {
+      //   name: 'survey',
+      //   path: 'surveys/personal/:teamid/survey/:surveyid',
+      //   component: () => import('@/views/Survey/SurveyQuestion.vue')
+      // },
+      // {
+      //   name: "surveyQuestionRange",
+      //   path: "surveyQuestionRange",
+      //   component: () => import("@/views/Survey/SurveyQuestionRange.vue"),
+      // },
+      // {
+      //   name: "surveyFinished",
+      //   path: "surveyFinished",
+      //   component: () => import("@/views/Survey/surveyFinished.vue"),
+      // },
       {
         name: "academy",
         path: "academys",

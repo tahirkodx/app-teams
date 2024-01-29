@@ -3,76 +3,153 @@
     <score />
   </ion-header>
   <ion-content>
-    <ProgressBar/>
-    <div class="outcome-title">Desired Outcomes</div>
-    <div class="title-line"></div>
-    <h3 class="question">How do you feel within the team?</h3>
-    <p class="instruction">Select One</p>
+    <ProgressBar :tempIndex="tempIndex+1" :data="statusStore?.questionnaire?.size+1" />
+    <div v-if="tempIndex <= statusStore?.questionnaire?.size -1">
+      <div class="outcome-title">{{ statusStore?.questionnaire?.get(currentIndex).name }}</div>
+      <div class="title-line"></div>
+      <h3 class="question">How do you feel within the team?</h3>
+      <p class="instruction">Select One</p>
+      <ion-list>
+        <ion-radio-group v-model="select">
+          <ion-item
+            :class="{
+              'radio-item-selected': select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_low,
+            }"
+            lines="full"
+            class="radio-item"
+          >
+            <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_low }}</ion-label> -->
+            <ion-radio :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_low" slot="start" label-placement="end" >
+            {{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_low }}
+            </ion-radio>
+          </ion-item>
+          <ion-item
+            :class="{
+              'radio-item-selected':
+                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow,
+            }"
+            lines="full"
+            class="radio-item"
+          >
+            <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow }}</ion-label> -->
+            <ion-radio
+              :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow" label-placement="end"
+              slot="start"
+            >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow }}</ion-radio>
+          </ion-item>
+          <ion-item
+            :class="{
+              'radio-item-selected':
+                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium,
+            }"
+            lines="full"
+            class="radio-item"
+          >
+            <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium }}</ion-label> -->
+            <ion-radio
+              :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium"
+              slot="start"
+              label-placement="end"
+            >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium }}</ion-radio>
+          </ion-item>
+          <ion-item
+            :class="{
+              'radio-item-selected':
+                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh,
+            }"
+            lines="full"
+            class="radio-item"
+          >
+            <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh }}</ion-label> -->
+            <ion-radio
+              :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh"
+              slot="start"
+              label-placement="end"
+            >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh }}</ion-radio>
+          </ion-item>
+          <ion-item
+            :class="{
+              'radio-item-selected':
+                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_high,
+            }"
+            lines="full"
+            class="radio-item"
+          >
+            <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_high }}</ion-label> -->
+            <ion-radio :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_high" slot="start" label-placement="end"  >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_high }}</ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
 
-    <ion-list>
-      <ion-radio-group v-model="select">
-        <ion-item
-          v-for="option in options"
-          :key="option.value"
-          :class="{ 'radio-item-selected': select === option.value }"
-          lines="full"
-          class="radio-item"
+      <div>
+        <h3 class="question">Where is the team weak/strong?</h3>
+        <p class="instruction">Select Only If Applicable</p>
+
+        <div
+          v-for="item2 in statusStore?.questionnaire?.get(currentIndex)?.question?.options"
+          :key="item2.id"
+          class="topMargin"
         >
-          <ion-label>{{ option.label }}</ion-label>
-          <ion-radio :value="option.value" slot="start" />
-        </ion-item>
-      </ion-radio-group>
-    </ion-list>
-    
-    
-    <div>
-      <h3 class="question">Where is the team weak/strong?</h3>
-      <p class="instruction">Select Only If Applicable</p>
-
-      <div 
-      v-for="checkBoxArray in checkBoxArrays"
-          :key="checkBoxArray.value"
-           class="topMargin"
-           >
-        <h3 class="question">{{ checkBoxArray.header }}</h3>
-        <div class="vision-goals-container">
-          <div class="checkbox-container" 
-           :class="{ 'checkbox-container-checked': selected[checkBoxArray.value] }"
-        @click="toggleSelection(checkBoxArray.value)"
-          >
-            <ion-checkbox :value="checkBoxArray.value" :checked="selected[checkBoxArray.value]"></ion-checkbox>
-        <ion-label>{{ checkBoxArray.label }}</ion-label>
-      </div>
-          <div class="checkbox-container"
-          :class="{ 'checkbox-container-checked': selected[checkBoxArray.value] }"
-        @click="toggleSelection(checkBoxArray.value)"
-          >
-            <ion-checkbox :value="checkBoxArray.value"  :checked="selected[checkBoxArray.value]"></ion-checkbox>
-            <ion-label>{{checkBoxArray.label2}}</ion-label>
+          <h3 class="question">{{ item2.title }}</h3>
+          <div class="vision-goals-container">
+            <div
+              class="checkbox-container"
+              :class="{
+                'checkbox-container-checked': selected[item2.favourable],
+              }"
+              @click="toggleSelection(item2.favourable)"
+            >
+              <ion-checkbox
+                :value="item2.favourable"
+                :checked="selected[item2.favourable]"
+              ></ion-checkbox>
+              <ion-label>{{ item2.favourable }}</ion-label>
+              <!-- <ion-checkbox label-placement="end" justify="start" aria-label="Label"
+              :checked="selected[item2.favourable]"
+                >{{ item2.favourable }}</ion-checkbox> -->
+            </div>
+            <div
+              class="checkbox-container"
+              :class="{
+                'checkbox-container-checked': selected[item2.unfavourable],
+              }"
+              @click="toggleSelection(item2.unfavourable)"
+            >
+              <ion-checkbox
+                :value="item2.unfavourable"
+                :checked="selected[item2.unfavourable]"
+              ></ion-checkbox>
+              <ion-label>{{ item2.unfavourable }}</ion-label>
+            </div>
           </div>
+          <div class="title-line"></div>
         </div>
-        <div class="title-line"></div>
       </div>
     </div>
-<ion-footer>
-
-<div class="button-container">
-    <ion-button class="previousButton">Previous</ion-button>
-    <ion-button class="nextButton"    
-    @click="
-              () =>
-                router.push({
-                  name: 'surveyQuestionRange',
-                })"
-      >Next</ion-button>
-  </div>
-</ion-footer>
-     
+    <SurveyRangeSelector v-if="tempIndex >= statusStore?.questionnaire?.size" />
+    <ion-footer>
+      <div class="button-container">
+        <ion-button class="previousButton"
+        @click="processBackItem"
+        :disabled="tempIndex <= 0"
+        >Previous</ion-button>
+        <ion-button v-if="tempIndex <= statusStore?.questionnaire?.size -1"
+          @click="processNextItem"
+          :disabled="tempIndex >= statusStore?.questionnaire?.size"
+          class="nextButton"
+          >Next</ion-button
+        >
+        <ion-button v-else
+          class="nextButton"
+          >Submit</ion-button
+        >
+      </div>
+    </ion-footer>
   </ion-content>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 import {
   IonContent,
@@ -88,35 +165,20 @@ import {
   IonButton,
 } from "@ionic/vue";
 import score from "@/components/Header/Header.vue";
-import ProgressBar from "@/components/ProgressBar/ProgressBar.vue"
+import ProgressBar from "@/components/ProgressBar/ProgressBar.vue";
+import SurveyRangeSelector from "@/components/Survey/SurveyRangeSelector.vue";
 import router from "@/router/index";
+import { useRoute } from "vue-router";
+import { useStatusStore } from "@/store";
+const statusStore = useStatusStore();
 
-interface RadioOption {
-  label: string;
-  value: string;
-}
-interface checkBox {
-  label: string;
-  value: string;
-  header:string;
-  label2:string;
-}
+const route = useRoute();
+const surveyId = route.params.surveyid as string;
+const teamId = route.params.teamid as string;
+console.log(surveyId);
+console.log(teamId);
 
-const options: RadioOption[] = [
-  { label: "I feel anxious and inhibited", value: "anxious" },
-  { label: "I feel cautious to take risks", value: "cautious" },
-  { label: "I feel comfortable expressing myself", value: "comfortable" },
-  { label: "I feel secure and empowered to share", value: "secure" },
-  { label: "I feel at ease, trusting and supporting", value: "ease" },
-];
-const checkBoxArrays:checkBox[] = [
-  { label: "Unclear",header:"Vision & goals", value: "unclear",label2:"Clear" },
-  { label: "Contribute to goals & vision",header:"Day-to-day work", value: "clear",label2:"Focuses on todays issue" },
-  { label: "Contribute to goals & vision",header:"Roles & Responsibilities", value: "goal",label2:"Clear" },
-  { label: "Unclear/Overlapping",header:"Roles & Responsibilities", value: "overlapping",label2:"Unclear/Overlapping" },
-  { label: "I feel at ease, trusting and supporting",header:"Information flow between members", value: "ease",label2:"Focuses on todays issue" },
-];
-const select : any = ref({
+const select: any = ref({
   unclear: false,
   clear: false,
   goal: false,
@@ -124,10 +186,10 @@ const select : any = ref({
   ease: false,
 });
 
-const toggleSelect = (radioValue:any) => {
+const toggleSelect = (radioValue: any) => {
   select.value[radioValue] = !select.value[radioValue];
 };
-const selected : any = ref({
+const selected: any = ref({
   unclear: false,
   clear: false,
   goal: false,
@@ -135,10 +197,38 @@ const selected : any = ref({
   ease: false,
 });
 
-const toggleSelection = (checkboxValue:any) => {
+const toggleSelection = (checkboxValue: any) => {
+  console.log(checkboxValue)
   selected.value[checkboxValue] = !selected.value[checkboxValue];
 };
- 
+// code by adil
+const currentIndex = ref('0');
+const tempIndex = ref(0)
+const processNextItem = () => {
+  if (tempIndex.value < statusStore.questionnaire.size -1) {
+    tempIndex.value++;
+    currentIndex.value = tempIndex.value.toString()
+  }else{
+    tempIndex.value++;
+  }
+  console.log(tempIndex.value)
+};
+const processBackItem = () => {
+
+  if (tempIndex.value <= statusStore.questionnaire.size ) {
+    tempIndex.value--;
+    currentIndex.value = tempIndex.value.toString()
+  }
+};
+
+onMounted(async () => {
+  await Promise.all([
+    // statusStore.getDimensions(),
+    statusStore.getQuestionNaire(),
+    // statusStore.getSchedulers(),
+  ]);
+  // console.log(statusStore.questionnaire)
+});
 </script>
 
 <style scoped>
@@ -148,7 +238,7 @@ const toggleSelection = (checkboxValue:any) => {
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
-  line-height: 28px; 
+  line-height: 28px;
 }
 .container {
   padding: 15px;
@@ -170,7 +260,7 @@ const toggleSelection = (checkboxValue:any) => {
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;  
+  line-height: 24px;
   letter-spacing: 0.15px;
 }
 
@@ -183,14 +273,14 @@ const toggleSelection = (checkboxValue:any) => {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;  
+  line-height: 20px;
   letter-spacing: 0.25px;
   text-align: center;
   margin-bottom: 10px;
 }
 
 ion-list {
-  margin: 0 16px;  
+  margin: 0 16px;
 }
 
 .radio-item {
@@ -211,8 +301,8 @@ ion-list {
 }
 
 .radio-item-selected {
-  --background: #ebf4e7; 
-  --border-color: #a5ce3e; 
+  --background: #ebf4e7;
+  --border-color: #a5ce3e;
   color: #a5ce3e;
 }
 
@@ -228,10 +318,10 @@ ion-list {
   align-items: center;
   gap: 10px;
   padding: 15px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #f2f2f2;
   border-radius: 5px;
-  background-color: #FCFCFC;  
-  color: #4D4D4D;
+  background-color: #fcfcfc;
+  color: #4d4d4d;
   width: 45%;
   height: 70px;
 }
@@ -241,12 +331,11 @@ ion-checkbox::part(container) {
   /* border: 2px solid var(--M3-sys-light-on-surface-variant, #a5ce3e); */
   width: 22px;
   height: 22px;
-    
 }
 .checkbox-container-checked {
   border-radius: 5px;
-border: 1px solid var(--main-green, #A5CE3E);
-background: #F2F8E3;
+  border: 1px solid var(--main-green, #a5ce3e);
+  background: #f2f8e3;
 }
 .topMargin {
   margin-top: 40px;
@@ -255,48 +344,45 @@ background: #F2F8E3;
 .button-container {
   display: flex;
   justify-content: space-between;
-  position: fixed; 
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 10px;
-  background: #FFF; 
-  
+  background: #fff;
 }
-
 
 ion-button {
-  flex: 1; 
+  flex: 1;
   margin: 0 5px;
 }
-.previousButton{
+.previousButton {
   border-radius: 5px;
-border: 1px solid var(--main-green, #F2F2F2);
-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-color: var(--main-green, #A5CE3E);
-text-align: center; 
-font-size: 15px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-letter-spacing: 0.75px;
-text-transform: uppercase;
---background: #FFF;
---background-activated: #ebe5e5;
-
+  border: 1px solid var(--main-green, #f2f2f2);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--main-green, #a5ce3e);
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  --background: #fff;
+  --background-activated: #ebe5e5;
 }
-.nextButton{
-border-radius: 5px;
-border: 1px solid var(--main-green, #A5CE3E);
-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-color: #FFF;
-text-align: center;
-font-size: 15px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-letter-spacing: 0.75px;
-text-transform: uppercase;
-background-color: #A5CE3E;
+.nextButton {
+  border-radius: 5px;
+  border: 1px solid var(--main-green, #a5ce3e);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  background-color: #a5ce3e;
 }
 </style>

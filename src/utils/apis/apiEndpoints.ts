@@ -22,7 +22,7 @@ export enum ApiEndpoints {
   GET_COURSES_SCORES = "v1/academy/team/courses/scores/",
   // Status endpoints
   // Object list for map
-  GET_QUESTION_NAIRE = "v1/status/team/questionnaire/active/",
+  GET_QUESTION_NAIRE = "v1/status/team/questionnaire/",
   GET_DIMENSIONS = "v1/status/team/dimensions/",
   GET_SCHEDULERS = "v1/status/team/scheduler/",
 
