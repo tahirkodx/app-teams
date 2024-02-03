@@ -8,6 +8,16 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Landing.vue"),
   },
   {
+    name: "intro",
+    path: "/intro",
+    component: () => import("@/views/Auth/Intro.vue"),
+  },
+  {
+    name: "welcomeScreen",
+    path: "/welcomeScreen",
+    component: () => import("@/views/Auth/WelcomeScreen.vue"),
+  },
+  {
     name: "login",
     path: "/login",
     component: () => import("@/views/Auth/Login.vue"),
@@ -22,9 +32,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Survey/Survey.vue"),
   },
   {
-    name: 'survey',
-    path: '/surveys/personal/:teamid/survey/:surveyid',
-    component: () => import('@/views/Survey/SurveyQuestion.vue')
+    name: "survey",
+    path: "/surveys/personal/:teamid/survey/:surveyid",
+    component: () => import("@/views/Survey/SurveyQuestion.vue"),
   },
   {
     name: "surveyQuestionRange",
