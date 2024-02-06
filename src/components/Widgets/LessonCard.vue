@@ -1,13 +1,15 @@
 <template>
   <ion-list>
     <ion-card
-      v-for="(resource, index) in resources"
-      :key="index"
-    @click="() =>
+      v-for="(resource, key) in academyStore.courses"
+      :key="key"
+      @click="
+        () =>
           router.push({
-            name: 'academyLesson',
+            name: 'lesson',
+            params: { courseId: resource['0'] },
           })
-        "
+      "
       class="resource-container"
     >
       <div class="resource-header">
@@ -24,10 +26,11 @@
                   class="play-icon"
                 ></ion-icon>
 
-                <span class="headerStyle">Resource title 1: Lorem ipsum</span>
-
+                <span class="headerStyle">{{ resource["1"]?.title }}</span>
                 <div class="resource-progress">
-                  <div class="time-left">Video: 2:00 Mins Left</div>
+                  <div class="time-left">
+                    Video: 2:00 Mins Left {{ (key + 1).toString() }}
+                  </div>
                   <ion-progress-bar
                     :value="0.6"
                     class="progressBar"
@@ -40,11 +43,12 @@
       </div>
       <div class="resource-body">
         <p class="resource-description">
-          Lorem ipsum dolor sit amet consectetur. Ac pulvinar congue ac sociis
-          suspendisse dictum.
+          {{ resource["1"]?.description }}
         </p>
         <div class="resource-details">
-          Video: 4:25 Mins • 6 Months ago • 4 Lessons
+          Video: {{ resource["1"]?.total_length }} Mins •
+          {{ MonthsAgo(resource["1"]?.last_updated) }} months ago •
+          {{ resource["1"]?.lessons.length }} Lessons
         </div>
       </div>
     </ion-card>
@@ -64,103 +68,13 @@ import {
 } from "@ionic/vue";
 import router from "@/router/index";
 import { ref, computed } from "vue";
+import { useUserStore, useAcademyStore } from "@/store";
+import { MonthsAgo } from "@/utils/Helper";
+const academyStore = useAcademyStore();
 
-const resources = ref([
-  // Populate this array with your resources
-  // Example resource:
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 1: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://youtu.be/UIZAiXYceBI?feature=shared",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/handPic.svg",
-    title: "Resource title 2: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl:
-      "https://www.youtube.com/watch?v=jejBQ_K2xyI&ab_channel=cricket.com.au",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 3: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://www.youtube.com/watch?v=k-trrJYXOG8&pp=ygUJaW9uaWMgbmV3",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/person.svg",
-    title: "Resource title 4: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://youtu.be/UIZAiXYceBI?feature=shared",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/handPic.svg",
-    title: "Resource title 5: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://youtu.be/UIZAiXYceBI?feature=shared",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/handPic.svg",
-    title: "Resource title 6: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://youtu.be/UIZAiXYceBI?feature=shared",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/person.svg",
-    title: "Resource title 7: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://youtu.be/UIZAiXYceBI?feature=shared",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 8: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://youtu.be/UIZAiXYceBI?feature=shared",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  {
-    img: "/src/pictures/dogYellow.svg",
-    title: "Resource title 9: Lorem ipsum ",
-    snippet:
-      "Resource snippet: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    duration: "Length 4:25 min",
-    videoUrl: "https://youtu.be/UIZAiXYceBI?feature=shared",
-    updated: "6",
-    icon: "/src/pictures/videoPlayIcon.svg",
-  },
-  // ... add more resources as needed
-]);
+// Example usage
+// const date = "2023-08-02"; // Replace with your date
+// console.log(monthsAgo(date) + " months ago");
 </script>
 
 <style scoped>

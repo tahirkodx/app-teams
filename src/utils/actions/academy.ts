@@ -23,6 +23,21 @@ const AcademyAPI: any = {
       return Catched(error);
     }
   },
+  getSingleCourse: async (payload: any) => {
+    try {
+      const options: any = {
+        params: payload,
+      };
+      const response = await eveTechApi.get(
+        `${ApiEndpoints.GET_COURSES}`,
+        options
+      );
+      return response.data;
+    //   return response.data;
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
   getCoursesStatus: async (payload: any) => {
     try {
       const options: any = {

@@ -12,7 +12,7 @@
         <div class="lesson-title">All Lessons</div>
         <ion-button class="all-button">
           All
-          <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+          <ion-icon slot="end" :icon="chevronDownOutline"></ion-icon>
         </ion-button>
       </div>
 
@@ -43,21 +43,14 @@ import {
   IonFab,
   IonFabButton,
 } from "@ionic/vue";
-
+import { informationCircleOutline ,chevronDownOutline} from "ionicons/icons";
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import myMyModal from "@/components/VideoPlayerModal/VideoPlayerModal.vue";
 import { useUserStore, useAcademyStore } from "@/store";
-import SearchBar from "@/components/Widgets/SearchBar.vue";
+import SearchBar from "@/components/Academy/SearchBar.vue";
 import LessonsCard from "@/components/Widgets/LessonCard.vue";
 
-// import { useTeamStore } from "@/stores/teams";
-//   import { useAcademyStore } from '@/stores/academy'
-//   import { fetchCurrent, teamID } from '@/stores/current'
-//   import { ICourse } from "@/stores/academy";
-
-// const route = useRoute()
-//  const teamStore = useTeamStore()
 const academyStore = useAcademyStore();
 
 await Promise.all([
@@ -65,21 +58,8 @@ await Promise.all([
   academyStore.getCoursesScores(),
   academyStore.getCoursesStatus(),
 ]);
-console.log("Satre: ", academyStore.courses);
-// const focus = ref(route.params.focus as string)
-// if (focus.value == '') focus.value = 'all'
+console.log("Satre: ", academyStore.courses.key);
 
-/**
- * Get ordered list of courses. Order by score, either of the current team or of all teams
- */
-// const orderedCourses = computed(() => {
-//   let courseList = academyStore.courses.list
-//   if (focus.value == 'all') {
-//     return courseList.sort((c: ICourse) => -academyStore.getAllTeamCourseScore(c.id))
-//   } else {
-//     return courseList.sort((c: ICourse) => -academyStore.getTeamCourseScore(c.id, teamID.value))
-//   }
-// })
 </script>
 
 <style scoped>

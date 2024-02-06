@@ -3,80 +3,151 @@
     <score />
   </ion-header>
   <ion-content>
-    <ProgressBar :tempIndex="tempIndex+1" :data="statusStore?.questionnaire?.size+1" />
-    <div v-if="tempIndex <= statusStore?.questionnaire?.size -1">
-      <div class="outcome-title">{{ statusStore?.questionnaire?.get(currentIndex).name }}</div>
+    <ProgressBar
+      :tempIndex="tempIndex + 1"
+      :data="statusStore?.questionnaire?.size + 1"
+    />
+    <div v-if="tempIndex <= statusStore?.questionnaire?.size - 1">
+      <div class="outcome-title">
+        {{ statusStore?.questionnaire?.get(currentIndex).name }}
+      </div>
       <div class="title-line"></div>
       <h3 class="question">How do you feel within the team?</h3>
       <p class="instruction">Select One</p>
       <ion-list>
-        <ion-radio-group v-model="select">
+        <ion-radio-group
+          v-model="selectQuestion"
+          @ionChange="
+            setQuestionActive(
+              'description_low',
+              'description_midlow',
+              'description_medium',
+              'description_midhigh',
+              'description_high',
+              statusStore?.questionnaire?.get(currentIndex)?.question?.id
+            )
+          "
+        >
           <ion-item
             :class="{
-              'radio-item-selected': select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_low,
+              'radio-item-selected':
+              selectQuestion ===
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_low,
             }"
             lines="full"
             class="radio-item"
           >
             <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_low }}</ion-label> -->
-            <ion-radio :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_low" slot="start" label-placement="end" >
-            {{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_low }}
+            <ion-radio
+              :value="
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_low
+              "
+              slot="start"
+              label-placement="end"
+            >
+              {{
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_low
+              }}
             </ion-radio>
           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow,
+              selectQuestion ===
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_midlow,
             }"
             lines="full"
             class="radio-item"
           >
             <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow }}</ion-label> -->
             <ion-radio
-              :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow" label-placement="end"
+              :value="
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_midlow
+              "
+              label-placement="end"
               slot="start"
-            >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midlow }}</ion-radio>
+              >{{
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_midlow
+              }}</ion-radio
+            >
           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium,
+              selectQuestion ===
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_medium,
             }"
             lines="full"
             class="radio-item"
           >
             <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium }}</ion-label> -->
             <ion-radio
-              :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium"
+              :value="
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_medium
+              "
               slot="start"
               label-placement="end"
-            >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_medium }}</ion-radio>
+              >{{
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_medium
+              }}</ion-radio
+            >
           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh,
+              selectQuestion ===
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_midhigh,
             }"
             lines="full"
             class="radio-item"
           >
             <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh }}</ion-label> -->
             <ion-radio
-              :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh"
+              :value="
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_midhigh
+              "
               slot="start"
               label-placement="end"
-            >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_midhigh }}</ion-radio>
+              >{{
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_midhigh
+              }}</ion-radio
+            >
           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-                select === statusStore?.questionnaire?.get(currentIndex)?.question?.description_high,
+              selectQuestion ===
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_high,
             }"
             lines="full"
             class="radio-item"
           >
             <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_high }}</ion-label> -->
-            <ion-radio :value="statusStore?.questionnaire?.get(currentIndex)?.question?.description_high" slot="start" label-placement="end"  >{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_high }}</ion-radio>
+            <ion-radio
+              :value="
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_high
+              "
+              slot="start"
+              label-placement="end"
+              >{{
+                statusStore?.questionnaire?.get(currentIndex)?.question
+                  ?.description_high
+              }}</ion-radio
+            >
           </ion-item>
         </ion-radio-group>
       </ion-list>
@@ -86,7 +157,8 @@
         <p class="instruction">Select Only If Applicable</p>
 
         <div
-          v-for="item2 in statusStore?.questionnaire?.get(currentIndex)?.question?.options"
+          v-for="item2 in statusStore?.questionnaire?.get(currentIndex)
+            ?.question?.options"
           :key="item2.id"
           class="topMargin"
         >
@@ -95,13 +167,14 @@
             <div
               class="checkbox-container"
               :class="{
-                'checkbox-container-checked': selected[item2.favourable],
+                'checkbox-container-checked': selected[item2.id +'_'+ item2.favourable],
               }"
-              @click="toggleSelection(item2.favourable)"
+              @click="toggleSelection('favourable',item2.favourable,item2.id,statusStore?.questionnaire?.get(currentIndex)?.question?.id)"
             >
+            <!-- :ref="'favourable_' + item2.id" -->
               <ion-checkbox
-                :value="item2.favourable"
-                :checked="selected[item2.favourable]"
+                :value="item2.id +'_'+ item2.favourable"
+                :checked="selected[item2.id +'_'+ item2.favourable]"
               ></ion-checkbox>
               <ion-label>{{ item2.favourable }}</ion-label>
               <!-- <ion-checkbox label-placement="end" justify="start" aria-label="Label"
@@ -111,13 +184,13 @@
             <div
               class="checkbox-container"
               :class="{
-                'checkbox-container-checked': selected[item2.unfavourable],
+                'checkbox-container-checked': selected[item2.id +'_'+ item2.unfavourable],
               }"
-              @click="toggleSelection(item2.unfavourable)"
+              @click="toggleSelection('unfavourable' ,item2.unfavourable,item2.id,statusStore?.questionnaire?.get(currentIndex)?.question?.id)"
             >
               <ion-checkbox
-                :value="item2.unfavourable"
-                :checked="selected[item2.unfavourable]"
+                :value="item2.id +'_'+ item2.unfavourable"
+                :checked="selected[item2.id +'_'+ item2.unfavourable]"
               ></ion-checkbox>
               <ion-label>{{ item2.unfavourable }}</ion-label>
             </div>
@@ -126,23 +199,23 @@
         </div>
       </div>
     </div>
-    <SurveyRangeSelector v-if="tempIndex >= statusStore?.questionnaire?.size" />
+    <SurveyRangeSelector v-if="tempIndex >= statusStore?.questionnaire?.size"   :surveyRequestId="surveyRequestId" />
     <ion-footer>
       <div class="button-container">
-        <ion-button class="previousButton"
-        @click="processBackItem"
-        :disabled="tempIndex <= 0"
-        >Previous</ion-button>
-        <ion-button v-if="tempIndex <= statusStore?.questionnaire?.size -1"
+        <ion-button
+          class="previousButton"
+          @click="processBackItem"
+          :disabled="tempIndex <= 0"
+          >Previous</ion-button
+        >
+        <ion-button
+          v-if="tempIndex <= statusStore?.questionnaire?.size - 1"
           @click="processNextItem"
           :disabled="tempIndex >= statusStore?.questionnaire?.size"
           class="nextButton"
           >Next</ion-button
         >
-        <ion-button v-else
-          class="nextButton"
-          >Submit</ion-button
-        >
+        <ion-button v-else @click="processSubmit" class="nextButton" >Submit</ion-button>
       </div>
     </ion-footer>
   </ion-content>
@@ -169,8 +242,9 @@ import ProgressBar from "@/components/ProgressBar/ProgressBar.vue";
 import SurveyRangeSelector from "@/components/Survey/SurveyRangeSelector.vue";
 import router from "@/router/index";
 import { useRoute } from "vue-router";
-import { useStatusStore } from "@/store";
+import { useStatusStore, usePlaybookStore } from "@/store";
 const statusStore = useStatusStore();
+const playbookStore = usePlaybookStore();
 
 const route = useRoute();
 const surveyId = route.params.surveyid as string;
@@ -178,56 +252,122 @@ const teamId = route.params.teamid as string;
 console.log(surveyId);
 console.log(teamId);
 
-const select: any = ref({
-  unclear: false,
-  clear: false,
-  goal: false,
-  overlapping: false,
-  ease: false,
-});
-
-const toggleSelect = (radioValue: any) => {
-  select.value[radioValue] = !select.value[radioValue];
-};
+const selectQuestion: any = ref();
+const surveyRequestId: any = ref(null);
 const selected: any = ref({
-  unclear: false,
-  clear: false,
-  goal: false,
-  overlapping: false,
-  ease: false,
+  
 });
 
-const toggleSelection = (checkboxValue: any) => {
-  console.log(checkboxValue)
-  selected.value[checkboxValue] = !selected.value[checkboxValue];
+const toggleSelection = (type : any ,checkboxValue: any,optionId : any,questionId: any) => {
+  const finalItem = optionId+'_'+checkboxValue;
+  selected.value[finalItem] = !selected.value[finalItem];
+  const questionResponseArray =
+    statusStore.lastResponse.get("question_response");
+    const existingValue = questionResponseArray.find(
+    (item: { question: string }) => item.question === questionId
+  );
+  const optionData = existingValue.options.find(
+    (item: { option: string }) => item.option === optionId
+    );
+  if(type === 'favourable'){
+    if(optionData.favourable === true){
+      optionData.favourable = false
+    }else{
+      optionData.favourable = true
+    }
+  }else{
+    if(optionData.unfavourable === true){
+      optionData.unfavourable = false
+    }else{
+      optionData.unfavourable = true
+    }
+  }
+  statusStore.lastResponse.set("question_response", questionResponseArray);
+  console.log(statusStore.lastResponse.get("question_response"))
 };
 // code by adil
-const currentIndex = ref('0');
-const tempIndex = ref(0)
+const currentIndex = ref("0");
+const tempIndex = ref(0);
+
+const setQuestionActive = (...types: any[]) => {
+  const questionId = types.pop();
+  const selectedType = types.find(
+    (type) =>
+    selectQuestion.value ===
+      statusStore?.questionnaire?.get(currentIndex.value)?.question?.[type]
+  );
+  const questionResponseArray =
+    statusStore.lastResponse.get("question_response");
+  const existingValue = questionResponseArray.find(
+    (item: { question: string }) => item.question === questionId
+  );
+  if (existingValue) {
+    existingValue.response_low = false;
+    existingValue.response_midlow = false;
+    existingValue.response_medium = false;
+    existingValue.response_midhigh = false;
+    existingValue.response_high = false;
+    if (selectedType === "description_low") {
+      existingValue.response_low = true; // Replace with the property you want to update
+    } 
+    else if (selectedType === 'description_midlow') {
+      existingValue.response_midlow = true; // Replace with the property you want to update
+    }
+    else if (selectedType === "description_medium") {
+      existingValue.response_medium = true; // Replace with the property you want to update
+    }
+    else if (selectedType === "description_midhigh") {
+      existingValue.response_midhigh = true; // Replace with the property you want to update
+    }else{
+      existingValue.response_high = true; // Replace with the property you want to update
+
+    }
+  }
+  statusStore.lastResponse.set("question_response", questionResponseArray);
+  console.log(statusStore.lastResponse.get("question_response"))
+};
 const processNextItem = () => {
-  if (tempIndex.value < statusStore.questionnaire.size -1) {
+ 
+
+  if (tempIndex.value < statusStore.questionnaire.size - 1) {
     tempIndex.value++;
-    currentIndex.value = tempIndex.value.toString()
-  }else{
+    currentIndex.value = tempIndex.value.toString();
+  } else {
     tempIndex.value++;
   }
-  console.log(tempIndex.value)
+  console.log(tempIndex.value);
 };
 const processBackItem = () => {
-
-  if (tempIndex.value <= statusStore.questionnaire.size ) {
+  if (tempIndex.value <= statusStore.questionnaire.size) {
     tempIndex.value--;
-    currentIndex.value = tempIndex.value.toString()
+    currentIndex.value = tempIndex.value.toString();
   }
+};
+const processSubmit = () => {
+  const data = playbookStore.surveyExercises;
+  data.forEach((entry: any) => {
+  // Remove the 'score' property
+  delete entry.exId;
+});
+const obj = Object.fromEntries(data);
+const dataArray = Object.values(obj);
+const jsonString = JSON.stringify(dataArray, null, 2);
+console.log(jsonString);
+  // const res = playbookStore.createSurveyExerciseResponse(jsonString)
+  const res = statusStore.submitSurvey() 
 };
 
 onMounted(async () => {
   await Promise.all([
     // statusStore.getDimensions(),
     statusStore.getQuestionNaire(),
-    // statusStore.getSchedulers(),
+    statusStore.getLastResponse(teamId),
+    playbookStore.getPlaybook(),
+    playbookStore.getExercises(teamId),
+
+    // playbookStore.getTeamExerciseScores(),
   ]);
-  // console.log(statusStore.questionnaire)
+  surveyRequestId.value =  statusStore.lastResponse.get('request')
 });
 </script>
 

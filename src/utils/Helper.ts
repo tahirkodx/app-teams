@@ -7,6 +7,21 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 export const DateFormate = (date: string) => {
   return formatter.format(new Date(date))
 };
+export const  MonthsAgo = (dateString: any) =>{
+  const date = new Date(dateString);
+  const currentDate = new Date();
+
+  // Extract year and month
+  const year1 = date.getFullYear();
+  const month1 = date.getMonth();
+  const year2 = currentDate.getFullYear();
+  const month2 = currentDate.getMonth();
+
+  // Calculate difference
+  const months = (year2 - year1) * 12 + (month2 - month1);
+
+  return Math.abs(months); // Returns the absolute value to avoid negative numbers
+}
 export const checkIfDateIsPast = (dateString: string) => {
   const formatter = new Intl.DateTimeFormat("en-US", {
     year: 'numeric',

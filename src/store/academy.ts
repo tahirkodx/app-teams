@@ -1,4 +1,4 @@
-import { computed ,ref } from "vue";
+import { computed ,ref ,reactive} from "vue";
 import { defineStore } from "pinia";
 
 import { TCourseID, TLessonID, TTeamID, TPlayID } from "@/utils/types";
@@ -70,6 +70,8 @@ const useAcademyStore = defineStore("Academy", () =>{
     // new api data
 
     const courses = ref<any>();
+    const tempCourses = ref<any>();
+    const singleCourse = ref<any>();
     // courses status
     const status: any = ref(null);
     // courses scores
@@ -77,6 +79,13 @@ const useAcademyStore = defineStore("Academy", () =>{
 
     async function getCourses() {
         courses.value = await AcademyAPI.getCourses();
+        tempCourses.value = courses.value
+    }
+    async function getSingleCourse(courseId: any) {
+        const payload = {
+            courseId : courseId
+        } 
+        singleCourse.value = await AcademyAPI.getSingleCourse(payload);
 
     }
     async function getCoursesStatus() {
@@ -86,6 +95,22 @@ const useAcademyStore = defineStore("Academy", () =>{
     async function getCoursesScores() {
         scores.value = await AcademyAPI.getCoursesScores();
     }
+    async function searchAcademys(key : any) {
+        
+      if(key){
+        // Using Array.from to convert Map values to an array and then filter items by title
+        const searchResults = Array.from(courses.value.values())
+          .filter(item => item.title.toLowerCase().includes(key.toLowerCase()));
+      
+        // console.log(searchResults);
+        courses.value = reactive(new Map(Object.entries(searchResults)))
+      }else{
+        courses.value = tempCourses.value
+      }
+        // Now you can use searchResults for further processing or rendering in your application
+      }
+      
+      
     // -----------------------------------------------
     // Lesson
     // -----------------------------------------------
@@ -160,10 +185,13 @@ const useAcademyStore = defineStore("Academy", () =>{
     
 
     return {
+        singleCourse,
         courses,
         status,
         scores,
         getCourses,
+        searchAcademys,
+        getSingleCourse,
         getCoursesStatus,
         getCoursesScores,
     }

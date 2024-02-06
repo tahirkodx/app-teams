@@ -13,6 +13,7 @@ export enum ApiEndpoints {
   GET_PLAYBOOK = "v1/playbook/team/",
   GET_EXERCISES = "v1/playbook/team/exercise/selected/",
   GET_EXERCISES_RESPONSES = "v1/playbook/team/exercises/response/",
+  CREATE_EXERCISES_RESPONSES = "v1/playbook/team/exercise/response/",
   GET_TEAM_EXERCISE_SCORES = "v1/playbook/team/exercise/score/",
   GET_TEAM_EXERCISE_NOTES = "v1/playbook/team/exercise/note/",
 
@@ -26,13 +27,14 @@ export enum ApiEndpoints {
   GET_DIMENSIONS = "v1/status/team/dimensions/",
   GET_SCHEDULERS = "v1/status/team/scheduler/",
 
+  // status 
   // requests is of type Map<TTeamID, IRequest>
   GET_REQUESTS = "v1/status/team/request/",
 
-  // defaultResponses is of type Map<TTeamID, IResponse>
   GET_DEFAULT_RESPONSES = "v1/status/team/response/default/",
-
-  // responses is of type Map<TResponseID, IQuestionnaireResponse>
+  GET_LAST_RESPONSE = "v1/status/team/response/",
+  SURVEY_SUBMIT = "v1/status/team/response/"
+  
 }
 
 export default ApiEndpoints;

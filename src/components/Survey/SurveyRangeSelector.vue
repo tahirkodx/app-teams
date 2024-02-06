@@ -1,56 +1,59 @@
 <template>
-  <div>
-
+  <div class="div-height">
     <div class="outcome-title">How well would you rate the exercises below</div>
     <div class="title-line"></div>
     <div
-    class="mainStyle"
-    v-for="questionArray in questionArr"
-    :key="questionArray.value"
+      class="mainStyle"
+      v-for="[index, item] in playbookStore.surveyExercises"
+      :key="item.exercise"
     >
-    <h3 class="titleStyle">
-      {{ questionArray.question }}
-    </h3>
-    
-    <div class="scoreRange">
-      <span>
-        Scores:
-        <span
-        ><ion-icon class="iconStyle" :icon="informationCircleOutline"
-        /></span>
-      </span>
-      
-      <span> Range:1-10 </span>
+      <h3 class="title-style">
+        {{ playbookStore?.exercises?.get(item.exId)?.play_title }}
+      </h3>
+
+      <div class="scoreRange">
+        <span>
+          Scores:
+          <span
+            ><ion-icon class="iconStyle" :icon="informationCircleOutline"
+          /></span>
+        </span>
+
+        <span> Range:1-10 </span>
+      </div>
+
+      <ion-range
+        aria-label="Custom range"
+        :value="item.score"
+        :pin="true"
+        :min="0"
+        :max="10"
+        :step="1"
+        :ticks="true"
+        @ionChange="selectScore($event, item)"
+      ></ion-range>
+      <div class="notes">
+        <span> Notes: </span>
+      </div>
+
+      <div>
+        <ion-textarea
+          :rows="4"
+          aria-label="Custom textarea"
+          placeholder="Type something here"
+          class="custom"
+          v-model="item.note"
+          :auto-grow="true"
+          @keyup="selectNotes(item, item.note)"
+        ></ion-textarea>
+      </div>
+      <div class="title-line"></div>
     </div>
-    
-    <ion-range
-    aria-label="Custom range"
-    :value="5"
-    :pin="true"
-    :min="0"
-    :max="10"
-    :ticks="true"
-    ></ion-range>
-    <div class="notes">
-      <span> Notes: </span>
-    </div>
-    
-    <div>
-      <ion-textarea
-      rows="4"
-      aria-label="Custom textarea"
-      placeholder="Type something here"
-      class="custom"
-      :auto-grow="true"
-      ></ion-textarea>
-    </div>
-    <div class="title-line"></div>
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 
 import {
   IonContent,
@@ -64,32 +67,46 @@ import {
 } from "@ionic/vue";
 
 import { informationCircleOutline } from "ionicons/icons";
-
-const questionArr = [
-  {
-    question:
-      "Celebrate Success: Recognising Individual and Team Achievements:",
-    value: "1",
-  },
-  { question: "Establish Effective Communication Guidelines:", value: "2" },
-  { question: " Encourage Open Discussion:", value: "3" },
-  { question: "Encourage Peer-to-Peer Feedback:", value: "4" },
-  { question: "Practice Active Listening:", value: "5" },
-  { question: "Promote Equal Participation:", value: "6" },
-  { question: "Provide Effective Feedback:", value: "7" },
-  { question: "Provide Opportunities for Reflection:", value: "8" },
-];
+import { usePlaybookStore ,useUserStore } from "@/store";
+import { teamID } from "@/store/current";
+const props = defineProps(["surveyRequestId"]);
+const playbookStore = usePlaybookStore();
+const userStore = useUserStore();
+const selectScore = (event: CustomEvent, currentItem: any) => {
+  console.log(currentItem);
+  const existingValue = Array.from(playbookStore.surveyExercises.values()).find(
+    (entry: any) => entry.exercise === currentItem.exercise
+  );
+  if (existingValue) {
+    existingValue.score = event.detail.value;
+  }
+  console.log(playbookStore.surveyExercises);
+};
+const selectNotes = (currentItem: any, notes: any) => {
+  console.log(notes);
+  const existingValue = Array.from(playbookStore.surveyExercises.values()).find(
+    (entry: any) => entry.exercise === currentItem.exercise
+  );
+  if (existingValue) {
+    existingValue.note = notes;
+  }
+};
+playbookStore.defaultExerciseResponse(userStore.teamID,props.surveyRequestId);
 </script>
 
 <style scoped>
-.titleStyle {
+.div-height {
+  height: 600px;
+  overflow: auto;
+}
+.title-style {
   color: #4d4d4d;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.25px;
-  padding: 0 25px;
+  padding: 10px 25px;
 }
 .outcome-title {
   text-align: center;
@@ -100,12 +117,7 @@ const questionArr = [
   line-height: 28px;
   padding: 0 50px;
 }
-.container {
-  padding: 15px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
+
 .scoreRange {
   display: flex;
   justify-content: space-between;
@@ -168,21 +180,6 @@ ion-list {
   margin-bottom: -2px;
 }
 
-.topMargin {
-  margin-top: 40px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  background: #fff;
-}
-
 ion-button {
   flex: 1;
   margin: 0 5px;
@@ -196,35 +193,5 @@ ion-textarea.custom {
   --placeholder-opacity: 0.8;
   --padding-end: 15px;
   --padding-start: 15px;
-}
-
-.previousButton {
-  border-radius: 5px;
-  border: 1px solid var(--main-green, #f2f2f2);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: var(--main-green, #a5ce3e);
-  text-align: center;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  --background: #fff;
-  --background-activated: #ebe5e5;
-}
-.nextButton {
-  border-radius: 5px;
-  border: 1px solid var(--main-green, #a5ce3e);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: #fff;
-  text-align: center;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  background-color: #a5ce3e;
 }
 </style>
