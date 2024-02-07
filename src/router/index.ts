@@ -123,8 +123,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Academy/Academy.vue"),
       },
       {
-        name: "academyLesson",
-        path: "academysLesson",
+        name: "lesson",
+        path: "academys/lesson/:courseId",
         component: () => import("@/views/Academy/AcademyLesson.vue"),
       },
     ],

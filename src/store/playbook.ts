@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { useTeamStore, useUserStore } from "@/store";
 import {
@@ -121,6 +121,8 @@ const usePlaybookStore = defineStore("Playbook", () => {
   const playbook = ref<any>(null);
   const singleExercise = ref<any>();
   const exercises: any = ref(null);
+  const surveyExercises: any = ref(null);
+  
   const allNotes: any = ref(null);
   const singleExerciseNotes: any = ref(null);
   const notesByDate: any = ref(null);
@@ -133,14 +135,24 @@ const usePlaybookStore = defineStore("Playbook", () => {
       playbook.value = await PlaybookAPI.getPlaybook();
     }
   }
-  async function getExercises() {
+  async function getExercises(teamID: any) {
     if (exercises.value === null) {
-      exercises.value = await PlaybookAPI.getExercises();
+      let payload = null;
+      if (teamID) {
+        payload = {
+          teamID: teamID,
+        };
+      }
+      exercises.value = await PlaybookAPI.getExercises(payload);
     }
   }
   // Only for POST, not for GET Todo need to set new map to something esle
   async function getExerciseResponses() {
     exerciseResponses.value = await PlaybookAPI.getExerciseResponses();
+  }
+  async function createSurveyExerciseResponse(data :any) {
+    return await PlaybookAPI.createSurveyExerciseResponse(data)
+    
   }
   async function exerciseHelp() {
     // const exerciseHelp = new APIListObject('exerciseHelp', 'v1/playbook/team/exercises/help/')
@@ -158,11 +170,7 @@ const usePlaybookStore = defineStore("Playbook", () => {
       teamExerciseScores.value = await PlaybookAPI.getTeamExerciseScores();
     }
   }
-  // teamExerciseScores is of type Map<TTeamID, IScores>
-
-  // usage is of type TPlayUsageID[]
-  // const usage = new APIListObject('playbookusage', 'v1/playbook/team/plays/usage/')
-
+  
   const filteredExercises = computed(() => {
     return (filter: any) => {
       const teamExercises = exercises.value.get(userStore.teamID);
@@ -183,14 +191,13 @@ const usePlaybookStore = defineStore("Playbook", () => {
       }
     };
   });
-  function getFilteredTeamExercises() {}
-
   async function getSingleExercise(teamID: TTeamID, exerciseID: string) {
-    // todo need to change this prams 
-    singleExercise.value = await PlaybookAPI.getSingleExercise(
-      teamID,
-      exerciseID
-    );
+    // todo need to change this prams
+    const payload = {
+      teamId: teamID,
+      exerciseID: exerciseID,
+    };
+    singleExercise.value = await PlaybookAPI.getSingleExercise(payload);
     // if (exercises.value.has(teamID)) {
     //   const teamExercises = exercises.value.get(teamID);
     //   const arrayFromTeamExercises = Array.from(teamExercises);
@@ -234,6 +241,38 @@ const usePlaybookStore = defineStore("Playbook", () => {
       (element) => element.date === date
     );
   }
+  //   const defaultExerciseResponse = computed(() => {
+  //     return (surveyID: string) => {
+  //       let returnList = []
+  //       for (let exercise of exercises.value) {
+  //         console.log(exercise)
+  //           returnList.push({
+  //               id: exercise[0],
+  //               exercise: exercise[1].id,
+  //               team_request: surveyID,
+  //               score: 7,
+  //               note: ""
+  //           })
+  //       }
+  //       surveyExercises.value = reactive(new Map(Object.entries(returnList)));
+  //       return surveyExercises
+
+  //     }
+  // })
+  function defaultExerciseResponse(teamId : any,surveyID: any) {
+    let returnList = [];
+    for (let exercise of exercises.value) {
+      returnList.push({
+        exId : exercise[0],
+        id: teamId,
+        exercise: exercise[1].id,
+        team_request: surveyID,
+        score: 7,
+        note: "",
+      });
+    }
+    surveyExercises.value = reactive(new Map(Object.entries(returnList)));
+  }
 
   return {
     playbook,
@@ -242,6 +281,7 @@ const usePlaybookStore = defineStore("Playbook", () => {
     responsiblePerson,
     notesByDate,
     exerciseResponses,
+    surveyExercises,
     filteredExercises,
     getSingleExercise,
     teamExerciseScore,
@@ -254,6 +294,8 @@ const usePlaybookStore = defineStore("Playbook", () => {
     getTeamExerciseNotes,
     getSingleExerciseNotes,
     filteredNotesByDate,
+    defaultExerciseResponse,
+    createSurveyExerciseResponse
   };
 });
 

@@ -66,6 +66,34 @@ const StatusAPI: any = {
       return Catched(error);
     }
   },
+  getLastResponse: async (payload: any) => {
+    try {
+      const options: any = {
+        params: payload,
+        
+      };
+      const response = await eveTechApi.get(
+        `${ApiEndpoints.GET_LAST_RESPONSE}`,
+        options
+      );
+      return reactive(new Map(Object.entries(response.data)));
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
+  submitSurvey: async (payload: any) => {
+    try {
+      console.log("Here is play load " , payload)
+      // return 
+      const response = await eveTechApi.post(`${ApiEndpoints.SURVEY_SUBMIT}`, payload.data);
+      // Save token in local storage if found
+      console.log(response)
+      return response;
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
+  
   
 
   

@@ -1,6 +1,5 @@
 <template>
-  <div class="video-container">
-    <!-- You will need a direct video file link for the `src` attribute to work -->
+  <div class="video-container" v-if="props.play">
     <video
       width="100%"
       ref="videoElement"
@@ -12,7 +11,7 @@
       @loadedmetadata="onLoadedMetadata"
     >
       <!-- You can place a source tag here or set the src attribute directly -->
-      <source src="/src/videos/testvideo.mp4" type="video/mp4" />
+      <source :src="props.play" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <div class="controls">
@@ -40,9 +39,9 @@
         </div>
       </div>
       <ion-range
-        min="0"
+        :min="0"
         :max="duration"
-        step="0.1"
+        :step="0.1"
         :value="currentTime"
         @ionChange="seekVideo($event)"
       ></ion-range>
@@ -51,6 +50,14 @@
       <!-- Add here -->
     </div>
   </div>
+  <div class="no-video">
+    <div>
+      
+      <ion-icon class="no-video-icon" src="/src/pictures/no-video.svg"></ion-icon>
+    </div>
+    <div>No Video Available to play</div>
+  </div>
+  
 </template>
 
 <script setup lang="ts">
@@ -67,6 +74,8 @@ import {
 
 import { usePlaybookStore } from "@/store";
 const playbookStore = usePlaybookStore();
+const props = defineProps(["play"]);
+console.log(props.play)
 const videoElement = ref<HTMLVideoElement | null>(null);
 const duration = ref(0);
 const currentTime = ref(0);
@@ -75,6 +84,7 @@ const state = reactive({
   isMuted: false,
 });
 const onLoadedMetadata = () => {
+  console.log(videoElement.value)
   if (videoElement.value) {
     duration.value = videoElement.value.duration;
   }
@@ -197,6 +207,17 @@ span {
 
 .controls {
   padding: 0px 15px 0px 15px;
+}
+.no-video{
+  
+  /* display: flex; */
+padding: 64px 59px 63px 60px;
+text-align: center;
+/* align-items: center; */
+}
+.no-video-icon{
+  width: 50px;
+  height: 50px;
 }
 /* } */
 </style>

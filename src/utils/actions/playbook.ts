@@ -24,6 +24,7 @@ const PlaybookAPI: any = {
     }
   },
   getExercises: async (payload: any) => {
+    console.log("payload is here " , payload)
     try {
       const options: any = {
         params: payload,
@@ -37,14 +38,18 @@ const PlaybookAPI: any = {
       return Catched(error);
     }
   },
-  getSingleExercise: async (teamID: any , exerciseID:any) => {
-    console.log("Here is palload" , teamID)
-    console.log("Here is palload" , exerciseID)
-    const url = ApiEndpoints.GET_EXERCISES + teamID + "/" + exerciseID 
+  getSingleExercise: async (payload: any) => {
+    console.log("Here is palload" , payload)
+    const options: any = {
+      params: payload,
+    };
+    // console.log("Here is palload" , exerciseID)
+    // const url = ApiEndpoints.GET_EXERCISES + teamID + "/" + exerciseID 
     try {
       
       const response = await eveTechApi.get(
-        url
+        `${ApiEndpoints.GET_EXERCISES}`,
+        options
         
       );
       return response.data;
@@ -93,7 +98,18 @@ const PlaybookAPI: any = {
     } catch (error: any) {
       return Catched(error);
     }
-  }
+  },
+  createSurveyExerciseResponse: async (payload: any) => {
+    try {
+      // return 
+      const response = await eveTechApi.post(`${ApiEndpoints.CREATE_EXERCISES_RESPONSES}`, payload);
+      // Save token in local storage if found
+      console.log(response)
+      return response;
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
 
   
 };

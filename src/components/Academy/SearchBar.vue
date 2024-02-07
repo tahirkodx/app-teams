@@ -1,7 +1,9 @@
  <template>
    <ion-searchbar
+        v-model="searchValue"
         placeholder="Search here"
         class="custom-searchbar"
+        @keyup="searchAcademys"
       >
       </ion-searchbar>
   
@@ -9,9 +11,15 @@
 
 <script setup lang="ts">
   import { IonSearchbar,IonIcon } from '@ionic/vue';
-  import { defineComponent } from 'vue';
+  import { defineComponent,ref } from 'vue';
+  import { useAcademyStore } from '@/store';
+  const academyStore = useAcademyStore()
+  const searchValue : any =  ref(null)
+ const searchAcademys =() =>{
+  console.log('Search Value:', searchValue.value);
+  academyStore.searchAcademys(searchValue.value)
 
- 
+ }
 </script>
 
 <style scoped>

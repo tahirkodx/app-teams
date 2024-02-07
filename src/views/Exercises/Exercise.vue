@@ -71,7 +71,7 @@
             <Notes v-if="scoreValue" />
           </div>
           <div v-if="activeTab === 'description'">
-            <VideoPlayer />
+            <VideoPlayer play="/src/videos/testvideo.mp4" />
             <SummaryDescription :id="exerciseID" />
           </div>
           <div v-if="activeTab === 'details'">

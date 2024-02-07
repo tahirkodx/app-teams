@@ -145,7 +145,8 @@ const useStatusStore = defineStore('status', () => {
   
   // defaultResponses is of type Map<TTeamID, IResponse>
   const defaultResponses = ref();
-  
+  // const lastResponse = ref();
+  const lastResponse: any = ref(null);
   // responses is of type Map<TResponseID, IQuestionnaireResponse>
   // Only uses POST, never GET
   const responses = ref();
@@ -169,8 +170,29 @@ async function getSchedulers() {
 }
 async function getRequests() {
   // todo need to change that id 
-  requests.value = await StatusAPI.getRequests('60d84fb36d8e42838966350ddc3ac956');
+  const payload = {
+    teamID : '60d84fb36d8e42838966350ddc3ac956'
+  }
+  requests.value = await StatusAPI.getRequests(payload);
 }
+async function getLastResponse(teamId :any) {
+  // todo need to change that id 
+  const payload = {
+    teamID : teamId
+  }
+  lastResponse.value = await StatusAPI.getLastResponse(payload);
+  console.log(lastResponse.value)
+  
+}
+async function submitSurvey() {
+  const obj = Object.fromEntries(lastResponse.value);
+  console.log(obj)
+  const payload = {
+    data : obj
+  }
+  const res =  await StatusAPI.submitSurvey(payload)
+}
+
   
  
   const schedulerPeriodDict: ISchedulerPeriodDict = {
@@ -189,6 +211,7 @@ interface IData {
     questionnaire,
     dimensions,
     schedulers,
+    lastResponse,
     requests,
     defaultResponses,
     responses,
@@ -197,7 +220,9 @@ interface IData {
     getDimensions,
     getQuestionNaire,
     getSchedulers,
-    getRequests
+    getRequests,
+    getLastResponse,
+    submitSurvey
     
   }
 })

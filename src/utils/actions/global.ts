@@ -51,7 +51,8 @@ export const eveTechApi = {
       let updateUrl = url;
       if (params) {
         if (!useQueryString) {
-          // payload = convertValuesToUrl(params);
+          console.log(params)
+          payload = convertValuesToUrl(params);
           updateUrl = `${url}${payload}/`;
         } else {
           payload = qs.stringify(params, { arrayFormat: "bracket" });
