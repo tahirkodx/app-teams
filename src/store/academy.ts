@@ -109,6 +109,27 @@ const useAcademyStore = defineStore("Academy", () =>{
       }
         // Now you can use searchResults for further processing or rendering in your application
       }
+    async function filteredAcademys(key : any) {
+        
+      if(key !='all'){
+        if(key === 15){
+
+        }else if(key === 30){
+            
+        }else{
+            
+        }
+        // Using Array.from to convert Map values to an array and then filter items by title
+        const searchResults = Array.from(courses.value.values())
+          .filter(item => key <= item.total_length );
+      
+        // console.log(searchResults);
+        courses.value = reactive(new Map(Object.entries(searchResults)))
+      }else{
+        courses.value = tempCourses.value
+      }
+        // Now you can use searchResults for further processing or rendering in your application
+      }
       
       
     // -----------------------------------------------
@@ -194,6 +215,7 @@ const useAcademyStore = defineStore("Academy", () =>{
         getSingleCourse,
         getCoursesStatus,
         getCoursesScores,
+        filteredAcademys
     }
 })
 

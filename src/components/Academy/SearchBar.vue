@@ -4,6 +4,7 @@
         placeholder="Search here"
         class="custom-searchbar"
         @keyup="searchAcademys"
+        @ionClear="clearSearch"
       >
       </ion-searchbar>
   
@@ -16,10 +17,14 @@
   const academyStore = useAcademyStore()
   const searchValue : any =  ref(null)
  const searchAcademys =() =>{
-  console.log('Search Value:', searchValue.value);
   academyStore.searchAcademys(searchValue.value)
+  
+}
+const clearSearch =() => {
+  searchValue.value = '';
+  academyStore.searchAcademys(searchValue.value)
+}
 
- }
 </script>
 
 <style scoped>
