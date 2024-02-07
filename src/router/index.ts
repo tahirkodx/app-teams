@@ -46,6 +46,21 @@ const routes: Array<RouteRecordRaw> = [
     path: "/surveyFinished",
     component: () => import("@/views/Survey/surveyFinished.vue"),
   },
+  {
+    name: "createteam",
+    path: "/teams/create",
+    component: () => import("@/views/Teams/CreateTeam.vue"),
+  },
+  {
+    name: "addteam",
+    path: "/teams/addteam",
+    component: () => import("@/views/Teams/AddTeam.vue"),
+  },
+  {
+    name: "teamMember",
+    path: "/teams/teamMember",
+    component: () => import("@/views/Teams/TeamMember.vue"),
+  },
 
   {
     path: "/tabs/",
@@ -66,6 +81,7 @@ const routes: Array<RouteRecordRaw> = [
         path: "teams/id/:id",
         component: () => import("@/views/Teams/EditTeam.vue"),
       },
+
       {
         name: "teamsupport",
         path: "teams/support",

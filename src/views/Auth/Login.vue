@@ -18,35 +18,37 @@
       </div>
 
       <ion-list class="login-form">
-         
-         
-          <ion-input
-            v-model="email"
-            clear-input
-            ref="emailInput"
-            type="email"
-            fill="solid"
-            label="Email"
-            label-placement="floating"
-            error-text="Invalid email"
-            @ionInput="validate"
-            @ionBlur="markTouched"
-          ></ion-input>
-         
-           
-          <ion-input
-           v-model="password"
-            clear-input
-            ref="passwordInput"
-            type="password"
-            fill="solid"
-            label="Password"
-            label-placement="floating"
-            error-text="Invalid password"
-            @ionInput="validate"
-            @ionBlur="markTouched"
-          ></ion-input>
-        
+        <ion-input
+          v-model="email"
+          ref="emailInput"
+          type="email"
+          fill="solid"
+          label="Email"
+          label-placement="floating"
+          error-text="This Email id is not found"
+          @ionInput="validate"
+          @ionBlur="markTouched"
+          class="input-background"
+        ></ion-input>
+
+        <ion-input
+          v-model="password"
+          ref="passwordInput"
+          :type="showPassword ? 'text' : 'password'"
+          fill="solid"
+          label="Password"
+          label-placement="floating"
+          error-text="Your password is incorrect"
+          @ionInput="validate"
+          @ionBlur="markTouched"
+          class="input-background"
+        >
+          <ion-icon
+            :icon="showPassword ? eyeOff : eye"
+            slot="end"
+            @click="toggleShowPassword"
+          ></ion-icon>
+        </ion-input>
 
         <ion-text class="forgot-password">
           <a class="linkStyle" href="#">Forgot Password</a>
@@ -85,6 +87,7 @@ import {
   IonItem,
   IonList,
 } from "@ionic/vue";
+import { eye, eyeOff } from "ionicons/icons";
 import router from "@/router/index";
 import { presentToast } from "@/utils/toast";
 // const userStore  = useUserStore()
@@ -94,6 +97,7 @@ const emailInput = ref(null);
 
 const email = ref("");
 const password = ref("");
+const showPassword = ref(false);
 
 // Email validation method
 const validateEmail = (email: string) => {
@@ -142,6 +146,10 @@ async function auth_login() {
     }
   }
 }
+
+const toggleShowPassword = () => {
+  showPassword.value = !showPassword.value;
+};
 </script>
 <style scoped>
 .login-header {
@@ -149,7 +157,9 @@ async function auth_login() {
   margin-top: 80px;
   margin-bottom: 80px;
 }
-
+/* .input-background {
+  background-color: #f2f2f2; 
+} */
 .ion-padding {
   display: flex;
   flex-direction: column;

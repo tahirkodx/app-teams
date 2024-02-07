@@ -48,9 +48,7 @@
         path="/src/pictures/today_24px.svg"
         @click="openModal"
       ></fixedicon>
-
       <datepickermodel :is-visible="isModalVisible"  @update:isVisible="isModalVisible = $event"></datepickermodel>
-    
     </ion-content>
   </ion-page>
 </template>
