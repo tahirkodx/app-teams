@@ -24,12 +24,7 @@
         </ion-grid>
 
         <div>
-          <ion-icon
-            @click="presentModal()"
-            class="iconStyle"
-            icon="/src/pictures/quill_info.svg"
-          ></ion-icon>
-          <modalInfo :popId="'help-trigger'" :popContent="'Tahir Amjad'"/>
+          <modalInfo/>
           <ion-note>Help</ion-note>
         </div>
       </ion-list>
@@ -69,12 +64,7 @@ import Header from "@/components/Header/Header.vue";
 import { ref } from "vue";
 import router from "@/router/index";
 
-// const infoModal = ref(null);
-
-
-// function presentModal() {
-//   infoModal.value.openModal();
-// }
+ 
 
 </script>
 
@@ -88,8 +78,5 @@ import router from "@/router/index";
   line-height: 28px; /* 127.273% */
 }
 
-.iconStyle {
-  padding-right: 5px;
-  margin-bottom: -3px;
-}
+ 
 </style>
