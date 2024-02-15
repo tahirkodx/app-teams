@@ -36,7 +36,31 @@ const routes: Array<RouteRecordRaw> = [
     path: "/surveyFinished",
     component: () => import("@/views/Survey/surveyFinished.vue"),
   },
-
+  {
+    name: "surveySchedule",
+    path: "/surveySchedule",
+    component: () => import("@/views/SurveySchedule/SurveySchedule.vue"),
+  },
+  {
+    name: "scheduleWeekly",
+    path: "/scheduleWeekly",
+    component: () => import("@/views/SurveySchedule/ScheduleWeekly.vue"),
+  },
+  {
+    name: "inviteLogin",
+    path: "/inviteLogin",
+    component: () => import("@/views/Invite/InviteLogin.vue"),
+  },
+  {
+    name: "inviteFound",
+    path: "/inviteFound",
+    component: () => import("@/views/Invite/InviteFound.vue"),
+  },
+  {
+    name: "inviteNotified",
+    path: "/inviteNotified",
+    component: () => import("@/views/Invite/InviteNotified.vue"),
+  },
   {
     path: "/tabs/",
     component: TabsPage,
@@ -91,6 +115,7 @@ const routes: Array<RouteRecordRaw> = [
       //   path: "surveyFinished",
       //   component: () => import("@/views/Survey/surveyFinished.vue"),
       // },
+      
       {
         name: "academy",
         path: "academys",
