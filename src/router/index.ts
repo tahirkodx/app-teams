@@ -62,6 +62,16 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Invite/InviteNotified.vue"),
   },
   {
+    name: "list",
+    path: "/list",
+    component: () => import("@/views/Buddy/List.vue"),
+  },
+  {
+    name: "create",
+    path: "/create",
+    component: () => import("@/views/Buddy/Create.vue"),
+  },
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [
@@ -121,6 +131,7 @@ const routes: Array<RouteRecordRaw> = [
         path: "academys",
         component: () => import("@/views/Academy/Academy.vue"),
       },
+     
       {
         name: "academyLesson",
         path: "academysLesson",
