@@ -18,7 +18,7 @@
             <ion-img
               src="/src/pictures/amico.svg"
               alt="Finished Success"
-              class="ion-padding"
+              class="ion-padding-vertical"
             ></ion-img>
           </div>
         </ion-col>
@@ -30,7 +30,6 @@
 import { ref } from "vue";
 import {
   IonButton,
-  IonLabel,
   IonText,
   IonRow,
   IonCol,
@@ -38,7 +37,11 @@ import {
   IonContent,
   IonImg
 } from "@ionic/vue";
-import router from "@/router/index";
+// import { useRouter } from 'vue-router';
+// const router = useRouter();
+// const navigateToInviteNotified = () => {
+//   router.push('/inviteNotified');
+// }
 </script>
 <style scoped>
 .customtext {
@@ -54,7 +57,6 @@ import router from "@/router/index";
 .ion-margin-top {
   margin-top: 53px;
 }
-
 .label-style {
   font-size: 12px;
   color: #9f9f9f;

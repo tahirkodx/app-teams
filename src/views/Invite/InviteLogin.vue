@@ -7,7 +7,7 @@
             <h4>Welcome to</h4>
             <h1>Epicus.</h1>
           </ion-text>
-          <div class="ion-text-wrap ion-text-center custom-text2">
+          <div class="ion-text-wrap ion-text-center text-sm">
             An app that enables team spirits and bring the best
           </div>
           <ion-text class="ion-text-center ion-margin">
@@ -30,7 +30,7 @@
                 placeholder="Type your email"
               ></ion-input>
             </div>
-            <h3 class="custom-lable2 ion-text-end ion-margin-bottom">
+            <h3 class="text-base ion-text-end ion-margin-bottom">
               Forget Password
             </h3>
           </div>
@@ -45,7 +45,7 @@
               <ion-text class="ion-text-center">
                 <h6>Not able to find the link/ invite code?</h6>
               </ion-text>
-              <ion-text class="ion-text-center custom-lable2">
+              <ion-text class="ion-text-center text-base">
                 <h6>Click here to resend the invite link/code</h6>
               </ion-text>
             </div>
@@ -61,7 +61,6 @@ import {
   IonButton,
   IonLabel,
   IonText,
-  IonGrid,
   IonRow,
   IonCol,
   IonPage,
@@ -84,7 +83,7 @@ import router from "@/router/index";
   line-height: 28px;
 }
 
-.custom-text2 {
+.text-sm {
   color: #9f9f9f;
   font-size: 16px;
   line-height: 24px;
@@ -117,7 +116,7 @@ ion-content {
   line-height: 16px;
 }
 
-.custom-lable2 {
+.text-base {
   color: #0d99ff;
   font-size: 12px;
   font-weight: 600;

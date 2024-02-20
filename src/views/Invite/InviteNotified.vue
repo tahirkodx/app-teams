@@ -1,4 +1,5 @@
 <template>
+  <ion-content>
   <ion-page>
     <ion-row>
       <ion-col>
@@ -26,19 +27,18 @@
       </ion-col></ion-row
     ></ion-page
   >
+  </ion-content>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
 import {
   IonButton,
-  IonLabel,
   IonText,
-  IonGrid,
   IonRow,
   IonCol,
   IonPage,
-  IonContent,
   IonImg,
+  IonContent
 } from "@ionic/vue";
 </script>
 <style scoped>
