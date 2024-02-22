@@ -72,6 +72,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Buddy/Create.vue"),
   },
   {
+    name: "personalProfile",
+    path: "/personalProfile",
+    component: () => import("@/views/PersonalTransformation/PersonalProfile.vue"),
+  },
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [
