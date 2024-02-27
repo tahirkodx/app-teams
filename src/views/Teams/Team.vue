@@ -12,7 +12,7 @@
                 <ion-card v-for="(member, index) in teamStore.teamMembers.members" :key="index" class="practice-card"
                 @click="() =>
                 router.push({
-                  name: 'editteam',
+                  name: 'teamMember',
                   
                 })
             "

@@ -1,207 +1,299 @@
 <template>
-    <ion-page>
-      <ion-header>
-        <score></score>
-      </ion-header>
-      <ion-content>
-        <div class="custom-card-container" ref="cardContainer">
-          <!-- todo backgound-color need to change for dark and light theme  -->
-          <!-- Dynamically create cards using v-for loop -->
-          <ion-card class="custom-card">
-            <ion-card-content>
-              Team Name
-            </ion-card-content>
-          </ion-card>
+  <ion-page>
+    <Header />
+    <ion-content>
+      <p class="titleStyle ion-padding">Edit Team</p>
+      <div class="ion-padding">
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <ion-label>Enter team name:</ion-label>
+              <ion-input
+                type="text"
+                v-model="teamName"
+                required
+                ref="teamInput"
+                class="custom"
+              ></ion-input>
+              <span class="error">{{ errorTeam }}</span>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+        <ion-grid >
+          <ion-row>
+            <ion-col size="9">
+              <ion-input
+                type="email"
+                ref="emailInput"
+                v-model="email"
+                class="custom"
+                @ionInput="validate"
+                placeholder="add member"
+              >
+                <!-- <ion-button fill="clear" slot="end" aria-label="Show/hide">
+                  <ion-icon
+                    slot="icon-only"
+                    :icon="chevronUp"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </ion-button> -->
+              </ion-input>
+              <span class="error">{{ customErrorMessage }}</span>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button @click="addEmailToList" expand="block"
+                >ADD</ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <!-- <AddListMember /> -->
+        <div v-if="teamName">
+          <modalInfo />
+          <ion-note>Help</ion-note>
         </div>
-          <div class="content">
-            <!-- Content based on the active tab -->
-              <ion-reorder-group>
-                <ion-card class="practice-card" v-for="index in 6" :key="index">
-                  <div class="card-content">
-                    <ion-reorder slot="start"></ion-reorder>
-  
-                    <ion-label>Survey 1</ion-label>
-                    <ion-icon :icon="chevronForward" slot="end" />
-                  </div>
-                  <p>
-                    Date : 23 Dec Score :
-                    <span> 4/5 </span>
-                  </p>
-                </ion-card>
-              </ion-reorder-group>
-           
+        <div v-if="membersList.length > 0">
+          <AddTeam
+            :members="membersList"
+            :email="emailTemp"
+            @updateMembers="handleUpdateMembers"
+            :isVisible="modalVisible"
+            @updateVisible="updateModalVisible"
+          />
         </div>
-      </ion-content>
-    </ion-page>
-  </template>
-  
-  <script setup lang="ts">
-  import { useRoute } from "vue-router";
-  import { ref } from "vue";
-  import {
-    IonPage,
-    IonHeader,
-    IonList,
-    IonItem,
-    IonContent,
-    IonDatetime,
-    IonBreadcrumbs,
-    IonBreadcrumb,
-    IonButton,
-    IonAccordionGroup,
-    IonAccordion,
-    IonLabel,
-    IonCard,
-    IonCardTitle,
-    IonCardHeader,
-    IonCardContent,
-    IonProgressBar,
-    IonReorderGroup,
-    IonReorder,
-  } from "@ionic/vue";
-  import router from "@/router/index";
-  import { pencilOutline, chevronForward } from "ionicons/icons";
-  import score from "@/components/Header/Header.vue";
-  import LineChart from "@/components/Charts/LineChart.vue";
-  import VideoPlayer from "@/components/Exercise/VideoPlayer.vue";
-  //   import PlayDetails from '@/components/PlayDetails.vue';
-  //   import { usePlaybookStore } from '@/stores/playbook';
-  //   import { useStatusStore } from '@/stores/status';
-  import { useTeamStore, usePlaybookStore, useStatusStore } from "@/store";
-  //   import { fetchCurrent, teamID } from '@/stores/current'
-  
-  const route = useRoute();
-  const teamId = route.params.id as string;
-  
-  //   const playbookStore = usePlaybookStore()
-  const statusStore = useStatusStore();
-  const teamStore = useTeamStore();
-  
-  console.log(teamId);
-  const editExercise = () => {
-    // Logic to edit exercise
-  };
-  const alterExercise = () => {
-    // Logic to alter exercise
-  };
-  const editNotes = () => {
-    // Logic to edit notes
-  };
-  const deleteExercise = () => {
-    // Logic to delete the exercise
-  };
-  </script>
-  
-  <style scoped>
-  .custom-card-container {
-    display: flex;
-    flex-direction: row;
+        <!-- list for members -->
+        <div class="member-list" >
+          <ion-list>
+            <ion-item
+            v-for="(item, index) in membersList"
+              :key="index"
+              lines="full"
+            >
+              <ion-avatar slot="start">
+                <img src="/src/pictures/listProfile.svg" />
+              </ion-avatar>
+              <ion-label>
+                <h3>{{ item?.first_name + " " + item.last_name }}</h3>
+              </ion-label>
+              <ion-item>
+                <ion-select
+                  value="Member"
+                  v-model="item.role"
+                  class="select-member"
+                >
+                  <ion-select-option :value="1">Member</ion-select-option>
+                  <ion-select-option :value="2">Leader</ion-select-option>
+                  <ion-select-option :value="3">Coach</ion-select-option>
+                  <ion-select-option :value="0">Visitor</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-icon slot="end" v-if="index !=0" @click="removeMember(index)" :icon="closeOutline"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </ion-content>
+
+    <ion-footer class="ion-no-border">
+      <ion-toolbar>
+        <ion-button
+          
+          @click="updateTeam"
+          class="ion-padding"
+          expand="block"
+          >UPDATE TEAM</ion-button
+        >
+      </ion-toolbar>
+    </ion-footer>
+  </ion-page>
+</template>
+
+<script setup lang="ts">
+import {
+  IonTitle,
+  IonPage,
+  IonContent,
+  IonAvatar,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonSelect,
+  IonButton,
+  IonFooter,
+  IonToolbar,
+  IonIcon,
+  IonSelectOption,
+  IonNote,
+  IonModal,
+} from "@ionic/vue";
+import { chevronForward, chevronUp, closeOutline } from "ionicons/icons";
+import modalInfo from "@/components/Widgets/InfoModal.vue";
+import AddTeam from "./AddTeam.vue";
+import Header from "@/components/Header/Header.vue";
+import { ref, onMounted,watchEffect } from "vue";
+import router from "@/router/index";
+import { emailValidate } from "@/utils/Helper";
+import { useTeamStore, useUserStore } from "@/store";
+import AddListMember from "./AddListMember.vue";
+const userStore = useUserStore();
+const teamStore = useTeamStore();
+const modalVisible = ref(false);
+const emailInput = ref(null);
+const teamInput = ref(null);
+const errorTeam = ref();
+const customErrorMessage = ref();
+const teamName = ref("");
+const email = ref("");
+const emailTemp = ref("");
+const membersList = ref<any>([]);
+  watchEffect(() => {
+  if (teamStore?.teamMembers?.members) {
+    membersList.value = teamStore.teamMembers.members;
+    teamName.value = teamStore.teamMembers.name
+    console.log(teamStore.teamMembers);
+  }
+});
+const handleUpdateMembers = (updatedMembers: any) => {
+  membersList.value = updatedMembers;
+};
+
+const addEmailToList = () => {
+  const isEmailInList = membersList.value.some(
+    (member: { email: string; }) => member.email === email.value
+  );
+  if (membersList.value.length === 0) {
+    const data = {
+      first_name: userStore?.settings?.get("first_name"),
+      last_name: userStore?.settings?.get("last_name"),
+      email: userStore?.settings?.get("email"),
+      role: 2,
+      photo: null
+    };
+    membersList.value.push(data);
+  }
+  if (isEmailInList) {
+    customErrorMessage.value = "Email is already in list";
+    return false
+  }
+  if (email.value && emailValidate(email.value) && !isEmailInList) {
+    modalVisible.value = true;
+    emailTemp.value = email.value;
+    email.value = "";
+  } else {
+    customErrorMessage.value = "Enter Email to add";
+    return
+  }
+};
+const updateModalVisible = (newValue: boolean) => {
+  modalVisible.value = newValue;
+};
+const updateTeam = async () => {
+  if (teamName.value) {
+  } else {
+    errorTeam.value = "Required team name";
+    return;
+  }
+  console.log("here is " , membersList.value);
+  const data = {
+    id: userStore.teamID,
+    members : membersList.value,
+    name : teamName.value
   }
   
-  .custom-card {
-    width: 100%;
-    margin: 0 0;
-    border-radius: 0px;
-    display: inline-flex;
-    padding: 8px 20px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #f2f2f2;
-    /* --background: #F7F7F7; */
+  const res = await teamStore.updateTeam(data, userStore.teamID);
+  router.push({ name: "teamMember" });
+  
+};
+const validate = (ev: any) => {
+  const value = ev.target.value;
+  const inputElement = emailInput?.value?.$el;
+
+  inputElement.classList.remove("ion-valid");
+  inputElement.classList.remove("ion-invalid");
+
+  if (value === "") {
+    customErrorMessage.value = "Email is required";
+    return;
   }
-  
-  ion-card-header {
-    position: relative;
-    padding-bottom: 0;
+
+  if (emailValidate(value)) {
+    inputElement.classList.add("ion-valid");
+    customErrorMessage.value = ""; // No error message when valid
+  } else {
+    inputElement.classList.add("ion-invalid");
+    customErrorMessage.value = "Invalid Email Format"; // Custom error message when invalid
   }
-  
-  ion-card-title {
-    font-size: 1.5em;
-  }
-  
-  ion-card-content {
-    padding-top: 16px;
-    font-size: 1rem;
-  }
-  
-  /* tabs css */
- 
-  
-  .content {
-    padding: 20px 0px 0px 0px;
-    min-height: 200px; /* Adjust as needed */
-    overflow-y: scroll;
-      height: 520px;
-  }
-  
-  .practice-card {
-      --ion-item-background: transparent;
-      --ion-item-padding: 0;
-      --background: transparent;
-      box-shadow: none;
-      border-bottom: 1px solid #F2F2F2;
-      border-radius: 0px;
-      margin: 10px 0px 0px 0px;
-      /* Remove shadow if present */
-  }
-  
-  .card-content {
-      display: flex;
-      align-items: center;
-      padding: 0px 15px 0px 15px;
-    }
-    p{
-    padding: 0px 15px 0px 15px;
-    margin: 0px 0px 10px 0px;
-  
+};
+const removeMember = (index: number) => {
+  console.log(index)
+  console.log(membersList.value)
+  membersList.value.splice(index, 1);
+};
+</script>
+
+<style scoped>
+.titleStyle {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: var(--black, #000);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px; /* 127.273% */
+}
+
+ion-input.custom {
+  border-radius: 5px;
+  --background: #f2f2f2;
+  --padding-bottom: 10px;
+  --padding-end: 10px;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  margin-top: 10px;
+}
+ion-input {
+  border-radius: 5px;
+  --background: #f2f2f2;
+  --padding-start: 10px;
+}
+.error {
+  color: #eb445a;
   font-size: 12px;
-  line-height: 16px;
-  
-  }
-    span{
-    color: var(--secondary, #FF8512);
-  
-  }
-  
-  ion-item {
-      --padding-start: 0;
-      --padding-end: 0;
-      --inner-padding-end: 0;
-      --inner-padding-start: 0;
-  }
-  
-  ion-label {
-      flex-grow: 1;
-      font-size: 1rem;
-      padding: 16px 0;
-  
-  }
-  
-  .progress-container {
-      width: 100%;
-  
-  }
-  
-  ion-progress-bar {
-      height: 2px;
-      /* Height of progress bar, adjust as needed */
-      --background: #7F7F7F;
-  }
-  
-  ion-reorder {
-      color: var(--ion-color-medium);
-  }
-  
-  ion-icon {
-      font-size: 1.5em;
-      width: 24px;
-      height: 24px;
-      margin-top: 20px;;
-  }
-  .addStyle{
-      margin-bottom: 40px;
-      margin: 10px ;
-  }
-  </style>
-  
+}
+.select-member {
+  width: 90px;
+  max-width: 90px;
+  /* Adjust the width as needed */
+  min-height: 32px;
+  background: var(--my-masg-background);
+  --placeholder-opacity: 1;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  border-radius: 8px;
+  --border: none;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  word-wrap: break-word;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background: #fff;
+}
+.member-list{
+ margin-top: 30px;
+}
+
+</style>

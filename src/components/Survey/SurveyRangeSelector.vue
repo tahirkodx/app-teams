@@ -67,11 +67,12 @@ import {
 } from "@ionic/vue";
 
 import { informationCircleOutline } from "ionicons/icons";
-import { usePlaybookStore ,useUserStore } from "@/store";
+import { usePlaybookStore ,useUserStore ,useStatusStore} from "@/store";
 import { teamID } from "@/store/current";
 const props = defineProps(["surveyRequestId"]);
 const playbookStore = usePlaybookStore();
 const userStore = useUserStore();
+const statusStore = useStatusStore();
 const selectScore = (event: CustomEvent, currentItem: any) => {
   console.log(currentItem);
   const existingValue = Array.from(playbookStore.surveyExercises.values()).find(
@@ -91,7 +92,7 @@ const selectNotes = (currentItem: any, notes: any) => {
     existingValue.note = notes;
   }
 };
-playbookStore.defaultExerciseResponse(userStore.teamID,props.surveyRequestId);
+playbookStore.defaultExerciseResponse(userStore.teamID,statusStore.lastResponse.get("request"));
 </script>
 
 <style scoped>

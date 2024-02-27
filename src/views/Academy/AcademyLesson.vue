@@ -66,7 +66,7 @@
           </ion-col>
         </ion-row>
       </div>
-      <VideoPlayer />
+      <VideoPlayer play="/src/videos/testvideo.mp4" />
       <div class="tab-container">
         <div class="tabs">
           <div
@@ -104,7 +104,7 @@
             <Description :summary="academyStore?.singleCourse?.summary" :description="academyStore?.singleCourse?.description" :plays="academyStore?.singleCourse?.plays" />
           </div>
           <div v-if="activeTab === 'details'">
-            <Details :summary="academyStore?.singleCourse?.lessons[tempIndex].summary" :time="academyStore?.singleCourse?.lessons[tempIndex].video_length" :lessons="academyStore?.singleCourse?.lessons" />
+            <Details :id="academyStore?.singleCourse?.lessons[tempIndex]?.id" :summary="academyStore?.singleCourse?.lessons[tempIndex].summary" :time="academyStore?.singleCourse?.lessons[tempIndex].video_length" :content="academyStore?.singleCourse?.lessons[tempIndex].content" />
           </div>
           <div v-if="activeTab === 'transcript'">
             <Transcript :summary="academyStore?.singleCourse?.lessons[tempIndex].summary" :transcript="academyStore.singleCourse?.lessons[tempIndex].transcript" />
@@ -195,6 +195,7 @@ onMounted(async () => {
     academyStore.getCourses(),
     academyStore.getCoursesScores(),
     academyStore.getCoursesStatus(),
+    academyStore.getLessonsStatus(),
     academyStore.getSingleCourse(courseId)
     
   ]);

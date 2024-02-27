@@ -17,13 +17,14 @@
 <script lang="ts" setup>
  import { IonButton, IonContent, IonPopover,IonIcon, } from '@ionic/vue';
  import { defineProps} from "vue";
-// agdygauysgyu
+
  const props = defineProps({
   id: String,
   infoText: String,
 
 });
  
+
 </script>
 
 <style scoped>

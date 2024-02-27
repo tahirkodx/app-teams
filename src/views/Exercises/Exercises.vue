@@ -32,7 +32,6 @@
         :disabled="false"
         v-if="Object.entries(playbookStore?.filteredExercises(selectedFilter) || {}).length > 0"
       >
-        
           <ion-card
           v-for="[key, exercise] in Object.entries(playbookStore?.filteredExercises(selectedFilter))"
             :key="exercise.id"
@@ -62,7 +61,9 @@
                     <img src="/src/pictures/Ellipse 72.svg" />
                   </ion-avatar>
                   <h3>
-                    Owner: Guy Hawkins
+                    Owner:  {{
+                      playbookStore.responsiblePersonName(userStore.teamID,exercise.responsible)
+            }}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="8"
@@ -190,6 +191,7 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonAvatar
 } from "@ionic/vue";
 import { chevronForwardOutline, add } from "ionicons/icons";
 import type { ReorderEventDetail } from "@ionic/core";
@@ -216,7 +218,7 @@ onMounted(async () => {
     playbookStore.getTeamExerciseScores(),
   ]);
   loading.value = true;
-  
+  console.log(teamStore.teams.get(userStore.teamID)?.members)
 });
 const practiceItems = ref([
   {

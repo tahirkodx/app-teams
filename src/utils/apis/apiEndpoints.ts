@@ -1,6 +1,9 @@
 export enum ApiEndpoints {
   // Auth Endpoints
   LOGIN = "accounts/login/",
+  LOGOUT = 'auth/logout/',
+  REGISTRATION = 'accounts/registration/',
+  
   GET_USER_SETTINGS = "v1/user/",
   GET_USER_ORGANIZATION = "v1/user/organization/",
   GET_USER_ORGANIZATION_MEMBERS = "v1/user/organization/members/",
@@ -19,8 +22,9 @@ export enum ApiEndpoints {
 
   // academy endpoints
   GET_COURSES = "v1/academy/team/courses/",
-  GET_COURSES_STATUS = "v1/academy/team/lessons/status/",
+  GET_LESSONS_STATUS = "v1/academy/team/lessons/status/",
   GET_COURSES_SCORES = "v1/academy/team/courses/scores/",
+  GET_COURSES_STATUS = "v1/academy/team/courses/status/",
   // Status endpoints
   // Object list for map
   GET_QUESTION_NAIRE = "v1/status/team/questionnaire/",

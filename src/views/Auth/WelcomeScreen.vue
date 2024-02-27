@@ -16,7 +16,7 @@
         <p class="register-prompt">
           Logging for the first time? <a href="/register">Register here</a>
         </p>
-        <button class="register-btn">REGISTER</button>
+        <button @click="auth_register" class="register-btn">REGISTER</button>
       </div>
     </ion-content>
   </ion-page>
@@ -28,6 +28,9 @@ import router from "@/router";
 const auth_login = () => {
   router.push({ name: "login" });
 };
+const auth_register = () => {
+  router.push({ name: "register" });
+};
 </script>
 
 <style scoped>
@@ -38,7 +41,7 @@ const auth_login = () => {
   justify-content: center;
   padding: 25px;
   max-width: 100%;
-  margin-top: 70px;
+  margin-top: 50px;
 }
 .welcomeClass {
   color: var(--tietiary, rgba(44, 58, 209, 0.5));
@@ -84,7 +87,7 @@ h1 {
 }
 
 .login-btn {
-    margin-top: 150px;
+    margin-top: 80px;
   background-color: #8bc34a; /* Adjust the color to match your design */
   color: white;
 }
@@ -114,7 +117,7 @@ letter-spacing: 0.25px;
 }
 
 .register-prompt {
-    margin-top: 210px ;
+    margin-top: 110px ;
   color: #5e5e5e;
   text-align: center;
   font-family: Cabin;

@@ -101,7 +101,9 @@ const PlaybookAPI: any = {
   },
   createSurveyExerciseResponse: async (payload: any) => {
     try {
+      // console.log("here is data" , payload.data)
       // return 
+      
       const response = await eveTechApi.post(`${ApiEndpoints.CREATE_EXERCISES_RESPONSES}`, payload);
       // Save token in local storage if found
       console.log(response)

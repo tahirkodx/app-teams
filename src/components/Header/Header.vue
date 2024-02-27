@@ -36,25 +36,14 @@
           ></ion-icon>
         </ion-button>
 
-        <!-- <ion-button>
-          <ion-toggle
-            :checked="themeToggle"
-            @ionChange="toggleChange($event)"
-            justify="space-between"
-          ></ion-toggle>
-        </ion-button> -->
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
-  <!--ion-item v-show="surveysStore.activeSurveys.length > 0" @click="() => router.push({name: 'surveys'})">
-        <ion-badge slot="start">{{ surveysStore.activeSurveys.length }}</ion-badge>
-        <ion-label>Open surveys</ion-label>
-    </ion-item-->
+ 
 </template>
 
 <script setup lang="ts">
-import { ref, watch ,onMounted} from "vue";
+import { ref, watchEffect ,onMounted} from "vue";
 import {
   IonHeader,
   IonToolbar,
@@ -76,6 +65,7 @@ import { useTeamStore, useUserStore } from "@/store";
 const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
+const teamSelected = ref();
 onMounted(async () => {
   if(teamStore.teams === null ){
   await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
@@ -90,8 +80,12 @@ const toggleChange = (ev: ToggleCustomEvent) => {
 };
 const buffer = 1.0;
 
-const teamSelected = ref(userStore.teamID);
-
+console.log(teamSelected.value)
+watchEffect(() => {
+  if (userStore.teamID) {
+    teamSelected.value = userStore.teamID;
+  }
+});
 const changeTeam = (value: any) => {
   console.log(userStore.userID);
 

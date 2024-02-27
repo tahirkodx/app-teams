@@ -6,7 +6,7 @@
     <ion-content >
       <div class="header-container">
         <!-- <h1>Celebrate and Collaborate</h1> -->
-        <h1>{{ playbookStore?.singleExercise?.play_title }}</h1>
+        <h1 class="ion-padding">{{ playbookStore?.singleExercise?.play_title }}</h1>
         <h2>
           {{
             playbookStore?.playbook?.get(playbookStore?.singleExercise?.play)

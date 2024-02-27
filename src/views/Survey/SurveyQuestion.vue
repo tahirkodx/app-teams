@@ -31,32 +31,33 @@
           <ion-item
             :class="{
               'radio-item-selected':
-              selectQuestion ===
+                selectQuestion ===
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_low,
             }"
             lines="full"
             class="radio-item"
           >
-            <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_low }}</ion-label> -->
+          <!-- <ion-label>{{ statusStore?.questionnaire?.get(currentIndex)?.question?.description_low }}</ion-label> -->
             <ion-radio
               :value="
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_low
               "
-              slot="start"
               label-placement="end"
+              justify="start"
             >
               {{
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_low
               }}
             </ion-radio>
+           
           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-              selectQuestion ===
+                selectQuestion ===
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_midlow,
             }"
@@ -70,17 +71,17 @@
                   ?.description_midlow
               "
               label-placement="end"
-              slot="start"
+              justify="start"
               >{{
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_midlow
               }}</ion-radio
             >
-          </ion-item>
+           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-              selectQuestion ===
+                selectQuestion ===
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_medium,
             }"
@@ -93,18 +94,19 @@
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_medium
               "
-              slot="start"
+              justify="start"
               label-placement="end"
               >{{
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_medium
               }}</ion-radio
             >
+            
           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-              selectQuestion ===
+                selectQuestion ===
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_midhigh,
             }"
@@ -117,18 +119,19 @@
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_midhigh
               "
-              slot="start"
+              justify="start"
               label-placement="end"
               >{{
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_midhigh
               }}</ion-radio
             >
+           
           </ion-item>
           <ion-item
             :class="{
               'radio-item-selected':
-              selectQuestion ===
+                selectQuestion ===
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_high,
             }"
@@ -141,7 +144,7 @@
                 statusStore?.questionnaire?.get(currentIndex)?.question
                   ?.description_high
               "
-              slot="start"
+              justify="start"
               label-placement="end"
               >{{
                 statusStore?.questionnaire?.get(currentIndex)?.question
@@ -167,14 +170,22 @@
             <div
               class="checkbox-container"
               :class="{
-                'checkbox-container-checked': selected[item2.id +'_'+ item2.favourable],
+                'checkbox-container-checked':
+                  selected[item2.id + '_' + item2.favourable],
               }"
-              @click="toggleSelection('favourable',item2.favourable,item2.id,statusStore?.questionnaire?.get(currentIndex)?.question?.id)"
+              @click="
+                toggleSelection(
+                  'favourable',
+                  item2.favourable,
+                  item2.id,
+                  statusStore?.questionnaire?.get(currentIndex)?.question?.id
+                )
+              "
             >
-            <!-- :ref="'favourable_' + item2.id" -->
+              <!-- :ref="'favourable_' + item2.id" -->
               <ion-checkbox
-                :value="item2.id +'_'+ item2.favourable"
-                :checked="selected[item2.id +'_'+ item2.favourable]"
+                :value="item2.id + '_' + item2.favourable"
+                :checked="selected[item2.id + '_' + item2.favourable]"
               ></ion-checkbox>
               <ion-label>{{ item2.favourable }}</ion-label>
               <!-- <ion-checkbox label-placement="end" justify="start" aria-label="Label"
@@ -184,13 +195,21 @@
             <div
               class="checkbox-container"
               :class="{
-                'checkbox-container-checked': selected[item2.id +'_'+ item2.unfavourable],
+                'checkbox-container-checked':
+                  selected[item2.id + '_' + item2.unfavourable],
               }"
-              @click="toggleSelection('unfavourable' ,item2.unfavourable,item2.id,statusStore?.questionnaire?.get(currentIndex)?.question?.id)"
+              @click="
+                toggleSelection(
+                  'unfavourable',
+                  item2.unfavourable,
+                  item2.id,
+                  statusStore?.questionnaire?.get(currentIndex)?.question?.id
+                )
+              "
             >
               <ion-checkbox
-                :value="item2.id +'_'+ item2.unfavourable"
-                :checked="selected[item2.id +'_'+ item2.unfavourable]"
+                :value="item2.id + '_' + item2.unfavourable"
+                :checked="selected[item2.id + '_' + item2.unfavourable]"
               ></ion-checkbox>
               <ion-label>{{ item2.unfavourable }}</ion-label>
             </div>
@@ -199,7 +218,10 @@
         </div>
       </div>
     </div>
-    <SurveyRangeSelector v-if="tempIndex >= statusStore?.questionnaire?.size"   :surveyRequestId="surveyRequestId" />
+    <SurveyRangeSelector
+      v-if="tempIndex >= statusStore?.questionnaire?.size"
+      :surveyRequestId="surveyRequestId"
+    />
     <ion-footer>
       <div class="button-container">
         <ion-button
@@ -215,14 +237,16 @@
           class="nextButton"
           >Next</ion-button
         >
-        <ion-button v-else @click="processSubmit" class="nextButton" >Submit</ion-button>
+        <ion-button v-else @click="processSubmit" class="nextButton"
+          >Submit</ion-button
+        >
       </div>
     </ion-footer>
   </ion-content>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted,watchEffect } from "vue";
 
 import {
   IonContent,
@@ -242,48 +266,53 @@ import ProgressBar from "@/components/ProgressBar/ProgressBar.vue";
 import SurveyRangeSelector from "@/components/Survey/SurveyRangeSelector.vue";
 import router from "@/router/index";
 import { useRoute } from "vue-router";
-import { useStatusStore, usePlaybookStore } from "@/store";
+import { useStatusStore, usePlaybookStore ,useUserStore } from "@/store";
 const statusStore = useStatusStore();
 const playbookStore = usePlaybookStore();
+const userStore = useUserStore();
 
 const route = useRoute();
 const surveyId = route.params.surveyid as string;
-const teamId = route.params.teamid as string;
-console.log(surveyId);
-console.log(teamId);
+const teamId = "60d84fb36d8e42838966350ddc3ac956";
+
+// console.log(surveyId);
+// console.log(teamId);
 
 const selectQuestion: any = ref();
 const surveyRequestId: any = ref(null);
-const selected: any = ref({
-  
-});
+const selected: any = ref({});
 
-const toggleSelection = (type : any ,checkboxValue: any,optionId : any,questionId: any) => {
-  const finalItem = optionId+'_'+checkboxValue;
+const toggleSelection = (
+  type: any,
+  checkboxValue: any,
+  optionId: any,
+  questionId: any
+) => {
+  const finalItem = optionId + "_" + checkboxValue;
   selected.value[finalItem] = !selected.value[finalItem];
   const questionResponseArray =
     statusStore.lastResponse.get("question_response");
-    const existingValue = questionResponseArray.find(
+  const existingValue = questionResponseArray.find(
     (item: { question: string }) => item.question === questionId
   );
   const optionData = existingValue.options.find(
     (item: { option: string }) => item.option === optionId
-    );
-  if(type === 'favourable'){
-    if(optionData.favourable === true){
-      optionData.favourable = false
-    }else{
-      optionData.favourable = true
+  );
+  if (type === "favourable") {
+    if (optionData.favourable === true) {
+      optionData.favourable = false;
+    } else {
+      optionData.favourable = true;
     }
-  }else{
-    if(optionData.unfavourable === true){
-      optionData.unfavourable = false
-    }else{
-      optionData.unfavourable = true
+  } else {
+    if (optionData.unfavourable === true) {
+      optionData.unfavourable = false;
+    } else {
+      optionData.unfavourable = true;
     }
   }
   statusStore.lastResponse.set("question_response", questionResponseArray);
-  console.log(statusStore.lastResponse.get("question_response"))
+  console.log(statusStore.lastResponse.get("question_response"));
 };
 // code by adil
 const currentIndex = ref("0");
@@ -293,7 +322,7 @@ const setQuestionActive = (...types: any[]) => {
   const questionId = types.pop();
   const selectedType = types.find(
     (type) =>
-    selectQuestion.value ===
+      selectQuestion.value ===
       statusStore?.questionnaire?.get(currentIndex.value)?.question?.[type]
   );
   const questionResponseArray =
@@ -309,26 +338,20 @@ const setQuestionActive = (...types: any[]) => {
     existingValue.response_high = false;
     if (selectedType === "description_low") {
       existingValue.response_low = true; // Replace with the property you want to update
-    } 
-    else if (selectedType === 'description_midlow') {
+    } else if (selectedType === "description_midlow") {
       existingValue.response_midlow = true; // Replace with the property you want to update
-    }
-    else if (selectedType === "description_medium") {
+    } else if (selectedType === "description_medium") {
       existingValue.response_medium = true; // Replace with the property you want to update
-    }
-    else if (selectedType === "description_midhigh") {
+    } else if (selectedType === "description_midhigh") {
       existingValue.response_midhigh = true; // Replace with the property you want to update
-    }else{
+    } else {
       existingValue.response_high = true; // Replace with the property you want to update
-
     }
   }
   statusStore.lastResponse.set("question_response", questionResponseArray);
-  console.log(statusStore.lastResponse.get("question_response"))
+  console.log(statusStore.lastResponse.get("question_response"));
 };
 const processNextItem = () => {
- 
-
   if (tempIndex.value < statusStore.questionnaire.size - 1) {
     tempIndex.value++;
     currentIndex.value = tempIndex.value.toString();
@@ -346,28 +369,37 @@ const processBackItem = () => {
 const processSubmit = () => {
   const data = playbookStore.surveyExercises;
   data.forEach((entry: any) => {
-  // Remove the 'score' property
-  delete entry.exId;
-});
-const obj = Object.fromEntries(data);
-const dataArray = Object.values(obj);
-const jsonString = JSON.stringify(dataArray, null, 2);
-console.log(jsonString);
-  // const res = playbookStore.createSurveyExerciseResponse(jsonString)
-  const res = statusStore.submitSurvey() 
+    // Remove the 'score' property
+    delete entry.exId;
+    delete entry.id;
+  });
+  const obj = Object.fromEntries(data);
+  const dataArray = Object.values(obj);
+  const jsonString = JSON.stringify(dataArray, null, 2);
+  console.log(jsonString);
+  const res1 = playbookStore.createSurveyExerciseResponse(jsonString);
+  // const res = statusStore.submitSurvey();
+  console.log(res1)
+  // console.log(res)
 };
 
 onMounted(async () => {
   await Promise.all([
     // statusStore.getDimensions(),
     statusStore.getQuestionNaire(),
-    statusStore.getLastResponse(teamId),
     playbookStore.getPlaybook(),
-    playbookStore.getExercises(teamId),
-
-    // playbookStore.getTeamExerciseScores(),
+    // playbookStore.getExercises(userStore.teamID),
+    // statusStore.getLastResponse(userStore.teamID)
   ]);
-  surveyRequestId.value =  statusStore.lastResponse.get('request')
+  
+});
+watchEffect(() => {
+  if (userStore.teamID) {
+    
+    playbookStore.getExercises(userStore.teamID)
+    statusStore.getLastResponse(userStore.teamID)
+  }
+  // surveyRequestId.value = statusStore.lastResponse.get("request");
 });
 </script>
 
@@ -457,13 +489,13 @@ ion-list {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 15px;
+  padding: 5px;
   border: 1px solid #f2f2f2;
   border-radius: 5px;
   background-color: #fcfcfc;
   color: #4d4d4d;
-  width: 45%;
-  height: 70px;
+  width: 47%;
+  height: 80px;
 }
 
 ion-checkbox::part(container) {
@@ -525,4 +557,18 @@ ion-button {
   text-transform: uppercase;
   background-color: #a5ce3e;
 }
+ion-radio {
+    --border-radius: 10px;
+    --inner-border-radius: 4px;
+
+    --color: #ddd;
+   
+  }
+  ion-radio.ios::part(container) {
+    width: 20px;
+    height: 20px;
+
+    border: 2px solid #ddd;
+    border-radius: 10px;
+  }
 </style>

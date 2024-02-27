@@ -29,10 +29,12 @@
                 <span class="headerStyle">{{ resource["1"]?.title }}</span>
                 <div class="resource-progress">
                   <div class="time-left">
-                    Video: 2:00 Mins Left {{ (key + 1).toString() }}
+                    Video: {{ mintsLeft(resource["1"]?.total_length ,academyStore?.coursesStatus?.get(resource['0'])?.time)}} Mins Left 
+                    
                   </div>
                   <ion-progress-bar
-                    :value="0.6"
+                    :value="progressValue(resource['1']?.total_length ,academyStore?.coursesStatus?.get(resource['0'])?.time)"
+                    :buffer="1.0"
                     class="progressBar"
                   ></ion-progress-bar>
                 </div>
@@ -69,9 +71,13 @@ import {
 import router from "@/router/index";
 import { ref, computed } from "vue";
 import { useUserStore, useAcademyStore } from "@/store";
-import { MonthsAgo } from "@/utils/Helper";
+import { MonthsAgo, mintsLeft } from "@/utils/Helper";
 const academyStore = useAcademyStore();
-
+const progressValue = (totl_titme: any , watchTime :any ) => {
+  const totalTime = totl_titme * 60; // Convert minutes to seconds
+  const elapsedTime = watchTime || 0;
+  return Math.min(1, elapsedTime / totalTime); // Ensure progress is between 0 and 1
+}
 // Example usage
 // const date = "2023-08-02"; // Replace with your date
 // console.log(monthsAgo(date) + " months ago");

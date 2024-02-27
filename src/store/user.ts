@@ -40,54 +40,6 @@ export interface IUser extends IUserBase {
   organization: TOrganizationID;
   last_team_used: TTeamID;
 }
-
-export interface INetworkMember extends IUserBase {
-  id: TUserID;
-}
-
-export interface ICoach extends IUserBase {
-  fit: number;
-}
-
-export interface IRegistratingUser {
-  email: string;
-  password1: string;
-  password2: string;
-}
-
-export interface IOrganizationMember {
-  id: TUserID;
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  country: string;
-}
-
-export interface IOrganizationLeader {
-  name: string;
-  date: Date;
-}
-
-export interface ICoachingCompanies {
-  id: TUserID;
-  name: string;
-  team_coach: boolean;
-  personal_coach: boolean;
-  created_at: Date;
-  updated_at: Date;
-}
-
-export interface ISubscription {}
-
-export interface IOrganizationProfile {
-  name: string;
-  subscription_active: boolean;
-  coaching_companies: ICoachingCompanies;
-  created_at: string;
-  updated_at: string;
-}
-
 const useUserStore = defineStore("user", () => {
   // currentUser is of type IUser
   const settings = ref<IUser>();

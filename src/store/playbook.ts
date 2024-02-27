@@ -2,17 +2,8 @@ import { computed, reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { useTeamStore, useUserStore } from "@/store";
 import {
-  TUserID,
   TTeamID,
-  TPlayID,
-  TRoleString,
-  TRoleNumber,
-  TKnownVia,
-  TTeamRequestID,
-  TExerciseID,
-  TExerciseScoresID,
-  TRequestID,
-  TPlayUsageID,
+  
 } from "@/utils/types";
 import { PlaybookAPI } from "@/utils/actions";
 import { find, forEach } from "lodash";
@@ -22,97 +13,6 @@ const teamStore = useTeamStore();
 // ==========================================================
 // Interfaces
 // ==========================================================
-
-export interface IPlay {
-  initial_scores: {
-    [key: string]: number;
-  };
-  title: string;
-  description: string;
-  video: string | null;
-  frequency: [string, string]; // e.g. "('X', 'X times')"
-  information_url: string;
-  information_text: string;
-  created_at: string;
-  updated_at: string;
-  when: [string, string]; // e.g. "('TE', 'Team')"
-}
-
-export interface IPlaybookScores {
-  [teamID: TTeamID]: {
-    [playID: TPlayID]: number;
-  };
-}
-
-export interface IRep {
-  id: string;
-  date: Date;
-  amount: number;
-  score: number;
-  note?: string;
-}
-
-export interface IExercise {
-  team: TTeamID;
-  play: TPlayID;
-  responsible: string; // e-mail
-  completed: boolean;
-  created_at: string;
-  updated_at: string;
-  is_active: boolean;
-}
-
-export interface IExerciseResponse {
-  id?: string;
-  exercise: TExerciseID;
-  team_request: TTeamRequestID;
-  score: number;
-  note?: string;
-}
-
-export interface IExerciseCompletion {
-  team?: string;
-  date: Date;
-  role: string;
-}
-
-export interface ICompletedExercise {
-  playID: TPlayID;
-  completions: IExerciseCompletion[];
-  lastCompletion: string;
-  roles: TRoleString[];
-  highestRole: TRoleString;
-}
-
-export interface IExerciseHelp {
-  userID: TUserID;
-  first_name: string;
-  last_name: string;
-  email: string;
-  lastExperienceDate: Date;
-  experienceAs: TRoleNumber[];
-  knownVia: TKnownVia[];
-  fit: number;
-}
-
-export interface IScores {
-  id: TExerciseScoresID;
-  request: TRequestID;
-  exercise: TExerciseID;
-  notes: string[];
-  request_end_date: string;
-  score: number;
-  created_at: string;
-}
-
-export interface IUsage {
-  id: TPlayUsageID;
-  play: TPlayID;
-  love: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
 // ==========================================================
 // Store
 // ==========================================================
@@ -191,6 +91,16 @@ const usePlaybookStore = defineStore("Playbook", () => {
       }
     };
   });
+  const responsiblePersonName = computed(() => {
+    return (teamID: any, email : string) => {
+      let data = teamStore.teams.get(teamID);
+      const result = Array.from(data.members).find(
+        (element) => element.email === email
+      );
+      return result.first_name + " " + result.last_name
+      
+    };
+  });
   async function getSingleExercise(teamID: TTeamID, exerciseID: string) {
     // todo need to change this prams
     const payload = {
@@ -241,34 +151,17 @@ const usePlaybookStore = defineStore("Playbook", () => {
       (element) => element.date === date
     );
   }
-  //   const defaultExerciseResponse = computed(() => {
-  //     return (surveyID: string) => {
-  //       let returnList = []
-  //       for (let exercise of exercises.value) {
-  //         console.log(exercise)
-  //           returnList.push({
-  //               id: exercise[0],
-  //               exercise: exercise[1].id,
-  //               team_request: surveyID,
-  //               score: 7,
-  //               note: ""
-  //           })
-  //       }
-  //       surveyExercises.value = reactive(new Map(Object.entries(returnList)));
-  //       return surveyExercises
-
-  //     }
-  // })
+  
   function defaultExerciseResponse(teamId : any,surveyID: any) {
     let returnList = [];
     for (let exercise of exercises.value) {
       returnList.push({
         exId : exercise[0],
         id: teamId,
-        exercise: exercise[1].id,
-        team_request: surveyID,
         score: 7,
         note: "",
+        exercise: exercise[1].id,
+        team_request: surveyID,
       });
     }
     surveyExercises.value = reactive(new Map(Object.entries(returnList)));
@@ -283,6 +176,7 @@ const usePlaybookStore = defineStore("Playbook", () => {
     exerciseResponses,
     surveyExercises,
     filteredExercises,
+    responsiblePersonName,
     getSingleExercise,
     teamExerciseScore,
     getPlaybook,
@@ -295,7 +189,7 @@ const usePlaybookStore = defineStore("Playbook", () => {
     getSingleExerciseNotes,
     filteredNotesByDate,
     defaultExerciseResponse,
-    createSurveyExerciseResponse
+    createSurveyExerciseResponse,
   };
 });
 

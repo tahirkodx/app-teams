@@ -52,6 +52,20 @@ const AcademyAPI: any = {
       return Catched(error);
     }
   },
+  getLessonsStatus: async (payload: any) => {
+    try {
+      const options: any = {
+        params: payload,
+      };
+      const response = await eveTechApi.get(
+        `${ApiEndpoints.GET_LESSONS_STATUS}`,
+        options
+      );
+      return reactive(new Map(Object.entries(response.data)));
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
   getCoursesScores: async (payload: any) => {
     try {
       const options: any = {
