@@ -77,6 +77,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/PersonalTransformation/PersonalProfile.vue"),
   },
   {
+    name: "sidebarMenu",
+    path: "/sidebarMenu",
+    component: () => import("@/views/Profile/SidebarMenu.vue"),
+  },
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [
