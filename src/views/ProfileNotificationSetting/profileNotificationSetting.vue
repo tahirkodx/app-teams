@@ -48,7 +48,7 @@
                     <ion-item lines="none" slot="header" color="light">
                       <ion-img class="iconEarth" src="/src/pictures/Frame 2609497.svg"></ion-img>
                       <!-- <ion-label>+245</ion-label> -->
-                      
+
                     </ion-item>
                   </ion-accordion>
                 </ion-accordion-group>
@@ -65,7 +65,7 @@
           <ion-row>
             <ion-col>
               <div class="ion-padding-vertical">
-                  <ion-accordion-group>
+                <ion-accordion-group>
                   <ion-accordion value="first">
                     <ion-item lines="none" slot="header" color="light">
                       <ion-img class="iconEarth" src="/src/pictures/Global.svg"></ion-img>
@@ -73,14 +73,14 @@
                     </ion-item>
                   </ion-accordion>
                 </ion-accordion-group>
-                </div>
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>
       </div>
     </ion-content>
     <ion-footer class="ion-padding">
-       <ion-button expand="block">SAVE PROFILE</ion-button>
+      <ion-button @click="navigateFunction" expand="block">SAVE PROFILE</ion-button>
     </ion-footer>
   </ion-page>
 </template>
@@ -114,7 +114,7 @@ import Header from "@/components/Header/Header.vue";
 import { cameraOutline } from "ionicons/icons";
 import { defineComponent, ref } from "vue";
 import CountryFlag from 'vue-country-flag-next';
-
+import router from "@/router/index";
 
 const fileInput = ref<HTMLInputElement | null>(null);
 
@@ -132,6 +132,10 @@ const changeProfilePicture = (event: Event) => {
 
     fileReader.readAsDataURL(file);
   }
+};
+
+const navigateFunction = () => {
+  router.push({ name: "profilenotification" });
 };
 
 const openFileInput = () => {
@@ -167,10 +171,12 @@ const openFileInput = () => {
 ion-icon {
   margin-right: 8px;
 }
-.iconEarth{
+
+.iconEarth {
   margin-right: 8px;
   margin-top: 2px
 }
+
 .title-line {
   border-bottom: 1px solid rgba(249, 238, 238, 0.95);
   margin-top: 5px;

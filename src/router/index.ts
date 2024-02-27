@@ -38,6 +38,14 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    name: "profilenotification",
+    path: "/profile/notification",
+    component: () => import("@/views/ProfileNotificationSetting/ProfileNotification.vue"),
+    meta: {
+      requiresAuth: true, // Add meta field to indicate protected route
+    },
+  },
+  {
     name: "surveys",
     path: "/surveys",
     component: () => import("@/views/Survey/Survey.vue"),
