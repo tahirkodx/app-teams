@@ -46,6 +46,38 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    name: "ask-help",
+    path: "/ask-help",
+    component: () => import("@/views/AskHelp/askHelp.vue"),
+    meta: {
+      requiresAuth: true, // Add meta field to indicate protected route
+    },
+  },
+  {
+    name: "appointmentHelp",
+    path: "/ask-help/appointment",
+    component: () => import("@/views/AskHelp/appointmentBook.vue"),
+    meta: {
+      requiresAuth: true, // Add meta field to indicate protected route
+    },
+  },
+  {
+    name: "appointmentConfirm",
+    path: "/ask-help/confirm",
+    component: () => import("@/views/AskHelp/ashHelpConfirm.vue"),
+    meta: {
+      requiresAuth: true, // Add meta field to indicate protected route
+    },
+  },
+  {
+    name: "requestHelp",
+    path: "/ask-help/requestHelp",
+    component: () => import("@/views/AskHelp/requestHelp.vue"),
+    meta: {
+      requiresAuth: true, // Add meta field to indicate protected route
+    },
+  },
+  {
     name: "surveys",
     path: "/surveys",
     component: () => import("@/views/Survey/Survey.vue"),
