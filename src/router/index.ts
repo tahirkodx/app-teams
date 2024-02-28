@@ -82,6 +82,16 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Profile/SidebarMenu.vue"),
   },
   {
+    name: "preTest",
+    path: "/preTest",
+    component: () => import("@/views/LeadershipTest/PreTest.vue"),
+  },
+  {
+    name: "question",
+    path: "/question",
+    component: () => import("@/views/LeadershipTest/Question.vue"),
+  },
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [
