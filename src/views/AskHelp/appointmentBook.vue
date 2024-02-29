@@ -25,6 +25,7 @@
             >Greenwich Meridian Time</span
           >
         </div>
+        
         <div
           v-else
           class="ion-text-center ion-justify-content-center head-clock-text"
@@ -35,6 +36,8 @@
       </div>
 
       <div v-if="selectedDay && availableTimes">
+
+      <div class="title-line"></div>
         <div class="select-day-text">Select a time</div>
 
         <ion-grid>
@@ -61,6 +64,8 @@
           @ionChange="dateChanged"
         ></ion-datetime>
       </div>
+
+      <div class="title-line"></div>
     </ion-content>
 
     <ion-footer>
