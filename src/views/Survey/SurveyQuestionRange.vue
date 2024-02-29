@@ -6,73 +6,71 @@
     <ProgressBar />
     <div class="outcome-title">How well would you rate the exercises below</div>
     <div class="title-line"></div>
-<div class="mainStyle" v-for="questionArray in questionArr"
-          :key="questionArray.value">
-    <h3 class="titleStyle">
-      {{ questionArray.question }}
-    </h3>
+    <div
+      class="mainStyle"
+      v-for="questionArray in questionArr"
+      :key="questionArray.value"
+    >
+      <h3 class="titleStyle">
+        {{ questionArray.question }}
+      </h3>
 
-    <div class="scoreRange">
-      <span>
-        Scores:
-        <span
-          ><ion-icon class="iconStyle" :icon="informationCircleOutline"
-        /></span>
-      </span>
+      <div class="scoreRange">
+        <span>
+          Scores:
+          <span
+            ><ion-icon class="iconStyle" :icon="informationCircleOutline"
+          /></span>
+        </span>
+        <span> Range:1-10 </span>
+      </div>
+      <ion-range
+        aria-label="Custom range"
+        :value="5"
+        :pin="true"
+        :min="0"
+        :max="10"
+        :ticks="true"
+      ></ion-range>
+      <div class="notes">
+        <span> Notes: </span>
+      </div>
 
-      <span> Range:1-10 </span>
+      <div>
+        <ion-textarea
+          row="4"
+          aria-label="Custom textarea"
+          placeholder="Type something here"
+          class="custom"
+          :auto-grow="true"
+        ></ion-textarea>
+      </div>
+      <div class="title-line"></div>
     </div>
-
-    <ion-range
-      aria-label="Custom range"
-      :value="5"
-      :pin="true"
-      :min="0"
-      :max="10"
-      :ticks="true"
-    ></ion-range>
-    <div class="notes">
-      <span> Notes: </span>
-    </div>
-
-    <div>
-      <ion-textarea
-        rows="4"
-        aria-label="Custom textarea"
-        placeholder="Type something here"
-        class="custom"
-        :auto-grow="true"
-      ></ion-textarea>
-    </div>
-    <div class="title-line"></div>
-</div>
-<ion-footer>
-   <div class="button-container">
-      <ion-button
-        class="previousButton"
-        @click="
-          () =>
-            router.push({
-              name: 'surveyQuestion',
-            })
-        "
-        >Previous</ion-button
-      >
-      <ion-button
-        class="nextButton"
-        @click="
-          () =>
-            router.push({
-              name: 'surveyFinished',
-            })
-        "
-        >Submit</ion-button
-      >
-    </div>
-
-</ion-footer>
-
- 
+    <ion-footer>
+      <div class="button-container">
+        <ion-button
+          class="previousButton"
+          @click="
+            () =>
+              router.push({
+                name: 'surveyQuestion',
+              })
+          "
+          >Previous</ion-button
+        >
+        <ion-button
+          class="nextButton"
+          @click="
+            () =>
+              router.push({
+                name: 'surveyFinished',
+              })
+          "
+          >Submit</ion-button
+        >
+      </div>
+    </ion-footer>
   </ion-content>
 </template>
 
@@ -95,22 +93,23 @@ import router from "@/router/index";
 
 import { informationCircleOutline } from "ionicons/icons";
 
-
 const questionArr = [
-  {question:"Celebrate Success: Recognising Individual and Team Achievements:" , value:"1"},
-  {question:"Establish Effective Communication Guidelines:", value:"2"},
-  {question:" Encourage Open Discussion:", value:"3"},
-  {question:"Encourage Peer-to-Peer Feedback:", value:"4"},
-  {question:"Practice Active Listening:", value:"5"},
-  {question:"Promote Equal Participation:", value:"6"},
-  {question:"Provide Effective Feedback:", value:"7"},
-  {question:"Provide Opportunities for Reflection:", value:"8"},
-   
-]
+  {
+    question:
+      "Celebrate Success: Recognising Individual and Team Achievements:",
+    value: "1",
+  },
+  { question: "Establish Effective Communication Guidelines:", value: "2" },
+  { question: " Encourage Open Discussion:", value: "3" },
+  { question: "Encourage Peer-to-Peer Feedback:", value: "4" },
+  { question: "Practice Active Listening:", value: "5" },
+  { question: "Promote Equal Participation:", value: "6" },
+  { question: "Provide Effective Feedback:", value: "7" },
+  { question: "Provide Opportunities for Reflection:", value: "8" },
+];
 </script>
 
 <style scoped>
- 
 .titleStyle {
   color: #4d4d4d;
   font-size: 14px;

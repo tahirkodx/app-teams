@@ -165,7 +165,70 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true, // Add meta field to indicate protected route
     },
   },
+  //Ahmi
   {
+    name: "surveySchedule",
+    path: "/surveySchedule",
+    component: () => import("@/views/SurveySchedule/SurveySchedule.vue"),
+  },
+  {
+    name: "scheduleWeekly",
+    path: "/scheduleWeekly",
+    component: () => import("@/views/SurveySchedule/ScheduleWeekly.vue"),
+  },
+  {
+    name: "inviteLogin",
+    path: "/inviteLogin",
+    component: () => import("@/views/Invite/InviteLogin.vue"),
+  },
+  {
+    name: "inviteFound",
+    path: "/inviteFound",
+    component: () => import("@/views/Invite/InviteFound.vue"),
+  },
+  {
+    name: "inviteNotified",
+    path: "/inviteNotified",
+    component: () => import("@/views/Invite/InviteNotified.vue"),
+  },
+  {
+    name: "list",
+    path: "/list",
+    component: () => import("@/views/Buddy/List.vue"),
+  },
+  {
+    name: "create",
+    path: "/create",
+    component: () => import("@/views/Buddy/Create.vue"),
+  },
+  {
+    name: "personalProfile",
+    path: "/personalProfile",
+    component: () => import("@/views/PersonalTransformation/PersonalProfile.vue"),
+  },
+  {
+    name: "sidebarMenu",
+    path: "/sidebarMenu",
+    component: () => import("@/views/Profile/SidebarMenu.vue"),
+  },
+  {
+    name: "preTest",
+    path: "/preTest",
+    component: () => import("@/views/LeadershipTest/PreTest.vue"),
+  },
+  {
+    name: "question",
+    path: "/question",
+    component: () => import("@/views/LeadershipTest/Question.vue"),
+  },
+  {
+    name: "result",
+    path: "/result",
+    component: () => import("@/views/LeadershipTest/Result.vue"),
+  },
+  
+//Ahmi End
+{
     path: "/tabs/",
     component: TabsPage,
     children: [
@@ -250,6 +313,7 @@ const routes: Array<RouteRecordRaw> = [
       //   path: "surveyFinished",
       //   component: () => import("@/views/Survey/surveyFinished.vue"),
       // },
+      
       {
         name: "academy",
         path: "academys",
@@ -258,6 +322,7 @@ const routes: Array<RouteRecordRaw> = [
           requiresAuth: true, // Add meta field to indicate protected route
         },
       },
+     
       {
         name: "lesson",
         path: "academys/lesson/:courseId",
