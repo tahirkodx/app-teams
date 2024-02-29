@@ -12,7 +12,7 @@
       </div>
 
       <div class="title-line"></div>
-      <div class="select-day-text">Select a day</div>
+      <!-- <div class="select-day-text">Select a day</div> -->
 
       <ion-list lines="none">
         <ion-item v-for="(item, index) in data" :key="index">
