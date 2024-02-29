@@ -4,7 +4,10 @@
     <ion-toolbar class="custom-toolbar">
       <ion-buttons class="startIcon" slot="start">
         <ion-button>
-          <ion-icon size="large" :icon="people" class="toolbar-icon"></ion-icon>
+          <ion-icon
+            icon="/src/pictures/setting.svg"
+            class="toolbar-icon"
+          ></ion-icon>
         </ion-button>
       </ion-buttons>
 
@@ -25,25 +28,22 @@
       </div>
 
       <ion-buttons class="endIcon" slot="end">
-        <ion-button @click="navigateFunction">
-          <ion-icon :icon="documentTextOutline" />
-        </ion-button>
         <ion-button>
           <ion-icon
-            size="medium"
-            :icon="personCircleOutline"
+            icon="/src/pictures/chat.svg"
             class="toolbar-icon"
           ></ion-icon>
         </ion-button>
-
+        <ion-button @click="navigateFunction">
+          <ion-icon icon="/src/pictures/survey.svg" class="toolbar-icon" />
+        </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
- 
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect ,onMounted} from "vue";
+import { ref, watchEffect, onMounted } from "vue";
 import {
   IonHeader,
   IonToolbar,
@@ -59,6 +59,7 @@ import {
   personCircleSharp,
   personCircleOutline,
   documentTextOutline,
+  settingsOutline,
 } from "ionicons/icons";
 import type { ToggleCustomEvent } from "@ionic/vue";
 import { useTeamStore, useUserStore } from "@/store";
@@ -67,11 +68,11 @@ const teamStore = useTeamStore();
 const themeToggle = ref(false);
 const teamSelected = ref();
 onMounted(async () => {
-  if(teamStore.teams === null ){
-  await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
+  if (teamStore.teams === null) {
+    await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
   }
-})
-import router from '@/router/index'
+});
+import router from "@/router/index";
 const toggleDarkTheme = (shouldAdd) => {
   document.body.classList.toggle("dark", shouldAdd);
 };
@@ -80,7 +81,7 @@ const toggleChange = (ev: ToggleCustomEvent) => {
 };
 const buffer = 1.0;
 
-console.log(teamSelected.value)
+console.log(teamSelected.value);
 watchEffect(() => {
   if (userStore.teamID) {
     teamSelected.value = userStore.teamID;
@@ -155,6 +156,8 @@ ion-select::part(icon) {
 
 .toolbar-icon {
   font-size: 24px;
+  height: 24px;
+  width: 24px;
 }
 
 ion-button {
