@@ -92,6 +92,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/LeadershipTest/Question.vue"),
   },
   {
+    name: "result",
+    path: "/result",
+    component: () => import("@/views/LeadershipTest/Result.vue"),
+  },
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [

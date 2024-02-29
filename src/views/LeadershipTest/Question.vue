@@ -8,10 +8,9 @@
                 <ion-text>
                     <h3 class="ion-text-center">Finish the sentence</h3>
                     <div class="ion-border-bottom"></div>
-                    <h6 class="ion-margin-bottom">
+                    <h6 class="ion-margin-bottom ion-padding-top">
                         When a child will not join in group activities...</h6>
                     <ion-input shape="block" placeholder="Complete the sentence here..." position="floating"></ion-input>
-
                     <div class="button-custom ion-margin-top">
                         <ion-button size="default" fill="outline" class="button-size btn-sm">Previous</ion-button>
                         <ion-button size="default" class="button-size">NEXT</ion-button>
@@ -80,7 +79,7 @@ ion-input {
 
 .btn-sm {
     color: #CCCCCCCC;
-    border: 1px solid #CCCCCCCC;
+    /* border: 1px solid #CCCCCCCC; */
 }
 </style>
     

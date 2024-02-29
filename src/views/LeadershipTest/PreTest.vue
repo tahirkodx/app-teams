@@ -15,7 +15,7 @@
               </h6>
             </ion-text>
             <ion-img src="/src/pictures/amico23.svg" alt="Finished Success" class="ion-padding"></ion-img>
-            <ion-button expand="full" class="ion-margin-top">START TEST</ion-button>
+            <ion-button expand="block" class="ion-margin-top">START TEST</ion-button>
           </ion-col></ion-row></ion-grid>
     </ion-page>
   </ion-content>
