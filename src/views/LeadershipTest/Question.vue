@@ -1,24 +1,27 @@
 <template>
-    <ion-content>
-        <ion-header>
-            <score />
-        </ion-header>
-        <ion-row>
-            <ion-col class=" ion-padding ion-margin-top">
-                <ion-text>
-                    <h3 class="ion-text-center">Finish the sentence</h3>
-                    <div class="ion-border-bottom"></div>
-                    <h6 class="ion-margin-bottom ion-padding-top">
-                        When a child will not join in group activities...</h6>
-                    <ion-input shape="block" placeholder="Complete the sentence here..." position="floating"></ion-input>
-                    <div class="button-custom ion-margin-top">
-                        <ion-button size="default" fill="outline" class="button-size btn-sm">Previous</ion-button>
-                        <ion-button size="default" class="button-size">NEXT</ion-button>
-                    </div>
-                </ion-text>
-            </ion-col>
-        </ion-row>
-    </ion-content>
+    <ion-page>
+        <ion-content>
+            <ion-header>
+                <score />
+            </ion-header>
+            <ion-row>
+                <ion-col class=" ion-padding ion-margin-top">
+                    <ion-text>
+                        <h3 class="ion-text-center">Finish the sentence</h3>
+                        <div class="ion-border-bottom"></div>
+                        <h6 class="ion-margin-bottom ion-padding-top">
+                            When a child will not join in group activities...</h6>
+                        <ion-input placeholder="Complete the sentence here..."
+                            position="floating"></ion-input>
+                        <div class="button-custom ion-margin-top">
+                            <ion-button size="default" fill="outline" class="button-size btn-sm">Previous</ion-button>
+                            <ion-button size="default" class="button-size">NEXT</ion-button>
+                        </div>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+        </ion-content>
+    </ion-page>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
@@ -28,10 +31,10 @@ import {
     IonText,
     IonRow,
     IonCol,
-    IonPage,
-    IonImg,
     IonContent,
-    IonHeader
+    IonHeader,
+    IonPage,
+    IonInput
 } from "@ionic/vue";
 </script>
 <style scoped>
@@ -59,8 +62,6 @@ ion-input {
 
 .button-custom {
     display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 14px 20px;
     gap: 10px;
 }
@@ -75,11 +76,11 @@ ion-input {
 .button-size {
     width: 100%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 33px;
 }
 
 .btn-sm {
     color: #CCCCCCCC;
-    /* border: 1px solid #CCCCCCCC; */
 }
 </style>
     

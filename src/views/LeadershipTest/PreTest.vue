@@ -1,6 +1,6 @@
 <template>
-  <ion-content>
-    <ion-page>
+  <ion-page>
+    <ion-content>
       <ion-header>
         <score />
       </ion-header>
@@ -16,9 +16,11 @@
             </ion-text>
             <ion-img src="/src/pictures/amico23.svg" alt="Finished Success" class="ion-padding"></ion-img>
             <ion-button expand="block" class="ion-margin-top">START TEST</ion-button>
-          </ion-col></ion-row></ion-grid>
-    </ion-page>
-  </ion-content>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ion-page>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
