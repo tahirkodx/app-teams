@@ -24,7 +24,6 @@
                         <h1>Devon Lane</h1>
                         <h4>Senior Manager</h4>
                         <h6>3 Active Teams</h6>
-                        <!-- <h2>Big 5 Profile<ion-icon :icon="ellipsisHorizontalCircle"  class="ion-color"></ion-icon></h2> -->
                     </IonLabel>
                     <ion-text class="ion-color"><ion-icon :icon="ellipsisVertical" class="ion-color"></ion-icon></ion-text>
                 </ion-card-content>
@@ -68,6 +67,7 @@
                                     <ion-text class="icon-color ion-color"><ion-icon :icon="arrowForwardOutline"
                                             class="icon-color"></ion-icon></ion-text>
                                 </ion-card>
+
                                 <h5 class="ion-padding-bottom">Suggested Exercises:</h5>
                                 <ion-card class="card-style">
                                     <ion-card-header>
@@ -79,11 +79,9 @@
                                     <ion-text class="icon-color ion-color"><ion-icon :icon="arrowForwardOutline"
                                             class="icon-color"></ion-icon></ion-text>
                                 </ion-card>
-
                             </ion-col>
                         </ion-row>
                     </ion-grid>
-
                 </div>
                 <div v-if="activeTab === 'Description'">
                     <div class="ion-border-bottom"></div>
@@ -119,10 +117,8 @@
                                     </p>
                                 </ion-text>
                             </ion-col>
-
                         </ion-row>
                     </ion-grid>
-
                 </div>
                 <div v-if="activeTab === 'Message'">Other tabseeee</div>
             </div>
@@ -152,7 +148,7 @@ import {
     IonSegment,
     IonSegmentButton
 } from "@ionic/vue";
-import { settingsOutline, personCircleOutline, arrowForwardOutline, ellipsisVertical ,ellipsisHorizontalCircle} from "ionicons/icons";
+import { settingsOutline, personCircleOutline, arrowForwardOutline, ellipsisVertical, ellipsisHorizontalCircle } from "ionicons/icons";
 import LineChart from "@/components/Charts/LineChart.vue";
 const activeTab = ref("Description"); // default active tab
 const progress = ref(2);
@@ -245,10 +241,12 @@ ion-icon {
     font-size: 12px;
     margin-top: -26px;
 }
+
 .text-card {
     color: var(--white, #FFF);
 }
-.text-card h1 {   
+
+.text-card h1 {
     font-size: 22px;
     line-height: 28px;
 }
@@ -269,7 +267,8 @@ ion-icon {
     width: 85px;
     border-radius: 100px;
 }
-.text-card h2{
+
+.text-card h2 {
     font-size: 12px;
 }
 
@@ -342,5 +341,4 @@ ion-icon {
     width: 24px;
     height: 24px;
     color: #2C3AD180;
-}
-</style>
+}</style>

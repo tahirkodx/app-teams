@@ -97,6 +97,36 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/LeadershipTest/Result.vue"),
   },
   {
+    name: "profilePersonal",
+    path: "/profilePersonal",
+    component: () => import("@/views/Personal/ProfilePersonal.vue"),
+  },
+  {
+    name: "bigProfile",
+    path: "/bigProfile",
+    component: () => import("@/views/Personal/BigProfile.vue"),
+  },
+  {
+    name: "commitentProfile",
+    path: "/commitentProfile",
+    component: () => import("@/views/Personal/CommitentProfile.vue")
+  },
+  {
+    name: "exerciseProfile",
+    path: "/exerciseProfile",
+    component: () => import("@/views/Personal/ExerciseProfile.vue")
+  },
+  {
+    name: "success",
+    path: "/success",
+    component: () => import("@/views/Personal/Success.vue")
+  },
+  {
+    name: "searchOtherProfile",
+    path: "/searchOtherProfile",
+    component: () => import("@/views/Personal/SearchOtherProfile.vue")
+  },
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [
