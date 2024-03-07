@@ -127,6 +127,16 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Personal/SearchOtherProfile.vue")
   },
   {
+    name: "exerciseProgress",
+    path: "/exerciseProgress",
+    component: () => import("@/views/Personal/ExerciseProgress.vue")
+  },
+  {
+    name: "activeExercise",
+    path: "/activeExercise",
+    component: () => import("@/views/Personal/ActiveExercise.vue")
+  },
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [
