@@ -87,13 +87,13 @@ ion-item {
     --border-style: none;
 }
 
-ion-item:hover {
+ion-item.border-gray:hover {
     border: 1px solid #A5CE3E;
-    --background-color: #F2F8E3; 
+    background-color: #F2F8E3; 
 }
 ion-item.border-gray:active {
     border: 1px solid #A5CE3E; 
-    --background-color: #F2F8E3; 
+    background-color: #F2F8E3; 
 }
 .ion-margin-vertical {
     margin-bottom: -5px;
