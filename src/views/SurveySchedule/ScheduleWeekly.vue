@@ -8,10 +8,7 @@
         <ion-col>
           <h4 class="textStyle ion-padding-start">New Survey Schedule</h4>
           <h6 class="ion-margin">Start Time:</h6>
-          <ion-datetime-button
-            datetime="datetime3"
-            class="ion-date"
-          ></ion-datetime-button>
+          <ion-datetime-button datetime="datetime3" class="ion-date"></ion-datetime-button>
           <ion-modal :keep-contents-mounted="true">
             <ion-datetime id="datetime3"></ion-datetime>
           </ion-modal>
@@ -24,33 +21,22 @@
             </ion-accordion>
           </ion-accordion-group>
           <h6 class="ion-margin">End Time:</h6>
-          <ion-datetime-button
-            class="ion-date"
-            datetime="datetime4"
-          ></ion-datetime-button>
+          <ion-datetime-button class="ion-date" datetime="datetime4"></ion-datetime-button>
           <div class="border-bottom"></div>
           <ion-text class="text-sm">
-            Response time: 2 days and 3 hours</ion-text
-          >
+            Response time: 2 days and 3 hours</ion-text>
           <ion-modal :keep-contents-mounted="true">
             <ion-datetime id="datetime4"></ion-datetime>
           </ion-modal>
           <ion-text class="bg-gray"> Recurrence Patten </ion-text>
-          <ion-radio-group
-            v-model="selectedOption"
-            value="Weekly"
-            @ionChange="handleChange($event)"
-          >
+          <ion-radio-group v-model="selectedOption" value="Weekly" @ionChange="handleChange($event)">
             <div class="ion-item">
               <ion-radio value="No recurrence" label-placement="end">
-                <ion-label>No recurrence</ion-label></ion-radio
-              >
+                <ion-label>No recurrence</ion-label></ion-radio>
               <ion-radio value="Weekly" label-placement="end">
-                <ion-label>Weekly</ion-label></ion-radio
-              >
+                <ion-label>Weekly</ion-label></ion-radio>
               <ion-radio value="Monthly" label-placement="end">
-                <ion-label>Monthly</ion-label></ion-radio
-              >
+                <ion-label>Monthly</ion-label></ion-radio>
             </div>
           </ion-radio-group>
           <div v-if="selectedOption === 'Weekly'">
@@ -62,8 +48,7 @@
                 <ion-col v-for="(day, index) in days" :key="index" size="3.7">
                   <div class="ion-item3">
                     <ion-radio :value="day" label-placement="end">
-                      <ion-label>{{ day }}</ion-label></ion-radio
-                    >
+                      <ion-label>{{ day }}</ion-label></ion-radio>
                   </div>
                 </ion-col>
               </ion-row>
@@ -84,23 +69,13 @@
                   <ion-select-option value="Second">Second</ion-select-option>
                   <ion-select-option value="Third">Third</ion-select-option>
                 </ion-select>
-                <ion-select
-                  interface="popover"
-                  value="Wednesday"
-                  class="text-base"
-                >
+                <ion-select interface="popover" value="Wednesday" class="text-base">
                   <ion-select-option value="Monday">Monday</ion-select-option>
                   <ion-select-option value="Tuesday">Tuesday</ion-select-option>
-                  <ion-select-option value="Wednesday"
-                    >Wednesday</ion-select-option
-                  >
-                  <ion-select-option value="Thursday"
-                    >Thursday</ion-select-option
-                  >
+                  <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+                  <ion-select-option value="Thursday">Thursday</ion-select-option>
                   <ion-select-option value="Friday">Friday</ion-select-option>
-                  <ion-select-option value="Saturday"
-                    >Saturday</ion-select-option
-                  >
+                  <ion-select-option value="Saturday">Saturday</ion-select-option>
                   <ion-select-option value="Sunday">Sunday</ion-select-option>
                 </ion-select>
                 of every
@@ -121,33 +96,18 @@
         <span> Start Date:</span>
         <ion-datetime-button datetime="date1"></ion-datetime-button>
         <ion-modal :keep-contents-mounted="true">
-          <ion-datetime
-            id="date1"
-            presentation="date"
-          ></ion-datetime> </ion-modal
-      ></ion-label>
+          <ion-datetime id="date1" presentation="date"></ion-datetime> </ion-modal></ion-label>
       <ion-radio-group v-model="selectedOption" class="custom-radio-group">
         <ion-label class="text">
-          <span class="text2"
-            ><ion-radio value="end by"></ion-radio>End By</span
-          >
+          <span class="text2"><ion-radio value="end by"></ion-radio>End By</span>
           <ion-datetime-button datetime="date2"></ion-datetime-button>
           <ion-modal :keep-contents-mounted="true">
-            <ion-datetime
-              id="date2"
-              presentation="date"
-            ></ion-datetime> </ion-modal
-        ></ion-label>
+            <ion-datetime id="date2" presentation="date"></ion-datetime> </ion-modal></ion-label>
         <ion-text class="border2 ion-border">
-          <ion-radio value="end after"></ion-radio>End after:<span
-            class="text-white"
-            >25</span
-          >ocurrences:
+          <ion-radio value="end after"></ion-radio>End after:<span class="text-white">25</span>ocurrences:
         </ion-text>
         <ion-label class="text">
-          <span class="text2"
-            ><ion-radio value="no end date"></ion-radio>No end date</span
-          >
+          <span class="text2"><ion-radio value="no end date"></ion-radio>No end date</span>
         </ion-label>
       </ion-radio-group>
     </div>
@@ -218,12 +178,14 @@ const handleChange = (ev) => {
   margin-left: 13px;
   margin-right: 10px;
 }
+
 .ion-border {
   display: flex;
   gap: 8px;
   margin-top: 25px;
   margin-left: 20px;
 }
+
 .ion-border span {
   border-radius: 5px;
   text-align: center;
@@ -232,9 +194,11 @@ const handleChange = (ev) => {
   width: 40px;
   padding: 10px 6.5px;
 }
+
 ion-select.interface {
   width: 188px;
 }
+
 .ion-border input {
   border-radius: 5px;
   text-align: center;
@@ -243,11 +207,13 @@ ion-select.interface {
   width: 40px;
   padding: 10px 6.5px;
 }
+
 .text-base {
   background-color: #f2f2f2;
   border-radius: 5px;
   margin-top: -8px;
 }
+
 .ion-border h6 {
   width: 100px;
   font-size: 13px;
@@ -286,10 +252,12 @@ ion-select.interface {
   display: flex;
   gap: 10px;
 }
+
 .border-bottom {
   border-bottom: 1px solid#F2F2F2;
   margin-top: 16px;
 }
+
 .text-sm {
   color: var(--tietiary, rgba(44, 58, 209, 0.5));
   margin-top: -30px;

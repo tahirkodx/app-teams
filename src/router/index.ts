@@ -171,6 +171,16 @@ const routes: Array<RouteRecordRaw> = [
   path: "/sendInvite",
   component: () => import("@/views/Registration/SendInvite.vue")
 },
+{
+  name: "profileResult",
+  path: "/profileResult",
+  component: () => import("@/views/BigProfile5/ProfileResult.vue")
+},
+{
+  name: "profileQuestions",
+  path: "/profileQuestions",
+  component: () => import("@/views/BigProfile5/ProfileQuestions.vue")
+},
   {
     path: "/tabs/",
     component: TabsPage,
