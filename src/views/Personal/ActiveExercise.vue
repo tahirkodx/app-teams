@@ -4,8 +4,9 @@
             <ion-text class="ion-text-center ion-padding">
                 <div class="bg-gray">
                     <h2 class="text-bold ion-padding-top">Celebrate and Collaborate</h2>
-                    <h6 class="text-bold font-lg">Recognising Individual and
-                        Team Achievements</h6>
+                    <h6 class="text-bold font-lg">
+                        Recognising Individual and Team Achievements
+                    </h6>
                     <h6 class="ion-padding text-bold text-green">Status: Active</h6>
                 </div>
             </ion-text>
@@ -26,19 +27,11 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col class="ion-padding-start">
-                                <h5 class="text-tietiary font-lg">
-                                    Exercise Details
-                                </h5>
-                                <div class=" icon-container flex-item text-bold bg-gray">
-                                    <span>Owner:
-                                        Ralph Edwards
-                                    </span>
-                                    <span>Created at:
-                                        2023-11-06
-                                    </span>
-                                    <span>Play Type:
-                                        Team
-                                    </span>
+                                <h5 class="text-tietiary font-lg">Exercise Details</h5>
+                                <div class="icon-container flex-item text-bold bg-gray">
+                                    <span>Owner: Ralph Edwards </span>
+                                    <span>Created at: 2023-11-06 </span>
+                                    <span>Play Type: Team </span>
                                 </div>
                                 <ion-text class="font-lg">
                                     <span class="ion-padding-bottom">Relevant Academy Lessons:</span>
@@ -50,11 +43,14 @@
                                 <ion-lable class="font-lg">
                                     External Materials:
                                     <h6 class="text-blue text-bold">
-                                        Www.Loremsitinposuerenuncullamcorperamet.com</h6>
+                                        Www.Loremsitinposuerenuncullamcorperamet.com
+                                    </h6>
                                     <h6 class="text-blue text-bold">
-                                        Www.Loremsitinposuerenuncullamcorperamet.com</h6>
+                                        Www.Loremsitinposuerenuncullamcorperamet.com
+                                    </h6>
                                     <h6 class="text-blue text-bold">
-                                        Www.Loremsitinposuerenuncullamcorperamet.com</h6>
+                                        Www.Loremsitinposuerenuncullamcorperamet.com
+                                    </h6>
                                 </ion-lable>
                                 <span class="text-bold">What Is The Status Of Your Excercise?</span>
                                 <div class="custom-container flex-item">
@@ -85,8 +81,8 @@
                                 </ion-modal>
                             </div>
                         </div>
-                        <div class="custom-class flex-item ">
-                            <ion-lable class=" ion-text-start custom-color text-bold">Scores:</ion-lable>
+                        <div class="custom-class flex-item">
+                            <ion-lable class="ion-text-start custom-color text-bold">Scores:</ion-lable>
                             <ion-lable class="ion-text-end text-bold">Range: 1-10</ion-lable>
                         </div>
                         <ion-range :value="50" :pin="true"></ion-range>
@@ -97,14 +93,16 @@
                             <ion-label class="ion-margin-start">Past Repetition:</ion-label>
                             <ion-list>
                                 <ion-item>
-                                    <ion-label class="button-style  flex-item text-bold ion-justify-content-between">
+                                    <ion-label class="button-style flex-item text-bold ion-justify-content-between">
                                         <span>Repetitions: 10</span>
                                         <span>Average Scores: 6/10
                                             <ion-icon :icon="ellipsisVertical" class="bg-gray"></ion-icon></span>
                                     </ion-label>
                                     <p class="text-bold">
-                                        Lorem ipsum dolor sit amet consectetur. Lacinia in posuere egestas enim tempor
-                                        praesent in. Amet sit amet sollicitudin imperdiet odio.</p>
+                                        Lorem ipsum dolor sit amet consectetur. Lacinia in posuere
+                                        egestas enim tempor praesent in. Amet sit amet sollicitudin
+                                        imperdiet odio.
+                                    </p>
                                     <span class="text-bold">Thu 17/08/2024</span>
                                 </ion-item>
                             </ion-list>
@@ -116,8 +114,10 @@
                                             <ion-icon :icon="ellipsisVertical" class="bg-gray"></ion-icon></span>
                                     </ion-label>
                                     <p class="text-bold">
-                                        Lorem ipsum dolor sit amet consectetur. Lacinia in posuere egestas enim tempor
-                                        praesent in. Amet sit amet sollicitudin imperdiet odio.</p>
+                                        Lorem ipsum dolor sit amet consectetur. Lacinia in posuere
+                                        egestas enim tempor praesent in. Amet sit amet sollicitudin
+                                        imperdiet odio.
+                                    </p>
                                     <span class="text-bold">Thu 17/08/2024</span>
                                 </ion-item>
                             </ion-list>
@@ -133,21 +133,21 @@
                         <ion-col class="ion-padding">
                             <ion-text class="text-bold">
                                 <p class="box">
-                                    Lorem ipsum dolor sit amet consectetur. Aenean integer
-                                    vivamus morbi nulla et tincidunt. Platea hac sed nunc est
-                                    phasellus. Risus et id mi in. Facilisi tellus facilisis
-                                    venenatis amet. Volutpat lobortis phasellus tincidunt
-                                    vestibulum volutpat pharetra purus.
+                                    Lorem ipsum dolor sit amet consectetur. Aenean integer vivamus
+                                    morbi nulla et tincidunt. Platea hac sed nunc est phasellus.
+                                    Risus et id mi in. Facilisi tellus facilisis venenatis amet.
+                                    Volutpat lobortis phasellus tincidunt vestibulum volutpat
+                                    pharetra purus.
                                 </p>
                             </ion-text>
                             <ion-text class="text-bold">
                                 <h6>Exercise Objective:</h6>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur. Aenean integer
-                                    vivamus morbi nulla et tincidunt. Platea hac sed nunc est
-                                    phasellus. Risus et id mi in. Facilisi tellus facilisis
-                                    venenatis amet. Volutpat lobortis phasellus tincidunt
-                                    vestibulum volutpat pharetra purus.
+                                    Lorem ipsum dolor sit amet consectetur. Aenean integer vivamus
+                                    morbi nulla et tincidunt. Platea hac sed nunc est phasellus.
+                                    Risus et id mi in. Facilisi tellus facilisis venenatis amet.
+                                    Volutpat lobortis phasellus tincidunt vestibulum volutpat
+                                    pharetra purus.
                                 </p>
                             </ion-text>
                         </ion-col>
@@ -181,13 +181,13 @@ import {
     IonSegmentButton,
     IonDatetime,
     IonDatetimeButton,
-    IonModal
+    IonModal,
 } from "@ionic/vue";
 import { ellipsisVertical, caretForward } from "ionicons/icons";
 const activeTab = ref("Description");
 const progress = ref(2);
 const repetitionValue = ref(0);
-const lessons = ref(['Lorem Ipsum 1', 'Lorem Ipsum 2', 'Lorem Ipsum 3']);
+const lessons = ref(["Lorem Ipsum 1", "Lorem Ipsum 2", "Lorem Ipsum 3"]);
 const increment = () => {
     repetitionValue.value++;
 };
@@ -197,7 +197,6 @@ const decrement = () => {
         repetitionValue.value--;
     }
 };
-
 // Function to handle segment change
 const segmentChanged = (event) => {
     activeTab.value = event.detail.value;
@@ -207,7 +206,7 @@ const segmentChanged = (event) => {
 ion-segment {
     --background-color: white;
     --color: white;
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1px solid #f2f2f2;
 }
 
 ion-icon {
@@ -215,7 +214,6 @@ ion-icon {
     width: 16px;
     height: 16px;
 }
-
 
 ion-segment-button {
     --background-color: white;
@@ -225,16 +223,16 @@ ion-segment-button {
 }
 
 ion-segment-button.segment-button-checked {
-    --border-bottom: 2px solid var(--tietiary, rgba(44, 58, 209, 0.50));
+    --border-bottom: 2px solid var(--tietiary, rgba(44, 58, 209, 0.5));
 }
 
 ion-range {
-    --bar-background: #2C3AD133;
-    --bar-background-active: #2C3AD133;
+    --bar-background: #2c3ad133;
+    --bar-background-active: #2c3ad133;
     --bar-height: 10px;
     --bar-width: 20px;
     --bar-border-radius: 10px;
-    --knob-background: var(--white, #FFF);
+    --knob-background: var(--white, #fff);
     --knob-size: 22px;
 }
 
@@ -273,13 +271,13 @@ ion-range {
     border: 1px solid #ccc;
     padding: 10px 15px;
     border-radius: 5px;
-    background: #F2F2F2;
+    background: #f2f2f2;
 }
 
 .box {
     border-radius: 5px;
-    border: 1px solid var(--main-green, #A5CE3E);
-    background: #F2F8E3;
+    border: 1px solid var(--main-green, #a5ce3e);
+    background: #f2f8e3;
     padding: 10px;
     margin: 0;
 }
@@ -292,7 +290,7 @@ ion-range {
 }
 
 .custom-color {
-    color: rgba(44, 58, 209, 0.50);
+    color: rgba(44, 58, 209, 0.5);
 }
 
 .text-bold {
@@ -311,7 +309,7 @@ ion-range {
 }
 
 .text-green {
-    color: #A5CE3E;
+    color: #a5ce3e;
 }
 
 .bg-gray {
@@ -319,11 +317,11 @@ ion-range {
 }
 
 .text-tietiary {
-    color: var(--tietiary, rgba(44, 58, 209, 0.50));
+    color: var(--tietiary, rgba(44, 58, 209, 0.5));
 }
 
 .text-blue {
-    color: #0061A8;
+    color: #0061a8;
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.25px;
@@ -343,7 +341,7 @@ ion-range {
     width: 103.667px;
     padding: 0px 4px;
     flex-direction: column;
-    border-right: 0.5px solid rgba(204, 204, 204, 0.80);
+    border-right: 0.5px solid rgba(204, 204, 204, 0.8);
 }
 
 .icon-container>span:last-child {
@@ -357,6 +355,6 @@ ion-range {
     color: white;
     gap: 44px;
     border-radius: 5px;
-    background: var(--main-green, #A5CE3E);
+    background: var(--main-green, #a5ce3e);
 }
 </style>

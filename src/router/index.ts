@@ -137,6 +137,41 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Personal/ActiveExercise.vue")
   },
   {
+    name: "selectPlan",
+    path: "/selectPlan",
+    component: () => import("@/views/Registration/SelectPlan.vue")
+  },
+  {
+    name: "proPlan",
+    path: "/proPlan",
+    component: () => import("@/views/Registration/ProPlan.vue")
+  },
+  {
+    name: "paymentSuccess",
+    path: "/paymentSuccess",
+    component: () => import("@/views/Registration/PaymentSuccess.vue")
+  },
+  {
+    name: "setProfile",
+    path: "/setProfile",
+    component: () => import("@/views/Registration/SetProfile.vue")
+  },
+  {
+    name: "registerCompany",
+    path: "/registerCompany",
+    component: () => import("@/views/Registration/RegisterCompany.vue")
+  },
+{
+  name: "signup",
+  path: "/signup",
+  component: () => import("@/views/Registration/Signup.vue")
+},
+{
+  name: "sendInvite",
+  path: "/sendInvite",
+  component: () => import("@/views/Registration/SendInvite.vue")
+},
+  {
     path: "/tabs/",
     component: TabsPage,
     children: [
