@@ -4,14 +4,14 @@
             <ion-toolbar>
                 <ion-buttons slot="start">
                     <ion-icon :icon="arrowBack" class="icon-size"></ion-icon>
-                    <ion-label>
-                        <h1 class="text-black ion-padding-start">Pro plan</h1>
+                    <ion-label class="ion-padding-start">
+                        <h1> Pro plan</h1>
                     </ion-label>
                 </ion-buttons>
             </ion-toolbar>
             <ion-row>
                 <ion-col class="ion-padding">
-                    <ion-text class="text-black ion-margin-start ion-text-center">
+                    <ion-text class="ion-margin-start ion-text-center">
                         <h5>How many users will use Epicus on a monthly basis?</h5>
                     </ion-text>
                     <ion-accordion-group expand="" class="ion-group ion-padding">
@@ -104,9 +104,6 @@ ion-list {
     --background: #959595;
 }
 
-.text-black {
-    color: #303030;
-}
 
 .text-white {
     color: var(--Neutral-100, #FFF);
@@ -172,4 +169,3 @@ ion-list {
     margin-left: 20px;
 }
 </style>
-

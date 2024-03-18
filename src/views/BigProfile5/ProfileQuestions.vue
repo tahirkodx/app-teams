@@ -4,44 +4,33 @@
             <ion-header>
                 <score />
             </ion-header>
-            <!-- <progress-bar/> -->
+            <div class="ion-padding">
+                <ProgressBar />
+                <div class="progress-indicator">120/120 Questions</div>
+            </div>
             <ion-grid>
                 <ion-row>
                     <ion-col>
-                        <ion-text class="ion-padding ion-text-center">
+                        <div class="ion-padding ion-text-center">
                             <h1>Answer all questions</h1>
                             <div class="border-bottom"></div>
-                            <h5>I worry alot</h5>
-                            <h4 class="font-sm">Select One</h4>
-                        </ion-text>
+                            <h5>I worry a lot</h5>
+                            <ion-text color="medium" class="font-sm">Select One</ion-text>
+                        </div>
                         <div class=" ion-padding-horizontal">
-                            <ion-radio-group>
-                                <ion-item class="border-gray ion-margin-vertical">
-                                    <ion-radio value="fully_disagree"></ion-radio>
-                                    <ion-label class="ion-padding-horizontal">Fully disagree</ion-label>
-                                </ion-item>
-                                <ion-item class="border-gray  ion-margin-vertical">
-                                    <ion-radio value="Disagree"></ion-radio>
-                                    <ion-label class="ion-padding-horizontal">Disagree</ion-label>
-                                </ion-item>
-                                <ion-item class="border-gray ion-margin-vertical">
-                                    <ion-radio value="Neutral"></ion-radio>
-                                    <ion-label class="ion-padding-horizontal">Neutral</ion-label>
-                                </ion-item>
-                                <ion-item class="border-gray  ion-margin-vertical">
-                                    <ion-radio value="Agree"></ion-radio>
-                                    <ion-label class="ion-padding-horizontal">Agree</ion-label>
-                                </ion-item>
-                                <ion-item class="border-gray  ion-margin-vertical">
-                                    <ion-radio value="Fully Agree"></ion-radio>
-                                    <ion-label class="ion-padding-horizontal">Fully Agree</ion-label>
+                            <ion-radio-group v-model="selectedValue">
+                                <ion-item lines="none" class="border-gray ion-margin-vertical" v-for="option in options"
+                                    :key="option.value">
+                                    <ion-radio :value="option.value"></ion-radio>
+                                    <ion-label class="ion-padding-horizontal">{{ option.text }}</ion-label>
                                 </ion-item>
                             </ion-radio-group>
                         </div>
 
-                        <div class="button-custom">
+                        <div class="button-custom ion-padding">
                             <ion-button size="default" fill="outline" class="button-size">PREVIOUS</ion-button>
-                            <ion-button size="default" class="button-size" router-link="/profileResult">fINISH</ion-button>
+                            <ion-button size="default" class="button-size"
+                                router-link="/bigProfileResult">FINISH</ion-button>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -54,113 +43,70 @@
 import { ref } from "vue";
 import {
     IonHeader,
-    IonToolbar,
-    IonButtons,
+    IonText,
+    IonRadioGroup,
     IonButton,
-    IonIcon,
+    IonRadio,
     IonContent,
     IonGrid,
     IonRow,
-    IonCard,
     IonCol,
     IonPage,
-    IonCardContent,
-    IonCardHeader,
-    IonRange
+    IonLabel,
+    IonItem,
 } from "@ionic/vue";
 import score from "@/components/Header/Header.vue";
-</script>
-<style scoped>
-.border-bottom {
-    width: 100%;
-    height: 1px;
-    background: #F2F2F2;
-    margin-top: 16px;
-}
+import ProgressBar from "@/components/ProgressBar/ProgressBar.vue";
 
-ion-item {
-    --display: flex;
-    --width: 100%;
-    --padding: 12px 20px;
-    --align-items: center;
-    --gap: 8px;
-    --border-style: none;
-}
+const selectedValue = ref(null);
+const options = [
+    { value: "fully_disagree", text: "Fully disagree" },
+    { value: "Disagree", text: "Disagree" },
+    { value: "Neutral", text: "Neutral" },
+    { value: "Agree", text: "Agree" },
+    { value: "Fully Agree", text: "Fully Agree" }
+];
+</script>
+
+<style scoped>
 
 ion-item.border-gray:hover {
-    border: 1px solid #A5CE3E;
-    background-color: #F2F8E3; 
-}
-ion-item.border-gray:active {
-    border: 1px solid #A5CE3E; 
-    background-color: #F2F8E3; 
-}
-.ion-margin-vertical {
-    margin-bottom: -5px;
+    border: 1px solid #a5ce3e;
+    --background: #f2f8e3;
+    color: #a5ce3e;
 }
 
-.text-color {
-    color: #333;
-}
-
-h1 {
-    font-size: 22px;
-    line-height: 28px;
-    margin-top: 60px;
-}
-
-h5 {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.15px;
-}
-
-h4 {
-    color: #999;
-    margin-top: -8px;
-}
-
-.font-sm {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.25px;
-}
-
-
-.border-container {
-    display: flex;
-    width: 100%;
-    padding: 12px 20px;
-    align-items: center;
-    gap: 8px;
-}
-
-/* .border-green {
-    border-radius: 5px;
-    border: 1px solid var(--main-green, #A5CE3E);
-    --background: #F2F8E3;
-} */
-
-.border-gray {
+ion-item.border-gray {
     border-radius: 5px;
     border: 1px solid #f2f2f2;
-    background: #FCFCFC;
+    background: #fcfcfc;
 }
 
-.button-custom {
-    display: flex;
-    padding: 14px 20px;
-    justify-content: center;
-    align-items: center;
-    gap: 29px;
-    position: fixed;
-    bottom: 0; 
-    left: 0; 
-    width: 100%; 
+.border-bottom {
+    height: 1px;
+    background: #f2f2f2;
+    margin-top: 16px;
+    margin-left: -30px;
+    margin-right: -30px;
 }
 
-.button-size {
+ion-button {
     width: 100%;
 }
+.button-custom {
+    display: flex;
+    gap: 29px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.progress-indicator {
+    text-align: right;
+    padding-right: 14px;
+    color: #7c7c7c;
+    font-size: 12px;
+}
+
 </style>

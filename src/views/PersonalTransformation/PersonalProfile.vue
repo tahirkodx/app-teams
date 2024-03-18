@@ -186,9 +186,6 @@ ion-card {
     background: #aed351;
 }
 
-/* ion-button {
-    --background: transparent;
-} */
 ion-progress-bar {
     --progress-background: #2C3AD180;
     --progress-color: #2C3AD180;
