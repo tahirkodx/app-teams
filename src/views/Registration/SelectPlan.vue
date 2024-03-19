@@ -19,11 +19,11 @@
                             <ion-icon :icon="ellipse"></ion-icon>
                             <div class="text-col text-white flex">
                                 <ion-text class="ion-margin-start">
-                                    <h5>For startups</h5>
+                                    <h6>For startups</h6>
                                     <h3>Pro</h3>
                                 </ion-text>
                                 <ion-text>
-                                    <h4 class="flex item-center">Popular</h4>
+                                    <span class="flex">Popular</span>
                                 </ion-text>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <span class="font-lg text-white">$25 </span><span class="font-sm">per user</span><span
                                 class="font-md text-white">/month</span>
                         </div>
-                        <ion-accordion-group expand="" class="ion-group ion-padding-bottom">
+                        <ion-accordion-group class="ion-group ion-padding-bottom">
                             <ion-accordion value="first">
                                 <ion-item slot="header" class="text-white bg-gray">
                                     <ion-label>What’s included</ion-label>
@@ -43,7 +43,7 @@
                         </ion-accordion-group>
                         <ion-button class="custom-button custom-color" expand="block">GET STARTED</ion-button>
                     </ion-card>
-                    <ion-card class="item-center bg-light">
+                    <ion-card class="bg-light">
                         <div class="header-container flex">
                             <ion-icon :icon="ellipse"></ion-icon>
                             <div class="text-col text-black flex">
@@ -53,14 +53,14 @@
                                 </ion-text>
                             </div>
                         </div>
-                        <ion-text>
-                            <h5 class="text-black">Develop your own leadership skills and overcome your long-standing
+                        <ion-text class="text-black">
+                            <h5>Develop your own leadership skills and overcome your long-standing
                                 development points, better than with coaching</h5>
                         </ion-text>
                         <div class="ion-padding ion-margin-top ion-text-center">
                             <span class="font-lg text-black">$0 </span><span class="font-md text-black">/month</span>
                         </div>
-                        <ion-accordion-group expand="" class="ion-group ion-padding-bottom">
+                        <ion-accordion-group class="ion-group ion-padding-bottom">
                             <ion-accordion value="first">
                                 <ion-item slot="header" class="bg-light">
                                     <ion-label>What’s included</ion-label>
@@ -82,7 +82,6 @@ import {
     IonButtons,
     IonButton,
     IonIcon,
-    IonTitle,
     IonContent,
     IonRow,
     IonCard,
@@ -92,7 +91,7 @@ import {
     IonText,
     IonItem,
     IonAccordion,
-    IonAccordianGroup
+    IonAccordionGroup
 } from "@ionic/vue";
 import {
     arrowBack,
@@ -101,40 +100,18 @@ import {
 </script>
 
 <style scoped>
-ion-toolbar {
-    --background: #fff;
-    --padding-start: 8px;
-    --padding-end: 20px;
-}
-
-ion-label h1 {
-    font-size: 22px;
-
-}
-
-ion-text h5 {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.15px;
-    margin-bottom: -8px;
-}
-
-ion-text h3 {
-    font-size: 26px;
-}
-
-ion-text h4 {
+ion-text span {
     width: 62px;
     height: 28px;
-    font-size: 12px;
     padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
     margin-top: 34px;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.20);
 }
 
 ion-card {
-    /* width: 100%; */
     padding: 40px;
     gap: 10px;
     border-radius: 10px;
@@ -155,6 +132,10 @@ ion-item {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+ion-button {
+    height: 72px;
+}
+
 .text-col {
     gap: 50px;
 }
@@ -173,11 +154,6 @@ ion-item {
 
 .flex {
     display: flex;
-}
-
-.item-center {
-    justify-content: center;
-    align-items: center;
 }
 
 .header-container {
@@ -214,18 +190,11 @@ ion-item {
 }
 
 .ion-group {
-    border-radius: 10px;
     margin-left: 4px;
     margin-right: 4px;
-}
-
-.custom-button {
-    height: 72px;
-
 }
 
 .custom-color {
     --background: var(--secondary, #FF8512);
 }
 </style>
-

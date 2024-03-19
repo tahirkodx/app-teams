@@ -10,9 +10,9 @@
                 <ion-row>
                     <ion-col class="ion-text-center ion-padding">
                         <ion-text>
-                            <h3 class="text-sm">Your company profile is set</h3>
+                            <h6 class="text-sm">Your company profile is set</h6>
                             <h5 class="ion-padding-vertical">Welcome</h5>
-                            <h6 class="custom-styleion ion-padding">
+                            <h6 class=" custom-style ion-padding">
                                 Invite your team members to your team space at Epicus
                             </h6>
                         </ion-text>
@@ -43,7 +43,6 @@ import {
 <style scoped>
 ion-img {
     width: 100%;
-    /* height:100%; */
 }
 
 ion-text {
@@ -58,16 +57,14 @@ ion-text {
 
 .custom-style {
     color: #404040;
-    font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.25px;
 }
 
 .text-sm {
     color: var(--secondary, #FF8512);
-    text-align: center;
-    font-size: 16px;
     letter-spacing: 0.15px;
     margin-top: -12px;
-}</style>
+}
+</style>
     

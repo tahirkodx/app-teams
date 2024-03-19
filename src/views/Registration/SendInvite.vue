@@ -9,7 +9,7 @@ import { closeOutline } from 'ionicons/icons';
                 <ion-buttons slot="start">
                     <ion-icon :icon="arrowBack" class="icon-size ion-padding-start"></ion-icon>
                     <ion-label>
-                        <h1 class="text-black ion-padding">Invite team</h1>
+                        <h1 class="ion-padding">Invite team</h1>
                     </ion-label>
                 </ion-buttons>
             </ion-toolbar>
@@ -20,15 +20,15 @@ import { closeOutline } from 'ionicons/icons';
                             <h3 class="text-sm">Send an invite to your team members</h3>
                         </ion-text>
                         <div class="input-container flex flex-col">
-                            <label for="inputField">Team name</label>
+                            <ion-label for="inputField">Team name</ion-label>
                             <ion-input fill="solid" id="inputField"></ion-input>
                             <div class="input-row flex">
                                 <div class="row flex flex-col">
-                                    <label for="firstNameInput">First name*</label>
+                                    <ion-label  for="firstNameInput">First name*</ion-label >
                                     <ion-input fill="solid" id="firstNameInput"></ion-input>
                                 </div>
                                 <div class="row flex flex-col">
-                                    <label for="lastNameInput">Last name*</label>
+                                    <ion-label  for="lastNameInput">Last name*</ion-label >
                                     <ion-input fill="solid" id="lastNameInput"></ion-input>
                                 </div>
                                 <div><ion-icon :icon="closeOutline" class="icon-fixed"></ion-icon></div>
@@ -36,11 +36,11 @@ import { closeOutline } from 'ionicons/icons';
                             <div class="border-bottom"></div>
                             <div class="input-row flex">
                                 <div class="row flex flex-col">
-                                    <label for="firstNameInput">First name*</label>
+                                    <ion-label  for="firstNameInput">First name*</ion-label >
                                     <ion-input fill="solid" id="firstNameInput"></ion-input>
                                 </div>
                                 <div class="row flex flex-col">
-                                    <label for="lastNameInput">Last name*</label>
+                                    <ion-label  for="lastNameInput">Last name*</ion-label >
                                     <ion-input fill="solid" id="lastNameInput"></ion-input>
                                 </div>
                                 <div><ion-icon :icon="closeOutline" class="icon-fixed"></ion-icon></div>
@@ -62,15 +62,12 @@ import {
     IonRow,
     IonCol,
     IonPage,
-    IonImg,
     IonContent,
-    IonHeader,
     IonGrid,
     IonInput
 } from "@ionic/vue";
 import {
     arrowBack,
-    eyeOffOutline,
     closeOutline
 } from "ionicons/icons";
 </script>
@@ -111,10 +108,9 @@ ion-icon {
     margin-top: 38px
 }
 
-label {
+ion-label {
     color: rgba(128, 128, 128, 1);
     font-size: 12px;
-    font-style: normal;
     font-weight: 700;
     line-height: 16px;
 }
