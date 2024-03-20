@@ -181,6 +181,11 @@ const routes: Array<RouteRecordRaw> = [
   path: "/profileQuestions",
   component: () => import("@/views/BigProfile5/ProfileQuestions.vue")
 },
+{
+  name: "allMessages",
+  path: "/allMessages",
+  component: () => import("@/views/Messages/AllMessages.vue")
+},
   {
     path: "/tabs/",
     component: TabsPage,
