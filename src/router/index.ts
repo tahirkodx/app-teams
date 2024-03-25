@@ -186,6 +186,76 @@ const routes: Array<RouteRecordRaw> = [
   path: "/allMessages",
   component: () => import("@/views/Messages/AllMessages.vue")
 },
+{
+  name: "sendOut",
+  path: "/sendOut",
+  component: () => import("@/views/UserOnboarding/Surveyflow/SendOut.vue")
+},
+{
+  name: "createRecurrent",
+  path: "/createRecurrent",
+  component: () => import("@/views/UserOnboarding/Surveyflow/CreateRecurrent.vue")
+},
+{
+  name: "scheduleNow",
+  path: "/scheduleNow",
+  component: () => import("@/views/UserOnboarding/Surveyflow/ScheduleNow.vue")
+},
+{
+  name: "onBoard",
+  path: "/onBoard",
+  component: () => import("@/components/Survey/OnBoard.vue")
+},
+{
+  name: "addExercise",
+  path: "/addExercise",
+  component: () => import("@/views/UserOnboarding/ExerciseFlow/AddExercise.vue")
+},
+{
+  name: "takeSurvey",
+  path: "/takeSurvey",
+  component: () => import("@/views/UserOnboarding/TakeSurveyFlow/TakeSurvey.vue")
+},
+{
+  name: "changeTransformation",
+  path: "/changeTransformation",
+  component: () => import("@/views/UserOnboarding/ProfileSection/ChangeTransformation.vue")
+},
+{
+  name: "createTransformation",
+  path: "/createTransformation",
+  component: () => import("@/views/UserOnboarding/ProfileSection/CreateTransformation.vue")
+},
+{
+  name: "createCommintent",
+  path: "/createCommintent",
+  component: () => import("@/views/UserOnboarding/ProfileSection/CreateCommintent.vue")
+},
+{
+  name: "commintentList",
+  path: "/commintentList",
+  component: () => import("@/views/UserOnboarding/ProfileSection/CommintentList.vue")
+},
+{
+  name: "createBigProfile",
+  path: "/createBigProfile",
+  component: () => import("@/views/UserOnboarding/BigProfileFlow/CreateBigProfile.vue")
+},
+{
+  name: "createTeams",
+  path: "/createTeams",
+  component: () => import("@/views/UserOnboarding/CreateTeamsFlow/CreateTeams.vue")
+},
+{
+  name: "visitAcdemy",
+  path: "/visitAcdemy",
+  component: () => import("@/views/UserOnboarding/ProfileFlow/VisitAcdemy.vue")
+},
+{
+  name: "takeTest",
+  path: "/takeTest",
+  component: () => import("@/views/UserOnboarding/LeadershipFlow/TakeTest.vue")
+},
   {
     path: "/tabs/",
     component: TabsPage,

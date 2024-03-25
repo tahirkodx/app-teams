@@ -5,7 +5,7 @@
         </ion-header>
         <ion-content>
             <ion-text>
-             <h3 class="ion-padding">All Suggested Commitments</h3></ion-text>
+             <h3 class="ion-padding"> Create commitment</h3></ion-text>
             <ion-grid>
                 <ion-row>
                     <ion-col>

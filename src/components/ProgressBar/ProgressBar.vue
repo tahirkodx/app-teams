@@ -15,8 +15,7 @@
   import { ref } from "vue";
   import { computed, defineProps } from "vue";
   const props = defineProps(["data","tempIndex"]);
-  
-  
+
   const progressWidth = computed(() => {
     return `${(props.tempIndex  / props.data  ) * 100}%`;
   });
