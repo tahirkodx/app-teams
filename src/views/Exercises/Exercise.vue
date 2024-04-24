@@ -6,7 +6,7 @@
     <ion-content >
       <div class="header-container">
         <!-- <h1>Celebrate and Collaborate</h1> -->
-        <h1>{{ playbookStore?.singleExercise?.play_title }}</h1>
+        <h1 class="ion-padding">{{ playbookStore?.singleExercise?.play_title }}</h1>
         <h2>
           {{
             playbookStore?.playbook?.get(playbookStore?.singleExercise?.play)
@@ -105,8 +105,7 @@ import {
   IonIcon,
   IonText,
 } from "@ionic/vue";
-import router from "@/router/index";
-import { pencilOutline, chevronForward } from "ionicons/icons";
+import router from "@/router/index"; 
 import score from "@/components/Header/Header.vue";
 import Notes from "@/components/Exercise/Notes.vue"
 import SummaryDescription from "@/components/Exercise/SummaryDescription.vue"

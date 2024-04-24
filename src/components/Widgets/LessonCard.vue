@@ -29,10 +29,12 @@
                 <span class="headerStyle">{{ resource["1"]?.title }}</span>
                 <div class="resource-progress">
                   <div class="time-left">
-                    Video: 2:00 Mins Left {{ (key + 1).toString() }}
+                    Video: {{ mintsLeft(resource["1"]?.total_length ,resource["1"]?.time_played)}} Mins Left 
+                    
                   </div>
                   <ion-progress-bar
-                    :value="0.6"
+                    :value="progressValue(resource['1']?.total_length ,resource['1']?.time_played)"
+                    :buffer="1.0"
                     class="progressBar"
                   ></ion-progress-bar>
                 </div>
@@ -46,9 +48,10 @@
           {{ resource["1"]?.description }}
         </p>
         <div class="resource-details">
+          <!-- todo need to convert time into mints frist confimr form Thijs  -->
           Video: {{ resource["1"]?.total_length }} Mins •
-          {{ MonthsAgo(resource["1"]?.last_updated) }} months ago •
-          {{ resource["1"]?.lessons.length }} Lessons
+          <!-- {{ MonthsAgo(resource["1"]?.last_updated) }} months ago • -->
+          {{ resource["1"]?.plays.length }} Lessons
         </div>
       </div>
     </ion-card>
@@ -69,9 +72,13 @@ import {
 import router from "@/router/index";
 import { ref, computed } from "vue";
 import { useUserStore, useAcademyStore } from "@/store";
-import { MonthsAgo } from "@/utils/Helper";
+import { MonthsAgo, mintsLeft } from "@/utils/Helper";
 const academyStore = useAcademyStore();
-
+const progressValue = (totl_titme: any , watchTime :any ) => {
+  const totalTime = totl_titme * 60; // Convert minutes to seconds
+  const elapsedTime = watchTime || 0;
+  return Math.min(1, elapsedTime / totalTime); // Ensure progress is between 0 and 1
+}
 // Example usage
 // const date = "2023-08-02"; // Replace with your date
 // console.log(monthsAgo(date) + " months ago");
@@ -193,3 +200,4 @@ ion-progress-bar {
   color: #999;
 }
 </style>
+ 

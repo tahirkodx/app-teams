@@ -9,13 +9,14 @@ import {
     
 const AcademyAPI: any = {
   getCourses: async (payload: any) => {
+    console.log("Here is payload : " , payload)
     try {
       const options: any = {
         params: payload,
       };
+      const url = ApiEndpoints.GET_COURSES + payload.teamId + ""
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_COURSES}`,
-        options
+        url
       );
       return reactive(new Map(Object.entries(response.data)));
     //   return response.data;
@@ -29,7 +30,7 @@ const AcademyAPI: any = {
         params: payload,
       };
       const response = await eveTechApi.get(
-        `${ApiEndpoints.GET_COURSES}`,
+        `${ApiEndpoints.GET_SINGLE_COURSE}`,
         options
       );
       return response.data;
@@ -45,6 +46,20 @@ const AcademyAPI: any = {
       };
       const response = await eveTechApi.get(
         `${ApiEndpoints.GET_COURSES_STATUS}`,
+        options
+      );
+      return reactive(new Map(Object.entries(response.data)));
+    } catch (error: any) {
+      return Catched(error);
+    }
+  },
+  getLessonsStatus: async (payload: any) => {
+    try {
+      const options: any = {
+        params: payload,
+      };
+      const response = await eveTechApi.get(
+        `${ApiEndpoints.GET_LESSONS_STATUS}`,
         options
       );
       return reactive(new Map(Object.entries(response.data)));

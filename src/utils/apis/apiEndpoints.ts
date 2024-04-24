@@ -1,7 +1,11 @@
 export enum ApiEndpoints {
   // Auth Endpoints
   LOGIN = "accounts/login/",
-  GET_USER_SETTINGS = "v1/user/",
+  LOGOUT = 'auth/logout/',
+  REGISTRATION = 'accounts/registration/',
+  
+  GET_USER_SETTINGS = "v1/user/settings/",
+  GET_USER_USER = "v1/user/",
   GET_USER_ORGANIZATION = "v1/user/organization/",
   GET_USER_ORGANIZATION_MEMBERS = "v1/user/organization/members/",
   GET_USER_ORGANIZATION_LEADERS = "v1/user/organization/leaders/",
@@ -10,17 +14,20 @@ export enum ApiEndpoints {
   GET_TEAMS = "v1/team/team/",
 
   // playbook end points
-  GET_PLAYBOOK = "v1/playbook/team/",
+  GET_PLAYBOOK = "v1/playbook/team/plays/",
   GET_EXERCISES = "v1/playbook/team/exercise/selected/",
   GET_EXERCISES_RESPONSES = "v1/playbook/team/exercises/response/",
   CREATE_EXERCISES_RESPONSES = "v1/playbook/team/exercise/response/",
+  GET_SUGGESTED_EXERCISES = "v1/playbook/team/plays/team:",
   GET_TEAM_EXERCISE_SCORES = "v1/playbook/team/exercise/score/",
   GET_TEAM_EXERCISE_NOTES = "v1/playbook/team/exercise/note/",
 
   // academy endpoints
-  GET_COURSES = "v1/academy/team/courses/",
-  GET_COURSES_STATUS = "v1/academy/team/lessons/status/",
+  GET_COURSES = "v1/academy/team/courses/overview/team:",
+  GET_SINGLE_COURSE = "v1/academy/team/courses/details/course:",
+  GET_LESSONS_STATUS = "v1/academy/team/lessons/status/",
   GET_COURSES_SCORES = "v1/academy/team/courses/scores/",
+  GET_COURSES_STATUS = "v1/academy/team/courses/status/",
   // Status endpoints
   // Object list for map
   GET_QUESTION_NAIRE = "v1/status/team/questionnaire/",

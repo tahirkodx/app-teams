@@ -181,6 +181,7 @@ async function getLastResponse(teamId :any) {
     teamID : teamId
   }
   lastResponse.value = await StatusAPI.getLastResponse(payload);
+  
   console.log(lastResponse.value)
   
 }

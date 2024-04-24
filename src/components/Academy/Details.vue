@@ -6,7 +6,7 @@
       <p>Lesson Time</p>
       <div class="time-details">
         <ion-icon size="small" color="primary" :icon="alarmOutline"></ion-icon>
-        <span>{{ $props.time }} Mins</span>
+        <span>{{ props.time }} Mins</span>
       </div>
     </div>
     <ion-card class="custom-card" v-if="props.summary">
@@ -16,28 +16,29 @@
     </ion-card>
     <div class="custom-section">
       <!-- <p>Courses Objective:</p> -->
-      <!-- todo need to add this part  -->
-      <p class="time-left">Video: 2:00 Mins Left</p>
+      
+      <p class="time-left">Video: {{mintsLeft(props.time ,academyStore?.lessonsStatus?.get(props.id.toString()).time)}} Mins Left</p>
       <div class="progress-container">
-        <ion-progress-bar :buffer="1.0" :value="0.5"></ion-progress-bar>
+        <ion-progress-bar :buffer="1.0" :value="progressValue"></ion-progress-bar>
       </div>
     </div>
     <ion-accordion-group>
       <ion-accordion value="first">
         <ion-item slot="header" color="white">
-          <ion-label>Resource 1 breakdown</ion-label>
+          <ion-label>Resource Breakdown</ion-label>
         </ion-item>
 
         <div class="lesson-div" slot="content">
           <ion-list lines="none" class="ion-no-padding ion-no-margin">
             <ion-item
               class="ion-no-padding ion-no-margin"
-              v-for="(item, index) in props.lessons"
+              v-for="(item, index) in props.content"
               :key="index"
+              @click="moveToData(item.time)"
             >
               <ion-label class="ion-no-padding ion-no-margin lesson-label"
-                ><span class="lesson-time">{{ item.video_length }} </span>
-                {{ item.title }}</ion-label
+                ><span class="lesson-time">{{ item.time }} </span>
+                {{ item.description }}</ion-label
               >
             </ion-item>
           </ion-list>
@@ -47,7 +48,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch,computed } from "vue";
 import {
   IonPage,
   IonHeader,
@@ -67,6 +68,7 @@ import {
   IonProgressBar,
   IonReorderGroup,
   IonReorder,
+  IonCardContent
 } from "@ionic/vue";
 
 import {
@@ -75,9 +77,23 @@ import {
   arrowUpOutline,
   alarmOutline,
 } from "ionicons/icons";
-const props = defineProps(["summary", "time", "lessons"]);
+import { convertSecondsIntoMints,mintsLeft } from "@/utils/Helper";
+const props = defineProps(["id", "summary", "time", "content"]);
 //   console.log("Here is adil" , props.id)
-//   const playbookStore = usePlaybookStore();
+import { useAcademyStore } from "@/store";
+  const academyStore = useAcademyStore();
+// import TinyEmitter from 'tiny-emitter';
+// const emitter = new TinyEmitter();
+const moveToData =(time : any) =>{
+  console.log(time)
+  // emitter.emit('myEvent', { message: 'Hello, TinyEmitter!' });
+  
+}
+const progressValue = computed(() => {
+  const totalTime = props.time * 60; // Convert minutes to seconds
+  const elapsedTime = academyStore?.lessonsStatus?.get(props.id.toString())?.time || 0;
+  return Math.min(1, elapsedTime / totalTime); // Ensure progress is between 0 and 1
+});
 </script>
 <style scoped>
 .custom-card {

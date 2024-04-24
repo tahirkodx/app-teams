@@ -1,0 +1,289 @@
+<template>
+    <ion-page>
+        <ion-content>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button>
+                        <ion-icon :icon="settingsOutline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                    <ion-button>
+                        <ion-icon :icon="chatbubbleEllipsesOutline"></ion-icon>
+                    </ion-button>
+                    <ion-button>
+                        <ion-icon :icon="documentTextOutline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="ion-padding top-content">
+                        <h3 class="text-lg">Excercise Progress</h3>
+                        <ion-card class="card-style">
+                            <ion-card-header>
+                                <ion-card-title>Excercise Topic</ion-card-title>
+                                <div class="owner-container">
+                                    <ion-img src="/src/pictures/Ellipse 72.svg" />
+                                    <h3>
+                                        Owner: Guy Hawkins
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="4" height="3" viewBox="0 0 2 2"
+                                            fill="none">
+                                            <circle cx="1" cy="1" r="1" fill="#D9D9D9" />
+                                        </svg>
+                                        <span color="success"> Ongoing </span>
+                                    </h3>
+                                </div>
+                            </ion-card-header>
+                            <ion-card-content class="top-content">
+                                Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet
+                                aenean id.
+                            </ion-card-content>
+                            <ion-progress-bar value="0.5"></ion-progress-bar>
+                            <ion-text class="ion-color text-green">5.5</ion-text>
+                            <div class="owner-container ion-margin-start">
+                                <h3>
+                                    Repetion 7/10
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="4" height="3" viewBox="0 0 2 2"
+                                        fill="none">
+                                        <circle cx="1" cy="1" r="1" fill="#D9D9D9" />
+                                    </svg>
+                                    <span color="success"> Updated 6 months ago </span>
+                                </h3>
+                            </div>
+                        </ion-card>
+                        <ion-card class="card-style">
+                            <ion-card-header>
+                                <ion-card-title>Excercise Topic</ion-card-title>
+                                <div class="owner-container">
+                                    <ion-img src="/src/pictures/Ellipse 72.svg" />
+                                    <h3>
+                                        Owner: Guy Hawkins
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="4" height="3" viewBox="0 0 2 2"
+                                            fill="none">
+                                            <circle cx="1" cy="1" r="1" fill="#D9D9D9" />
+                                        </svg>
+                                        <span color="success"> Ongoing </span>
+                                    </h3>
+                                </div>
+                            </ion-card-header>
+                            <ion-card-content class="top-content">
+                                Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet
+                                aenean id.
+                            </ion-card-content>
+                            <ion-progress-bar value="0.5"></ion-progress-bar>
+                            <ion-text class="ion-color text-green">5.5</ion-text>
+                            <!-- <ion-text class="icon-color  icon-bottom"><ion-icon :icon="arrowForwardOutline"
+                                    class="icon-color"></ion-icon></ion-text> -->
+                            <div class="owner-container ion-margin-start">
+                                <h3>
+                                    Repetion 7/10
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="4" height="3" viewBox="0 0 2 2"
+                                        fill="none">
+                                        <circle cx="1" cy="1" r="1" fill="#D9D9D9" />
+                                    </svg>
+                                    <span color="success"> Updated 6 months ago </span>
+                                </h3>
+                            </div>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="ion-padding-start ion-padding-end top-content">
+                        <h3 class="text-lg">Suggested Exercises:</h3>
+                        <ion-card class="card-style">
+                            <ion-card-header>
+                                <ion-card-title>Excercise Topic</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet
+                                aenean id.
+                            </ion-card-content>
+                            <ion-text class="icon-color ion-color"><ion-icon :icon="arrowForwardOutline"
+                                    class="icon-color"></ion-icon></ion-text>
+                        </ion-card>
+                        <ion-card class="card-style">
+                            <ion-card-header>
+                                <ion-card-title>Excercise Topic</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet
+                                aenean id.
+                            </ion-card-content>
+                            <ion-text class="icon-color ion-color"><ion-icon :icon="arrowForwardOutline"
+                                    class="icon-color"></ion-icon></ion-text>
+                        </ion-card>
+                        <ion-card class="card-style">
+                            <ion-card-header>
+                                <ion-card-title>Excercise Topic</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet
+                                aenean id.
+                            </ion-card-content>
+                            <ion-text class="icon-color ion-color"><ion-icon :icon="arrowForwardOutline"
+                                    class="icon-color"></ion-icon></ion-text>
+                        </ion-card>
+                        <ion-button expand="block" fill="outline">SEARCH OTHER</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-content>
+    </ion-page>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import {
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonTitle,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCard,
+    IonCol,
+    IonPage,
+    IonImg,
+    IonLabel,
+    IonText,
+    IonCardContent,
+    IonCardHeader,
+} from "@ionic/vue";
+import {
+    settingsOutline,
+    personCircleOutline,
+    arrowForwardOutline,
+    ellipsisVertical,
+    ellipsisHorizontalCircle,
+    chatbubbleEllipsesOutline,
+    documentTextOutline
+} from "ionicons/icons";
+</script>
+
+<style scoped>
+ion-toolbar {
+    --background: #fff;
+    --padding-start: 8px;
+    --padding-end: 20px;
+}
+
+ion-card-content {
+    display: flex;
+    font-size: 12px;
+
+}
+
+ion-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+}
+
+ion-title {
+    color: var(--Neutrals-black, #303030);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    text-align: justify;
+}
+
+.text-green {
+    color: var(--main-green, #a5ce3e);
+}
+
+.top-content {
+    margin-top: -20px;
+}
+
+.bg-green {
+    background: #aed351;
+}
+
+.text-lg {
+    color: #303030;
+    font-size: 22px;
+    line-height: 28px;
+}
+
+.text-base {}
+
+ion-card {
+    width: auto;
+    margin-right: -20px;
+    margin-left: -5px;
+    margin-top: -8px;
+    margin-bottom: 0px;
+    box-shadow: none;
+}
+
+ion-progress-bar {
+    /* --progress-background: #2c3ad180;
+    --progress-color: #2c3ad180; */
+    width: 89%;
+    left: 15px;
+    margin-bottom: 15px;
+}
+
+ion-icon {
+    /* width: 27px;
+    height: 27px; */
+    color: #747474;
+}
+
+.owner-container {
+    display: flex;
+    align-items: center;
+    margin-top: -8px;
+}
+
+.owner-container h3 {
+    color: #808080;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    /* 133.333% */
+    margin-left: 8px;
+    margin-bottom: 15px;
+}
+
+.ion-margin-start {
+    margin-top: -22px;
+    margin-left: 8px;
+}
+
+.ion-color {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.card-style {
+    border: 1px solid #F2F2F2;
+    margin: 0px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 16px;
+}
+
+.icon-color {
+    top: 15px;
+    width: 24px;
+    height: 24px;
+    color: #2c3ad180;
+}
+
+/* .icon-bottom{
+    position: absolute;
+    top: 125px;
+    right: 20px;
+} */
+</style>
+

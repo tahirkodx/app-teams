@@ -5,79 +5,117 @@
     </ion-header>
     <ion-content :fullscreen="true">
       <h4 class="titleStyle">Academy</h4>
-
       <SearchBar />
-      
-         
-       
       <div class="lesson-header">
-        <div class="lesson-title">All Lessons</div>
-        
-        <ion-button id="trigger-button" class="compact-filter-chip" style="--background: white">
-            <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
-            <span class="text">Filters</span>
-          </ion-button>
-          <ion-popover trigger="trigger-button">
-            
-              <ion-accordion-group>
-                <ion-accordion value="first">
-                  <ion-item slot="header" color="light">
-                    <ion-label class="ion-color">Academy Status</ion-label>
+        <div class="lesson-title">All Courses</div>
+
+        <ion-button
+          id="trigger-button"
+          class="compact-filter-chip"
+          style="--background: white"
+        >
+          <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
+          <span class="text">Filters</span>
+        </ion-button>
+        <ion-popover trigger="trigger-button">
+          <ion-accordion-group>
+            <ion-accordion value="first">
+              <ion-item slot="header" color="light">
+                <ion-label class="ion-color">Academy Status</ion-label>
+              </ion-item>
+              <div slot="content">
+                <ion-list>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange('all')"
+                      >All</ion-checkbox
+                    >
                   </ion-item>
-                  <div slot="content">
-                    <ion-list>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange('all')">All</ion-checkbox>
-                      </ion-item>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange('completed')">Completed</ion-checkbox>
-                      </ion-item>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange('started')">Started</ion-checkbox>
-                      </ion-item>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange('notstarted')">Not Started</ion-checkbox>
-                      </ion-item>
-                    </ion-list>
-                  </div>
-                </ion-accordion>
-                <ion-accordion value="second">
-                  <ion-item slot="header" color="light">
-                    <ion-label class="ion-color">Duration</ion-label>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange('completed')"
+                      >Completed</ion-checkbox
+                    >
                   </ion-item>
-                  <div slot="content">
-                    <ion-list>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange('all')">All</ion-checkbox>
-                      </ion-item>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange(15)">15 Mins</ion-checkbox>
-                      </ion-item>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange(30)">30 Mins</ion-checkbox>
-                      </ion-item>
-                      <ion-item >
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                        @ionChange="handleCheckboxChange(60)">1 hour above </ion-checkbox>
-                      </ion-item>
-                    </ion-list>
-                  </div>
-                </ion-accordion>
-              </ion-accordion-group>
-            
-          </ion-popover>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange('started')"
+                      >Started</ion-checkbox
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange('notstarted')"
+                      >Not Started</ion-checkbox
+                    >
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-accordion>
+            <ion-accordion value="second">
+              <ion-item slot="header" color="light">
+                <ion-label class="ion-color">Duration</ion-label>
+              </ion-item>
+              <div slot="content">
+                <ion-list>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange('all')"
+                      >All</ion-checkbox
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange(120)"
+                      >15 Mins</ion-checkbox
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange(120)"
+                      >30 Mins</ion-checkbox
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox
+                      label-placement="end"
+                      justify="start"
+                      aria-label="Label"
+                      @ionChange="handleCheckboxChange(60)"
+                      >1 hour above
+                    </ion-checkbox>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-popover>
       </div>
 
       <LessonsCard />
 
-      <ion-fab
+      <!-- <ion-fab
         class="addStyle"
         slot="fixed"
         horizontal="end"
@@ -87,7 +125,7 @@
         <ion-fab-button>
           <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
         </ion-fab-button>
-      </ion-fab>
+      </ion-fab> -->
     </ion-content>
   </ion-page>
 </template>
@@ -96,45 +134,63 @@
 import {
   IonPage,
   IonHeader,
-  IonGrid,
-  IonRow,
-  IonCol,
   IonButton,
   IonContent,
   IonIcon,
   IonFab,
   IonFabButton,
-  IonSelect,
-  IonSelectOption,
-  IonItemGroup,
   IonList,
   IonLabel,
   IonPopover,
   IonItem,
   IonAccordionGroup,
-  IonAccordion
+  IonAccordion,
 } from "@ionic/vue";
-import { informationCircleOutline ,chevronDownOutline,optionsOutline} from "ionicons/icons";
+import { optionsOutline } from "ionicons/icons";
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import myMyModal from "@/components/VideoPlayerModal/VideoPlayerModal.vue";
 import { useUserStore, useAcademyStore } from "@/store";
 import SearchBar from "@/components/Academy/SearchBar.vue";
 import LessonsCard from "@/components/Widgets/LessonCard.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const academyStore = useAcademyStore();
-const handleCheckboxChange = (key : any) =>{
-  console.log(key)
-  academyStore.filteredAcademys(key)
-}
-await Promise.all([
-  academyStore.getCourses(),
-  academyStore.getCoursesScores(),
-  academyStore.getCoursesStatus(),
-]);
-console.log("Satre: ", academyStore.courses.key);
+const userStore = useUserStore();
+const filterArray = ref<any>([]);
+const handleCheckboxChange = (key: any) => {
+  const isChecked = event?.detail.checked;
 
+  if (isChecked) {
+    if (!filterArray.value.includes(key)) {
+      filterArray.value.push(key);
+      academyStore.filteredAcademys(filterArray.value, key, true);
+      console.log(`${key} checkbox is checked`);
+      console.log("Updated Array:", filterArray.value);
+    }
+  } else {
+    const indexToRemove = filterArray.value.indexOf(key);
+    if (indexToRemove !== -1) {
+      filterArray.value.splice(indexToRemove, 1);
+      academyStore.filteredAcademys(filterArray.value, key, false);
+      console.log(`${key} checkbox is unchecked`);
+      console.log("Updated Array:", filterArray.value);
+    }
+  }
+
+  console.log(key);
+};
+onMounted(() => {
+  console.log(userStore.teamID);
+  academyStore.getCourses(userStore.teamID);
+}),
+  await Promise.all([
+    academyStore.getCourses(userStore.teamID),
+    academyStore.getCoursesScores(),
+    academyStore.getCoursesStatus(),
+    academyStore.getLessonsStatus(),
+  ]);
+console.log("Satre: ", academyStore.courses.key);
 </script>
 
 <style scoped>
@@ -188,23 +244,14 @@ console.log("Satre: ", academyStore.courses.key);
 }
 /* new code */
 
-
 ion-button {
   --color: #yourColor;
-  /* Replace with your icon color */
 }
-
-
-
-
-
 
 .ion-color {
   color: gray;
   font-weight: bold;
 }
-
-
 
 .compact-filter-chip {
   /* Auto layout */

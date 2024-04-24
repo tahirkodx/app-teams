@@ -86,9 +86,9 @@ export const eveTechApi = {
         throw new Error("Empty POST response received");
       }
       return data;
-    } catch (error) {
-      
+    } catch (error : any) {
       handleApiError(error);
+      return error.response
     }
   },
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="chart-container-outer">
+  <div class="chart-container-outer">
     <div class="chart-container">
       <canvas ref="radarChart"></canvas>
     </div>
@@ -12,24 +12,24 @@ import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
 const radarChart = ref(null);
-let chartInstance: Chart<"radar", number[], string> | null = null
-const createChart = () =>{
-    const body = document.body;
-    let stline = "rgba(255, 255, 255, 0.5)";
-    console.log(body.classList.contains('dark'))
-    if (body.classList.contains('dark')) {
-        stline = "#fff";
-        console.log( 'light');
-    } else {
-        stline = "#BDBDBD";
-      console.log( 'dark');
-    }
-    console.log("Chart ", stline)
-    if(chartInstance){
-        chartInstance.destroy();
-    }
-    const ctx = radarChart.value.getContext("2d");
-    chartInstance = new Chart(ctx, {
+let chartInstance: Chart<"radar", number[], string> | null = null;
+const createChart = () => {
+  const body = document.body;
+  let stline = "rgba(255, 255, 255, 0.5)";
+  console.log(body.classList.contains("dark"));
+  if (body.classList.contains("dark")) {
+    stline = "#fff";
+    console.log("light");
+  } else {
+    stline = "#BDBDBD";
+    console.log("dark");
+  }
+  console.log("Chart ", stline);
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+  const ctx = radarChart.value.getContext("2d");
+  chartInstance = new Chart(ctx, {
     type: "radar",
     data: {
       labels: ["1", "2", "3", "4", "5", "6", "7"],
@@ -55,26 +55,26 @@ const createChart = () =>{
           //   angleLines: {
           //     display: false // Hide angle lines
           //   },
-          
+
           grid: {
             circular: true,
             color: stline,
-            lineWidth:2
+            lineWidth: 2,
           },
           ticks: {
             display: false, // Hide the ticks
-            stepSize: 18 
+            stepSize: 18,
 
             // stepSize: .9,
           },
           angleLines: {
-            color: stline
+            color: stline,
           },
           pointLabels: {
             color: "#fff", // Text color for the labels
             padding: 0,
             backdropColor: "#8289D5",
-            
+
             backdropPadding: 5,
             borderRadius: 10,
             font: {
@@ -104,32 +104,27 @@ const createChart = () =>{
       // Ensure the background is transparent
     },
   });
-}
+};
 onMounted(() => {
   console.log("Here so ado;");
   createChart();
-
 });
 </script>
 
 <style scoped>
 .chart-container {
-  height: 300px;
   width: 300px;
   border-radius: 50%;
-  margin: 0px 25px 25px 0px;
   border: solid 2px #3c3c41;
-  border-style: ridge;
   border-width: 3px 3px 3px 3px;
   border-color: var(--my-chart-border);
 }
 .chart-container-outer {
   height: 350px;
   width: 350px;
-  padding: 25px 25px 25px 25px;
+  padding: 25px;
   position: relative;
   margin: auto;
-  overflow: hidden;
 }
 
 .chart-container-outer::before {

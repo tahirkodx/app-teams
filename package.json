@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "start": "ionic serve --port=8100",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
@@ -13,9 +13,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@capacitor/android": "^5.5.1",
     "@capacitor/app": "5.0.6",
     "@capacitor/core": "5.5.1",
     "@capacitor/haptics": "5.0.6",
+    "@capacitor/ios": "5.5.1",
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/status-bar": "5.0.6",
     "@ionic/vue": "^7.0.0",
@@ -27,8 +29,10 @@
     "query-string": "^8.1.0",
     "showdown": "^2.1.0",
     "swiper": "^11.0.5",
+    "tiny-emitter": "^2.1.0",
     "vue": "^3.3.0",
     "vue-chartjs": "^5.3.0",
+    "vue-country-flag-next": "^2.3.2",
     "vue-router": "^4.2.0"
   },
   "devDependencies": {

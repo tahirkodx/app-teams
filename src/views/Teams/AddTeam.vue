@@ -1,42 +1,46 @@
 <template>
-  <ion-page>
-    <Header />
-    <ion-content class="ion-padding">
-      <h2 class="heading">What's Your Invite Name?</h2>
-      <ion-card class="input-card">
+  <ion-modal
+    ref="modal"
+    :is-open="isVisible"
+    :initial-breakpoint="1"
+    :breakpoints="[0, 1]"
+    @willDismiss="onWillDismiss"
+  >
+    <div class="block">
+      <h2 class="heading">Enter your Invites Details</h2>
+      <ion-card
+        class="input-card"
+      >
         <ion-card-content>
-          <ion-text color="dark">j.jones@gmail.com</ion-text>
+          <ion-text color="dark">{{ props.email }}</ion-text>
           <ion-row>
             <ion-col size="6">
               <ion-item>
-                <ion-input placeholder="First name"></ion-input>
+                <ion-input
+                  v-model="first_name"
+                  placeholder="First name"
+                  ></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="6">
               <ion-item>
-                <ion-input placeholder="Last name"></ion-input>
+                <ion-input
+                  v-model="last_name"
+                  placeholder="Last name"
+                  ></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
         </ion-card-content>
       </ion-card>
-    </ion-content>
-
-    <ion-footer class="ion-no-border">
-      <ion-toolbar>
-        <ion-button
-          @click="() => router.push('/teams/teamMember')"
-          class="ion-padding"
-          expand="block"
-          >FINISH</ion-button
-        >
-      </ion-toolbar>
-    </ion-footer>
-  </ion-page>
+      <ion-button class="ion-padding" @click="updateMember" expand="block"
+        >ADD INVITE DETAILS</ion-button
+      >
+      </div>
+  </ion-modal>
 </template>
-
 <script setup lang="ts">
-import Header from "@/components/Header/Header.vue";
+import { ref, onMounted, watch } from "vue";
 import {
   IonText,
   IonContent,
@@ -49,12 +53,47 @@ import {
   IonCol,
   IonFooter,
   IonButton,
-  IonToolbar
+  IonToolbar,
+  IonIcon,
+  IonModal,
 } from "@ionic/vue";
 
-import router from "@/router/index";
-</script>
+import {
+  chevronForward,
+  add,
+  arrowUpOutline,
+  closeOutline,
+  play,
+} from "ionicons/icons";
+import { OverlayEventDetail } from "@ionic/core/components";
 
+const props = defineProps(["members", "isVisible","email"]);
+const first_name = ref()
+const last_name = ref()
+const emit = defineEmits();
+
+console.log(props.members);
+const updateMember = () => {
+  console.log()
+  if(first_name.value && last_name.value){
+    const data = {
+      email : props.email,
+      first_name : first_name.value,
+      last_name : last_name.value,
+      role : 1,
+    }
+    props.members.push(data)
+    first_name.value =""
+    last_name.value =""
+    emit("updateMembers", props.members);
+    emit("updateVisible", false);
+  }
+};
+const onWillDismiss = () => {
+  // props.isVisible.value = false;
+  emit("updateVisible", false);
+};
+</script>
 <style scoped>
 .heading {
   color: var(--black, #000);
@@ -74,6 +113,7 @@ import router from "@/router/index";
 }
 
 ion-card-content {
+  padding: 5px;
   --padding-start: 0;
   --padding-end: 0;
   --padding-top: 0;
@@ -111,5 +151,19 @@ ion-row {
 ion-col {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+ion-icon {
+  float: right;
+}
+.block {
+  width: 100%;
+  height: 300px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+ion-modal {
+  --height: auto;
 }
 </style>

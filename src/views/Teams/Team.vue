@@ -6,54 +6,93 @@
     <ion-content class="ion-padding">
       <!-- <chart /> -->
       <radarchart />
-      <linkbutton label="Ask Help" expend="block" link="teamsupport" />
+      <linkbutton label="ASK HELP" expend="block" link="teamsupport" />
       <teamwidget />
-      <ion-reorder-group v-if="loading">
-                <ion-card v-for="(member, index) in teamStore.teamMembers.members" :key="index" class="practice-card"
-                @click="() =>
-                router.push({
-                  name: 'editteam',
-                  
-                })
-            "
-                >
-                    <div class="card-content">
-                        <ion-reorder slot="start"></ion-reorder>
-                        
-                        <ion-label>{{member.last_name}}</ion-label>
-                        <ion-icon :icon="chevronForward" slot="end" />
+      <!-- new  -->
+      <ion-accordion-group :multiple="true" :value="['first', 'third']">
+        <ion-accordion value="first">
+          <ion-item class="cus-item" slot="header">
+            <ion-label>Team</ion-label>
+          </ion-item>
+          <div class="ion-no-padding" slot="content">
+            <div class="ion-no-padding">
+              <div
+                class="newClass"
+                v-for="(member, index) in teamStore.teamMembers.members"
+                :key="index"
+                @click="
+                  () =>
+                    router.push({
+                      name: 'teamMember',
+                    })
+                "
+              >
+                <div class="profile-pic">
+                  <ion-img
+                    src="/src/pictures/Ellipse1.svg"
+                    alt="Finished Success"
+                  ></ion-img>
+                </div>
+                <div class="inner-team">
+                  <div>
+                    <div class="info-name">{{ member.last_name }}</div>
+                    <div class="info-role">
+                      {{
+                        member.role == 0
+                          ? "Visitor"
+                          : member.role == 1
+                          ? "Member"
+                          : member.role == 2
+                          ? "Leader"
+                          : "Coach"
+                      }}
                     </div>
-                    <div class="progress-container">
-                        <ion-progress-bar  ></ion-progress-bar>
-                    </div>
-                </ion-card>
-            </ion-reorder-group>
-      <fixedicon path="/src/pictures/answer-correct-icon.svg" link="team"></fixedicon>
+                  </div>
+                  <div>
+                    <div class="info-active">3 Active Teams</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item class="cus-item" slot="header">
+            <ion-label>Team Survey</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">Second Content</div>
+        </ion-accordion>
+      </ion-accordion-group>
+      <!-- new -->
+      <ion-reorder-group v-if="loading"> </ion-reorder-group>
+      <!-- <fixedicon
+        path="/src/pictures/answer-correct-icon.svg"
+        link="team"
+      ></fixedicon> -->
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { ref,onMounted,watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 import {
   IonPage,
   IonHeader,
   IonContent,
   IonItem,
   IonLabel,
-  IonButton,
   IonIcon,
   IonAccordion,
   IonAccordionGroup,
-  IonFab,
-  IonDatetime,
-  IonFabButton,
-  IonList,
   IonCard,
-  IonThumbnail,
-  IonProgressBar,
   IonReorderGroup,
   IonReorder,
+  IonRow,
+  IonCol,
+  IonImg,
+  IonPopover,
+  IonText,
+  IonGrid,
 } from "@ionic/vue";
 
 import { chevronForward, add, arrowUpOutline } from "ionicons/icons";
@@ -72,14 +111,9 @@ const teamStore = useTeamStore();
 const loading = ref(false);
 
 onMounted(async () => {
-  await Promise.all([
-    teamStore.getTeams(),
-    userStore.getUserSettings()
-  ]);
+  await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
   loading.value = true;
 });
-
-
 </script>
 
 <style scoped>
@@ -92,6 +126,9 @@ ion-datetime {
     --ion-item-padding: 0;
     --background: transparent;
     box-shadow: none;
+    border-radius: 5px;
+border: 1px solid #F2F2F2;
+background: #F5F5F5;
     /* Remove shadow if present */
 }
 
@@ -111,7 +148,7 @@ ion-label {
     flex-grow: 1;
     font-size: 1rem;
     padding: 16px 0;
-    
+
 }
 
 .progress-container {
@@ -137,5 +174,72 @@ ion-icon {
 .addStyle{
     margin-bottom: 40px;
     margin: 10px ;
+}
+.info-name {
+  color: #7C7C7C;
+
+/* mobile/Title small */
+font-family: Cabin;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
+}
+
+.info-role {
+  color: #7C7C7C;
+
+/* mobile/Body small */
+font-family: Cabin;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px; /* 133.333% */
+}
+
+.info-active {
+  padding: 2px 8px;
+
+
+  color: #6F6F6F;
+font-family: Cabin;
+font-size: 10px;
+font-style: normal;
+font-weight: 500;
+line-height: 16px; /* 160% */
+border-radius: 100px;
+background: #E6E6E6;
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+}
+.newClass{
+  display: flex;
+padding: 8px 20px;
+align-items: center;
+/* justify-content: center; */
+gap: 10px;
+border-radius: 5px;
+border: 1px solid #F2F2F2;
+background: #F5F5F5;
+margin-bottom: 10px;
+}
+.cus-item{
+  margin-bottom: 15px;
+  border-bottom: 1px solid #D9D9D9;
+}
+.inner-team{
+  display: flex;
+/* padding: 8px 20px; */
+align-items: center;
+/* justify-content: center; */
+gap: 100px;
+width: 100%;
+justify-content: space-between;
 }
 </style>

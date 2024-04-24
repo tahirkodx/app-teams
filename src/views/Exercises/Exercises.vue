@@ -3,14 +3,21 @@
     <ion-header>
       <score />
     </ion-header>
-    <ion-content :fullscreen="true" v-if="loading">
+    <ion-content
+      :fullscreen="true"
+      v-if="loading"
+      :scroll-events="true"
+      @ionScrollStart="handleScrollStart()"
+      @ionScroll="handleScroll($event)"
+      @ionScrollEnd="handleScrollEnd()"
+    >
       <ion-grid>
         <ion-row>
           <ion-col>
             <h4 class="page-heading">Excercise Progress</h4>
           </ion-col>
           <ion-col size="auto">
-            <div style="width: 70px">
+            <div>
               <ion-select
                 v-model="selectedFilter"
                 interface="popover"
@@ -26,43 +33,46 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      <ion-grid class="ion-padding outer-padding">
+        <ion-row class="ion-no-padding">
+          <ion-col class="ion-no-padding">
+            <!-- <h5 class="ion-padding-bottom">Active Exercises:</h5> -->
+            <ion-card
+              class="card-style"
+              v-if="
+                Object.entries(
+                  playbookStore?.filteredExercises(selectedFilter) || {}
+                ).length > 0
+              "
+              v-for="[key, exercise] in Object.entries(
+                playbookStore?.filteredExercises(selectedFilter)
+              )"
+              :key="exercise.id"
+              @click="
+                () =>
+                  router.push({
+                    name: 'exercise',
+                    params: { exerciseid: key },
+                  })
+              "
+            >
+              <ion-card-header>
+                <ion-card-title>{{ exercise.play_title }}</ion-card-title>
+              </ion-card-header>
 
-      <ion-reorder-group
-        @ionItemReorder="doReorder"
-        :disabled="false"
-        v-if="Object.entries(playbookStore?.filteredExercises(selectedFilter) || {}).length > 0"
-      >
-        
-          <ion-card
-          v-for="[key, exercise] in Object.entries(playbookStore?.filteredExercises(selectedFilter))"
-            :key="exercise.id"
-            @click="
-              () =>
-                router.push({
-                  name: 'exercise',
-                  params: { exerciseid: key },
-                })
-            "
-            class="practice-card"
-          >
-            <div class="card-content">
-              <ion-reorder slot="end">
-                <img
-                  src="/src/pictures/threeDot.svg"
-                  class="drag-handle-icon"
-                />
-              </ion-reorder>
-
-              <div class="title-progress-container">
-                <ion-label>
-                  {{ exercise.play_title }}
-                </ion-label>
+              <ion-card-content>
                 <div class="owner-container">
                   <ion-avatar>
                     <img src="/src/pictures/Ellipse 72.svg" />
                   </ion-avatar>
                   <h3>
-                    Owner: Guy Hawkins
+                    Owner:
+                    {{
+                      playbookStore.responsiblePersonName(
+                        userStore.teamID,
+                        exercise.responsible
+                      )
+                    }}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="8"
@@ -82,26 +92,75 @@
                     <span v-else color="success"> Ongoing </span>
                   </h3>
                 </div>
-                <!-- todo need to consider again -->
-                <ion-progress-bar
-                  :buffer="1.0"
-                  color="success"
-                  class="progress-bar"
-                  :value="
-                    playbookStore.teamExerciseScore(userStore.teamID, exercise.id) / 10
-                  "
-                ></ion-progress-bar>
-              </div>
-              <ion-icon
-                :icon="chevronForwardOutline"
-                slot="end"
-                class="arrow-icon"
-              />
-            </div>
-          </ion-card>
-       
-      </ion-reorder-group>
-      <ion-fab
+                Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet
+                aenean id.
+              </ion-card-content>
+              <ion-progress-bar
+                :buffer="1.0"
+                class="progress-bar"
+                :value="
+                  playbookStore.teamExerciseScore(
+                    userStore.teamID,
+                    exercise.id
+                  ) / 10
+                "
+              ></ion-progress-bar>
+              <ion-text class="icon-color ion-color"
+                ><ion-icon
+                  :icon="arrowForwardOutline"
+                  class="icon-color"
+                ></ion-icon
+              ></ion-text>
+            </ion-card>
+            <h5 class="ion-padding-bottom">Suggested Exercises:</h5>
+            <ion-card
+              class="card-style"
+              v-for="[key, exercise] in playbookStore.suggestedExercises"
+              :key="key"
+              @click="
+                () =>
+                  router.push({
+                    name: 'suggestedExercise',
+                    params: { exerciseid: key },
+                  })
+              "
+            >
+              <ion-card-header>
+                <ion-card-title>{{ exercise.title }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                {{ exercise.description }}
+              </ion-card-content>
+              <ion-text class="icon-color ion-color"
+                ><ion-icon
+                  :icon="arrowForwardOutline"
+                  class="icon-color"
+                ></ion-icon
+              ></ion-text>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-no-padding">
+          <ion-col class="ion-no-padding">
+            <ion-button
+              expand="block"
+              @click="() => router.push({ name: 'exerciseSearch' })"
+              >SEARCH More</ion-button
+            >
+            <!-- <div>
+              <ion-button
+                class="button-custom"
+                expand="full"
+                fill="outline"
+                router-link="/#"
+                >SEARCH OTHERS</ion-button
+              >
+            </div> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- <ion-fab
         class="addStyle"
         slot="fixed"
         horizontal="end"
@@ -111,16 +170,10 @@
         <ion-fab-button>
           <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
         </ion-fab-button>
-      </ion-fab>
+      </ion-fab> -->
     </ion-content>
     <ion-content :fullscreen="true" v-if="!loading">
-      <h4 class="titleStyle">
-        <ion-skeleton-text
-          :animated="true"
-          style="width: 100px"
-        ></ion-skeleton-text>
-      </h4>
-      <ion-reorder-group @ionItemReorder="doReorder" :disabled="false">
+      <!-- <ion-reorder-group @ionItemReorder="doReorder" :disabled="false">
         <ion-card v-for="index in 10" :key="index" class="practice-card">
           <div class="card-content">
             <ion-reorder slot="end">
@@ -151,8 +204,8 @@
             ></ion-skeleton-text>
           </div>
         </ion-card>
-      </ion-reorder-group>
-      <ion-fab
+      </ion-reorder-group> -->
+      <!-- <ion-fab
         class="addStyle"
         slot="fixed"
         horizontal="end"
@@ -162,7 +215,7 @@
         <ion-fab-button>
           <ion-icon src="/src/pictures/answer-correct-icon 1.svg"></ion-icon>
         </ion-fab-button>
-      </ion-fab>
+      </ion-fab> -->
     </ion-content>
   </ion-page>
 </template>
@@ -190,8 +243,10 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonAvatar,
+  IonButton,
 } from "@ionic/vue";
-import { chevronForwardOutline, add } from "ionicons/icons";
+import { chevronForwardOutline, arrowForwardOutline } from "ionicons/icons";
 import type { ReorderEventDetail } from "@ionic/core";
 import score from "@/components/Header/Header.vue";
 import router from "@/router/index";
@@ -203,9 +258,18 @@ const loading = ref(false);
 const selectedFilter = ref("all");
 const getSelectedFilterExericse = (value: any) => {
   if (value.detail.value) {
-    console.log(value.detail.value);
-    playbookStore.filteredExercises(value.detail.value)
+    playbookStore.filteredExercises(value.detail.value);
   }
+};
+const handleScrollStart = () => {
+  // console.log('scroll start');
+};
+
+const handleScroll = (ev: CustomEvent) => {
+  // console.log('scroll', JSON.stringify(ev.detail));
+};
+const handleScrollEnd = () => {
+  playbookStore.getSuggestedExercises();
 };
 onMounted(async () => {
   await Promise.all([
@@ -216,70 +280,23 @@ onMounted(async () => {
     playbookStore.getTeamExerciseScores(),
   ]);
   loading.value = true;
-  
+  console.log("hwew iw adil ", teamStore.teams.get(userStore.teamID)?.members);
 });
-const practiceItems = ref([
-  {
-    title: "Communication",
-    imgSrc: "/src/pictures/Illustration 6.svg",
-    progress: 0.5,
-  },
-  {
-    title: "Celebrate and Collaborate",
-    imgSrc: "/src/pictures/Illustration 7.svg",
-    progress: 0.3,
-  },
-  {
-    title: "Effective Feedback",
-    imgSrc: "/src/pictures/Illustration 5.svg",
-    progress: 0.7,
-  },
-  {
-    title: "Active Listening",
-    imgSrc: "/src/pictures/Illustration 4.svg",
-    progress: 0.2,
-  },
-  // ... other items
-]);
-
-const doReorder = (event: CustomEvent<ReorderEventDetail>) => {
-  const fromIndex = event.detail.from;
-  const toIndex = event.detail.to;
-  practiceItems.value.splice(
-    toIndex,
-    0,
-    practiceItems.value.splice(fromIndex, 1)[0]
-  );
-  event.detail.complete();
-};
 </script>
 
 <style scoped>
-.practice-card {
-  margin-bottom: 8px;
-  --ion-item-background: transparent;
-  --background: transparent;
-  box-shadow: none;
-  /* Remove shadow if present */
-  display: flex;
-  flex-direction: column;
-  padding: 0px 0px 4px 0px;
-}
+ion-card-title {
+  color: var(--Color-Brand-black, #000);
 
-.card-content {
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  /* Add padding if needed */
-  border-radius: 5px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.title-progress-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
+  /* mobile/Title small */
+  font-family: Cabin;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 142.857% */
+  letter-spacing: 0.1px;
+  width: 90%;
 }
 
 ion-label {
@@ -288,67 +305,6 @@ ion-label {
   /* Space between title and progress bar */
 }
 
-.progress-bar {
-  --progress-background: #e6e0e9;
-  /* --buffer-background: transparent; */
-  --progress-color: #a5ce3e;
-  width: 60%;
-  margin-bottom: 15px;
-
-  /* Adjust width as needed */
-}
-
-.arrow-icon {
-  font-size: 1.5em;
-  margin-left: auto;
-  color: #303030;
-  /* Ensures the arrow icon is aligned to the right */
-}
-
-ion-thumbnail {
-  --border-radius: 0;
-  --size: 55px;
-  /* Adjust the size based on your design */
-  margin-right: 8px;
-  width: 105px;
-  height: 60px;
-  /* Spacing between image and title */
-}
-
-ion-reorder {
-  color: var(--ion-color-medium);
-}
-
-.drag-handle-icon {
-  width: 15px;
-  height: 20px;
-  margin-right: 10px;
-}
-
-.contentHeader {
-  color: var(--Neutrals-black, #303030);
-  /* Title Large */
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 28px;
-  /* 127.273% */
-}
-
-.titleStyle {
-  color: var(--Neutrals-black, #303030);
-  font-size: 22px;
-  /* Keep the font size as is unless it needs to change */
-  font-weight: 500;
-  /* Keep the font weight as is */
-  line-height: 28px;
-  /* Keep the line height as is */
-  text-align: left;
-  /* Align to the left, right or center as per your design */
-  margin-top: 25px;
-  margin-bottom: -20px;
-  padding-left: 15px;
-}
 .page-heading {
   color: var(--Neutrals-black, #303030);
   font-size: 22px;
@@ -363,36 +319,37 @@ ion-reorder {
   margin-bottom: 0px;
 }
 
-.practiceBox {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-}
 .addStyle {
   margin-bottom: 40px;
   margin: 10px;
 }
+
 .owner-container {
   display: flex;
-  align-items: center;
-  margin-top: -8px; /* Adjust this value as needed for top margin */
+  /* align-items: center; */
+  margin-top: 0px;
+  /* Adjust this value as needed for top margin */
 }
+
 .owner-container h3 {
   color: #808080;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 16px; /* 133.333% */
+  line-height: 16px;
+  /* 133.333% */
   margin-left: 8px;
   margin-bottom: 15px;
 }
+
 .completed {
   color: var(--ion-color-primary);
 }
+
 ion-avatar {
   --border-radius: 50%;
-  --size: 50px; /* Adjust the size of the avatar */
+  --size: 50px;
+  /* Adjust the size of the avatar */
   width: 20px;
   height: 20px;
 }
@@ -404,21 +361,123 @@ ion-avatar img {
 
 .select-option {
   width: 100%;
-  max-width: 100%; /* Adjust the width as needed */
+  max-width: 100%;
+  /* Adjust the width as needed */
   min-height: 32px;
-  background: var(--my-masg-background);
+  /* background: var(--my-masg-background); */
   --placeholder-opacity: 1;
   --padding-start: 10px;
   --padding-end: 10px;
   border-radius: 8px;
   --border: none;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.15px;
   word-wrap: break-word;
+  box-shadow: 0px 1px 2px 0px rgba(51, 51, 51, 0.3);
 }
+
 ion-grid {
   padding-top: 20px;
+}
+
+/* new css */
+
+ion-title {
+  color: var(--Neutrals-black, #303030);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  text-align: justify;
+}
+
+ion-card {
+  width: auto;
+  margin-right: -20px;
+  margin-left: -5px;
+  margin-top: -8px;
+  box-shadow: none;
+  background: #aed351;
+}
+
+/* ion-button {
+  --background: transparent;
+} */
+ion-progress-bar {
+  left: 15px;
+  margin-bottom: 15px;
+}
+
+.ion-text-end {
+  color: rgba(119, 85, 119, 0.34);
+  font-size: 12px;
+  margin-top: -26px;
+}
+
+.ion-color {
+  color: #f2f2f2;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.card-style {
+  background: white;
+  margin: 20px 0px 20px 0px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.icon-color {
+  top: 15px;
+  width: 24px;
+  height: 24px;
+  color: #2c3ad180;
+}
+
+.progress-bar {
+  display: flex;
+  width: 90%;
+  height: 4px;
+  padding-right: 149px;
+  align-items: center;
+  border-radius: 24px;
+  --progress-background: #a5ce3e;
+  /* --buffer-background: transparent; */
+  --progress-color: #e6e0e9;
+
+  /* Adjust width as needed */
+}
+
+.button-custom {
+  gap: 29px;
+  bottom: 0;
+  /* border:1px solid; */
+  left: 0;
+  width: 100%;
+}
+
+ion-button {
+  --border-radius: 5px;
+  --border-style: solid;
+  --border-width: 1px;
+  --background: transparent;
+  /* border: 1px solid #a5ce3e; */
+  color: #a5ce3e;
+  color: var(--main-green, #a5ce3e);
+  text-align: center;
+  font-family: Cabin;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+}
+
+.outer-padding {
+  padding-top: 0px;
 }
 </style>

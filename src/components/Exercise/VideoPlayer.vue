@@ -50,7 +50,7 @@
       <!-- Add here -->
     </div>
   </div>
-  <div class="no-video">
+  <div v-else class="no-video">
     <div>
       
       <ion-icon class="no-video-icon" src="/src/pictures/no-video.svg"></ion-icon>
@@ -73,6 +73,10 @@ import {
 } from "ionicons/icons";
 
 import { usePlaybookStore } from "@/store";
+// import TinyEmitter from 'tiny-emitter';
+
+// Creating an instance of TinyEmitter
+// const emitter = new TinyEmitter();
 const playbookStore = usePlaybookStore();
 const props = defineProps(["play"]);
 console.log(props.play)
@@ -83,6 +87,9 @@ const state = reactive({
   isPlaying: false,
   isMuted: false,
 });
+// emitter.on('myEvent', (data :any) => {
+//   console.log('Event received:', data);
+// });
 const onLoadedMetadata = () => {
   console.log(videoElement.value)
   if (videoElement.value) {

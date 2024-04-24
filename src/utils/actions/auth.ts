@@ -18,6 +18,22 @@ const AuthAPI: any = {
       return Catched(error);
     }
   },
+  userRegister: async (payload: any) => {
+    try {
+      console.log("Here is play load " , payload)
+      // return 
+      const response = await eveTechApi.post(`${ApiEndpoints.REGISTRATION}`, payload);
+      // Save token in local storage if found
+      console.log(response)
+      // if(response.key){
+      //   token.set("user:token", response.key);
+      // }
+      return response;
+    } catch (error: any) {
+      console.log("Here is error " ,error)
+      return Catched(error);
+    }
+  },
   logout: async (payload: any) => {
     try {
       const response = await eveTechApi.get(`${ApiEndpoints.LOGOUT}`);

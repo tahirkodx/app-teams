@@ -4,7 +4,10 @@
     <ion-toolbar class="custom-toolbar">
       <ion-buttons class="startIcon" slot="start">
         <ion-button>
-          <ion-icon size="large" :icon="people" class="toolbar-icon"></ion-icon>
+          <ion-icon
+            icon="/src/pictures/setting.svg"
+            class="toolbar-icon"
+          ></ion-icon>
         </ion-button>
       </ion-buttons>
 
@@ -25,36 +28,22 @@
       </div>
 
       <ion-buttons class="endIcon" slot="end">
-        <ion-button @click="navigateFunction">
-          <ion-icon :icon="documentTextOutline" />
-        </ion-button>
         <ion-button>
           <ion-icon
-            size="medium"
-            :icon="personCircleOutline"
+            icon="/src/pictures/chat.svg"
             class="toolbar-icon"
           ></ion-icon>
         </ion-button>
-
-        <!-- <ion-button>
-          <ion-toggle
-            :checked="themeToggle"
-            @ionChange="toggleChange($event)"
-            justify="space-between"
-          ></ion-toggle>
-        </ion-button> -->
+        <ion-button @click="navigateFunction">
+          <ion-icon icon="/src/pictures/survey.svg" class="toolbar-icon" />
+        </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
-  <!--ion-item v-show="surveysStore.activeSurveys.length > 0" @click="() => router.push({name: 'surveys'})">
-        <ion-badge slot="start">{{ surveysStore.activeSurveys.length }}</ion-badge>
-        <ion-label>Open surveys</ion-label>
-    </ion-item-->
 </template>
 
 <script setup lang="ts">
-import { ref, watch ,onMounted} from "vue";
+import { ref, watchEffect, onMounted } from "vue";
 import {
   IonHeader,
   IonToolbar,
@@ -70,18 +59,23 @@ import {
   personCircleSharp,
   personCircleOutline,
   documentTextOutline,
+  settingsOutline,
 } from "ionicons/icons";
 import type { ToggleCustomEvent } from "@ionic/vue";
 import { useTeamStore, useUserStore } from "@/store";
 const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
+const teamSelected = ref();
 onMounted(async () => {
-  if(teamStore.teams === null ){
-  await Promise.all([teamStore.getTeams(), userStore.getUserSettings()]);
+  if (teamStore.teams === null) {
+    await Promise.all([
+      userStore.getUserSettings(),
+      teamStore.getTeams(), 
+    ]);
   }
-})
-import router from '@/router/index'
+});
+import router from "@/router/index";
 const toggleDarkTheme = (shouldAdd) => {
   document.body.classList.toggle("dark", shouldAdd);
 };
@@ -90,8 +84,12 @@ const toggleChange = (ev: ToggleCustomEvent) => {
 };
 const buffer = 1.0;
 
-const teamSelected = ref(userStore.teamID);
-
+console.log(teamSelected.value);
+watchEffect(() => {
+  if (userStore.teamID) {
+    teamSelected.value = userStore.teamID;
+  }
+});
 const changeTeam = (value: any) => {
   console.log(userStore.userID);
 
@@ -161,6 +159,8 @@ ion-select::part(icon) {
 
 .toolbar-icon {
   font-size: 24px;
+  height: 24px;
+  width: 24px;
 }
 
 ion-button {

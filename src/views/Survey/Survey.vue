@@ -37,8 +37,8 @@
                     <ion-list>
                       <ion-item v-for="[id, team] in Array.from(teamStore.teams)" :key="id">
                         <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                          :checked="selectedTeams.includes(id)"
-                          @ionChange="handleCheckboxChange(id)">{{ team.name }}</ion-checkbox>
+                          :checked="selectedTeams.includes(id)" @ionChange="handleCheckboxChange(id)">{{ team.name
+                          }}</ion-checkbox>
                       </ion-item>
                     </ion-list>
                   </div>
@@ -78,12 +78,12 @@
         </IonRow>
       </IonGrid>
       <!-- todo need to get team id is here -->
-      <ion-card v-for="[id, survey] in statusStore.requests" :key="id" class="ion-margin-vertical" 
-      @click="() => router.push({name: 'survey', params: { teamid: '60d84fb36d8e42838966350ddc3ac956', surveyid: survey.id}})"
-
       
-        >
-        <IonGrid :fixed="true">
+      <ion-card v-for="[id, survey] in statusStore.requests" :key="id" class="ion-margin-vertical" 
+      @click="() => router.push({name: 'survey', params: {  surveyid: survey.id}})">
+      
+      <IonGrid :fixed="true">
+          <ion-route url="/tutorial" component="page-tutorial"></ion-route>
           <IonRow>
             <IonCol>
               <ion-card-header>
@@ -189,7 +189,7 @@ onMounted(async () => {
     statusStore.getSchedulers(),
     statusStore.getRequests(),
   ]);
-  
+
 });
 const handleCheckboxChange = (teamId: any) => {
 
@@ -198,7 +198,7 @@ const handleCheckboxChange = (teamId: any) => {
     selectedTeams.value.splice(index, 1);
   } else {
     selectedTeams.value.push(teamId);
-  } 
+  }
   console.log(selectedTeams.value);
 }
 const getChipClass = (type: string, date: string) => {

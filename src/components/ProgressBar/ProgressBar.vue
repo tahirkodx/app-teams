@@ -4,7 +4,7 @@
         <div class="progress-bar">
           <div class="progress" :style="{ width: progressWidth }"></div>
         </div>
-        <div class="progress-indicator">
+        <div class="progress-indicator" v-if="props.showLabel">
           {{ props.tempIndex  }}/{{ props.data }} Questions
         </div>
       </div>
@@ -14,7 +14,7 @@
   <script setup lang="ts">
   import { ref } from "vue";
   import { computed, defineProps } from "vue";
-  const props = defineProps(["data","tempIndex"]);
+  const props = defineProps(["data","tempIndex","showLabel"]);
   
   
   const progressWidth = computed(() => {

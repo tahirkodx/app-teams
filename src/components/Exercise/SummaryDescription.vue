@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div v-if="props.id">
     <ion-card
       class="custom-card"
-      v-if="
-        playbookStore.playbook.get(props.id)?.summary
-      "
+      
     >
       <ion-card-content class="card-text">
         {{
@@ -20,7 +18,30 @@
         v-html="
           converter.makeHtml(
             playbookStore.playbook.get(props.id)
-              ?.description
+              ?.description)
+        "
+      ></p>
+    </div>
+  </div>
+  <div v-else>
+    <ion-card
+      class="custom-card"
+      v-if="props.summary"
+    >
+      <ion-card-content class="card-text" >
+        {{
+          props.summary
+        }}
+      </ion-card-content>
+    </ion-card>
+
+    <div class="custom-section">
+      <p>Exercise Objective:</p>
+
+      <p
+        v-html="
+          converter.makeHtml(
+            props.description
           )
         "
       ></p>
@@ -30,7 +51,7 @@
 <script setup lang="ts">
 import { usePlaybookStore } from "@/store";
 import showdown from "showdown";
-const props = defineProps(["id"]);
+const props = defineProps(["id","summary", "description"]);
 console.log("Here is adil" , props.id)
 var converter = new showdown.Converter();
 const playbookStore = usePlaybookStore();

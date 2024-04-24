@@ -8,6 +8,7 @@
           An app that enables team spirits and bring the best
         </p>
         <button @click="auth_login" class="login-btn">LOGIN</button>
+
         <div class="divider">OR</div>
         <button class="login-google-btn">
           <img src="/src/pictures/SSO Icon.svg" alt="Google" />
@@ -16,7 +17,7 @@
         <p class="register-prompt">
           Logging for the first time? <a href="/register">Register here</a>
         </p>
-        <button class="register-btn">REGISTER</button>
+        <button @click="auth_register" class="register-btn">REGISTER</button>
       </div>
     </ion-content>
   </ion-page>
@@ -28,6 +29,9 @@ import router from "@/router";
 const auth_login = () => {
   router.push({ name: "login" });
 };
+const auth_register = () => {
+  router.push({ name: "register" });
+};
 </script>
 
 <style scoped>
@@ -38,7 +42,7 @@ const auth_login = () => {
   justify-content: center;
   padding: 25px;
   max-width: 100%;
-  margin-top: 70px;
+  margin-top: 50px;
 }
 .welcomeClass {
   color: var(--tietiary, rgba(44, 58, 209, 0.5));
@@ -60,15 +64,16 @@ h1 {
 }
 
 .subtitle {
+  padding: 0 50px;
   color: #9f9f9f;
   text-align: center;
+  /* mobile/Title Medium */
   font-family: Cabin;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px; /* 150% */
   letter-spacing: 0.15px;
-  padding: 0 50px;
 }
 
 .login-btn,
@@ -84,9 +89,20 @@ h1 {
 }
 
 .login-btn {
-    margin-top: 150px;
+  margin-top: 80px;
+  padding: 12px;
   background-color: #8bc34a; /* Adjust the color to match your design */
-  color: white;
+
+  margin-bottom: 0px;
+  color: var(--white, #fff);
+  text-align: center;
+  font-family: Cabin;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
 }
 
 .login-google-btn {
@@ -96,7 +112,15 @@ h1 {
   background-color: white;
 
   border: 1px solid var(--main-green, #a5ce3e);
-  color: #a5ce3e;
+  color: var(--main-green, #a5ce3e);
+  text-align: center;
+  font-family: Cabin;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
 }
 
 .login-google-btn img {
@@ -105,16 +129,16 @@ h1 {
 
 .divider {
   margin: 15px 0;
-  color: #49454F;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 20px; /* 142.857% */
-letter-spacing: 0.25px;
+  color: #49454f;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.25px;
 }
 
 .register-prompt {
-    margin-top: 210px ;
+  margin-top: 110px;
   color: #5e5e5e;
   text-align: center;
   font-family: Cabin;
@@ -130,16 +154,16 @@ letter-spacing: 0.25px;
 }
 
 .register-btn {
-    color: var(--secondary, #FF8512);
-text-align: center;
-font-size: 15px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-letter-spacing: 0.75px;
-text-transform: uppercase;
+  color: var(--secondary, #ff8512);
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
   background-color: transparent;
-  color: #FF8512;  
-  border: 1px solid var(--secondary, #FF8512);
+  color: #ff8512;
+  border: 1px solid var(--secondary, #ff8512);
 }
 </style>

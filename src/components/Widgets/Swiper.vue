@@ -1,46 +1,48 @@
 <template>
-  <Swiper
-    :spaceBetween="30"
-    :pagination="{ clickable: true }"
-    :modules="modules"
-    class="mySwiper"
-  >
-    <swiper-slide>
-      <div class="slide-content">
-        <ion-img
-          class="imgStyle"
-          src="/src/pictures/Frame 2608638.svg"
-        ></ion-img>
-        <div class="title">Building your team stronger and smarter</div>
-      </div>
-    </swiper-slide>
-
-    <swiper-slide>
-      <div class="slide-content">
-        <ion-img
-          class="imgStyle"
-          src="/src/pictures/Frame 2608639.svg"
-        ></ion-img>
-        <div class="title">Grow your teams and grow yourself</div>
-      </div></swiper-slide
+  <ion-page>
+    <Swiper
+      :spaceBetween="30"
+      :pagination="{ clickable: true }"
+      :modules="modules"
+      class="mySwiper"
     >
-    <swiper-slide>
-      <div class="slide-content">
-        <div>
-          <div class="slidertitle">Elevate your leadership</div>
+      <swiper-slide>
+        <div class="slide-content">
+          <ion-img
+            class="imgStyle"
+            src="/src/pictures/Frame 2608638.svg"
+          ></ion-img>
+          <div class="title">Building your team stronger and smarter</div>
         </div>
-        <ion-img
-          class="imgStyle"
-          src="/src/pictures/follow the leader-pana 1.svg"
-        ></ion-img>
-        <div class="button-container">
-          <button @click="welcomePage" class="login-button">LOGIN</button>
-          <span class="or-text">OR</span>
-          <button @click="reg_login" class="register-button">REGISTER</button>
+      </swiper-slide>
+
+      <swiper-slide>
+        <div class="slide-content">
+          <ion-img
+            class="imgStyle"
+            src="/src/pictures/Frame 2608639.svg"
+          ></ion-img>
+          <div class="title">Grow your teams and grow yourself</div>
+        </div></swiper-slide
+      >
+      <swiper-slide>
+        <div class="slide-content">
+          <div>
+            <div class="slidertitle">Elevate your leadership</div>
+          </div>
+          <ion-img
+            class="imgStyle"
+            src="/src/pictures/follow the leader-pana 1.svg"
+          ></ion-img>
+          <div class="button-container">
+            <button @click="welcomePage" class="login-button">LOGIN</button>
+            <span class="or-text">OR</span>
+            <button @click="reg_login" class="register-button">REGISTER</button>
+          </div>
         </div>
-      </div>
-    </swiper-slide>
-  </Swiper>
+      </swiper-slide>
+    </Swiper>
+  </ion-page>
 </template>
 
 <script setup lang="ts">
@@ -49,12 +51,15 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import { IonImg, IonButton } from "@ionic/vue";
+import { IonImg, IonButton, IonPage } from "@ionic/vue";
 import router from "@/router/index";
 // Define modules
 const modules = ref([Pagination]);
 
 const welcomePage = () => {
+  router.push({ name: "welcomeScreen" });
+};
+const reg_login = () => {
   router.push({ name: "welcomeScreen" });
 };
 </script>
