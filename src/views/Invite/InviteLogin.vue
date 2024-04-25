@@ -19,13 +19,13 @@
               <ion-input
                 fill="outline"
                 placeholder="Enter the invite code"
-                class="ion-margin-top custom-input"
+                class="custom-input"
               ></ion-input>
             </div>
             <div class="ion-margin-bottom">
               <ion-label class="custom-label">Email</ion-label>
               <ion-input
-                class="ion-margin-top custom-input"
+                class="custom-input"
                 fill="outline"
                 placeholder="Type your email"
               ></ion-input>
@@ -67,7 +67,6 @@ import {
   IonContent,
   IonInput,
 } from "@ionic/vue";
-import router from "@/router/index";
 </script>
 
 <style scoped>
@@ -92,9 +91,10 @@ import router from "@/router/index";
   padding: 0 50px;
 }
 .custom-input {
-  --background: #F2F2F2; 
+  --background: #f2f2f2;
   --border-width: 0;
   --border-radius: 5px;
+  margin-top: 10px;
 }
 ion-content {
   display: flex;

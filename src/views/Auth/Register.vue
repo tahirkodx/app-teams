@@ -60,23 +60,23 @@
       <IonGrid>
         <IonRow>
           <IonCol>
-            <ion-label>First Name</ion-label>
+            <ion-label class="label-text">First Name</ion-label>
             <ion-input v-model="fname" type="text" class="custom"></ion-input>
           </IonCol>
           <IonCol>
-            <ion-label>Last Name</ion-label>
+            <ion-label class="label-text">Last Name</ion-label>
             <ion-input v-model="lname" type="text" class="custom"></ion-input>
           </IonCol>
         </IonRow>
         <IonRow>
           <IonCol>
-            <ion-label>Company / Company code</ion-label>
+            <ion-label class="label-text">Company / Company code</ion-label>
             <ion-input v-model="company" type="text" class="custom"></ion-input>
           </IonCol>
         </IonRow>
         <IonRow>
           <IonCol>
-            <ion-label>Email Id</ion-label>
+            <ion-label class="label-text">Email Id</ion-label>
             <ion-input
               v-model="email"
               ref="emailInput"
@@ -89,7 +89,7 @@
         </IonRow>
         <IonRow>
           <IonCol>
-            <ion-label>Password</ion-label>
+            <ion-label class="label-text">Password</ion-label>
             <ion-input
               v-model="password"
               ref="passwordInput"
@@ -112,7 +112,7 @@
         </IonRow>
         <IonRow>
           <IonCol>
-            <ion-label>Confirm Password</ion-label>
+            <ion-label class="label-text">Confirm Password</ion-label>
             <ion-input
               v-model="conPassword"
               ref="confirmPasswordInput"
@@ -199,9 +199,10 @@ const validatePassword = () => {
   const isValidPassword = passwordRegex.test(password.value);
 
   if (!isValidPassword) {
-    customErrorMessagePass.value = 'Invalid password. Must contain a minimum of 8 characters and at least one special character.';
+    customErrorMessagePass.value =
+      "Invalid password. Must contain a minimum of 8 characters and at least one special character.";
   } else {
-    customErrorMessagePass.value = ''; // Clear the error message if the password is valid
+    customErrorMessagePass.value = ""; // Clear the error message if the password is valid
   }
 };
 // Email validation method
@@ -249,20 +250,18 @@ const markTouched = () => {
  * Send details to the login function. If an error then present toast of failed login
  */
 async function goto_login() {
-    router.push({ name: 'login' });
-
+  router.push({ name: "login" });
 }
 async function auth_login() {
-    // isRegister.value = true
-//   console.log(email.value);
-//   console.log(password.value);
-//   console.log(lname.value);
-//   console.log(fname.value);
-//   console.log(company.value);
-// return false
-//   todo need to add these values 
+  // isRegister.value = true
+  //   console.log(email.value);
+  //   console.log(password.value);
+  //   console.log(lname.value);
+  //   console.log(fname.value);
+  //   console.log(company.value);
+  // return false
+  //   todo need to add these values
   const login = {
-
     email: email.value,
     password1: password.value,
     password2: conPassword.value,
@@ -279,13 +278,12 @@ async function auth_login() {
       }
     } else {
       isRegister.value = !isRegister.value;
-      lname.value = ""
-      fname.value = ""
-      password.value = ""
-      email.value = ""
-      conPassword.value = ""
-      company.value = ""
-
+      lname.value = "";
+      fname.value = "";
+      password.value = "";
+      email.value = "";
+      conPassword.value = "";
+      company.value = "";
     }
   }
 }
@@ -320,9 +318,10 @@ ion-input {
 }
 
 .login-btn {
-  --background: #8bc34a;
+  --background: #a5ce3e;
   margin-top: 20px;
   --border-radius: 5px;
+  height: 43px;
 }
 
 .login-google-btn {
@@ -362,7 +361,8 @@ ion-input.custom {
   --padding-end: 10px;
   --padding-start: 10px;
   --padding-top: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 ion-input.custom.ios .input-bottom .helper-text,
@@ -372,7 +372,7 @@ ion-input.custom.md .input-bottom .counter {
   color: var(--ion-color-primary);
 }
 .acceptTerm {
-  font-family: Cabin;
+  color: var(--Color-Brand-black, #000);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -380,7 +380,7 @@ ion-input.custom.md .input-bottom .counter {
   text-align: center;
 }
 .policy {
-  color: #0d99ff;
+  color: var(--Color-Brand-black, #0d99ff);
   font-family: Cabin;
   font-size: 12px;
   font-style: normal;
@@ -403,12 +403,13 @@ ion-input.custom.md .input-bottom .counter {
   text-align: center;
 
   /* mobile/Body medium */
-  font-family: Cabin;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.25px;
+  max-width: 293px;
+  margin: 0 auto;
 }
 .conEmailLink {
   padding-top: 40px;
@@ -424,5 +425,13 @@ ion-input.custom.md .input-bottom .counter {
   font-weight: 400;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.25px;
+}
+
+.label-text {
+  color: #808080;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 133.333% */
 }
 </style>

@@ -3,7 +3,7 @@
     <ion-content>
       <div class="login-container">
         <h3 class="welcomeClass">Welcome to</h3>
-        <h1>Epicus.</h1>
+        <h1 class="epiText">Epicus.</h1>
         <p class="subtitle">
           An app that enables team spirits and bring the best
         </p>
@@ -52,7 +52,9 @@ const auth_register = () => {
   font-weight: 500;
   line-height: 28px; /* 127.273% */
 }
-
+.epiText {
+  margin-top: 10px;
+}
 h1 {
   color: var(--tietiary, rgba(44, 58, 209, 0.5));
   text-align: center;
@@ -90,9 +92,9 @@ h1 {
 
 .login-btn {
   margin-top: 80px;
-  padding: 12px;
+  padding: 12px 24px;
   background-color: #8bc34a; /* Adjust the color to match your design */
-
+  height: 50px;
   margin-bottom: 0px;
   color: var(--white, #fff);
   text-align: center;
@@ -130,7 +132,7 @@ h1 {
 .divider {
   margin: 15px 0;
   color: #49454f;
-  font-size: 14px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 142.857% */
@@ -164,6 +166,7 @@ h1 {
   text-transform: uppercase;
   background-color: transparent;
   color: #ff8512;
+  height: 50px;
   border: 1px solid var(--secondary, #ff8512);
 }
 </style>

@@ -1,36 +1,35 @@
 <template>
   <ion-content>
-  <ion-page>
-    <ion-row>
-      <ion-col>
-        <ion-text class="ion-text-center">
-          <h3 class="text-sm">Get notified!</h3>
-          <h6 class="custom-style">
-            To keep yourself updated on surveys, team insights, performance
-          </h6>
-        </ion-text>
-        <div>
-          <ion-img
-            src="/src/pictures/rafiki.svg"
-            alt="Finished Success"
-            class="ion-padding-top"
-          ></ion-img>
-        </div>
-        <ion-text>
-          <ion-button class="ion-padding style" expand="block"
-            >ALLOW NOTIFICATIONS</ion-button
+    <ion-page>
+      <ion-row>
+        <ion-col>
+          <ion-text class="ion-text-center">
+            <h3 class="text-sm">Get notified!</h3>
+            <h6 class="custom-style">
+              To keep yourself updated on surveys, team insights, performance
+            </h6>
+          </ion-text>
+          <div>
+            <ion-img
+              src="/src/pictures/rafiki.svg"
+              alt="Finished Success"
+              class="ion-padding-top"
+            ></ion-img>
+          </div>
+          <ion-text>
+            <ion-button class="ion-padding style" expand="block"
+              >ALLOW NOTIFICATIONS</ion-button
+            >
+            <ion-button fill="clear" expand="block" class="text-size"
+              >Maybe later</ion-button
+            ></ion-text
           >
-          <ion-button fill="clear" expand="block" class="text-size"
-            >Maybe later</ion-button
-          ></ion-text
-        >
-      </ion-col></ion-row
-    ></ion-page
-  >
+        </ion-col></ion-row
+      ></ion-page
+    >
   </ion-content>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
 import {
   IonButton,
   IonText,
@@ -38,7 +37,7 @@ import {
   IonCol,
   IonPage,
   IonImg,
-  IonContent
+  IonContent,
 } from "@ionic/vue";
 </script>
 <style scoped>
@@ -46,6 +45,8 @@ import {
   color: #9f9f9f;
   font-size: 16px;
   line-height: 16px;
+  max-width: 278px;
+  margin: 0 auto;
 }
 
 .style {

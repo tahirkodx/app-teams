@@ -14,34 +14,35 @@
 
     <ion-content class="ion-padding">
       <div class="login-header">
-        <h2>Login</h2>
+        <h2 class="headingText">Login</h2>
       </div>
 
       <ion-list class="login-form">
+        <ion-label class="custom-label">E-mail</ion-label>
         <ion-input
           v-model="email"
           ref="emailInput"
           type="email"
-          fill="solid"
-          label="Email"
-          label-placement="floating"
+          fill="outline"
+          placeholder="Enter your email here"
           error-text="This Email id is not found"
           @ionInput="validate"
           @ionBlur="markTouched"
-          class="input-background"
+          class="custom-input"
         ></ion-input>
+
+        <ion-label class="custom-label">Password</ion-label>
 
         <ion-input
           v-model="password"
           ref="passwordInput"
           :type="showPassword ? 'text' : 'password'"
-          fill="solid"
-          label="Password"
-          label-placement="floating"
+          fill="outline"
+          placeholder="Type your password"
           error-text="Your password is incorrect"
           @ionInput="validate"
           @ionBlur="markTouched"
-          class="input-background"
+          class="input-background custom-input"
         >
           <ion-icon
             :icon="showPassword ? eyeOff : eye"
@@ -131,8 +132,8 @@ const markTouched = () => {
  * Send details to the login function. If an error then present toast of failed login
  */
 async function auth_login() {
-  console.log(email.value);
-  console.log(password.value);
+  // console.log(email.value);
+  // console.log(password.value);
   const login = {
     email: email.value,
     password: password.value,
@@ -169,24 +170,32 @@ const toggleShowPassword = () => {
 .login-form {
   width: 100%;
   max-width: 400px;
-  padding: 20px;
+  padding: 4px;
 }
 
 .login-btn {
-  --background: #8bc34a;
+  --background: #a5ce3e;
   margin-top: 20px;
   --border-radius: 5px;
+  height: 50px;
 }
 
 .login-google-btn {
   --background: white;
   --color: #555;
   --border-radius: 5px;
-  --border-style: solid;
-  --border-width: 1px;
-  --border-color: var(--ion-color-primary);
-  --box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--main-green, #a5ce3e);
   margin-top: 20px;
+  color: var(--main-green, #a5ce3e);
+  text-align: center;
+  font-family: Cabin;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.75px;
+  height: 50px;
+  text-transform: uppercase;
 }
 
 .forgot-password {
@@ -206,6 +215,32 @@ const toggleShowPassword = () => {
   font-weight: 700;
   line-height: 16px; /* 133.333% */
   text-decoration-line: underline;
+}
+
+.custom-input {
+  --background: #f2f2f2;
+  --border-width: 0;
+  --border-radius: 5px;
+  margin-top: 10px;
+}
+
+.custom-label {
+  color: #808080;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 133.333% */
+}
+
+.headingText {
+  color: #303030;
+  text-align: center;
+
+  /* mobile/Title Large */
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px; /* 127.273% */
 }
 </style>
 <!-- <div >
