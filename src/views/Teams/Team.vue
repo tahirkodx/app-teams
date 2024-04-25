@@ -6,7 +6,12 @@
     <ion-content class="ion-padding">
       <!-- <chart /> -->
       <radarchart />
-      <linkbutton label="ASK HELP" expend="block" link="teamsupport" class="ion-padding-vertical" />
+      <linkbutton
+        label="ASK HELP"
+        expend="block"
+        link="teamsupport"
+        class="ion-padding-vertical"
+      />
       <teamwidget />
       <!-- new  -->
       <ion-accordion-group :multiple="true" :value="['first', 'third']">
@@ -16,27 +21,36 @@
           </ion-item>
           <div class="ion-no-padding" slot="content">
             <div class="ion-no-padding">
-              <div class="newClass" v-for="(member, index) in teamStore.teamMembers.members" :key="index" @click="() =>
-          router.push({
-            name: 'teamMember',
-          })
-        ">
+              <div
+                class="newClass"
+                v-for="(member, index) in teamStore.teamMembers.members"
+                :key="index"
+                @click="
+                  () =>
+                    router.push({
+                      name: 'teamMember',
+                    })
+                "
+              >
                 <div class="profile-pic">
-                  <ion-img src="/src/pictures/Ellipse1.svg" alt="Finished Success"></ion-img>
+                  <ion-img
+                    src="/src/pictures/Ellipse1.svg"
+                    alt="Finished Success"
+                  ></ion-img>
                 </div>
                 <div class="inner-team">
                   <div>
                     <div class="info-name">{{ member.last_name }}</div>
                     <div class="info-role">
                       {{
-        member.role == 0
-          ? "Visitor"
-          : member.role == 1
-            ? "Member"
-            : member.role == 2
-              ? "Leader"
-              : "Coach"
-      }}
+                        member.role == 0
+                          ? "Visitor"
+                          : member.role == 1
+                          ? "Member"
+                          : member.role == 2
+                          ? "Leader"
+                          : "Coach"
+                      }}
                     </div>
                   </div>
                   <div>

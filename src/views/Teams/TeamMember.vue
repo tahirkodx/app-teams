@@ -16,31 +16,48 @@
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
-    <InfoCard />
+      <InfoCard />
       <ion-card class="gray-card ion-padding-start ion-padding-end">
         <ion-card-header>
           <ion-card-title>Improvement Commitments:</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          This suggestions contain list of recommended commitments related to the improvement commitment you made.
+          This suggestions contain list of recommended commitments related to
+          the improvement commitment you made.
         </ion-card-content>
       </ion-card>
       <ion-grid>
         <ion-row>
           <ion-col class="ion-padding">
-            <ion-card v-for="(topic, index) in commitmentTopics" :key="index" @click="() =>
-          router.push({
-            name: 'teamTopic',
-          })
-        " class="card-style">
+            <ion-card
+              v-for="(topic, index) in commitmentTopics"
+              :key="index"
+              @click="
+                () =>
+                  router.push({
+                    name: 'teamTopic',
+                  })
+              "
+              class="card-style"
+            >
               <ion-card-header>
                 <ion-card-title>{{ topic.title }}</ion-card-title>
-                <ion-card-subtitle> <span class="text-green">{{ topic.score }}</span></ion-card-subtitle>
+                <ion-card-subtitle>
+                  <span class="text-green">{{
+                    topic.score
+                  }}</span></ion-card-subtitle
+                >
                 <div class="owner-container">
                   <ion-img :src="topic.owner.avatar" />
                   <ion-text class="font-sm">
                     Owner: {{ topic.owner.name }}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 2 2" fill="none">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="4"
+                      height="4"
+                      viewBox="0 0 2 2"
+                      fill="none"
+                    >
                       <circle cx="1" cy="1" r="1" fill="#D9D9D9" />
                     </svg>
                     <span class="">
@@ -54,7 +71,10 @@
               </ion-card-content>
               <ion-progress-bar :value="topic.progress"></ion-progress-bar>
               <ion-text class="ion-color">
-                <ion-icon :icon="arrowForwardOutline" class="icon-color"></ion-icon>
+                <ion-icon
+                  :icon="arrowForwardOutline"
+                  class="icon-color"
+                ></ion-icon>
               </ion-text>
             </ion-card>
           </ion-col>
@@ -87,7 +107,7 @@ import {
   settingsOutline,
   arrowForwardOutline,
   chatbubbleEllipsesOutline,
-  documentTextOutline
+  documentTextOutline,
 } from "ionicons/icons";
 import InfoCard from "@/components/Personal/InfoCard.vue";
 import router from "@/router/index";
@@ -100,7 +120,8 @@ const commitmentTopics = ref([
       avatar: "/src/pictures/Ellipse 72.svg",
     },
     status: "Ongoing",
-    description: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
     progress: 0.5,
   },
   {
@@ -111,7 +132,8 @@ const commitmentTopics = ref([
       avatar: "/src/pictures/Ellipse 72.svg",
     },
     status: "Ongoing",
-    description: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
     progress: 0.5,
   },
   {
@@ -121,7 +143,8 @@ const commitmentTopics = ref([
       avatar: "/src/pictures/Ellipse 72.svg",
     },
     status: "Ongoing",
-    description: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
     progress: 0.5,
   },
 ]);
@@ -136,7 +159,6 @@ ion-toolbar {
 ion-card-content {
   display: flex;
   font-size: 12px;
-
 }
 
 ion-card-title {
@@ -175,7 +197,7 @@ ion-card {
 }
 
 ion-progress-bar {
-  --background: #E6E0E9;
+  --background: #e6e0e9;
   --progress-color: #2c3ad180;
   width: 89%;
   left: 15px;
@@ -229,7 +251,7 @@ ion-icon {
 }
 
 .card-style {
-  border: 1px solid #F2F2F2;
+  border: 1px solid #f2f2f2;
   margin: 0px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   margin-bottom: 16px;
