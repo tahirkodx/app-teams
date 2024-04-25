@@ -28,7 +28,11 @@
       <ion-grid>
         <ion-row>
           <ion-col class="ion-padding">
-            <ion-card v-for="(topic, index) in commitmentTopics" :key="index" class="card-style">
+            <ion-card v-for="(topic, index) in commitmentTopics" :key="index" @click="() =>
+          router.push({
+            name: 'teamTopic',
+          })
+        " class="card-style">
               <ion-card-header>
                 <ion-card-title>{{ topic.title }}</ion-card-title>
                 <ion-card-subtitle> <span class="text-green">{{ topic.score }}</span></ion-card-subtitle>
@@ -86,6 +90,7 @@ import {
   documentTextOutline
 } from "ionicons/icons";
 import InfoCard from "@/components/Personal/InfoCard.vue";
+import router from "@/router/index";
 const commitmentTopics = ref([
   {
     title: "Commitment Topic",
@@ -106,7 +111,7 @@ const commitmentTopics = ref([
       avatar: "/src/pictures/Ellipse 72.svg",
     },
     status: "Ongoing",
-    description: "Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum.",
+    description: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
     progress: 0.5,
   },
   {
@@ -116,7 +121,7 @@ const commitmentTopics = ref([
       avatar: "/src/pictures/Ellipse 72.svg",
     },
     status: "Ongoing",
-    description: "Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum.",
+    description: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
     progress: 0.5,
   },
 ]);

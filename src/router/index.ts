@@ -198,6 +198,14 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+  {
+    name: "teamTopic",
+    path: "/teams/teamTopic",
+    component: () => import("@/views/Teams/TeamTopic.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
   // All messages screens
   {
     name: "allMessages",
