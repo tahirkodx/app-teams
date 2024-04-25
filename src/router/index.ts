@@ -7,30 +7,84 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     component: () => import("@/views/Auth/Intro.vue"),
   },
+  // Welcome Screen
   {
     name: "welcomeScreen",
     path: "/welcomeScreen",
     component: () => import("@/views/Auth/WelcomeScreen.vue"),
   },
+  // Register screen.
   {
     name: "register",
     path: "/register",
     component: () => import("@/views/Auth/Register.vue"),
   },
   {
+    name: "registerCompany",
+    path: "/registerCompany",
+    component: () => import("@/views/RegistrationCompany/RegisterCompany.vue"),
+  },
+  {
+    name: "selectPlan",
+    path: "/selectPlan",
+    component: () => import("@/views/SelectPlan/SelectPlan.vue"),
+  },
+
+  {
+    name: "proPlan",
+    path: "/proPlan",
+    component: () => import("@/views/SelectPlan/ProPlan.vue"),
+  },
+
+  {
+    name: "paymentSuccess",
+    path: "/paymentSuccess",
+    component: () => import("@/views/SelectPlan/PaymentSuccess.vue"),
+  },
+
+  {
+    name: "setProfile",
+    path: "/setProfile",
+    component: () => import("@/views/RegistrationCompany/SetProfile.vue"),
+  },
+
+  {
+    name: "sendInvite",
+    path: "/sendInvite",
+    component: () => import("@/views/RegistrationCompany/SendInvite.vue"),
+  },
+
+  {
+    name: "signUpCompany",
+    path: "/signUpCompany",
+    component: () => import("@/views/RegistrationCompany/SignUpCompany.vue"),
+  },
+  {
+    name: "paymentSuccess",
+    path: "/paymentSuccess",
+    component: () => import("@/views/RegistrationCompany/PaymentSuccess.vue"),
+  },
+  {
+    name: "paymentSuccess",
+    path: "/paymentSuccess",
+    component: () => import("@/views/RegistrationCompany/ProPlan.vue"),
+  },
+  {
+    name: "paymentSuccess",
+    path: "/paymentSuccess",
+    component: () => import("@/views/RegistrationCompany/SelectPlan.vue"),
+  },
+
+  // Login screens
+  {
     name: "login",
     path: "/login",
     component: () => import("@/views/Auth/Login.vue"),
   },
+
+  // User profile screens
   {
     path: "/profile",
-    component: () => import("@/views/Profile/Profile.vue"),
-    meta: {
-      requiresAuth: true, // Add meta field to indicate protected route
-    },
-  },
-  {
-    path: "/profile/notif",
     component: () =>
       import(
         "@/views//ProfileNotificationSetting/ProfileNotificationSetting.vue"
@@ -48,6 +102,8 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+
+  // Ask Help Screens
   {
     name: "ask-help",
     path: "/ask-help",
@@ -80,6 +136,8 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+
+  //Surveys screens
   {
     name: "surveys",
     path: "/surveys",
@@ -113,13 +171,16 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    name: "createteam",
-    path: "/teams/create",
-    component: () => import("@/views/Teams/CreateTeam.vue"),
-    meta: {
-      requiresAuth: true,
-    },
+    name: "surveySchedule",
+    path: "/surveySchedule",
+    component: () => import("@/views/SurveySchedule/SurveySchedule.vue"),
   },
+  {
+    name: "scheduleWeekly",
+    path: "/scheduleWeekly",
+    component: () => import("@/views/SurveySchedule/ScheduleWeekly.vue"),
+  },
+  // check later
   {
     name: "addteam",
     path: "/teams/addteam",
@@ -128,6 +189,7 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+  // check later
   {
     name: "teamMember",
     path: "/teams/teamMember",
@@ -136,11 +198,13 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+  // All messages screens
   {
     name: "allMessages",
     path: "/allMessages",
     component: () => import("@/views/Messages/AllMessages.vue"),
   },
+  // statistics screens
   {
     name: "teamStatus",
     path: "/all/statistics",
@@ -173,14 +237,16 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+  // buddies
   {
     name: "buddyList",
-    path: "/buddy/list",
+    path: "/buddy",
     component: () => import("@/views/Buddies/Index.vue"),
     meta: {
       requiresAuth: true,
     },
   },
+  // big profile
   {
     name: "big5Profile",
     path: "/bigProfile",
@@ -205,16 +271,21 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+
   {
-    name: "surveySchedule",
-    path: "/surveySchedule",
-    component: () => import("@/views/SurveySchedule/SurveySchedule.vue"),
+    name: "createBigProfile",
+    path: "/createBigProfile",
+    component: () =>
+      import("@/views/UserOnboarding/BigProfileFlow/CreateBigProfile.vue"),
   },
-  {
-    name: "scheduleWeekly",
-    path: "/scheduleWeekly",
-    component: () => import("@/views/SurveySchedule/ScheduleWeekly.vue"),
-  },
+
+  // {
+  //   name: "bigProfile",
+  //   path: "/bigProfile",
+  //   component: () => import("@/views/PersonalProfile/BigProfile.vue"),
+  // },
+
+  // Invite screens
   {
     name: "inviteLogin",
     path: "/inviteLogin",
@@ -230,27 +301,31 @@ const routes: Array<RouteRecordRaw> = [
     path: "/inviteNotified",
     component: () => import("@/views/Invite/InviteNotified.vue"),
   },
-  {
-    name: "list",
-    path: "/list",
-    component: () => import("@/views/Buddy/List.vue"),
-  },
-  {
-    name: "create",
-    path: "/create",
-    component: () => import("@/views/Buddy/Create.vue"),
-  },
+  // {
+  //   name: "list",
+  //   path: "/list",
+  //   component: () => import("@/views/Buddy/List.vue"),
+  // },
+  // {
+  //   name: "create",
+  //   path: "/create",
+  //   component: () => import("@/views/Buddy/Create.vue"),
+  // },
+
+  // personal profile
   {
     name: "personalProfile",
     path: "/personalProfile",
     component: () =>
       import("@/views/PersonalTransformation/PersonalProfile.vue"),
   },
+  // side menubar
   {
     name: "sidebarMenu",
     path: "/sidebarMenu",
     component: () => import("@/views/Profile/SidebarMenu.vue"),
   },
+  // LeadershipTest screens
   {
     name: "preTest",
     path: "/preTest",
@@ -273,20 +348,42 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/PersonalProfile/ProfilePersonal.vue"),
   },
   {
-    name: "bigProfile",
-    path: "/bigProfile",
-    component: () => import("@/views/PersonalProfile/BigProfile.vue"),
+    name: "changeTransformation",
+    path: "/changeTransformation",
+    component: () =>
+      import("@/views/UserOnboarding/ProfileSection/ChangeTransformation.vue"),
   },
+  
+  {
+    name: "createTransformation",
+    path: "/createTransformation",
+    component: () =>
+      import("@/views/UserOnboarding/ProfileSection/CreateTransformation.vue"),
+  },
+  {
+    name: "createCommintent",
+    path: "/createCommintent",
+    component: () =>
+      import("@/views/UserOnboarding/ProfileSection/CreateCommintent.vue"),
+  },
+  {
+    name: "commintentList",
+    path: "/commintentList",
+    component: () =>
+      import("@/views/UserOnboarding/ProfileSection/CommintentList.vue"),
+  },
+  // commitentProfile screen
   {
     name: "commitentProfile",
     path: "/commitentProfile",
     component: () => import("@/views/PersonalProfile/CommitentProfile.vue"),
   },
-  {
-    name: "exerciseProfile",
-    path: "/exerciseProfile",
-    component: () => import("@/views/PersonalProfile/ExerciseProfile.vue"),
-  },
+  // check later exerciseProfile
+  // {
+  //   name: "exerciseProfile",
+  //   path: "/exerciseProfile",
+  //   component: () => import("@/views/PersonalProfile/ExerciseProfile.vue"),
+  // },
   {
     name: "success",
     path: "/success",
@@ -308,49 +405,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/PersonalProfile/ActiveExercise.vue"),
   },
 
-  {
-    name: "selectPlan",
-    path: "/selectPlan",
-    component: () => import("@/views/SelectPlan/SelectPlan.vue"),
-  },
-
-  {
-    name: "proPlan",
-    path: "/proPlan",
-    component: () => import("@/views/SelectPlan/ProPlan.vue"),
-  },
-
-  {
-    name: "paymentSuccess",
-    path: "/paymentSuccess",
-    component: () => import("@/views/SelectPlan/PaymentSuccess.vue"),
-  },
-
-  {
-    name: "registerCompany",
-    path: "/registerCompany",
-    component: () => import("@/views/RegistrationCompany/RegisterCompany.vue"),
-  },
-
-  {
-    name: "setProfile",
-    path: "/setProfile",
-    component: () => import("@/views/RegistrationCompany/SetProfile.vue"),
-  },
-
-  {
-    name: "sendInvite",
-    path: "/sendInvite",
-    component: () => import("@/views/RegistrationCompany/SendInvite.vue"),
-  },
-
-  {
-    name: "signUpCompany",
-    path: "/signUpCompany",
-    component: () => import("@/views/RegistrationCompany/SignUpCompany.vue"),
-  },
-
-  // onboard routes
+  // onboard routes Surveyflow
   {
     name: "sendOut",
     path: "/sendOut",
@@ -368,53 +423,28 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import("@/views/UserOnboarding/Surveyflow/ScheduleNow.vue"),
   },
+  // onboarding show for suvey
   {
     name: "onBoard",
     path: "/onBoard",
     component: () => import("@/components/Survey/OnBoard.vue"),
   },
+  // onboarding exercise
   {
     name: "addExercise",
     path: "/addExercise",
     component: () =>
       import("@/views/UserOnboarding/ExerciseFlow/AddExercise.vue"),
   },
+  // onbarding suvey
   {
     name: "takeSurvey",
     path: "/takeSurvey",
     component: () =>
       import("@/views/UserOnboarding/TakeSurveyFlow/TakeSurvey.vue"),
   },
-  {
-    name: "changeTransformation",
-    path: "/changeTransformation",
-    component: () =>
-      import("@/views/UserOnboarding/ProfileSection/ChangeTransformation.vue"),
-  },
-  {
-    name: "createTransformation",
-    path: "/createTransformation",
-    component: () =>
-      import("@/views/UserOnboarding/ProfileSection/CreateTransformation.vue"),
-  },
-  {
-    name: "createCommintent",
-    path: "/createCommintent",
-    component: () =>
-      import("@/views/UserOnboarding/ProfileSection/CreateCommintent.vue"),
-  },
-  {
-    name: "commintentList",
-    path: "/commintentList",
-    component: () =>
-      import("@/views/UserOnboarding/ProfileSection/CommintentList.vue"),
-  },
-  {
-    name: "createBigProfile",
-    path: "/createBigProfile",
-    component: () =>
-      import("@/views/UserOnboarding/BigProfileFlow/CreateBigProfile.vue"),
-  },
+  
+  // onbarding team
   {
     name: "createTeams",
     path: "/createTeams",
@@ -426,21 +456,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/visitAcdemy",
     component: () =>
       import("@/views/UserOnboarding/ProfileFlow/VisitAcdemy.vue"),
-  },
-  {
-    name: "paymentSuccess",
-    path: "/paymentSuccess",
-    component: () => import("@/views/RegistrationCompany/PaymentSuccess.vue"),
-  },
-  {
-    name: "paymentSuccess",
-    path: "/paymentSuccess",
-    component: () => import("@/views/RegistrationCompany/ProPlan.vue"),
-  },
-  {
-    name: "paymentSuccess",
-    path: "/paymentSuccess",
-    component: () => import("@/views/RegistrationCompany/SelectPlan.vue"),
   },
   {
     name: "takeTest",
