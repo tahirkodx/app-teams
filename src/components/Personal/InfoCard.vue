@@ -4,26 +4,31 @@
     <IonGrid>
       <IonRow>
         <IonCol size="4">
-          <div class="profile-pic">
-            <ion-img
-              src="/src/pictures/Ellipse1.svg"
-              alt="Finished Success"
-            ></ion-img>
+          <div class="container">
+            <div class="profile-pic" id="top-center">
+              <ion-img src="/src/pictures/Ellipse1.svg" alt="Finished Success"></ion-img>
+            </div>
+            <ion-popover trigger="top-center" side="top" alignment="center">
+              <ion-content class="ion-padding popover-content">
+                <div class="popover-item">Robert Fox</div>
+                <div class="popover-item info-role text-purple">robertfox1101@gmail.com:</div>
+                <div class="popover-item info-role text-purple">(201) 555-0124</div>
+                <div class="popover-item font-xs">(GMT) United Kingdom</div>
+                <ion-icon :icon="closeOutline" class="close-icon"></ion-icon>
+              </ion-content>
+            </ion-popover>
           </div>
         </IonCol>
         <IonCol size="8" class="frame">
-          <div class="frame-wrapper-top">
+          <div class="frame-wrapper-top ion-margin-top">
             <div class="info-name">Devon Lane</div>
             <div class="info-role">Senior Manager</div>
-            <ion-icon :icon="ellipsisVertical" class="ri-more-fill"></ion-icon>
+            <!-- <ion-icon :icon="ellipsisVertical" class="ri-more-fill"></ion-icon> -->
           </div>
           <div class="frame-wrapper-bottom">
             <div class="info-active">3 Active Teams</div>
             <div class="info-profile">Big 5 Profile</div>
-            <ion-icon
-              :icon="alertCircleOutline"
-              class="ri-more-fill"
-            ></ion-icon>
+            <ion-icon :icon="alertCircleOutline" class="ri-more-fill"></ion-icon>
           </div>
         </IonCol>
         <!-- <IonCol size="2">
@@ -40,21 +45,15 @@
 import {
   IonRow,
   IonCol,
-  IonLabel,
-  IonButton,
   IonIcon,
-  IonItem,
-  IonList,
   IonImg,
   IonPopover,
-  IonText,
+  IonContent,
   IonGrid,
 } from "@ionic/vue";
 import {
-  optionsOutline,
-  ellipsisVertical,
-  ellipsisHorizontalCircle,
   alertCircleOutline,
+  closeOutline
 } from "ionicons/icons";
 
 </script>
@@ -64,6 +63,34 @@ ion-grid {
   background: #aed351;
   color: #fff;
 }
+
+ion-popover {
+  --width: 253px;
+  --height: 120px;
+  top: 9%;
+  left: 11%;
+  --ion-backdrop-color: transparent;
+  --ion-backdrop-opacity: 0;
+}
+
+.popover-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.popover-item {
+  margin-bottom: 6px;
+}
+
+.close-icon {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 21px;
+  cursor: pointer;
+  color: #808080;
+}
+
 .info-profile {
   color: #e6e6e6;
 
@@ -72,7 +99,13 @@ ion-grid {
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 16px; /* 133.333% */
+  line-height: 16px;
+  /* 133.333% */
+}
+
+.text-purple {
+  color: #475569;
+
 }
 
 .info-name {
@@ -83,7 +116,17 @@ ion-grid {
 .info-role {
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.1px;
+}
+
+.font-xs {
+  color: #808080;
+  font-family: Cabin;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  /* 160% */
 }
 
 .info-active {
@@ -106,12 +149,14 @@ ion-grid {
   height: 100px;
   border: 4px solid #fff;
   border-radius: 50%;
+  margin-left: 10px;
 }
 
 .frame .frame-wrapper-top {
   position: relative;
   width: 100%;
 }
+
 .frame .frame-wrapper-bottom {
   display: flex;
   width: 100%;
@@ -125,11 +170,12 @@ ion-grid {
   top: 0;
   width: 20px;
 }
+
 .frame-wrapper-bottom .ri-more-fill {
   height: 20px;
-  left: 88%;
+  left: 84%;
   position: absolute;
-
+  margin-top: -3px;
   width: 20px;
 }
 </style>

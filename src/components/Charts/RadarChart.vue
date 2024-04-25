@@ -119,6 +119,7 @@ onMounted(() => {
   border-width: 3px 3px 3px 3px;
   border-color: var(--my-chart-border);
 }
+
 .chart-container-outer {
   height: 350px;
   width: 350px;
@@ -137,14 +138,14 @@ onMounted(() => {
   border-radius: inherit;
   filter: blur(11.5px);
   z-index: -1;
-  border: 7px solid var(--my-chart-border-color);
-  box-shadow: 0px 0px 20px 0px var(--my-chart-border);
+  border: 0.959px solid #8289D5;
+  box-shadow: 0px 3.834px 3.834px 0px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
 }
 
 canvas {
   border-radius: 50%;
-  background: var(--my-canvas-background);
+  background: rgba(130, 137, 213, 0.10);
   /* background-color: transparent; Transparent background for the canvas */
 }
 </style>

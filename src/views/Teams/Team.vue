@@ -6,7 +6,7 @@
     <ion-content class="ion-padding">
       <!-- <chart /> -->
       <radarchart />
-      <linkbutton label="ASK HELP" expend="block" link="teamsupport" />
+      <linkbutton label="ASK HELP" expend="block" link="teamsupport" class="ion-padding-vertical" />
       <teamwidget />
       <!-- new  -->
       <ion-accordion-group :multiple="true" :value="['first', 'third']">
@@ -16,36 +16,27 @@
           </ion-item>
           <div class="ion-no-padding" slot="content">
             <div class="ion-no-padding">
-              <div
-                class="newClass"
-                v-for="(member, index) in teamStore.teamMembers.members"
-                :key="index"
-                @click="
-                  () =>
-                    router.push({
-                      name: 'teamMember',
-                    })
-                "
-              >
+              <div class="newClass" v-for="(member, index) in teamStore.teamMembers.members" :key="index" @click="() =>
+          router.push({
+            name: 'teamMember',
+          })
+        ">
                 <div class="profile-pic">
-                  <ion-img
-                    src="/src/pictures/Ellipse1.svg"
-                    alt="Finished Success"
-                  ></ion-img>
+                  <ion-img src="/src/pictures/Ellipse1.svg" alt="Finished Success"></ion-img>
                 </div>
                 <div class="inner-team">
                   <div>
                     <div class="info-name">{{ member.last_name }}</div>
                     <div class="info-role">
                       {{
-                        member.role == 0
-                          ? "Visitor"
-                          : member.role == 1
-                          ? "Member"
-                          : member.role == 2
-                          ? "Leader"
-                          : "Coach"
-                      }}
+        member.role == 0
+          ? "Visitor"
+          : member.role == 1
+            ? "Member"
+            : member.role == 2
+              ? "Leader"
+              : "Coach"
+      }}
                     </div>
                   </div>
                   <div>
@@ -120,82 +111,87 @@ onMounted(async () => {
 ion-datetime {
   --background: unset: !important;
 }
+
 .practice-card {
-    margin-bottom: 8px;
-    --ion-item-background: transparent;
-    --ion-item-padding: 0;
-    --background: transparent;
-    box-shadow: none;
-    border-radius: 5px;
-border: 1px solid #F2F2F2;
-background: #F5F5F5;
-    /* Remove shadow if present */
+  margin-bottom: 8px;
+  --ion-item-background: transparent;
+  --ion-item-padding: 0;
+  --background: transparent;
+  box-shadow: none;
+  border-radius: 5px;
+  border: 1px solid #F2F2F2;
+  background: #F5F5F5;
+  /* Remove shadow if present */
 }
 
 .card-content {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 ion-item {
-    --padding-start: 0;
-    --padding-end: 0;
-    --inner-padding-end: 0;
-    --inner-padding-start: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
 }
 
 ion-label {
-    flex-grow: 1;
-    font-size: 1rem;
-    padding: 16px 0;
+  flex-grow: 1;
+  font-size: 1rem;
+  padding: 16px 0;
 
 }
 
 .progress-container {
-    width: 100%;
+  width: 100%;
 
 }
 
 ion-progress-bar {
-    height: 2px;
-    /* Height of progress bar, adjust as needed */
-    --background: #7F7F7F;
+  height: 2px;
+  /* Height of progress bar, adjust as needed */
+  --background: #7F7F7F;
 }
 
 ion-reorder {
-    color: var(--ion-color-medium);
+  color: var(--ion-color-medium);
 }
 
 ion-icon {
-    font-size: 1.5em;
-    width: 24px;
-    height: 24px;
+  font-size: 1.5em;
+  width: 24px;
+  height: 24px;
 }
-.addStyle{
-    margin-bottom: 40px;
-    margin: 10px ;
+
+.addStyle {
+  margin-bottom: 40px;
+  margin: 10px;
 }
+
 .info-name {
   color: #7C7C7C;
 
-/* mobile/Title small */
-font-family: Cabin;
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: 20px; /* 142.857% */
-letter-spacing: 0.1px;
+  /* mobile/Title small */
+  font-family: Cabin;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 142.857% */
+  letter-spacing: 0.1px;
 }
 
 .info-role {
   color: #7C7C7C;
 
-/* mobile/Body small */
-font-family: Cabin;
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: 16px; /* 133.333% */
+  /* mobile/Body small */
+  font-family: Cabin;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  /* 133.333% */
 }
 
 .info-active {
@@ -203,13 +199,14 @@ line-height: 16px; /* 133.333% */
 
 
   color: #6F6F6F;
-font-family: Cabin;
-font-size: 10px;
-font-style: normal;
-font-weight: 500;
-line-height: 16px; /* 160% */
-border-radius: 100px;
-background: #E6E6E6;
+  font-family: Cabin;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  /* 160% */
+  border-radius: 100px;
+  background: #E6E6E6;
 }
 
 .profile-pic {
@@ -218,28 +215,31 @@ background: #E6E6E6;
   border: 4px solid #fff;
   border-radius: 50%;
 }
-.newClass{
+
+.newClass {
   display: flex;
-padding: 8px 20px;
-align-items: center;
-/* justify-content: center; */
-gap: 10px;
-border-radius: 5px;
-border: 1px solid #F2F2F2;
-background: #F5F5F5;
-margin-bottom: 10px;
+  padding: 8px 20px;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 10px;
+  border-radius: 5px;
+  border: 1px solid #F2F2F2;
+  background: #F5F5F5;
+  margin-bottom: 10px;
 }
-.cus-item{
+
+.cus-item {
   margin-bottom: 15px;
   border-bottom: 1px solid #D9D9D9;
 }
-.inner-team{
+
+.inner-team {
   display: flex;
-/* padding: 8px 20px; */
-align-items: center;
-/* justify-content: center; */
-gap: 100px;
-width: 100%;
-justify-content: space-between;
+  /* padding: 8px 20px; */
+  align-items: center;
+  /* justify-content: center; */
+  gap: 100px;
+  width: 100%;
+  justify-content: space-between;
 }
 </style>

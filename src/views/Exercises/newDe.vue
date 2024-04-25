@@ -43,6 +43,7 @@
           </div>
         </div>
         <div class="content">
+          {{ chartData }}
           <!-- Content based on the active tab -->
           <div v-if="activeTab === 'timeline'">
             <LineChart :data="chartData" @update="handleUpdate" />

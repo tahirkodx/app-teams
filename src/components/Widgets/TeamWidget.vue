@@ -48,10 +48,12 @@ onMounted(() => {
 }
 
 .custom-card {
+  max-width: 186px;
+  max-height: 86px;
+  padding: 8px;
   flex: 0 0 auto;
   margin: 0 8px;
-  border-radius: 20px;
-  width: 250px;
+  border-radius: 12px;
   background: #f5f5f5;
   scroll-snap-align: start;
   box-shadow: none;
@@ -75,10 +77,13 @@ ion-card-content {
 
 .custom-icon {
   position: absolute;
-  top: 10px;
+  top: 6px;
   right: 10px;
-  color: #f39c12;
+  color: #FF8512;
+  width: 24px;
+  height: 24px;
   font-size: 2em;
+  font-weight: bold;
 }
 
 .text-heading {
