@@ -22,59 +22,31 @@
             </ion-text>
             <InfoCard />
             <LineChart :data="dummyData" />
-            <swiper :navigation="true" class="bg-gray owner-container font-sm ion-padding-start ion-padding-end">
-                <swiper-slide class="ion-padding-start">
-                    <div class="container text-center">
-                        <ion-button id="top-center1" class="font-normal">Build Their Group Identity
-                            <ion-icon :icon="chevronDownOutline" class="ion-margin-start"></ion-icon><span
-                                class="text-small">1/6</span></ion-button>
-                        <ion-popover trigger="top-center1" side="bottom" alignment="center">
-                            <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                            <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                            <ion-content class="ion-padding">Add Commitments</ion-content>
-                        </ion-popover>
-                    </div>
-                </swiper-slide>
-                <swiper-slide class="ion-padding-start">
-                    <div class="container text-center">
-                        <ion-button id="top-center2" class="font-normal">Build Their Group Identity
-                            <ion-icon :icon="chevronDownOutline" class="ion-margin-start"></ion-icon><span
-                                class="text-small">1/6</span></ion-button>
-                        <ion-popover trigger="top-center2" side="bottom" alignment="center">
-                            <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                            <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                            <ion-content class="ion-padding">Add Commitments</ion-content>
-                        </ion-popover>
-                    </div>
-                </swiper-slide>
-                <swiper-slide class="ion-padding-start">
-                    <div class="container text-center">
-                        <ion-button id="top-center3" class="font-normal">Build Their Group Identity
-                            <ion-icon :icon="chevronDownOutline" class="ion-margin-start"></ion-icon><span
-                                class="text-small">1/6</span></ion-button>
-                        <ion-popover trigger="top-center3" side="bottom" alignment="center">
-                            <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                            <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                            <ion-content class="ion-padding">Add Commitments</ion-content>
-                        </ion-popover>
-                    </div>
-                </swiper-slide>
-            </swiper>
-
-            <ion-text class="bg-gray owner-container font-sm ion-padding-start ion-padding-end">
-                <ion-icon :icon="arrowBackCircle"></ion-icon>
-                <div class="container text-center">
-                    <ion-button id="top-center" class="font-normal">Build Their Group Identity
-                        <ion-icon :icon="chevronDownOutline" class="ion-margin-start"></ion-icon><span
-                            class="text-small">1/6</span></ion-button>
-                    <ion-popover trigger="top-center" side="bottom" alignment="center">
-                        <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                        <ion-content class="ion-padding">Build Their Group Identity</ion-content>
-                        <ion-content class="ion-padding">Add Commitments</ion-content>
-                    </ion-popover>
+            <div class=" bg-gray owner-container font-sm ion-padding-start ion-padding-end">
+                <!-- Swiper Navigation Buttons -->
+                <div @click="goToPreviousSlide">
+                    <ion-icon :icon="arrowBackCircle" id="prev"></ion-icon>
                 </div>
-                <ion-icon :icon="arrowForwardCircle" class="bg-green ion-margin-left"></ion-icon>
-            </ion-text>
+                <!-- Swiper instance -->
+                <swiper class="mySwiper" :key="currentSlideIndex" ref="mySwiper" :navigation="swiperNavigationConfig">
+                    <swiper-slide v-for="(slide, index) in slides" :key="index">
+                        <div class="container text-center">
+                            <ion-button :id="slide.id" class="font-normal">{{ slide.content }}
+                                <ion-icon :icon="chevronDownOutline" class="ion-margin-start"></ion-icon><span
+                                    class="text-small">1/3</span>
+                            </ion-button>
+                            <ion-popover :trigger="slide.id" side="bottom" alignment="center">
+                                <ion-content class="ion-padding">Build Their Group Identity</ion-content>
+                                <ion-content class="ion-padding">Build Their Group Identity</ion-content>
+                                <ion-content class="ion-padding">Add Commitments</ion-content>
+                            </ion-popover>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+                <div @click="goToNextSlide">
+                    <ion-icon :icon="arrowForwardCircle" id="next" class="bg-green"></ion-icon>
+                </div>
+            </div>
             <ion-segment v-model="activeTab" value="Description" @ionChange="segmentChanged">
                 <ion-segment-button value="Description">
                     <ion-label>Description</ion-label>
@@ -164,7 +136,6 @@
         </ion-content>
     </ion-page>
 </template>
-
 <script setup lang="ts">
 import { ref } from "vue";
 import {
@@ -181,7 +152,6 @@ import {
     IonLabel,
     IonPopover,
     IonText,
-    IonCardContent,
     IonSegment,
     IonSegmentButton,
     IonProgressBar,
@@ -189,6 +159,7 @@ import {
     IonCardTitle,
     IonButtons
 } from "@ionic/vue";
+
 import {
     arrowBackCircle,
     arrowForwardCircle,
@@ -201,14 +172,14 @@ import LineChart from "@/components/Charts/LineChart.vue";
 import InfoCard from "@/components/Personal/InfoCard.vue";
 import Message from "@/components/Personal/Message.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
-
 import "swiper/css";
-import "@ionic/vue/css/ionic-swiper.css";
 import "swiper/css/navigation";
 
-const activeTab = ref("Description"); // default active tab
-const progress = ref(2);
-const chartData = ref();
+const slides = [
+    { id: 'top-center1', content: 'Build Their Group Identity' },
+    { id: 'top-center2', content: 'Build Their Group Identity' },
+    { id: 'top-center3', content: 'Build Their Group Identity' }
+];
 const dummyData = [
     { score: 7, date: "2024-01-01" },
     { score: 8, date: "2024-02-02" },
@@ -238,15 +209,24 @@ const cardArray = [
         imageURL: "/src/pictures/Ellipse 72.svg",
     },
 ];
-
-const segmentChanged = (event) => {
-    activeTab.value = event.detail.value;
+const currentSlideIndex = ref(0);
+const activeTab = ref("Description"); // default active tab
+const progress = ref(2);
+const chartData = ref();
+const swiperNavigationConfig = {
+    nextEl: "#next",
+    prevEl: "#prev",
 };
-// const handleUpdate = (score : any , date : any) => {
-//       dateValue.value = formatter.format(new Date(date))
-//       scoreValue.value = score;
-//     }
 
+const goToPreviousSlide = () => {
+    const swiperInstance = refs.mySwiper.swiper;
+    swiperInstance.slidePrev();
+};
+
+const goToNextSlide = () => {
+    const swiperInstance = refs.mySwiper.swiper;
+    swiperInstance.slideNext();
+};
 </script>
 
 <style scoped>
@@ -276,35 +256,9 @@ ion-title {
     color: var(--Neutrals-black, #303030);
     font-size: 16px;
     line-height: 24px;
-    margin-left: -20px;
     letter-spacing: 0.1px;
     --background: #f2f2f2;
     --box-shadow: none;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    background-color: white;
-    background-position: center;
-    background-size: 40px;
-    background-repeat: no-repeat;
-    padding: 8px 16px;
-    border-radius: 100%;
-    border: 2px solid black;
-    color: red;
-}
-
-.swiper-button-prev {
-    background-image: url("/box-arrow-in-left.svg");
-}
-
-.swiper-button-next {
-    background-image: url("/box-arrow-in-right.svg");
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-    content: "";
 }
 
 .icon-container {
@@ -438,5 +392,4 @@ ion-icon {
     height: 24px;
     color: #2c3ad180;
 }
-
 </style>
