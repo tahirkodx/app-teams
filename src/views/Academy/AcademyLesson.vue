@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <score></score>
+      <Header isBackButton />
     </ion-header>
     <ion-content>
       <!-- Header Container -->
@@ -13,7 +13,6 @@
                 Resource Title:
                 {{ academyStore?.singleCourse?.lessons[tempIndex]?.title }}
               </p>
-             
             </ion-text>
           </ion-col>
           <ion-col size="3" class="ion-text-right">
@@ -21,20 +20,24 @@
               fill="clear"
               class="navigation-button"
               @click="processBackItem"
-              :disabled="(tempIndex +1) <= 1"
+              :disabled="tempIndex + 1 <= 1"
             >
               <span class="icon-background">
                 <ion-icon :icon="chevronBack" slot="icon-only"></ion-icon>
               </span>
             </ion-button>
             <div class="resource-navigation">
-              {{ (tempIndex + 1) + "/" + academyStore.singleCourse?.lessons?.length }}
+              {{
+                tempIndex + 1 + "/" + academyStore.singleCourse?.lessons?.length
+              }}
             </div>
             <ion-button
               fill="clear"
               class="navigation-button"
               @click="processNextItem"
-              :disabled="(tempIndex + 1) >= academyStore.singleCourse?.lessons?.length"
+              :disabled="
+                tempIndex + 1 >= academyStore.singleCourse?.lessons?.length
+              "
             >
               <span class="icon-background">
                 <ion-icon :icon="chevronForward" slot="icon-only"></ion-icon>
@@ -51,11 +54,7 @@
                 Mins
               </div>
               <div class="resource-detail">
-                {{
-                  MonthsAgo(
-                    academyStore?.singleCourse?.last_updated
-                  )
-                }}
+                {{ MonthsAgo(academyStore?.singleCourse?.last_updated) }}
                 Months ago
               </div>
               <div class="resource-detail">
@@ -101,13 +100,29 @@
         <div class="content" v-if="loading">
           <!-- Content based on the active tab -->
           <div v-if="activeTab === 'courses'">
-            <Description :summary="academyStore?.singleCourse?.summary" :description="academyStore?.singleCourse?.description" :plays="academyStore?.singleCourse?.plays" />
+            <Description
+              :summary="academyStore?.singleCourse?.summary"
+              :description="academyStore?.singleCourse?.description"
+              :plays="academyStore?.singleCourse?.plays"
+            />
           </div>
           <div v-if="activeTab === 'details'">
-            <Details :id="academyStore?.singleCourse?.lessons[tempIndex]?.id" :summary="academyStore?.singleCourse?.lessons[tempIndex].summary" :time="academyStore?.singleCourse?.lessons[tempIndex].video_length" :content="academyStore?.singleCourse?.lessons[tempIndex].content" />
+            <Details
+              :id="academyStore?.singleCourse?.lessons[tempIndex]?.id"
+              :summary="academyStore?.singleCourse?.lessons[tempIndex].summary"
+              :time="
+                academyStore?.singleCourse?.lessons[tempIndex].video_length
+              "
+              :content="academyStore?.singleCourse?.lessons[tempIndex].content"
+            />
           </div>
           <div v-if="activeTab === 'transcript'">
-            <Transcript :summary="academyStore?.singleCourse?.lessons[tempIndex].summary" :transcript="academyStore.singleCourse?.lessons[tempIndex].transcript" />
+            <Transcript
+              :summary="academyStore?.singleCourse?.lessons[tempIndex].summary"
+              :transcript="
+                academyStore.singleCourse?.lessons[tempIndex].transcript
+              "
+            />
           </div>
           <div v-if="activeTab === 'notes'">
             <p>Write something here</p>
@@ -150,7 +165,7 @@ import {
   arrowBackOutline,
   chevronBack,
 } from "ionicons/icons";
-import score from "@/components/Header/Header.vue";
+import Header from "@/components/Header/Header.vue";
 import Description from "@/components/Academy/Description.vue";
 import Transcript from "@/components/Academy/Transcript.vue";
 import Details from "@/components/Academy/Details.vue";
@@ -196,10 +211,9 @@ onMounted(async () => {
     academyStore.getCoursesScores(),
     academyStore.getCoursesStatus(),
     academyStore.getLessonsStatus(),
-    academyStore.getSingleCourse(courseId)
-    
+    academyStore.getSingleCourse(courseId),
   ]);
-    console.log(academyStore.singleCourse.lessons.length)
+  console.log(academyStore.singleCourse.lessons.length);
   loading.value = true;
 });
 // Other script setup code here

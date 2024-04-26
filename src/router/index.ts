@@ -59,21 +59,21 @@ const routes: Array<RouteRecordRaw> = [
     path: "/signUpCompany",
     component: () => import("@/views/RegistrationCompany/SignUpCompany.vue"),
   },
-  {
-    name: "paymentSuccess",
-    path: "/paymentSuccess",
-    component: () => import("@/views/RegistrationCompany/PaymentSuccess.vue"),
-  },
-  {
-    name: "paymentSuccess",
-    path: "/paymentSuccess",
-    component: () => import("@/views/RegistrationCompany/ProPlan.vue"),
-  },
-  {
-    name: "paymentSuccess",
-    path: "/paymentSuccess",
-    component: () => import("@/views/RegistrationCompany/SelectPlan.vue"),
-  },
+  // {
+  //   name: "paymentSuccess",
+  //   path: "/paymentSuccess",
+  //   component: () => import("@/views/RegistrationCompany/PaymentSuccess.vue"),
+  // },
+  // {
+  //   name: "proPlan",
+  //   path: "/ProPlan",
+  //   component: () => import("@/views/RegistrationCompany/ProPlan.vue"),
+  // },
+  // {
+  //   name: "paymentSuccess",
+  //   path: "/paymentSuccess",
+  //   component: () => import("@/views/RegistrationCompany/SelectPlan.vue"),
+  // },
 
   // Login screens
   {
@@ -181,23 +181,23 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/SurveySchedule/ScheduleWeekly.vue"),
   },
   // check later
-  {
-    name: "addteam",
-    path: "/teams/addteam",
-    component: () => import("@/views/Teams/AddTeam.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
+  // {
+  //   name: "addteam",
+  //   path: "/teams/addteam",
+  //   component: () => import("@/views/Teams/AddTeam.vue"),
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   // check later
-  {
-    name: "teamMember",
-    path: "/teams/teamMember",
-    component: () => import("@/views/Teams/TeamMember.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
+  // {
+  //   name: "teamMember",
+  //   path: "/teams/teamMember",
+  //   component: () => import("@/views/Teams/TeamMember.vue"),
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   {
     name: "teamTopic",
     path: "/teams/teamTopic",

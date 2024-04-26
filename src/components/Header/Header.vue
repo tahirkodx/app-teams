@@ -3,9 +3,15 @@
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons class="startIcon" slot="start">
-        <ion-button>
+        <ion-button v-if="!isBackButton">
           <ion-icon
             icon="/src/pictures/setting.svg"
+            class="toolbar-icon"
+          ></ion-icon>
+        </ion-button>
+        <ion-button v-if="isBackButton" @click="handleBack">
+          <ion-icon
+            icon="/src/pictures/backButton.svg"
             class="toolbar-icon"
           ></ion-icon>
         </ion-button>
@@ -67,12 +73,15 @@ const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
 const teamSelected = ref();
+defineProps({
+  isBackButton: {
+    type: Boolean,
+    default: false,
+  },
+});
 onMounted(async () => {
   if (teamStore.teams === null) {
-    await Promise.all([
-      userStore.getUserSettings(),
-      teamStore.getTeams(), 
-    ]);
+    await Promise.all([userStore.getUserSettings(), teamStore.getTeams()]);
   }
 });
 import router from "@/router/index";
@@ -110,6 +119,11 @@ function animateIncrease() {
   setTimeout(() => {
     animate.value = false;
   }, 820);
+}
+
+function handleBack() {
+  console.log("cccc");
+  router.back();
 }
 </script>
 

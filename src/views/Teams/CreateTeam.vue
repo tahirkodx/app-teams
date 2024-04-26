@@ -20,7 +20,7 @@
           </IonRow>
         </IonGrid>
         <ion-grid v-if="teamName">
-          <ion-row>
+          <ion-row class="align-items-center">
             <ion-col size="9">
               <ion-input
                 type="email"
@@ -41,7 +41,10 @@
               <span class="error">{{ customErrorMessage }}</span>
             </ion-col>
             <ion-col size="3">
-              <ion-button @click="addEmailToList" :disabled="shouldDisableButton" expand="block"
+              <ion-button
+                @click="addEmailToList"
+                :disabled="shouldDisableButton"
+                expand="block"
                 >ADD</ion-button
               >
             </ion-col>
@@ -88,7 +91,11 @@
                 </ion-select>
               </ion-item>
 
-              <ion-icon slot="end" @click="removeMember(index)" :icon="closeOutline"></ion-icon>
+              <ion-icon
+                slot="end"
+                @click="removeMember(index)"
+                :icon="closeOutline"
+              ></ion-icon>
             </ion-item>
           </ion-list>
         </div>
@@ -97,11 +104,7 @@
 
     <ion-footer class="ion-no-border">
       <ion-toolbar>
-        <ion-button
-          
-          @click="createTeam"
-          class="ion-padding"
-          expand="block"
+        <ion-button @click="createTeam" class="ion-padding" expand="block"
           >CREATE TEAM</ion-button
         >
       </ion-toolbar>
@@ -159,7 +162,7 @@ const handleUpdateMembers = (updatedMembers: any) => {
 
 const addEmailToList = () => {
   const isEmailInList = membersList.value.some(
-    (member: { email: string; }) => member.email === email.value
+    (member: { email: string }) => member.email === email.value
   );
   if (membersList.value.length === 0) {
     const data = {
@@ -179,7 +182,7 @@ const addEmailToList = () => {
     email.value = "";
   } else {
     customErrorMessage.value = "Enter Email to add";
-    return
+    return;
   }
 };
 const updateModalVisible = (newValue: boolean) => {
@@ -193,13 +196,12 @@ const createTeam = async () => {
   }
   console.log(membersList.value);
   const data = {
-    members : membersList.value,
-    name : teamName.value
-  }
-  
+    members: membersList.value,
+    name: teamName.value,
+  };
+
   const res = await teamStore.createTeam(data);
   router.push({ name: "team" });
-  
 };
 const validate = (ev: any) => {
   const value = ev.target.value;
@@ -216,16 +218,16 @@ const validate = (ev: any) => {
   if (emailValidate(value)) {
     inputElement.classList.add("ion-valid");
     customErrorMessage.value = ""; // No error message when valid
-    shouldDisableButton.value = false
+    shouldDisableButton.value = false;
   } else {
     inputElement.classList.add("ion-invalid");
     customErrorMessage.value = "Invalid Email Format"; // Custom error message when invalid
-    shouldDisableButton.value = true
+    shouldDisableButton.value = true;
   }
 };
 const removeMember = (index: number) => {
-  console.log(index)
-  console.log(membersList.value)
+  console.log(index);
+  console.log(membersList.value);
   membersList.value.splice(index, 1);
 };
 </script>
@@ -286,8 +288,12 @@ ion-input {
   padding: 10px;
   background: #fff;
 }
-.member-list{
- margin-top: 30px;
+.member-list {
+  margin-top: 30px;
 }
 
+.align-items-center {
+  display: flex;
+  align-items: end;
+}
 </style>
