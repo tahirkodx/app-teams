@@ -84,6 +84,7 @@ const routes: Array<RouteRecordRaw> = [
 
   // User profile screens
   {
+    name: 'profile',
     path: "/profile",
     component: () =>
       import(
@@ -198,14 +199,6 @@ const routes: Array<RouteRecordRaw> = [
   //     requiresAuth: true,
   //   },
   // },
-  {
-    name: "teamTopic",
-    path: "/teams/teamTopic",
-    component: () => import("@/views/Teams/TeamTopic.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
   // All messages screens
   {
     name: "allMessages",
@@ -528,6 +521,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Support/TeamSupport.vue"),
         meta: {
           requiresAuth: true, // Add meta field to indicate protected route
+        },
+      },
+      {
+        name: "teamTopic",
+        path: "teams/teamTopic/:topicid",
+        component: () => import("@/views/Teams/TeamTopic.vue"),
+        meta: {
+          requiresAuth: true,
         },
       },
       {

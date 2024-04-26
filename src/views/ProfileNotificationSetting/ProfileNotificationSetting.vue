@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <Header />
+    <Header is-back-button />
     <ion-content :fullscreen="true" class="ion-padding">
       <h3>Profile edit</h3>
       <div class="ion-text-center ion-justify-content-center">
@@ -12,7 +12,13 @@
             <ion-icon slot="start" icon="/src/pictures/Camera.svg"></ion-icon>
             Change profile picture
           </ion-button>
-          <input type="file" accept="image/*" @change="changeProfilePicture" hidden ref="fileInput" />
+          <input
+            type="file"
+            accept="image/*"
+            @change="changeProfilePicture"
+            hidden
+            ref="fileInput"
+          />
         </div>
       </div>
       <div class="title-line"></div>
@@ -46,9 +52,11 @@
                 <ion-accordion-group>
                   <ion-accordion value="first">
                     <ion-item lines="none" slot="header" color="light">
-                      <ion-img class="iconEarth" src="/src/pictures/Frame 2609497.svg"></ion-img>
-                      <!-- <ion-label>+245</ion-label> -->
-                      
+                      <ion-img
+                        class="iconEarth"
+                        src="/src/pictures/Frame 2609497.svg"
+                      ></ion-img>
+                      <ion-label>+245</ion-label>
                     </ion-item>
                   </ion-accordion>
                 </ion-accordion-group>
@@ -65,22 +73,27 @@
           <ion-row>
             <ion-col>
               <div class="ion-padding-vertical">
-                  <ion-accordion-group>
+                <ion-accordion-group>
                   <ion-accordion value="first">
                     <ion-item lines="none" slot="header" color="light">
-                      <ion-img class="iconEarth" src="/src/pictures/Global.svg"></ion-img>
+                      <ion-img
+                        class="iconEarth"
+                        src="/src/pictures/Global.svg"
+                      ></ion-img>
                       <ion-label>Timezone</ion-label>
                     </ion-item>
                   </ion-accordion>
                 </ion-accordion-group>
-                </div>
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>
       </div>
     </ion-content>
     <ion-footer class="ion-padding">
-       <ion-button @click="navigateFunction" expand="block">SAVE PROFILE</ion-button>
+      <ion-button @click="navigateFunction" expand="block"
+        >SAVE PROFILE</ion-button
+      >
     </ion-footer>
   </ion-page>
 </template>
@@ -113,7 +126,7 @@ import {
 import Header from "@/components/Header/Header.vue";
 import { cameraOutline } from "ionicons/icons";
 import { defineComponent, ref } from "vue";
-import CountryFlag from 'vue-country-flag-next';
+import CountryFlag from "vue-country-flag-next";
 import router from "@/router/index";
 
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -170,9 +183,9 @@ const openFileInput = () => {
 ion-icon {
   margin-right: 8px;
 }
-.iconEarth{
+.iconEarth {
   margin-right: 8px;
-  margin-top: 2px
+  margin-top: 2px;
 }
 .title-line {
   border-bottom: 1px solid rgba(249, 238, 238, 0.95);

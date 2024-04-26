@@ -1,9 +1,11 @@
 <template>
   <ion-page>
-    <Header />
+    <Header is-back-button />
     <ion-content :fullscreen="true">
       <h3 class="main-title ion-padding">Notification settings</h3>
-      <span class="desc-text ion-padding">For important updates regarding your Epicus activities.</span>
+      <span class="desc-text ion-padding"
+        >For important updates regarding your Epicus activities.</span
+      >
 
       <div class="notification-content">
         <div class="bg-gray">
@@ -13,7 +15,11 @@
                 <h2>All notifications</h2>
                 <p>Enabled</p>
               </ion-label>
-              <ion-toggle slot="end" color="success" :checked="true"></ion-toggle>
+              <ion-toggle
+                slot="end"
+                color="success"
+                :checked="true"
+              ></ion-toggle>
             </ion-item>
 
             <ion-item>
@@ -21,33 +27,51 @@
                 <h2>Push notifications</h2>
                 <p>Enabled</p>
               </ion-label>
-              <ion-toggle slot="end" color="success" :checked="true"></ion-toggle>
+              <ion-toggle
+                slot="end"
+                color="success"
+                :checked="true"
+              ></ion-toggle>
             </ion-item>
           </ion-list>
         </div>
 
-
-
-
         <ion-list lines="none">
           <ion-item>
-            <ion-checkbox class="checkbox-text" justify="space-between">Show messages on opening</ion-checkbox>
+            <ion-checkbox class="checkbox-text" justify="space-between"
+              >Show messages on opening</ion-checkbox
+            >
           </ion-item>
           <ion-item>
-            <ion-checkbox class="checkbox-text" justify="space-between">Send new survey emails</ion-checkbox>
+            <ion-checkbox class="checkbox-text" justify="space-between"
+              >Send new survey emails</ion-checkbox
+            >
           </ion-item>
           <ion-item>
-            <ion-checkbox :checked="true" class="checkbox-text" justify="space-between">Send new survey SMS</ion-checkbox>
+            <ion-checkbox
+              :checked="true"
+              class="checkbox-text"
+              justify="space-between"
+              >Send new survey SMS</ion-checkbox
+            >
           </ion-item>
           <ion-item>
-            <ion-checkbox :checked="true" class="checkbox-text" justify="space-between">Send new survey results
-              notifications</ion-checkbox>
+            <ion-checkbox
+              :checked="true"
+              class="checkbox-text"
+              justify="space-between"
+              >Send new survey results notifications</ion-checkbox
+            >
           </ion-item>
           <ion-item>
-            <ion-checkbox class="checkbox-text" justify="space-between">Available as coach</ion-checkbox>
+            <ion-checkbox class="checkbox-text" justify="space-between"
+              >Available as coach</ion-checkbox
+            >
           </ion-item>
           <ion-item>
-            <ion-checkbox class="checkbox-text" justify="space-between">Available for exercise questions</ion-checkbox>
+            <ion-checkbox class="checkbox-text" justify="space-between"
+              >Available for exercise questions</ion-checkbox
+            >
           </ion-item>
         </ion-list>
       </div>
@@ -112,8 +136,7 @@ import Header from "@/components/Header/Header.vue";
 }
 
 .bg-gray {
-  --ion-item-background: #F2F2F2;
-  ;
+  --ion-item-background: #f2f2f2;
 }
 
 .notification-content {

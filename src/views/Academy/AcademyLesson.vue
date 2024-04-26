@@ -45,7 +45,7 @@
             </ion-button>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row class="pl-4">
           <ion-col size="9">
             <div class="resource-details">
               <div class="resource-detail">
@@ -228,9 +228,13 @@ onMounted(async () => {
 }
 
 .resource-title {
-  font-size: 1.2em;
-  font-weight: bold;
   padding-top: 15px;
+  color: #303030;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.15px;
 }
 
 .resource-details {
@@ -324,5 +328,19 @@ p {
 
 ion-icon {
   --ionicon-stroke-width: 32px; /* example to increase icon size if needed */
+}
+
+.pl-4 {
+  padding-left: 16px;
+}
+
+.text-course {
+  color: var(--tietiary, rgba(44, 58, 209, 0.5));
+
+  /* mobile/Body small */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
 }
 </style>

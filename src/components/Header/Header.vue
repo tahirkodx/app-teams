@@ -3,7 +3,7 @@
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons class="startIcon" slot="start">
-        <ion-button v-if="!isBackButton">
+        <ion-button v-if="!isBackButton" @click="navigateSettingFunction">
           <ion-icon
             icon="/src/pictures/setting.svg"
             class="toolbar-icon"
@@ -69,6 +69,7 @@ import {
 } from "ionicons/icons";
 import type { ToggleCustomEvent } from "@ionic/vue";
 import { useTeamStore, useUserStore } from "@/store";
+
 const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
@@ -110,6 +111,10 @@ const changeTeam = (value: any) => {
     );
   }
 };
+const navigateSettingFunction = () => {
+  router.push({ name: "profile" });
+};
+
 const navigateFunction = () => {
   router.push({ name: "surveys" });
 };

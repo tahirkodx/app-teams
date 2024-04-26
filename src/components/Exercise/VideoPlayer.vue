@@ -52,17 +52,24 @@
   </div>
   <div v-else class="no-video">
     <div>
-      
-      <ion-icon class="no-video-icon" src="/src/pictures/no-video.svg"></ion-icon>
+      <ion-icon
+        class="no-video-icon"
+        src="/src/pictures/no-video.svg"
+      ></ion-icon>
     </div>
     <div>No Video Available to play</div>
   </div>
-  
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed } from "vue";
-import { IonButton, IonIcon,IonRange,IonCard,IonCardContent } from "@ionic/vue";
+import {
+  IonButton,
+  IonIcon,
+  IonRange,
+  IonCard,
+  IonCardContent,
+} from "@ionic/vue";
 import {
   play as playIcon,
   pause as pauseIcon,
@@ -79,7 +86,7 @@ import { usePlaybookStore } from "@/store";
 // const emitter = new TinyEmitter();
 const playbookStore = usePlaybookStore();
 const props = defineProps(["play"]);
-console.log(props.play)
+console.log(props.play);
 const videoElement = ref<HTMLVideoElement | null>(null);
 const duration = ref(0);
 const currentTime = ref(0);
@@ -91,7 +98,7 @@ const state = reactive({
 //   console.log('Event received:', data);
 // });
 const onLoadedMetadata = () => {
-  console.log(videoElement.value)
+  console.log(videoElement.value);
   if (videoElement.value) {
     duration.value = videoElement.value.duration;
   }
@@ -183,11 +190,16 @@ const formatTime = (timeInSeconds: number) => {
 /* Your styles here */
 ion-range {
   --knob-size: 0px;
+  --bar-height: 4px;
+  margin-top: -10px;
 }
 ion-button {
   --background: none;
   --color: #a5ce3e;
   --background-activated: none;
+  --border-width: 0;
+  --border-style: none;
+  --box-shadow: 0;
 }
 .card-text {
   color: #000;
@@ -208,21 +220,26 @@ ion-button {
   display: flex;
 }
 span {
-  margin-top: 20px;
+  margin-top: 15px;
+  color: #000;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
-
 
 .controls {
   padding: 0px 15px 0px 15px;
 }
-.no-video{
-  
+.no-video {
   /* display: flex; */
-padding: 64px 59px 63px 60px;
-text-align: center;
-/* align-items: center; */
+  padding: 64px 59px 63px 60px;
+  text-align: center;
+  /* align-items: center; */
 }
-.no-video-icon{
+.no-video-icon {
   width: 50px;
   height: 50px;
 }

@@ -3,7 +3,7 @@
     <ion-header>
       <score />
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content :fullscreen="true" class="ion-padding">
       <h4 class="titleStyle">Academy</h4>
       <SearchBar />
       <div class="lesson-header">
@@ -12,10 +12,10 @@
         <ion-button
           id="trigger-button"
           class="compact-filter-chip"
-          style="--background: white"
+          style="--background: #f7f7f7"
         >
-          <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
-          <span class="text">Filters</span>
+          <span class="text-all">All</span>
+          <ion-icon src="/src/pictures/arrow-down.svg" class="icon"></ion-icon>
         </ion-button>
         <ion-popover trigger="trigger-button">
           <ion-accordion-group>
@@ -146,7 +146,7 @@ import {
   IonAccordionGroup,
   IonAccordion,
 } from "@ionic/vue";
-import { optionsOutline } from "ionicons/icons";
+import { caretUpOutline } from "ionicons/icons";
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import myMyModal from "@/components/VideoPlayerModal/VideoPlayerModal.vue";
@@ -198,7 +198,7 @@ console.log("Satre: ", academyStore.courses.key);
   display: flex;
   justify-content: space-between;
   align-items: left;
-  padding: 16px;
+  /* padding: 16px; */
 }
 
 .lesson-title {
@@ -234,7 +234,7 @@ console.log("Satre: ", academyStore.courses.key);
   text-align: left;
   margin-top: 25px;
   margin-bottom: 0px;
-  padding-left: 16px;
+  padding-left: 4px;
   font-style: normal;
 }
 
@@ -261,19 +261,31 @@ ion-button {
   align-items: center;
   padding: 0px;
   float: inline-end;
-  width: 107px;
+  /* width: 107px; */
   height: 32px;
-  background: #ffffff;
-  box-shadow: 0px 1px 2px rgba(51, 51, 51, 0.3);
-  border-radius: 5px;
-  border: 0px solid #8b8b8b;
+  /* background: #8b8b8b; */
+  /* box-shadow: 0px 1px 2px rgba(51, 51, 51, 0.3); */
+  border-radius: 8px;
+  /* border: 0px solid #8b8b8b; */
   flex: none;
   order: 1;
   flex-grow: 0;
 }
 
 .compact-filter-chip:hover {
-  background: #f0f0f0;
+  /* background: #f0f0f0; */
   /* Change the background on hover */
+}
+
+.text-all {
+  color: #8b8b8b;
+  text-align: center;
+
+  /* mobile/Title small */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
 }
 </style>

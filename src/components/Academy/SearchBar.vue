@@ -43,6 +43,7 @@ const clearSearch = () => {
   /* border: 1px solid #ccc; */
   /* 150% */
   letter-spacing: 0.5px;
+  padding: 18px 0px;
 }
 /* .searchbar-search-icon.sc-ion-searchbar-md {
   left: 344px;

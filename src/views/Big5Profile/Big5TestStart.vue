@@ -21,13 +21,14 @@
                 slot="start"
                 class="dot-icon"
               ></ion-icon>
-              <ion-text color="medium" class="ion-margin-bottom">{{ instruction }}</ion-text>
-
+              <ion-text color="medium">{{ instruction }}</ion-text>
             </ion-item>
           </ion-list>
         </div>
         <div>
-           <ion-button  @click="navigate" expand="block">START TEST</ion-button>
+          <ion-button class="button-size" @click="navigate" expand="block"
+            >START TEST</ion-button
+          >
         </div>
       </div>
     </ion-content>
@@ -64,14 +65,12 @@ import VideoPlayer from "@/components/Exercise/VideoPlayer.vue";
 import ExerciseDetails from "@/components/Exercise/ExerciseDetails.vue";
 import { usePlaybookStore, useUserStore, useTeamStore } from "@/store";
 
-
-const router = useRouter()
+const router = useRouter();
 function navigate() {
-  router.push({ name: 'big5Question' }).catch(err => {
+  router.push({ name: "big5Question" }).catch((err) => {
     console.error(err);
   });
 }
-
 
 const instructions = ref([
   "This questionnaire consists of 120 statements. There is no time restriction.",
@@ -85,13 +84,24 @@ const instructions = ref([
 <style scoped>
 .headerStyle {
   color: var(--tietiary, rgba(44, 58, 209, 0.5));
+
+  /* mobile/Title Large */
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px; /* 127.273% */
 }
 .dot-icon {
   color: var(--ion-color-medium);
   font-size: min(1rem, 6px);
   margin-right: 12px;
+  /* margin-top: 12px; */
 }
- .divPostion{
-  height: 600px 
- }
+.divPostion {
+  height: 600px;
+}
+
+.button-size {
+  height: 43px;
+}
 </style>

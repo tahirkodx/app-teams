@@ -24,6 +24,7 @@
                 () =>
                   router.push({
                     name: 'teamTopic',
+                    params: { topicid: topic.id },
                   })
               "
               class="card-style"
@@ -104,6 +105,7 @@ import Header from "@/components/Header/Header.vue";
 
 const commitmentTopics = ref([
   {
+    id: 123123123213,
     title: "Commitment Topic",
     score: "Score: 7.5/10",
     owner: {
@@ -116,6 +118,7 @@ const commitmentTopics = ref([
     progress: 0.5,
   },
   {
+    id: 123123123213,
     title: "Commitment Topic",
 
     owner: {
@@ -128,6 +131,7 @@ const commitmentTopics = ref([
     progress: 0.5,
   },
   {
+    id: 123123123213,
     title: "Commitment Topic",
     owner: {
       name: "Jane Smith",
