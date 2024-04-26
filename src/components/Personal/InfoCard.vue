@@ -1,18 +1,25 @@
 <template>
   <div class="ion-no-padding">
     <!-- new end -->
-    <IonGrid>
+    <IonGrid class="ion-padding">
       <IonRow>
         <IonCol size="4">
           <div class="container">
             <div class="profile-pic" id="top-center4">
-              <ion-img src="/src/pictures/Ellipse1.svg" alt="Finished Success"></ion-img>
+              <ion-img
+                src="/src/pictures/Ellipse1.svg"
+                alt="Finished Success"
+              ></ion-img>
             </div>
             <ion-popover trigger="top-center4" side="top" alignment="center">
               <ion-content class="ion-padding popover-content">
                 <div class="popover-item">Robert Fox</div>
-                <div class="popover-item info-role text-purple">robertfox1101@gmail.com:</div>
-                <div class="popover-item info-role text-purple">(201) 555-0124</div>
+                <div class="popover-item info-role text-purple">
+                  robertfox1101@gmail.com:
+                </div>
+                <div class="popover-item info-role text-purple">
+                  (201) 555-0124
+                </div>
                 <div class="popover-item font-xs">(GMT) United Kingdom</div>
                 <ion-icon :icon="closeOutline" class="close-icon"></ion-icon>
               </ion-content>
@@ -27,8 +34,13 @@
           </div>
           <div class="frame-wrapper-bottom">
             <div class="info-active">3 Active Teams</div>
-            <div class="info-profile">Big 5 Profile</div>
-            <ion-icon :icon="alertCircleOutline" class="ri-more-fill"></ion-icon>
+            <div class="d-flex">
+              <div class="info-profile">Big 5 Profile</div>
+              <ion-icon
+                :icon="alertCircleOutline"
+                class="ri-more-fill"
+              ></ion-icon>
+            </div>
           </div>
         </IonCol>
         <!-- <IonCol size="2">
@@ -51,11 +63,7 @@ import {
   IonContent,
   IonGrid,
 } from "@ionic/vue";
-import {
-  alertCircleOutline,
-  closeOutline
-} from "ionicons/icons";
-
+import { alertCircleOutline, closeOutline } from "ionicons/icons";
 </script>
 
 <style scoped>
@@ -105,7 +113,6 @@ ion-popover {
 
 .text-purple {
   color: #475569;
-
 }
 
 .info-name {
@@ -159,8 +166,10 @@ ion-popover {
 
 .frame .frame-wrapper-bottom {
   display: flex;
+  align-items: center;
   width: 100%;
   gap: 25%;
+  margin-top: 4px;
 }
 
 .frame-wrapper-top .ri-more-fill {
@@ -174,8 +183,13 @@ ion-popover {
 .frame-wrapper-bottom .ri-more-fill {
   height: 20px;
   left: 84%;
-  position: absolute;
+  /* position: absolute; */
   margin-top: -3px;
   width: 20px;
+}
+
+.d-flex {
+  display: inline-flex;
+  gap: 4px;
 }
 </style>

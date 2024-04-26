@@ -51,7 +51,7 @@
           </ion-row>
         </ion-grid>
         <!-- <AddListMember /> -->
-        <div v-if="teamName">
+        <div v-if="teamName" class="ion-margin-top">
           <modalInfo />
           <ion-note>Help</ion-note>
         </div>
@@ -260,6 +260,8 @@ ion-input {
 .error {
   color: #eb445a;
   font-size: 12px;
+  margin-top: 3px;
+  position: absolute;
 }
 .select-member {
   width: 90px;
