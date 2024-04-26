@@ -21,7 +21,7 @@
                 slot="start"
                 class="dot-icon"
               ></ion-icon>
-              <ion-text color="medium">{{ instruction }}</ion-text>
+              <ion-text color="medium" class="ion-margin-bottom">{{ instruction }}</ion-text>
 
             </ion-item>
           </ion-list>

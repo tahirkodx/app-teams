@@ -5,10 +5,10 @@
       <IonRow>
         <IonCol size="4">
           <div class="container">
-            <div class="profile-pic" id="top-center">
+            <div class="profile-pic" id="top-center4">
               <ion-img src="/src/pictures/Ellipse1.svg" alt="Finished Success"></ion-img>
             </div>
-            <ion-popover trigger="top-center" side="top" alignment="center">
+            <ion-popover trigger="top-center4" side="top" alignment="center">
               <ion-content class="ion-padding popover-content">
                 <div class="popover-item">Robert Fox</div>
                 <div class="popover-item info-role text-purple">robertfox1101@gmail.com:</div>
