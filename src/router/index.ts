@@ -490,6 +490,14 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
+        name: "teamid",
+        path: "team/:teamid",
+        component: () => import("@/views/Teams/TeamDetail.vue"),
+        meta: {
+          requiresAuth: true, // Add meta field to indicate protected route
+        },
+      },
+      {
         name: "createteam",
         path: "teams/create",
         component: () => import("@/views/Teams/CreateTeam.vue"),

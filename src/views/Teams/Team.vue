@@ -28,7 +28,8 @@
                 @click="
                   () =>
                     router.push({
-                      name: 'teamMember',
+                      name: 'teamid',
+                      params: { teamid: member.id },
                     })
                 "
               >
