@@ -25,14 +25,14 @@
             <div class=" bg-gray owner-container font-sm ion-padding-start ion-padding-end">
                 <!-- Swiper Navigation Buttons -->
                 <div @click="goToPreviousSlide">
-                    <ion-icon :icon="arrowBackCircle" id="prev"></ion-icon>
+                    <ion-icon :icon="chevronBackCircle" id="prev"></ion-icon>
                 </div>
                 <!-- Swiper instance -->
                 <swiper class="mySwiper" :key="currentSlideIndex" ref="mySwiper" :navigation="swiperNavigationConfig">
                     <swiper-slide v-for="(slide, index) in slides" :key="index">
                         <div class="container text-center">
                             <ion-button :id="slide.id" class="font-normal">{{ slide.content }}
-                                <ion-icon :icon="chevronDownOutline" class="ion-margin-start"></ion-icon><span
+                                <ion-icon :icon="chevronDownOutline" class="icon-sm ion-margin-horizontal"></ion-icon><span
                                     class="text-small">1/3</span>
                             </ion-button>
                             <ion-popover :trigger="slide.id" side="bottom" alignment="center">
@@ -44,7 +44,7 @@
                     </swiper-slide>
                 </swiper>
                 <div @click="goToNextSlide">
-                    <ion-icon :icon="arrowForwardCircle" id="next" class="bg-green"></ion-icon>
+                    <ion-icon :icon="chevronForwardCircle" id="next" class="bg-green"></ion-icon>
                 </div>
             </div>
             <ion-segment v-model="activeTab" value="Description" @ionChange="segmentChanged">
@@ -161,8 +161,8 @@ import {
 } from "@ionic/vue";
 
 import {
-    arrowBackCircle,
-    arrowForwardCircle,
+    chevronBackCircle,
+    chevronForwardCircle,
     chevronDownOutline,
     settingsOutline,
     chatbubbleEllipsesOutline,
@@ -287,7 +287,6 @@ ion-progress-bar {
 ion-icon {
     width: 24px;
     height: 24px;
-    flex-shrink: 0;
     color: #747474;
 }
 
@@ -326,7 +325,12 @@ ion-icon {
     gap: 10px;
     margin-bottom: 16px;
 }
-
+.icon-sm{
+    width: 12px;
+height: 12px;
+margin-left:10px;
+color: black
+}
 .container {
     display: flex;
     padding: 0px 12px;
