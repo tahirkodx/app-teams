@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <Header />
+    <Header is-back-button />
     <ion-content :fullscreen="true" class="ion-padding">
       <h3>Get an external coach</h3>
 
