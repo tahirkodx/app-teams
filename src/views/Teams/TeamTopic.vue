@@ -5,57 +5,65 @@
     </ion-header>
     <ion-content>
       <ion-text>
-        <h2 class="text-lg ion-padding-start ion-padding-bottom">
-          Build Their group Identity
-        </h2>
+        <h2 class="text-lg ion-padding-start">Build Their group Identity</h2>
       </ion-text>
-      <InfoCard />
+      <InfoCard is-small />
       <LineChart :data="dummyData" />
       <div
-    class="bg-gray owner-container font-sm ion-padding-start ion-padding-end"
-  >
-    <!-- Swiper Navigation Buttons -->
-    <div @click="goToPreviousSlide" :class="{ 'bg-green': currentSlideIndex > 1 }">
-      <ion-icon :icon="chevronBackCircle" id="prev"></ion-icon>
-    </div>
-    <!-- Swiper instance -->
-    <swiper
-      class="mySwiper"
-      :key="currentSlideIndex"
-      ref="mySwiper"
-      :navigation="swiperNavigationConfig"
-    >
-      <swiper-slide v-for="(slide, index) in slides" :key="index">
-        <div class="container text-center">
-          <ion-button :id="slide.id" class="font-normal"
-            >{{ slide.content }}
-            <ion-icon
-              :icon="chevronDownOutline"
-              class="icon-sm ion-margin-horizontal"
-            ></ion-icon
-            ><span class="text-small">{{ index+ 1}}/{{ slides.length }}</span>
-          </ion-button>
-          <ion-popover :trigger="slide.id" side="bottom" alignment="center">
-            <ion-content class="ion-padding">option1</ion-content>
-          </ion-popover>
-        </div>
-      </swiper-slide>
-    </swiper>
-    <div @click="goToNextSlide">
-      <ion-icon
-        :icon="chevronForwardCircle"
-        id="next"
-        class="bg-green"
-        @click="goToNextSlide"
-      ></ion-icon>
-    </div>
-  </div>
-
-      <ion-segment
-        v-model="activeTab"
-        value="Description"
-        @ionChange="segmentChanged"
+        class="bg-gray owner-container font-sm ion-padding-start ion-padding-end"
       >
+        <!-- Swiper Navigation Buttons -->
+        <button
+          id="prev-icon"
+          :disabled="currentSlideIndex === 1"
+          @click="goToPreviousSlide"
+        >
+          <ion-icon
+            :icon="chevronBackCircle"
+            :class="{ 'bg-green': currentSlideIndex > 1 }"
+          ></ion-icon>
+        </button>
+        <!-- Swiper instance -->
+        <Swiper
+          class="mySwiper"
+          :navigation="{ nextEl: '#next-icon', prevEl: '#prev-icon' }"
+        >
+          <SwiperSlide v-for="(slide, index) in slides" :key="index">
+            <div class="container text-center">
+              <ion-button :id="slide.id" class="font-normal"
+                >{{ slide.content }}
+                <ion-icon
+                  :icon="chevronDownOutline"
+                  class="icon-sm ion-margin-horizontal"
+                ></ion-icon
+                ><span class="text-small"
+                  >{{ index + 1 }}/{{ slides.length }}</span
+                >
+              </ion-button>
+              <ion-popover :trigger="slide.id" side="bottom" alignment="center">
+                <ion-content class="ion-padding">option1</ion-content>
+              </ion-popover>
+            </div>
+          </SwiperSlide>
+        </Swiper>
+        <button
+          id="next-icon"
+          :disabled="currentSlideIndex === slides.length"
+          @click="goToNextSlide"
+        >
+          <ion-icon
+            v-if="currentSlideIndex === slides.length"
+            :icon="chevronForwardCircle"
+          ></ion-icon>
+          <ion-icon
+            v-else
+            :icon="chevronForwardCircle"
+            class="bg-green"
+          ></ion-icon>
+        </button>
+      </div>
+
+      <ion-segment v-model="activeTab" value="Description">
         <ion-segment-button value="Description">
           <ion-label>Description</ion-label>
         </ion-segment-button>
@@ -98,7 +106,7 @@
                     </div>
                     <div>
                       <ion-card-header>
-                        <ion-card-title class="text-bold">{{
+                        <ion-card-title class="exs-heading">{{
                           card.title
                         }}</ion-card-title>
                         <div class="owner-container font-sm">
@@ -234,29 +242,14 @@ const cardArray = [
   },
 ];
 const currentSlideIndex = ref(1);
-const mySwiper = ref(null);
-
 const activeTab = ref("Description"); // default active tab
-const progress = ref(2);
-const chartData = ref();
-const swiperNavigationConfig = {
-  nextEl: "#next",
-  prevEl: "#prev",
-};
-
 
 const goToPreviousSlide = () => {
-  const swiperInstance = $refs.mySwiper.swiper;
-  swiperInstance.slidePrev();
-  currentSlideIndex.value = swiperInstance.activeIndex + 1;
-  console.log("Went to previous slide");
+  currentSlideIndex.value--;
 };
 
 const goToNextSlide = () => {
-  const swiperInstance = $refs.mySwiper.swiper;
-  swiperInstance.slideNext();
-  currentSlideIndex.value = swiperInstance.activeIndex + 1;
-  console.log("Went to next slide");
+  currentSlideIndex.value++;
 };
 </script>
 
@@ -326,6 +319,9 @@ ion-icon {
 }
 .bg-green {
   color: #aed351; /* Green color */
+}
+.bg-grey {
+  color: #7c7c7c; /* Green color */
 }
 .owner-container {
   align-items: center;
@@ -399,6 +395,7 @@ ion-icon {
 .text-lg {
   color: var(--tietiary, rgba(44, 58, 209, 0.5));
   line-height: 28px;
+  padding-bottom: 6px;
 }
 
 .text-small {
@@ -428,5 +425,15 @@ ion-icon {
   width: 24px;
   height: 24px;
   color: #2c3ad180;
+}
+.exs-heading {
+  color: var(--Color-Brand-black, #000);
+
+  /* mobile/Title Medium */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.15px;
 }
 </style>

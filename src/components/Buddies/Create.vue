@@ -29,7 +29,18 @@
       </ion-row>
 
       <div class="grid-cutom">
-        <div size="6" v-for="(item, index) in data" :key="index">
+        <div
+          size="6"
+          v-for="(item, index) in data"
+          :key="index"
+          @click="
+            () =>
+              router.push({
+                name: 'teamTopic',
+                params: { topicid: index + 872349246 },
+              })
+          "
+        >
           <ion-card class="ion-no-padding">
             <img
               alt="Silhouette of mountains"
@@ -81,6 +92,7 @@ import {
 } from "ionicons/icons";
 import { ref, onMounted } from "vue";
 import AddTeam from "../../views/Teams/AddTeam.vue";
+import router from "@/router/index";
 
 const modalVisible = ref(false);
 
