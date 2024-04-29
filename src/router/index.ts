@@ -464,6 +464,31 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import("@/views/UserOnboarding/LeadershipFlow/TakeTest.vue"),
   },
+  // Passwordchanged
+  {
+    name: "passwordSetting",
+    path: "/passwordSetting",
+    component: () =>
+      import("@/views/Passwordchanged/PasswordSetting.vue"),
+  },
+  {
+    name: "changePassword",
+    path: "/changePassword",
+    component: () =>
+      import("@/views/Passwordchanged/ChangePassword.vue"),
+  },
+  {
+    name: "resetPassword",
+    path: "/resetPassword",
+    component: () =>
+      import("@/views/Passwordchanged/ResetPassword.vue"),
+  },
+  {
+    name: "resetOtp",
+    path: "/resetOtp",
+    component: () =>
+      import("@/views/Passwordchanged/ResetOtp.vue"),
+  },
   // end of onboard routes
 
   {
