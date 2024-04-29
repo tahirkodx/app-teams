@@ -63,24 +63,25 @@
               </div>
             </div>
           </ion-col>
+          <div class="ion-text-end text-course" id="open-modal"><span>Course Details</span> <ion-icon :icon="informationCircleOutline" ></ion-icon></div>
         </ion-row>
       </div>
       <VideoPlayer play="/src/videos/testvideo.mp4" />
       <div class="tab-container">
         <div class="tabs">
-          <div
+          <!-- <div
             class="tab"
             :class="{ active: activeTab === 'courses' }"
             @click="segmentChanged('courses')"
           >
             Courses
-          </div>
+          </div> -->
           <div
             class="tab"
             :class="{ active: activeTab === 'details' }"
             @click="segmentChanged('details')"
           >
-            Details
+           Details
           </div>
           <div
             class="tab"
@@ -129,7 +130,11 @@
           </div>
         </div>
       </div>
+     
     </ion-content>
+ <ion-modal trigger="open-modal" :initial-breakpoint="1" :breakpoints="[0, 1]">
+      <div class="block">Block of Content</div>
+    </ion-modal>
   </ion-page>
 </template>
 
@@ -155,6 +160,7 @@ import {
   IonText,
   IonRow,
   IonCol,
+  IonModal,
   IonButton,
 } from "@ionic/vue";
 import router from "@/router/index";
@@ -164,6 +170,7 @@ import {
   arrowForwardOutline,
   arrowBackOutline,
   chevronBack,
+  informationCircleOutline
 } from "ionicons/icons";
 import Header from "@/components/Header/Header.vue";
 import Description from "@/components/Academy/Description.vue";
@@ -220,6 +227,10 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+ion-icon{
+  width: 16px;
+height: 16px; 
+}
 .header-container {
   margin-bottom: 20px;
 
@@ -241,15 +252,15 @@ onMounted(async () => {
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 0.8em;
-  color: #666;
+  font-size: 10px;
+  color: #CACACA;
 }
 
 .resource-detail:not(:last-child)::after {
   content: "•";
-  margin: 0 10px;
-  color: #666;
-  font-size: 20px;
+  margin: 6px;
+  color: #CACACA;
+  font-size: px;
 }
 
 .ion-text-right {
@@ -276,9 +287,10 @@ onMounted(async () => {
 .tabs {
   display: flex;
   justify-content: center;
-  padding: 0;
+  padding: 8px;
   margin: 0;
   list-style: none;
+  justify-content: space-between;
 }
 
 .tab-container {
@@ -342,5 +354,23 @@ ion-icon {
   font-style: normal;
   font-weight: 400;
   line-height: 16px; /* 133.333% */
+  /* margin-top: 10px; */
 }
+.ion-text-end {
+  display: flex;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+.block {
+    width: 100%;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ion-modal {
+    --height: auto;
+  }
 </style>
