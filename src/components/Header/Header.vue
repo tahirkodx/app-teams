@@ -112,7 +112,7 @@ const changeTeam = (value: any) => {
   }
 };
 const navigateSettingFunction = () => {
-  router.push({ name: "profile" });
+  router.push({ name: "passwordSetting" });
 };
 
 const navigateFunction = () => {
