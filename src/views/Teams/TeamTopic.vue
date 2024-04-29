@@ -12,49 +12,45 @@
       <InfoCard />
       <LineChart :data="dummyData" />
       <div
-        class="bg-gray owner-container font-sm ion-padding-start ion-padding-end"
-      >
-        <!-- Swiper Navigation Buttons -->
-        <div @click="goToPreviousSlide">
-          <ion-icon :icon="chevronBackCircle" id="prev"></ion-icon>
+    class="bg-gray owner-container font-sm ion-padding-start ion-padding-end"
+  >
+    <!-- Swiper Navigation Buttons -->
+    <div @click="goToPreviousSlide" :class="{ 'bg-green': currentSlideIndex > 1 }">
+      <ion-icon :icon="chevronBackCircle" id="prev"></ion-icon>
+    </div>
+    <!-- Swiper instance -->
+    <swiper
+      class="mySwiper"
+      :key="currentSlideIndex"
+      ref="mySwiper"
+      :navigation="swiperNavigationConfig"
+    >
+      <swiper-slide v-for="(slide, index) in slides" :key="index">
+        <div class="container text-center">
+          <ion-button :id="slide.id" class="font-normal"
+            >{{ slide.content }}
+            <ion-icon
+              :icon="chevronDownOutline"
+              class="icon-sm ion-margin-horizontal"
+            ></ion-icon
+            ><span class="text-small">{{ index+ 1}}/{{ slides.length }}</span>
+          </ion-button>
+          <ion-popover :trigger="slide.id" side="bottom" alignment="center">
+            <ion-content class="ion-padding">option1</ion-content>
+          </ion-popover>
         </div>
-        <!-- Swiper instance -->
-        <swiper
-          class="mySwiper"
-          :key="currentSlideIndex"
-          ref="mySwiper"
-          :navigation="swiperNavigationConfig"
-        >
-          <swiper-slide v-for="(slide, index) in slides" :key="index">
-            <div class="container text-center">
-              <ion-button :id="slide.id" class="font-normal"
-                >{{ slide.content }}
-                <ion-icon
-                  :icon="chevronDownOutline"
-                  class="icon-sm ion-margin-horizontal"
-                ></ion-icon
-                ><span class="text-small">1/3</span>
-              </ion-button>
-              <ion-popover :trigger="slide.id" side="bottom" alignment="center">
-                <ion-content class="ion-padding"
-                  >Build Their Group Identity</ion-content
-                >
-                <ion-content class="ion-padding"
-                  >Build Their Group Identity</ion-content
-                >
-                <ion-content class="ion-padding">Add Commitments</ion-content>
-              </ion-popover>
-            </div>
-          </swiper-slide>
-        </swiper>
-        <div @click="goToNextSlide">
-          <ion-icon
-            :icon="chevronForwardCircle"
-            id="next"
-            class="bg-green"
-          ></ion-icon>
-        </div>
-      </div>
+      </swiper-slide>
+    </swiper>
+    <div @click="goToNextSlide">
+      <ion-icon
+        :icon="chevronForwardCircle"
+        id="next"
+        class="bg-green"
+        @click="goToNextSlide"
+      ></ion-icon>
+    </div>
+  </div>
+
       <ion-segment
         v-model="activeTab"
         value="Description"
@@ -205,8 +201,8 @@ import "swiper/css/navigation";
 
 const slides = [
   { id: "top-center1", content: "Build Their Group Identity" },
-  { id: "top-center2", content: "Build Their Group Identity" },
-  { id: "top-center3", content: "Build Their Group Identity" },
+  { id: "top-center2", content: "Build Their Group Identity2" },
+  { id: "top-center3", content: "Build Their Group Identity3" },
 ];
 const dummyData = [
   { score: 7, date: "2024-01-01" },
@@ -237,7 +233,9 @@ const cardArray = [
     imageURL: "/src/pictures/Ellipse 72.svg",
   },
 ];
-const currentSlideIndex = ref(0);
+const currentSlideIndex = ref(1);
+const mySwiper = ref(null);
+
 const activeTab = ref("Description"); // default active tab
 const progress = ref(2);
 const chartData = ref();
@@ -246,14 +244,19 @@ const swiperNavigationConfig = {
   prevEl: "#prev",
 };
 
+
 const goToPreviousSlide = () => {
-  const swiperInstance = refs.mySwiper.swiper;
+  const swiperInstance = $refs.mySwiper.swiper;
   swiperInstance.slidePrev();
+  currentSlideIndex.value = swiperInstance.activeIndex + 1;
+  console.log("Went to previous slide");
 };
 
 const goToNextSlide = () => {
-  const swiperInstance = refs.mySwiper.swiper;
+  const swiperInstance = $refs.mySwiper.swiper;
   swiperInstance.slideNext();
+  currentSlideIndex.value = swiperInstance.activeIndex + 1;
+  console.log("Went to next slide");
 };
 </script>
 
@@ -321,7 +324,9 @@ ion-icon {
 .top-content {
   margin-top: -18px;
 }
-
+.bg-green {
+  color: #aed351; /* Green color */
+}
 .owner-container {
   align-items: center;
   margin-top: -8px;
