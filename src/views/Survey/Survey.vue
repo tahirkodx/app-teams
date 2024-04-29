@@ -22,7 +22,11 @@
           <ion-col>
             <h4 class="titleStyle">Survey</h4>
           </ion-col>
-          <ion-button id="trigger-button" class="compact-filter-chip" style="--background: white">
+          <ion-button
+            id="trigger-button"
+            class="compact-filter-chip"
+            style="--background: white"
+          >
             <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
             <span class="text">Team ({{ selectedTeams.length }})</span>
           </ion-button>
@@ -35,10 +39,18 @@
                   </ion-item>
                   <div slot="content">
                     <ion-list>
-                      <ion-item v-for="[id, team] in Array.from(teamStore.teams)" :key="id">
-                        <ion-checkbox label-placement="end" justify="start" aria-label="Label"
-                          :checked="selectedTeams.includes(id)" @ionChange="handleCheckboxChange(id)">{{ team.name
-                          }}</ion-checkbox>
+                      <ion-item
+                        v-for="[id, team] in Array.from(teamStore.teams)"
+                        :key="id"
+                      >
+                        <ion-checkbox
+                          label-placement="end"
+                          justify="start"
+                          aria-label="Label"
+                          :checked="selectedTeams.includes(id)"
+                          @ionChange="handleCheckboxChange(id)"
+                          >{{ team.name }}</ion-checkbox
+                        >
                       </ion-item>
                     </ion-list>
                   </div>
@@ -49,7 +61,8 @@
                   </ion-item>
                   <div slot="content">
                     <ion-radio-group v-model="selectedOption">
-                      <ion-item><ion-radio value="Today"></ion-radio>
+                      <ion-item
+                        ><ion-radio value="Today"></ion-radio>
                         <ion-label class="ion-text">Today</ion-label>
                       </ion-item>
                       <ion-item>
@@ -78,11 +91,16 @@
         </IonRow>
       </IonGrid>
       <!-- todo need to get team id is here -->
-      
-      <ion-card v-for="[id, survey] in statusStore.requests" :key="id" class="ion-margin-vertical" 
-      @click="() => router.push({name: 'survey', params: {  surveyid: survey.id}})">
-      
-      <IonGrid :fixed="true">
+
+      <ion-card
+        v-for="[id, survey] in statusStore.requests"
+        :key="id"
+        class="ion-margin-vertical"
+        @click="
+          () => router.push({ name: 'survey', params: { surveyid: survey.id } })
+        "
+      >
+        <IonGrid :fixed="true">
           <ion-route url="/tutorial" component="page-tutorial"></ion-route>
           <IonRow>
             <IonCol>
@@ -91,12 +109,17 @@
                   teamStore?.teams?.get(userStore.teamID)?.name
                 }}</ion-card-title>
               </ion-card-header>
-              <ion-card-content class="ion-flex ion-align-items-center ion-justify-content-between">
+              <ion-card-content
+                class="ion-flex ion-align-items-center ion-justify-content-between"
+              >
                 <span class="ion-text-capitalize">
                   <ion-chip v-if="survey.responded" class="chip-complete">
                     <ion-label>Completed</ion-label>
                   </ion-chip>
-                  <ion-chip v-else-if="survey.responded === false" class="chip-pending">
+                  <ion-chip
+                    v-else-if="survey.responded === false"
+                    class="chip-pending"
+                  >
                     <ion-label>Missed</ion-label>
                   </ion-chip>
                   <span v-else>
@@ -122,8 +145,13 @@
         </IonGrid>
       </ion-card>
 
-      <ion-fab class="addStyle" slot="fixed" horizontal="end" vertical="bottom"
-        @click="() => router.push({ name: 'addteam' })">
+      <ion-fab
+        class="addStyle"
+        slot="fixed"
+        horizontal="end"
+        vertical="bottom"
+        @click="() => router.push({ name: 'addteam' })"
+      >
         <ion-fab-button>
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
@@ -179,6 +207,7 @@ import { useUserStore, useStatusStore, useTeamStore } from "@/store";
 
 const statusStore = useStatusStore();
 const teamStore = useTeamStore();
+console.log("🚀 ~ teamStore:", teamStore);
 const userStore = useUserStore();
 const selectedTeams: any = ref([]);
 onMounted(async () => {
@@ -189,10 +218,8 @@ onMounted(async () => {
     statusStore.getSchedulers(),
     statusStore.getRequests(),
   ]);
-
 });
 const handleCheckboxChange = (teamId: any) => {
-
   const index = selectedTeams.value.indexOf(teamId);
   if (index >= 0) {
     selectedTeams.value.splice(index, 1);
@@ -200,7 +227,7 @@ const handleCheckboxChange = (teamId: any) => {
     selectedTeams.value.push(teamId);
   }
   console.log(selectedTeams.value);
-}
+};
 const getChipClass = (type: string, date: string) => {
   switch (type) {
     case "Pending":
