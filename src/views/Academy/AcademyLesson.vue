@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <Header isBackButton />
+      <Header isBackButton router-link="academy" />
     </ion-header>
     <ion-content>
       <!-- Header Container -->
@@ -472,10 +472,13 @@ p {
 }
 
 .icon-background {
-  background-color: var(--ion-color-primary);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ion-color-primary); /* example background color */
+  border-radius: 50%; /* circular background */
+  width: 24px; /* size of the background */
+  height: 24px; /* size of the background */
   color: #fff;
 }
 

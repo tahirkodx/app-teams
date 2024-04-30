@@ -74,10 +74,13 @@ const userStore = useUserStore();
 const teamStore = useTeamStore();
 const themeToggle = ref(false);
 const teamSelected = ref();
-defineProps({
+const porps = defineProps({
   isBackButton: {
     type: Boolean,
     default: false,
+  },
+  routerLink: {
+    type: String,
   },
 });
 onMounted(async () => {
@@ -127,8 +130,7 @@ function animateIncrease() {
 }
 
 function handleBack() {
-  console.log("cccc");
-  router.back();
+  router.push({ name: porps.routerLink });
 }
 </script>
 

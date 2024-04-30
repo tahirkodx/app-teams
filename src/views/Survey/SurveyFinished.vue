@@ -58,10 +58,12 @@ import { informationCircleOutline } from "ionicons/icons";
 .styleHeader {
   margin-top: 50px;
   display: inline-flex;
-  padding: 16px 125px;
+  /* padding: 16px 125px; */
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  max-width: 153px;
+  margin: 0 auto;
 }
 
 .outcome-title {
@@ -94,7 +96,7 @@ ion-img {
 
 .button-container {
   display: flex;
-flex-direction: column;
+  flex-direction: column;
   position: fixed;
   left: 0;
   right: 0;
@@ -121,7 +123,7 @@ ion-button {
   text-transform: uppercase;
   --background: #fff;
   --background-activated: #ebe5e5;
-   margin-top: 15px;
+  margin-top: 15px;
 }
 
 .finishedButton {

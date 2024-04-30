@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <Header is-back-button />
+    <Header is-back-button router-link="changePassword" />
     <ion-content>
       <ion-row>
         <ion-col class="ion-padding">
