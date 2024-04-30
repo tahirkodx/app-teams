@@ -8,11 +8,11 @@
         <ion-row>
           <ion-col class="ion-text-center ion-padding">
             <ion-text>
-              <h3 class="text-sm">Leadership Test
-                Questions</h3>
-              <h6 class="custom-style">
+              <div class="text-sm">Leadership Test
+                Questions</div>
+              <div class="custom-style">
                 The test requires you to fill in the gap to the sentences you see based on your understanding of it.
-              </h6>
+              </div>
             </ion-text>
             <ion-img src="/src/pictures/amico23.svg" alt="Finished Success" class="ion-padding"></ion-img>
             <ion-button expand="block" class="ion-margin-top">START TEST</ion-button>
