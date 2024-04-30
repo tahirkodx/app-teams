@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <Header isBackButton />
+      <Header isBackButton router-link="academy" />
     </ion-header>
     <ion-content>
       <!-- Header Container -->
@@ -321,8 +321,8 @@ p {
   align-items: center;
   background-color: var(--ion-color-primary); /* example background color */
   border-radius: 50%; /* circular background */
-  width: 30px; /* size of the background */
-  height: 30px; /* size of the background */
+  width: 24px; /* size of the background */
+  height: 24px; /* size of the background */
   color: #fff;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <Header is-back-button />
+    <Header is-back-button router-link="passwordSetting" />
     <ion-content :fullscreen="true">
       <h3 class="main-title ion-padding">Notification settings</h3>
       <span class="desc-text ion-padding"

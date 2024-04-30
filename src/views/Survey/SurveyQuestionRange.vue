@@ -6,73 +6,92 @@
     <ProgressBar />
     <div class="outcome-title">How well would you rate the exercises below</div>
     <div class="title-line"></div>
-<div class="mainStyle" v-for="questionArray in questionArr"
-          :key="questionArray.value">
-    <h3 class="titleStyle">
-      {{ questionArray.question }}
-    </h3>
+    <div
+      class="mainStyle"
+      v-for="questionArray in questionArr"
+      :key="questionArray.value"
+    >
+      <h3 class="titleStyle">
+        {{ questionArray.question }}
+      </h3>
 
-    <div class="scoreRange">
-      <span>
-        Scores:
-        <span
-          ><ion-icon class="iconStyle" :icon="informationCircleOutline"
-        /></span>
-      </span>
+      <div class="scoreRange">
+        <span>
+          Scores:
+          <span>
+            <ion-icon
+              :id="questionArray.value"
+              class="iconStyle"
+              :icon="informationCircleOutline"
+            />
+          </span>
+          <ion-popover
+            :trigger="questionArray.value"
+            side="top"
+            alignment="center"
+          >
+            <ion-content class="ion-padding popover-content">
+              <div class="flex">
+                <span class="text-title">Score grade</span>
+                <span class="text-desc"
+                  >write about score grade numbers Resizable Auto Layout Tooltip
+                  Component, Border Adjustable</span
+                >
+              </div>
+            </ion-content>
+          </ion-popover>
+        </span>
 
-      <span> Range:1-10 </span>
+        <span> Range:1-10 </span>
+      </div>
+
+      <ion-range
+        aria-label="Custom range"
+        :value="5"
+        :pin="true"
+        :min="0"
+        :max="10"
+        :ticks="true"
+      ></ion-range>
+      <div class="notes">
+        <span> Notes: </span>
+      </div>
+
+      <div>
+        <ion-textarea
+          rows="4"
+          aria-label="Custom textarea"
+          placeholder="Type something here"
+          class="custom"
+          :auto-grow="true"
+        ></ion-textarea>
+      </div>
+      <div class="title-line"></div>
     </div>
-
-    <ion-range
-      aria-label="Custom range"
-      :value="5"
-      :pin="true"
-      :min="0"
-      :max="10"
-      :ticks="true"
-    ></ion-range>
-    <div class="notes">
-      <span> Notes: </span>
-    </div>
-
-    <div>
-      <ion-textarea
-        rows="4"
-        aria-label="Custom textarea"
-        placeholder="Type something here"
-        class="custom"
-        :auto-grow="true"
-      ></ion-textarea>
-    </div>
-    <div class="title-line"></div>
-</div>
-<ion-footer>
-   <div class="button-container">
-      <ion-button
-        class="previousButton"
-        @click="
-          () =>
-            router.push({
-              name: 'surveyQuestion',
-            })
-        "
-        >Previous</ion-button
-      >
-      <ion-button
-        class="nextButton"
-        @click="
-          () =>
-            router.push({
-              name: 'surveyFinished',
-            })
-        "
-        >Submit</ion-button
-      >
-    </div>
-
-</ion-footer>
-
- 
+    <ion-footer>
+      <div class="button-container">
+        <ion-button
+          class="previousButton"
+          @click="
+            () =>
+              router.push({
+                name: 'surveyQuestion',
+              })
+          "
+          >Previous</ion-button
+        >
+        <ion-button
+          class="nextButton"
+          @click="
+            () =>
+              router.push({
+                name: 'surveyFinished',
+              })
+          "
+          >Submit</ion-button
+        >
+      </div>
+    </ion-footer>
   </ion-content>
 </template>
 
@@ -95,22 +114,23 @@ import router from "@/router/index";
 
 import { informationCircleOutline } from "ionicons/icons";
 
-
 const questionArr = [
-  {question:"Celebrate Success: Recognising Individual and Team Achievements:" , value:"1"},
-  {question:"Establish Effective Communication Guidelines:", value:"2"},
-  {question:" Encourage Open Discussion:", value:"3"},
-  {question:"Encourage Peer-to-Peer Feedback:", value:"4"},
-  {question:"Practice Active Listening:", value:"5"},
-  {question:"Promote Equal Participation:", value:"6"},
-  {question:"Provide Effective Feedback:", value:"7"},
-  {question:"Provide Opportunities for Reflection:", value:"8"},
-   
-]
+  {
+    question:
+      "Celebrate Success: Recognising Individual and Team Achievements:",
+    value: "1",
+  },
+  { question: "Establish Effective Communication Guidelines:", value: "2" },
+  { question: " Encourage Open Discussion:", value: "3" },
+  { question: "Encourage Peer-to-Peer Feedback:", value: "4" },
+  { question: "Practice Active Listening:", value: "5" },
+  { question: "Promote Equal Participation:", value: "6" },
+  { question: "Provide Effective Feedback:", value: "7" },
+  { question: "Provide Opportunities for Reflection:", value: "8" },
+];
 </script>
 
 <style scoped>
- 
 .titleStyle {
   color: #4d4d4d;
   font-size: 14px;
@@ -255,5 +275,33 @@ ion-textarea.custom {
   letter-spacing: 0.75px;
   text-transform: uppercase;
   background-color: #a5ce3e;
+}
+
+.text-title {
+  color: #000;
+
+  /* mobile/Title Large */
+  font-family: Cabin;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px; /* 127.273% */
+}
+
+.text-desc {
+  color: #7c7c7c;
+
+  /* mobile/Body medium */
+  font-family: Cabin;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.25px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <Header is-back-button />
+    <Header is-back-button router-link="passwordSetting" />
     <ion-content :fullscreen="true" class="ion-padding">
       <h3>Profile edit</h3>
       <div class="ion-text-center ion-justify-content-center">
