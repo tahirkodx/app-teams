@@ -7,15 +7,14 @@
           <div class="custom-container ion-padding">
             <div class="custom-container ion-text-center ion-margin-bottom">
               <ion-text class="font-lg">Change Password?</ion-text>
-              <ion-text class="font-sm"
-                >We will send you a link to reset password
-              </ion-text>
+              <ion-text class="font-sm">We will send you a link to reset password</ion-text>
             </div>
             <ion-input
               fill="outline"
               placeholder="Enter password:*"
-              error-text="Your password is incorrect"
               :type="passwordFieldType"
+              @ionInput="validatePassword"
+              v-model="password"
             >
               <ion-icon
                 :icon="passwordFieldType === 'password' ? eyeOutline : eyeOff"
@@ -23,11 +22,13 @@
                 @click="togglePasswordVisibility"
               ></ion-icon>
             </ion-input>
+            <ion-text color="danger">{{ customErrorMessagePass }}</ion-text>
             <ion-input
               fill="outline"
               placeholder="Confirm password:*"
-              error-text="Your password is incorrect"
               :type="passwordFieldType"
+              @ionInput="validateConfirmPassword"
+              v-model="confirmPassword"
             >
               <ion-icon
                 :icon="passwordFieldType === 'password' ? eyeOutline : eyeOff"
@@ -35,11 +36,14 @@
                 @click="togglePasswordVisibility"
               ></ion-icon>
             </ion-input>
+            <ion-text color="danger">{{ confirmPasswordError }}</ion-text>
             <ion-button
               expand="block"
               class="ion-padding-vertical"
-              router-link="/inviteFound"
-              >CREATE NEW PASSWORD
+              :disabled="!isValidForm"
+              @click="changePassword"
+            >
+              CREATE NEW PASSWORD
             </ion-button>
           </div>
         </ion-col>
@@ -54,20 +58,45 @@ import {
   IonContent,
   IonRow,
   IonCol,
-  IonIcon,
   IonText,
   IonInput,
   IonButton,
 } from "@ionic/vue";
 import Header from "@/components/Header/Header.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { eyeOutline, eyeOff } from "ionicons/icons";
 
 const passwordFieldType = ref("password");
+const password = ref("");
+const confirmPassword = ref("");
+const customErrorMessagePass = ref("");
+const confirmPasswordError = ref("");
 
 const togglePasswordVisibility = () => {
-  passwordFieldType.value =
-    passwordFieldType.value === "password" ? "text" : "password";
+  passwordFieldType.value = passwordFieldType.value === "password" ? "text" : "password";
+};
+
+const validatePassword = () => {
+  const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z0-9]).{8,}$/;
+
+  // Check if the password matches the regular expression
+  const isValidPassword = passwordRegex.test(password.value);
+
+  customErrorMessagePass.value = isValidPassword
+    ? ""
+    : "Invalid password. Must contain a minimum of 8 characters and at least one special character.";
+};
+
+const validateConfirmPassword = () => {
+  confirmPasswordError.value = password.value === confirmPassword.value ? "" : "Passwords do not match";
+};
+
+const isValidForm = computed(() => {
+  return customErrorMessagePass.value === "" && confirmPasswordError.value === "";
+});
+
+const changePassword = () => {
+  // Handle password change logic here
 };
 </script>
 
