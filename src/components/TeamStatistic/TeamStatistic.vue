@@ -2,7 +2,7 @@
   <div>
     <div class="segment-wrapper">
       <ion-segment
-      mode="md"
+        mode="md"
         scrollable
         value="doingWell"
         @ionChange="segmentChanged($event)"
@@ -42,7 +42,7 @@
     </div>
 
     <div v-if="selectedSegment === 'doingWell'">
-      <div v-for="(item, index) in items" :key="index" class="ion-padding">
+      <div v-for="(item, index) in items" :key="index" style="padding: 6px">
         <ion-item lines="none">
           <ion-label
             >{{ item.label }}
@@ -54,7 +54,7 @@
             @click="openPopover($event)"
           ></ion-icon>
         </ion-item>
-        <ion-item lines="full">
+        <ion-item lines="full" class="second-item">
           <ion-badge slot="start" color="light">{{ item.value }}</ion-badge>
           <ion-progress-bar :value="item.value / 10"></ion-progress-bar>
         </ion-item>
@@ -84,14 +84,22 @@
     </div>
     <div v-if="selectedSegment === 'excercises'">
       <div class="suggested-exercise">Suggested Exercise</div>
+
+      <div class="ion-padding-top ion-padding-bottom ion-padding-start">
+        <span class="text-excersise-title">Active Exercises:</span>
+      </div>
       <div class="ion-padding-horizontal">
-        <ion-card class="practice-card">
+        <ion-card
+          class="practice-card"
+          v-for="(item, index) in extiveExercises"
+          :key="index"
+        >
           <div class="card-content">
             <ion-reorder slot="end">
               <img src="/src/pictures/threeDot.svg" class="drag-handle-icon" />
             </ion-reorder>
             <div class="title-progress-container">
-              <ion-label> </ion-label>
+              <ion-label class="text-exer"> Exercise Topic</ion-label>
               <div class="owner-container">
                 <ion-avatar>
                   <img src="/src/pictures/Ellipse 72.svg" />
@@ -121,6 +129,38 @@
               size="large"
               class="arrow-back"
             />
+          </div>
+        </ion-card>
+      </div>
+
+      <div class="ion-padding-top ion-padding-bottom ion-padding-start">
+        <span class="text-excersise-title">Suggested Exercises:</span>
+      </div>
+
+      <div class="ion-padding-horizontal">
+        <ion-card v-for="(item, index) in suggestedExercises" :key="index">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <div class="ion-padding-horizontal headerTitle">
+                  <h5>{{ item.title }}</h5>
+                </div>
+              </ion-col>
+              <ion-col size="auto">
+                <div style="width: 40px">
+                  <ion-icon
+                    class="ionIconCustom"
+                    src="/src/pictures/uil_arrow-right.svg"
+                    slot="end"
+                    size="large"
+                  >
+                  </ion-icon>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <div class="ion-padding ionText">
+            <ion-text>{{ item.desc }} </ion-text>
           </div>
         </ion-card>
       </div>
@@ -203,9 +243,9 @@
           <ion-label class="ion-text-center" style="flex: 1"
             >Clear & Vision</ion-label
           >
-          <ion-button fill="clear" slot="end">
+          <!-- <ion-button fill="clear" slot="end">
             <ion-icon :icon="closeOutline"></ion-icon>
-          </ion-button>
+          </ion-button> -->
         </ion-item>
         <ion-item>
           <ion-label>Energy</ion-label>
@@ -295,6 +335,32 @@ const openPopover = (e: Event) => {
   event.value = e;
   popoverOpen.value = true;
 };
+
+const extiveExercises = ref([
+  {
+    topic: "Exercise Topic",
+    owner: "Guy Hawkins",
+    status: "Ongoing",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. ",
+  },
+  {
+    topic: "Exercise Topic",
+    owner: "Guy Hawkins",
+    status: "Ongoing",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. ",
+  },
+]);
+
+const suggestedExercises = ref([
+  {
+    title: "Exercise Topic",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. ",
+  },
+  {
+    title: "Exercise Topic",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. ",
+  },
+]);
 </script>
 
 <style scoped>
@@ -334,7 +400,7 @@ ion-progress-bar {
 }
 
 .suggested-exercise {
-  padding: 15px 25px;
+  padding: 5px 8px;
   background-color: rgba(44, 58, 209, 0.1);
   color: var(--black, #000);
   font-size: 16px;
@@ -343,7 +409,7 @@ ion-progress-bar {
 }
 
 .practice-card {
-  margin-bottom: 2px;
+  margin-bottom: 16px;
   --ion-item-background: transparent;
   --background: transparent;
   display: flex;
@@ -354,16 +420,16 @@ ion-progress-bar {
 .card-content {
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 10px 8px;
   border-radius: 5px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
 }
 
 .title-progress-container {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 ion-label {
@@ -457,5 +523,46 @@ ion-avatar img {
 .title-line {
   border-bottom: 1px solid rgba(242, 242, 242, 0.95);
   margin-top: 15px;
+}
+
+.text-exer {
+  color: #000;
+
+  /* mobile/Title small */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
+}
+
+.text-excersise-title {
+  color: var(--black, #000);
+  font-family: Cabin;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.15px;
+}
+
+ion-card {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.headerTitle {
+  margin-left: -10px;
+  color: #000;
+}
+
+.ionIconCustom {
+  margin-top: 5px;
+  margin-bottom: -12px;
+}
+
+.ionText {
+  margin-top: -30px;
+  color: #000;
 }
 </style>

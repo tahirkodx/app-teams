@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <Header isBackButton />
+      <Header isBackButton router-back />
     </ion-header>
     <ion-content>
       <ion-text>

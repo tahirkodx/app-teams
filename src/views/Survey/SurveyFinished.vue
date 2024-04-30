@@ -57,13 +57,10 @@ import { informationCircleOutline } from "ionicons/icons";
 <style scoped>
 .styleHeader {
   margin-top: 50px;
-  display: inline-flex;
-  /* padding: 16px 125px; */
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  max-width: 153px;
-  margin: 0 auto;
+  justify-content: center;
 }
 
 .outcome-title {
@@ -73,6 +70,8 @@ import { informationCircleOutline } from "ionicons/icons";
   font-style: normal;
   font-weight: 500;
   line-height: 28px;
+  max-width: 153px;
+  margin: 0 auto;
 }
 
 .title-line {
@@ -98,10 +97,13 @@ ion-img {
   display: flex;
   flex-direction: column;
   position: fixed;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  background: #fff;
+  /* left: 0;
+  right: 0; */
+  /* padding: 10px; */
+  background: none;
+  box-shadow: 0 0 0;
+  padding: 0 20px;
+  width: 100%;
 }
 
 ion-button {

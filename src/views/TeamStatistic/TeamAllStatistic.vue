@@ -7,7 +7,11 @@
           <ion-col>
             <h4 class="titleStyle">Survey Scores</h4>
           </ion-col>
-          <ion-button id="trigger-button"  class="text" style="--background: white">
+          <ion-button
+            id="trigger-button"
+            class="text btn-filter"
+            style="--background: white"
+          >
             <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
             <span class="text">10/06/24</span>
           </ion-button>
@@ -82,7 +86,78 @@
           </ion-row>
         </ion-grid>
       </div>
-      <div class="divColor">
+      <div
+        class="bg-gray owner-container font-sm ion-padding-start ion-padding-end"
+      >
+        <!-- Swiper Navigation Buttons -->
+        <button
+          id="prev-icon"
+          :disabled="currentSlideIndex === 1"
+          @click="goToPreviousSlide"
+        >
+          <ion-icon
+            :icon="chevronBackCircle"
+            :class="{ 'bg-green': currentSlideIndex > 1 }"
+          ></ion-icon>
+        </button>
+        <!-- Swiper instance -->
+        <Swiper
+          class="mySwiper"
+          :navigation="{ nextEl: '#next-icon', prevEl: '#prev-icon' }"
+        >
+          <SwiperSlide v-for="(slide, index) in slides" :key="index">
+            <div class="container text-center">
+              <ion-select
+                size="small"
+                interface="popover"
+                style="width: fit-content"
+                placeholder="All"
+                :toggle-icon="chevronUpOutline"
+                :expanded-icon="chevronDownOutline"
+              >
+                <ion-select-option value="energy">Energy</ion-select-option>
+                <!-- <ion-select-option value="oranges">Oranges</ion-select-option> -->
+                <!-- <ion-select-option value="bananas">Bananas</ion-select-option> -->
+              </ion-select>
+
+              <span class="text-small"
+                >{{ index + 1 }}/{{ slides.length }}</span
+              >
+            </div>
+            <!-- <div class="container text-center">
+              <ion-button :id="slide.id" class="font-normal"
+                >{{ slide.content }}
+                <ion-icon
+                  :icon="chevronDownOutline"
+                  class="icon-sm ion-margin-horizontal"
+                ></ion-icon
+                ><span class="text-small"
+                  >{{ index + 1 }}/{{ slides.length }}</span
+                >
+              </ion-button>
+              <ion-popover :trigger="slide.id" side="bottom" alignment="center">
+                <ion-content class="ion-padding">option1</ion-content>
+              </ion-popover>
+            </div> -->
+          </SwiperSlide>
+        </Swiper>
+        <button
+          id="next-icon"
+          :disabled="currentSlideIndex === slides.length"
+          @click="goToNextSlide"
+        >
+          <ion-icon
+            v-if="currentSlideIndex === slides.length"
+            :icon="chevronForwardCircle"
+          ></ion-icon>
+          <ion-icon
+            v-else
+            :icon="chevronForwardCircle"
+            class="bg-green"
+          ></ion-icon>
+        </button>
+      </div>
+      <!-- <div class="divColor">
         <ion-grid>
           <ion-row>
             <ion-col size="12" class="ion-text-right">
@@ -114,7 +189,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </div>
+      </div> -->
       <div>
         <Tabs />
       </div>
@@ -150,6 +225,8 @@ import {
   optionsOutline,
   chevronUpOutline,
   chevronDownOutline,
+  chevronBackCircle,
+  chevronForwardCircle,
 } from "ionicons/icons";
 import Charts from "@/components/Widgets/ChartSlider.vue";
 import Header from "@/components/Header/Header.vue";
@@ -157,11 +234,32 @@ import Tabs from "@/components/TeamStatistic/TeamStatistic.vue";
 import { DateFormate } from "@/utils/Helper";
 import router from "@/router/index";
 import { useUserStore, useStatusStore, useTeamStore } from "@/store";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+
+const slides = [
+  { id: "top-center1", content: "Build Their Group Identity" },
+  { id: "top-center2", content: "Build Their Group Identity2" },
+  { id: "top-center3", content: "Build Their Group Identity3" },
+];
 
 const statusStore = useStatusStore();
 const teamStore = useTeamStore();
 const userStore = useUserStore();
 const selectedTeams: any = ref([]);
+const currentSlideIndex = ref(1);
+const activeTab = ref("Description"); // default active tab
+
+const goToPreviousSlide = () => {
+  currentSlideIndex.value--;
+};
+
+const goToNextSlide = () => {
+  currentSlideIndex.value++;
+};
+
 onMounted(async () => {
   await Promise.all([
     teamStore.getTeams(),
@@ -297,7 +395,7 @@ const openPopover = (e: Event) => {
 }
 
 .score-section-response {
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   padding: 0px 0px 0px 20px;
 }
 
@@ -334,7 +432,9 @@ const openPopover = (e: Event) => {
 }
 
 .resource-navigation {
-  display: inline-flex;
+  display: flex;
+  /* justify-content: center; */
+  /* width: 100%; */
   margin: 0 10px;
   font-size: 0.9em;
   color: #666;
@@ -363,5 +463,65 @@ ion-select {
 
 .divColor {
   background-color: #f7f7f7;
+}
+
+.btn-filter {
+  padding: 0;
+}
+
+.owner-container {
+  align-items: center;
+  margin-top: -8px;
+}
+
+.font-sm {
+  display: flex;
+}
+
+.bg-gray {
+  background: #f2f2f2;
+  margin-top: 12px;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.bg-green {
+  color: #aed351;
+}
+
+.container {
+  display: flex;
+  padding: 0px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.text-center {
+  flex: 1;
+  text-align: center;
+}
+
+.font-normal {
+  color: var(--Neutrals-black, #303030);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+  --background: #f2f2f2;
+  --box-shadow: none;
+}
+
+ion-icon {
+  width: 24px;
+  height: 24px;
+  color: #747474;
+}
+
+.text-small {
+  color: #808080;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
 }
 </style>

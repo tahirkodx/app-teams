@@ -91,7 +91,6 @@
         </IonRow>
       </IonGrid>
       <!-- todo need to get team id is here -->
-
       <ion-card
         v-for="[id, survey] in statusStore.requests"
         :key="id"
@@ -207,7 +206,7 @@ import { useUserStore, useStatusStore, useTeamStore } from "@/store";
 
 const statusStore = useStatusStore();
 const teamStore = useTeamStore();
-console.log("🚀 ~ teamStore:", teamStore);
+console.log("🚀 ~ teamStore:", statusStore);
 const userStore = useUserStore();
 const selectedTeams: any = ref([]);
 onMounted(async () => {

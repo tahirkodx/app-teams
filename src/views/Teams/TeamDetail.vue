@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <Header isBackButton />
+      <Header isBackButton router-link="team" />
     </ion-header>
     <ion-content>
       <InfoCard />

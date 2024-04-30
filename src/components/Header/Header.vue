@@ -79,6 +79,10 @@ const porps = defineProps({
     type: Boolean,
     default: false,
   },
+  routerBack: {
+    type: Boolean,
+    default: false,
+  },
   routerLink: {
     type: String,
   },
@@ -130,7 +134,11 @@ function animateIncrease() {
 }
 
 function handleBack() {
-  router.push({ name: porps.routerLink });
+  if (porps.routerBack === true) {
+    router.back();
+  } else {
+    router.push({ name: porps.routerLink });
+  }
 }
 </script>
 
