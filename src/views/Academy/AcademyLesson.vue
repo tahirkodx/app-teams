@@ -16,29 +16,18 @@
             </ion-text>
           </ion-col>
           <ion-col size="3" class="ion-text-right">
-            <ion-button
-              fill="clear"
-              class="navigation-button"
-              @click="processBackItem"
-              :disabled="tempIndex + 1 <= 1"
-            >
+            <ion-button fill="clear" class="navigation-button" @click="processBackItem" :disabled="tempIndex + 1 <= 1">
               <span class="icon-background">
                 <ion-icon :icon="chevronBack" slot="icon-only"></ion-icon>
               </span>
             </ion-button>
             <div class="resource-navigation">
               {{
-                tempIndex + 1 + "/" + academyStore.singleCourse?.lessons?.length
-              }}
+                  tempIndex + 1 + "/" + academyStore.singleCourse?.lessons?.length
+                }}
             </div>
-            <ion-button
-              fill="clear"
-              class="navigation-button"
-              @click="processNextItem"
-              :disabled="
-                tempIndex + 1 >= academyStore.singleCourse?.lessons?.length
-              "
-            >
+            <ion-button fill="clear" class="navigation-button" @click="processNextItem" :disabled="tempIndex + 1 >= academyStore.singleCourse?.lessons?.length
+                  ">
               <span class="icon-background">
                 <ion-icon :icon="chevronForward" slot="icon-only"></ion-icon>
               </span>
@@ -63,7 +52,8 @@
               </div>
             </div>
           </ion-col>
-          <div class="ion-text-end text-course" id="open-modal"><span>Course Details</span> <ion-icon :icon="informationCircleOutline" ></ion-icon></div>
+          <div class="ion-text-end text-course" id="open-modal"><span>Course Details</span> <ion-icon
+              :icon="informationCircleOutline"></ion-icon></div>
         </ion-row>
       </div>
       <VideoPlayer play="/src/videos/testvideo.mp4" />
@@ -76,64 +66,105 @@
           >
             Courses
           </div> -->
-          <div
-            class="tab"
-            :class="{ active: activeTab === 'details' }"
-            @click="segmentChanged('details')"
-          >
-           Details
+          <div class="tab" :class="{ active: activeTab === 'details' }" @click="segmentChanged('details')">
+            Details
           </div>
-          <div
-            class="tab"
-            :class="{ active: activeTab === 'transcript' }"
-            @click="segmentChanged('transcript')"
-          >
+          <div class="tab" :class="{ active: activeTab === 'transcript' }" @click="segmentChanged('transcript')">
             Transcript
           </div>
-          <div
-            class="tab"
-            :class="{ active: activeTab === 'notes' }"
-            @click="segmentChanged('notes')"
-          >
+          <div class="tab" :class="{ active: activeTab === 'notes' }" @click="segmentChanged('notes')">
             Notes
           </div>
         </div>
         <div class="content" v-if="loading">
           <!-- Content based on the active tab -->
           <div v-if="activeTab === 'courses'">
-            <Description
-              :summary="academyStore?.singleCourse?.summary"
-              :description="academyStore?.singleCourse?.description"
-              :plays="academyStore?.singleCourse?.plays"
-            />
+            <Description :summary="academyStore?.singleCourse?.summary"
+              :description="academyStore?.singleCourse?.description" :plays="academyStore?.singleCourse?.plays" />
           </div>
           <div v-if="activeTab === 'details'">
-            <Details
-              :id="academyStore?.singleCourse?.lessons[tempIndex]?.id"
-              :summary="academyStore?.singleCourse?.lessons[tempIndex].summary"
-              :time="
-                academyStore?.singleCourse?.lessons[tempIndex].video_length
-              "
-              :content="academyStore?.singleCourse?.lessons[tempIndex].content"
-            />
+            <Details :id="academyStore?.singleCourse?.lessons[tempIndex]?.id"
+              :summary="academyStore?.singleCourse?.lessons[tempIndex].summary" :time="academyStore?.singleCourse?.lessons[tempIndex].video_length
+                  " :content="academyStore?.singleCourse?.lessons[tempIndex].content" />
           </div>
           <div v-if="activeTab === 'transcript'">
-            <Transcript
-              :summary="academyStore?.singleCourse?.lessons[tempIndex].summary"
-              :transcript="
-                academyStore.singleCourse?.lessons[tempIndex].transcript
-              "
-            />
+            <Transcript :summary="academyStore?.singleCourse?.lessons[tempIndex].summary" :transcript="academyStore.singleCourse?.lessons[tempIndex].transcript
+                  " />
           </div>
           <div v-if="activeTab === 'notes'">
             <p>Write something here</p>
           </div>
         </div>
       </div>
-     
+
     </ion-content>
- <ion-modal trigger="open-modal" :initial-breakpoint="1" :breakpoints="[0, 1]">
-      <div class="block">Block of Content</div>
+    <ion-modal trigger="open-modal" :initial-breakpoint="1" :breakpoints="[0, 1]">
+      <div>
+        <div class="header-container">
+          <ion-row>
+            <ion-col size="9">
+              <ion-text>
+                <p class="resource-title">
+                  Resource Title:
+                  {{ academyStore?.singleCourse?.lessons[tempIndex]?.title }}
+                </p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <span>
+                <ion-icon :icon="closeOutline" slot="icon-only" class="icon"></ion-icon>
+              </span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="pl-4">
+            <ion-col size="9">
+              <div class="resource-details">
+                <div class="resource-detail">
+                  Video:
+                  {{ academyStore?.singleCourse?.total_length }}
+                  Mins
+                </div>
+                <div class="resource-detail">
+                  {{ MonthsAgo(academyStore?.singleCourse?.last_updated) }}
+                  Months ago
+                </div>
+                <div class="resource-detail">
+                  {{ academyStore?.singleCourse?.lessons?.length }}
+                  Lessons
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <span class="bg-purple ion-margin-end">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                  <path
+                    d="M8.86389 11.9467C8.94572 11.9149 9.02048 11.8674 9.08389 11.8067L12.4172 8.47333C12.4794 8.41117 12.5287 8.33738 12.5623 8.25617C12.596 8.17495 12.6133 8.08791 12.6133 8C12.6133 7.82247 12.5428 7.6522 12.4172 7.52667C12.3551 7.46451 12.2813 7.4152 12.2001 7.38156C12.1188 7.34792 12.0318 7.33061 11.9439 7.33061C11.7664 7.33061 11.5961 7.40113 11.4706 7.52667L9.27722 9.72667V4.66667C9.27722 4.48986 9.20698 4.32029 9.08196 4.19526C8.95693 4.07024 8.78736 4 8.61055 4C8.43374 4 8.26417 4.07024 8.13915 4.19526C8.01412 4.32029 7.94389 4.48986 7.94389 4.66667V9.72667L5.75055 7.52667C5.68858 7.46418 5.61484 7.41459 5.53361 7.38074C5.45237 7.34689 5.36523 7.32947 5.27722 7.32947C5.18921 7.32947 5.10208 7.34689 5.02084 7.38074C4.9396 7.41459 4.86586 7.46418 4.80389 7.52667C4.7414 7.58864 4.69181 7.66238 4.65796 7.74362C4.62411 7.82486 4.60669 7.91199 4.60669 8C4.60669 8.08801 4.62411 8.17515 4.65796 8.25638C4.69181 8.33762 4.7414 8.41136 4.80389 8.47333L8.13722 11.8067C8.20062 11.8674 8.27539 11.9149 8.35722 11.9467C8.51953 12.0133 8.70158 12.0133 8.86389 11.9467Z"
+                    fill="white" />
+                </svg>
+              </span>
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row>
+          <ion-col>
+            <div v-for="(topic, index) in lessonTopics" :key="index"
+              @click="() => router.push({ name: 'teamTopic', params: { topicid: topic.id } })" class="card-wrapper">
+              <div class="ion-padding-horizontal">
+                <div>
+                  <div class="font-sm">{{ topic.title }}</div>
+                  <span :style="{ color: topic.statusColor }" class="text-green">{{ topic.status }}</span>
+                </div>
+                <div class="font-xs ion-margin-vertical">
+                  {{ topic.description }}
+                </div>
+                <ion-progress-bar :value="topic.progress"></ion-progress-bar>
+                <div class="ion-border-bottom"></div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </div>
     </ion-modal>
   </ion-page>
 </template>
@@ -144,18 +175,7 @@ import { ref, onMounted } from "vue";
 import {
   IonPage,
   IonHeader,
-  IonList,
-  IonItem,
   IonContent,
-  IonAvatar,
-  IonLabel,
-  IonCard,
-  IonCardTitle,
-  IonCardHeader,
-  IonCardContent,
-  IonProgressBar,
-  IonReorderGroup,
-  IonReorder,
   IonIcon,
   IonText,
   IonRow,
@@ -165,12 +185,10 @@ import {
 } from "@ionic/vue";
 import router from "@/router/index";
 import {
-  pencilOutline,
   chevronForward,
-  arrowForwardOutline,
-  arrowBackOutline,
   chevronBack,
-  informationCircleOutline
+  informationCircleOutline,
+  closeOutline
 } from "ionicons/icons";
 import Header from "@/components/Header/Header.vue";
 import Description from "@/components/Academy/Description.vue";
@@ -223,14 +241,68 @@ onMounted(async () => {
   console.log(academyStore.singleCourse.lessons.length);
   loading.value = true;
 });
-// Other script setup code here
+const lessonTopics = ref([
+  {
+    id: 123123123213,
+    title: "Lesson 1",
+    status: "Completed",
+    statusColor: "#A5CE3E", 
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
+    progress: 0.5,
+  },
+  {
+    id: 123123123213,
+    title: "Lesson 2",
+    status: "Video: 2:00 Mins Left",
+    statusColor: "#FF8512",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
+    progress: 0.5,
+  },
+  {
+    id: 123123123213,
+    title: "Lesson 3",
+    status: "Video: 2:00 Mins Left",
+    statusColor: "#FF8512", 
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
+    progress: 0.5,
+  },
+  {
+    id: 123123123213,
+    title: "Lesson 4",
+    status: "Video: 2:00 Mins",
+    statusColor: "#7C7C7C",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id.",
+    progress: 0.5,
+  },
+]);
+
 </script>
 
 <style scoped>
-ion-icon{
+ion-icon {
   width: 16px;
-height: 16px; 
+  height: 16px;
 }
+
+ion-progress-bar {
+  --background: #e6e0e9;
+  --progress-color: #2c3ad180;
+  width: 100%;
+  /* left: 15px; */
+  margin-top: 6px;
+  margin-bottom: 15px;
+}
+
+.ion-border-bottom {
+  border-bottom: 1px solid #F2F2F2;
+  background: var(--white, #FFF);
+  width: 100%;
+}
+
 .header-container {
   margin-bottom: 20px;
 
@@ -244,8 +316,25 @@ height: 16px;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
+  /* 150% */
   letter-spacing: 0.15px;
+}
+
+.font-sm {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  /* 150% */
+  letter-spacing: 0.15px;
+}
+
+.font-xs {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px
 }
 
 .resource-details {
@@ -253,7 +342,7 @@ height: 16px;
   justify-content: start;
   align-items: center;
   font-size: 10px;
-  color: #CACACA;
+  color: #7C7C7C;
 }
 
 .resource-detail:not(:last-child)::after {
@@ -283,6 +372,7 @@ height: 16px;
   font-size: 0.9em;
   color: #666;
 }
+
 /* tabs */
 .tabs {
   display: flex;
@@ -296,11 +386,13 @@ height: 16px;
 .tab-container {
   padding-top: 20px;
 }
+
 .tab {
   padding: 10px 20px;
   cursor: pointer;
   text-align: center;
-  border-bottom: 1px solid #eaeaea; /* Makes the tab seem "inactive" */
+  border-bottom: 1px solid #eaeaea;
+  /* Makes the tab seem "inactive" */
 }
 
 .tab.active {
@@ -310,7 +402,8 @@ height: 16px;
 
 .content {
   padding: 20px 0px 0px 0px;
-  min-height: 200px; /* Adjust as needed */
+  min-height: 200px;
+  /* Adjust as needed */
   overflow-y: scroll;
   height: auto;
 }
@@ -322,6 +415,7 @@ height: 16px;
   align-items: center;
   padding: 0px 15px 0px 15px;
 }
+
 p {
   padding: 0px 15px 0px 15px;
   margin: 0px 0px 10px 0px;
@@ -331,15 +425,20 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--ion-color-primary); /* example background color */
-  border-radius: 50%; /* circular background */
-  width: 30px; /* size of the background */
-  height: 30px; /* size of the background */
+  background-color: var(--ion-color-primary);
+  /* example background color */
+  border-radius: 50%;
+  /* circular background */
+  width: 30px;
+  /* size of the background */
+  height: 30px;
+  /* size of the background */
   color: #fff;
 }
 
 ion-icon {
-  --ionicon-stroke-width: 32px; /* example to increase icon size if needed */
+  --ionicon-stroke-width: 32px;
+  /* example to increase icon size if needed */
 }
 
 .pl-4 {
@@ -353,24 +452,52 @@ ion-icon {
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 16px; /* 133.333% */
+  line-height: 16px;
+  /* 133.333% */
   /* margin-top: 10px; */
 }
+
 .ion-text-end {
   display: flex;
-justify-content: center;
-align-items: center;
-gap: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
-.block {
+
+/* .block {
     width: 100%;
     height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
 
-  ion-modal {
-    --height: auto;
-  }
+ion-modal {
+  --height: 824px;
+  --width: 100%;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: #CCCCCC;
+  margin-right: 13px;
+}
+
+.bg-purple {
+  border-radius: 100px;
+  background: #2C3AD180;
+  height: 16px;
+  margin-top: -3px;
+}
+
+.text-green {
+
+  color: var(--main-green, #A5CE3E);
+  font-family: Cabin;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
 </style>
