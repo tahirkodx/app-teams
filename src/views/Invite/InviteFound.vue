@@ -11,8 +11,8 @@
             expand="block"
             router-link="/inviteNotified"
             class="ion-padding ion-margin-top"
-            >LOGIN WITH THIS ACCOUNT</ion-button
-          >
+            ><span class="login-text"> LOGIN WITH THIS ACCOUNT </span>
+          </ion-button>
           <h5 class="ion-padding-top ion-text-center label-style">
             Register with another email ID
           </h5>
@@ -101,5 +101,10 @@ import {
   line-height: normal;
   letter-spacing: 0.75px;
   text-transform: uppercase;
+}
+
+.login-text {
+  font-weight: 700;
+  padding: 2px;
 }
 </style>

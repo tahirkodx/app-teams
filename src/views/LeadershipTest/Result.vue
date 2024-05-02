@@ -4,7 +4,7 @@
       <score />
     </ion-header>
     <ion-row>
-      <ion-col class="ion-padding">
+      <ion-col class="">
         <ion-text class="text-sm">
           <h3>You are an opportunist! (level 1/7)</h3>
           <ion-img
@@ -14,15 +14,23 @@
         </ion-text>
         <div class="ion-border-bottom"></div>
         <ion-list class="ion-margin-bottom ion-padding-start">
-          <div class="label-container">
-            <ion-label class="label-text">Opportunity</ion-label>
-            <ion-progress-bar :value="25"></ion-progress-bar>
+          <div
+            v-for="(item, index) in progressItems"
+            :key="index"
+            class="label-container"
+          >
+            <ion-label class="label-text">{{ item.label }}</ion-label>
+            <ion-progress-bar
+              :value="1"
+              :color="item.color"
+              :style="{ width: item.progress }"
+            ></ion-progress-bar>
           </div>
-          <div class="label-container">
+          <!-- <div class="label-container">
             <ion-label class="label-text">Diplomat</ion-label>
             <ion-progress-bar :value="29"></ion-progress-bar>
-          </div>
-          <div class="label-container">
+          </div> -->
+          <!-- <div class="label-container">
             <ion-label class="label-text">Expert</ion-label>
             <ion-progress-bar :value="29"></ion-progress-bar>
           </div>
@@ -41,7 +49,7 @@
           <div class="label-container">
             <ion-label class="label-text">Alchemist</ion-label>
             <ion-progress-bar :value="29"></ion-progress-bar>
-          </div>
+          </div> -->
         </ion-list>
         <ion-row>
           <ion-col class="ion-padding-start">
@@ -76,7 +84,7 @@
             </ion-lable>
           </ion-col>
         </ion-row>
-        <ion-button expand="block" class="ion-margin-top"
+        <ion-button expand="block" class="ion-margin-top ion-padding"
           >PROCEED TO NEXT SCREEN</ion-button
         >
       </ion-col>
@@ -108,16 +116,16 @@ const labelNames = [
   "Strategic Vision",
   "Positive Influence",
 ];
-// const progressItems = ref([
-//     { label: "Opportunist", progress: 0.23 },
-//     { label: "Diplomat", progress: 0.0 },
-//     { label: "Expert", progress: 0.0 },
-//     { label: "Achiever", progress: 0 },
-//     { label: "Individualist", progress: 0 },
-//     { label: "Strategist", progress: 0 },
-//     { label: "Achemist", progress: 0 }
-//     // Add more items as needed
-// ]);
+const progressItems = ref([
+  { label: "Opportunist", progress: "14%", color: "tertiary" },
+  { label: "Diplomat", progress: "32%", color: "tertiary" },
+  { label: "Expert", progress: "58%", color: "tertiary" },
+  { label: "Achiever", progress: "48%", color: "tertiary" },
+  { label: "Individualist", progress: "28%", color: "success" },
+  { label: "Strategist", progress: "8%", color: "light" },
+  { label: "Achemist", progress: "4%", color: "light" },
+  // Add more items as needed
+]);
 // const getProgressBarStyle = (progress) => {
 //     const height = 20 + progress * 10;
 //     const width = 127 + progress * 10;

@@ -30,14 +30,18 @@
                 placeholder="Type your email"
               ></ion-input>
             </div>
-            <h3 class="text-base ion-text-end ion-margin-bottom">
+            <button
+              type="button"
+              @click="handleClick"
+              class="text-base ion-text-end ion-margin-bottom align-item-end"
+            >
               Forget Password
-            </h3>
+            </button>
           </div>
           <ion-button
             class="ion-padding"
             expand="block"
-            router-link="/inviteFound"
+            @click="() => router.push('/inviteFound')"
             >Login</ion-button
           >
           <ion-content>
@@ -67,6 +71,18 @@ import {
   IonContent,
   IonInput,
 } from "@ionic/vue";
+// import router from "@/router";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function handleClick() {
+  router.push({ name: "resetPassword" });
+}
+
+const handleLogin = () => {
+  router.push({ name: "inviteFound" });
+};
 </script>
 
 <style scoped>
@@ -122,6 +138,7 @@ ion-content {
   font-weight: 600;
   line-height: 16px;
   text-decoration-line: underline;
+  background: none;
 }
 
 .ion-text-center h6 {
@@ -130,5 +147,12 @@ ion-content {
 
 .ion-margin {
   margin-top: 93px;
+}
+
+.align-item-end {
+  display: flex;
+  align-items: end;
+  width: 100%;
+  justify-content: end;
 }
 </style>

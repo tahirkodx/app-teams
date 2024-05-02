@@ -69,6 +69,7 @@ import {
 } from "ionicons/icons";
 import type { ToggleCustomEvent } from "@ionic/vue";
 import { useTeamStore, useUserStore } from "@/store";
+import router from "@/router";
 
 const userStore = useUserStore();
 const teamStore = useTeamStore();
@@ -92,7 +93,6 @@ onMounted(async () => {
     await Promise.all([userStore.getUserSettings(), teamStore.getTeams()]);
   }
 });
-import router from "@/router/index";
 const toggleDarkTheme = (shouldAdd) => {
   document.body.classList.toggle("dark", shouldAdd);
 };
@@ -157,13 +157,17 @@ function handleBack() {
 }
 
 .header-select {
-  width: 127px;
-  max-width: 127px;
+  width: fit-content;
+  max-width: fit-content;
   /* Adjust the width as needed */
   min-height: 32px;
-  background: var(--my-masg-background);
+  /* background: var(--my-masg-background); */
+  border-radius: 8px;
+  background: var(--white, #fff);
+  box-shadow: 0px 1px 2px 0px rgba(51, 51, 51, 0.3),
+    0px 1px 3px 1px rgba(65, 65, 65, 0.15);
   --placeholder-opacity: 1;
-  --padding-start: 10px;
+  --padding-start: 16px;
   --padding-end: 10px;
   border-radius: 8px;
   --border: none;
@@ -172,6 +176,7 @@ function handleBack() {
   line-height: 24px;
   letter-spacing: 0.15px;
   word-wrap: break-word;
+  color: #8b8b8b;
 }
 
 ion-select::part(placeholder) {

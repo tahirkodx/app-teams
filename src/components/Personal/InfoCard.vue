@@ -137,7 +137,7 @@ ion-popover {
 }
 
 .text-purple {
-  color: #475569;
+  color: #475569 !important;
 }
 
 .info-name {
