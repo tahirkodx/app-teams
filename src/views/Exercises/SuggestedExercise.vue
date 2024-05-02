@@ -1,7 +1,7 @@
 <template>
     <ion-page>
       <ion-header>
-        <score></score>
+        <Header />
       </ion-header>
       <ion-content >
         <div class="header-container">
@@ -34,7 +34,6 @@
           </div>
           <div class="content" v-if="loading">
             <!-- Content based on the active tab -->
-            
             <div v-if="activeTab === 'description'">
               <VideoPlayer play="/src/videos/testvideo.mp4" />
               <SummaryDescription :summary="playbookStore?.suggestedExercise?.summary" :description="playbookStore?.suggestedExercise?.description" />
@@ -72,7 +71,7 @@
     IonText,
   } from "@ionic/vue";
   import router from "@/router/index"; 
-  import score from "@/components/Header/Header.vue";
+  import Header from "@/components/Header/Header.vue";
   import Notes from "@/components/Exercise/Notes.vue"
   import LinkButton from "@/components/Buttons/LinkButton.vue";
   import SummaryDescription from "@/components/Exercise/SummaryDescription.vue"

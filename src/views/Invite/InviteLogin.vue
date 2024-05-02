@@ -47,7 +47,9 @@
           <ion-content>
             <div class="ion-fixed-bottom">
               <ion-text class="ion-text-center">
-                <h6>Not able to find the link/ invite code?</h6>
+                <h6 class="text-code">
+                  Not able to find the link/ invite code?
+                </h6>
               </ion-text>
               <ion-text class="ion-text-center text-base">
                 <h6>Click here to resend the invite link/code</h6>
@@ -154,5 +156,17 @@ ion-content {
   align-items: end;
   width: 100%;
   justify-content: end;
+}
+
+.text-code {
+  color: #5e5e5e;
+  text-align: center;
+
+  /* mobile/Body small */
+  font-family: Cabin;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
 }
 </style>

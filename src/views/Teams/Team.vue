@@ -10,7 +10,7 @@
         label="ASK HELP"
         expend="block"
         link="teamsupport"
-        class="ion-padding-vertical"
+        class="btn-ask"
       />
       <teamwidget />
       <!-- new  -->
@@ -33,9 +33,10 @@
                     })
                 "
               >
-                <div class="profile-pic">
+                <div>
                   <ion-img
                     src="/src/pictures/Ellipse1.svg"
+                    class="profile-pic"
                     alt="Finished Success"
                   ></ion-img>
                 </div>
@@ -102,8 +103,6 @@ import {
 } from "@ionic/vue";
 
 import { chevronForward, add, arrowUpOutline } from "ionicons/icons";
-//import 'vue3-carousel/dist/carousel.css'
-//import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import router from "@/router/index";
 import score from "@/components/Header/Header.vue";
 import radarchart from "@/components/Charts/RadarChart.vue";
@@ -256,5 +255,9 @@ ion-icon {
   gap: 100px;
   width: 100%;
   justify-content: space-between;
+}
+
+.btn-ask{
+  height: 41px;
 }
 </style>

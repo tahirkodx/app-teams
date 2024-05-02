@@ -26,35 +26,11 @@
               :style="{ width: item.progress }"
             ></ion-progress-bar>
           </div>
-          <!-- <div class="label-container">
-            <ion-label class="label-text">Diplomat</ion-label>
-            <ion-progress-bar :value="29"></ion-progress-bar>
-          </div> -->
-          <!-- <div class="label-container">
-            <ion-label class="label-text">Expert</ion-label>
-            <ion-progress-bar :value="29"></ion-progress-bar>
-          </div>
-          <div class="label-container">
-            <ion-label class="label-text">Achiever</ion-label>
-            <ion-progress-bar :value="0.6"></ion-progress-bar>
-          </div>
-          <div class="label-container">
-            <ion-label class="label-text">Individualist</ion-label>
-            <ion-progress-bar :value="29"></ion-progress-bar>
-          </div>
-          <div class="label-container">
-            <ion-label class="label-text">Strategist</ion-label>
-            <ion-progress-bar :value="15"></ion-progress-bar>
-          </div>
-          <div class="label-container">
-            <ion-label class="label-text">Alchemist</ion-label>
-            <ion-progress-bar :value="29"></ion-progress-bar>
-          </div> -->
         </ion-list>
         <ion-row>
           <ion-col class="ion-padding-start">
             <ion-lable>
-              Characteristics
+              Characteristics:
               <p>
                 You win any way possible, self-oriented; manipulative; “might
                 makes right”
@@ -62,7 +38,7 @@
             </ion-lable>
             <div class="ion-border-bottom"></div>
             <ion-lable class="ion-margin-top">
-              Strengths:0000000
+              Strengths:
               <p>Good in emergencies and in sales oppurtunities.</p>
             </ion-lable>
             <div class="ion-border-bottom"></div>
@@ -153,6 +129,7 @@ ion-lable {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.15px;
+  font-weight: 500;
 }
 
 ion-lable p {
@@ -160,6 +137,7 @@ ion-lable p {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.1px;
+  font-weight: 500;
 }
 
 .custom-design {
@@ -212,6 +190,13 @@ ion-lable p {
   margin-right: -100px;
 }
 .label-text {
-  width: 30%;
+  width: 20%;
+  color: #808080;
+  font-family: Cabin;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
 }
 </style>

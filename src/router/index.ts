@@ -489,6 +489,26 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import("@/views/Passwordchanged/ResetOtp.vue"),
   },
+
+  // personal screens
+
+  {
+    name: "personal",
+    path: "/personal",
+    component: () => import("@/views/Personal/Index.vue"),
+    meta: {
+      requiresAuth: true, // Add meta field to indicate protected route
+    },
+  },
+  {
+    name: "commitmentTransformation",
+    path: "/personal/transformation",
+    component: () =>
+      import("@/views/Personal/CommitmentTransformation.vue"),
+    meta: {
+      requiresAuth: true, // Add meta field to indicate protected route
+    },
+  },
   // end of onboard routes
 
   {
@@ -620,23 +640,6 @@ const routes: Array<RouteRecordRaw> = [
         name: "lesson",
         path: "academys/lesson/:courseId",
         component: () => import("@/views/Academy/AcademyLesson.vue"),
-        meta: {
-          requiresAuth: true, // Add meta field to indicate protected route
-        },
-      },
-      {
-        name: "personal",
-        path: "/personal",
-        component: () => import("@/views/Personal/Index.vue"),
-        meta: {
-          requiresAuth: true, // Add meta field to indicate protected route
-        },
-      },
-      {
-        name: "commitmentTransformation",
-        path: "/personal/transformation",
-        component: () =>
-          import("@/views/Personal/CommitmentTransformation.vue"),
         meta: {
           requiresAuth: true, // Add meta field to indicate protected route
         },

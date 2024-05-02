@@ -46,7 +46,7 @@
                     </IonTextarea>
                 </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow class="ion-padding-top">
                 <IonCol class="ion-check-container">
                     <IonCheckbox
                 :value="true"
@@ -76,8 +76,7 @@
             
         </IonGrid>
         <ion-button
-          
-          class="ion-padding"
+          class="ion-padding-vertical add-text"
           expand="block"
           >ADD COMMITMENT</ion-button
         >
@@ -155,12 +154,25 @@ line-height: 28px; /* 127.273% */
   width: 22px;
   height: 22px;
 }
+
+ion-grid{
+  padding: 0;
+}
+
+ion-col{
+  padding-left: 0;
+  padding-right: 0;
+}
 .ion-check-container{
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 5px;
     
+}
+
+.add-text{
+  font-weight: 700;
 }
   
   </style>

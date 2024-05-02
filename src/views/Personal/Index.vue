@@ -1,18 +1,8 @@
 <template>
   <ion-page>
-    <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-button>
-          <ion-icon :icon="settingsOutline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title class="toolbar-title">Profile</ion-title>
-      <ion-buttons slot="start">
-        <ion-button>
-          <ion-icon :icon="personCircleOutline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
+    <ion-header>
+        <Header />
+      </ion-header>
     <ion-content>
       <h5 class="text-container ion-padding-start">(Level1) Diploment</h5>
       <h6 class="ion-text-end ion-padding-end">
@@ -136,6 +126,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import Header from "@/components/Header/Header.vue";
 import {
   IonHeader,
   IonToolbar,

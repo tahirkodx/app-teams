@@ -44,13 +44,18 @@ import {
 .custom-style {
   color: #9f9f9f;
   font-size: 16px;
-  line-height: 16px;
   max-width: 278px;
   margin: 0 auto;
+
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.15px;
 }
 
 .style {
   margin-top: 90px;
+  font-weight: 700;
 }
 
 .text-sm {

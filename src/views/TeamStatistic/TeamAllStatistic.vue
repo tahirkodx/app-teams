@@ -3,18 +3,16 @@
     <Header />
     <ion-content :fullscreen="true">
       <IonGrid>
-        <IonRow>
-          <ion-col>
-            <h4 class="titleStyle">Survey Scores</h4>
-          </ion-col>
-          <ion-button
+        <IonRow class="d-flex">
+          <h4 class="titleStyle">Stats Overview</h4>
+          <div
             id="trigger-button"
             class="text btn-filter"
             style="--background: white"
           >
             <ion-icon :icon="optionsOutline" class="icon"></ion-icon>
             <span class="text">10/06/24</span>
-          </ion-button>
+          </div>
           <ion-popover trigger="trigger-button">
             <ion-content>
               <ion-accordion-group>
@@ -65,6 +63,9 @@
       </IonGrid>
       <!-- Radar and line Chart component here -->
       <div>
+        <span class="ion-padding-start text-current-survey"
+          >Current survey scores
+        </span>
         <Charts />
       </div>
       <!-- total bar -->
@@ -94,6 +95,7 @@
           id="prev-icon"
           :disabled="currentSlideIndex === 1"
           @click="goToPreviousSlide"
+          class="swiper-buttons"
         >
           <ion-icon
             :icon="chevronBackCircle"
@@ -124,27 +126,13 @@
                 >{{ index + 1 }}/{{ slides.length }}</span
               >
             </div>
-            <!-- <div class="container text-center">
-              <ion-button :id="slide.id" class="font-normal"
-                >{{ slide.content }}
-                <ion-icon
-                  :icon="chevronDownOutline"
-                  class="icon-sm ion-margin-horizontal"
-                ></ion-icon
-                ><span class="text-small"
-                  >{{ index + 1 }}/{{ slides.length }}</span
-                >
-              </ion-button>
-              <ion-popover :trigger="slide.id" side="bottom" alignment="center">
-                <ion-content class="ion-padding">option1</ion-content>
-              </ion-popover>
-            </div> -->
           </SwiperSlide>
         </Swiper>
         <button
           id="next-icon"
           :disabled="currentSlideIndex === slides.length"
           @click="goToNextSlide"
+          class="swiper-buttons"
         >
           <ion-icon
             v-if="currentSlideIndex === slides.length"
@@ -157,39 +145,6 @@
           ></ion-icon>
         </button>
       </div>
-      <!-- <div class="divColor">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" class="ion-text-right">
-              <ion-button fill="clear" class="navigation-button">
-                <span class="icon-background">
-                  <ion-icon :icon="chevronBack" slot="icon-only"></ion-icon>
-                </span>
-              </ion-button>
-              <div class="resource-navigation">
-                <ion-select
-                  size="small"
-                  interface="popover"
-                  placeholder="All"
-                  :toggle-icon="chevronUpOutline"
-                  :expanded-icon="chevronDownOutline"
-                >
-                  <ion-select-option value="apples">Apples</ion-select-option>
-                  <ion-select-option value="oranges">Oranges</ion-select-option>
-                  <ion-select-option value="bananas">Bananas</ion-select-option>
-                </ion-select>
-
-                1/6
-              </div>
-              <ion-button fill="clear" class="navigation-button">
-                <span class="icon-background">
-                  <ion-icon :icon="chevronForward" slot="icon-only"></ion-icon>
-                </span>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div> -->
       <div>
         <Tabs />
       </div>
@@ -250,7 +205,6 @@ const teamStore = useTeamStore();
 const userStore = useUserStore();
 const selectedTeams: any = ref([]);
 const currentSlideIndex = ref(1);
-const activeTab = ref("Description"); // default active tab
 
 const goToPreviousSlide = () => {
   currentSlideIndex.value--;
@@ -355,7 +309,7 @@ const openPopover = (e: Event) => {
   line-height: 28px;
   text-align: left;
   margin-top: 10px;
-  padding-left: 16px;
+  padding-left: 11px;
   font-style: normal;
 }
 
@@ -466,7 +420,14 @@ ion-select {
 }
 
 .btn-filter {
-  padding: 0;
+  padding: 6px 8px;
+  height: fit-content;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0px 1px 2px 0px rgba(51, 51, 51, 0.3);
 }
 
 .owner-container {
@@ -523,5 +484,28 @@ ion-icon {
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
+}
+
+.swiper-buttons {
+  background: unset;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 16px;
+}
+
+.text-current-survey {
+  color: #7a7a7a;
+
+  /* mobile/Title Medium */
+  font-family: Cabin;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.15px;
 }
 </style>

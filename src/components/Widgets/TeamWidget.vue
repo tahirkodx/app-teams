@@ -39,6 +39,7 @@ onMounted(() => {
 
 <style scoped>
 .custom-card-container {
+  margin-top: 30px;
   display: flex;
   flex-direction: row;
   padding: 4px 0;
@@ -79,7 +80,7 @@ ion-card-content {
   position: absolute;
   top: 6px;
   right: 10px;
-  color: #FF8512;
+  color: #ff8512;
   width: 24px;
   height: 24px;
   font-size: 2em;

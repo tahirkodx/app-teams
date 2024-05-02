@@ -4,33 +4,33 @@
       <ion-segment
         mode="md"
         scrollable
-        value="doingWell"
+        value="scoreOverview"
         @ionChange="segmentChanged($event)"
       >
         <ion-segment-button
-          value="doingWell"
-          @click="segmentSelected('doingWell')"
+          value="scoreOverview"
+          @click="segmentSelected('scoreOverview')"
         >
-          <ion-label>Doing Well</ion-label>
+          <ion-label>Score Overview</ion-label>
         </ion-segment-button>
-        <ion-segment-button
+        <!-- <ion-segment-button
           value="needsImprovement"
           @click="segmentSelected('needsImprovement')"
         >
           <ion-label>Needs Improvement</ion-label>
-        </ion-segment-button>
+        </ion-segment-button> -->
         <ion-segment-button
           value="excercises"
           @click="segmentSelected('excercises')"
         >
           <ion-label>Exercises</ion-label>
         </ion-segment-button>
-        <ion-segment-button
+        <!-- <ion-segment-button
           value="academicCourses"
           @click="segmentSelected('academicCourses')"
         >
           <ion-label>Academic Courses</ion-label>
-        </ion-segment-button>
+        </ion-segment-button> -->
         <ion-segment-button
           value="surveyNotes"
           @click="segmentSelected('surveyNotes')"
@@ -41,7 +41,7 @@
       </ion-segment>
     </div>
 
-    <div v-if="selectedSegment === 'doingWell'">
+    <!-- <div v-if="selectedSegment === 'scoreOverview'">
       <div v-for="(item, index) in items" :key="index" style="padding: 6px">
         <ion-item lines="none">
           <ion-label
@@ -59,30 +59,60 @@
           <ion-progress-bar :value="item.value / 10"></ion-progress-bar>
         </ion-item>
       </div>
-    </div>
-    <div v-if="selectedSegment === 'needsImprovement'">
-      <div v-for="(item, index) in items" :key="index" class="ion-padding">
-        <ion-item lines="none">
-          <ion-label
-            >{{ item.label }}
-            <ion-text color="medium">{{ item.subLabel }}</ion-text>
-          </ion-label>
-          <ion-icon
-            slot="end"
-            :icon="helpCircleOutline"
-            @click="openPopover($event)"
-          ></ion-icon>
-        </ion-item>
-        <ion-item lines="full">
-          <ion-badge slot="start" color="light">{{ item.value }}</ion-badge>
-          <ion-progress-bar
-            class="ion-progress-bar_need"
-            :value="item.value / 10"
-          ></ion-progress-bar>
-        </ion-item>
+    </div> -->
+    <div v-if="selectedSegment === 'scoreOverview'" class="ion-padding">
+      <div class="com-border">
+        <div class="doing-well">
+          <div>Needs Improvements</div>
+        </div>
+
+        <div v-for="(item, index) in items" :key="index">
+          <ion-item lines="none">
+            <ion-label
+              >{{ item.label }}
+              <ion-text color="medium">{{ item.subLabel }}</ion-text>
+            </ion-label>
+            <ion-icon
+              slot="end"
+              :icon="helpCircleOutline"
+              @click="openPopover($event)"
+            ></ion-icon>
+          </ion-item>
+          <ion-item lines="full" class="second-item">
+            <ion-badge slot="start" color="light">{{ item.value }}</ion-badge>
+            <ion-progress-bar :value="item.value / 10"></ion-progress-bar>
+          </ion-item>
+        </div>
+      </div>
+
+      <div class="com-border">
+        <div class="need-improv">
+          <div>Needs Improvements</div>
+        </div>
+
+        <div v-for="(item, index) in items" :key="index">
+          <ion-item lines="none">
+            <ion-label
+              >{{ item.label }}
+              <ion-text color="medium">{{ item.subLabel }}</ion-text>
+            </ion-label>
+            <ion-icon
+              slot="end"
+              :icon="helpCircleOutline"
+              @click="openPopover($event)"
+            ></ion-icon>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-badge slot="start" color="light">{{ item.value }}</ion-badge>
+            <ion-progress-bar
+              class="ion-progress-bar_need"
+              :value="item.value / 10"
+            ></ion-progress-bar>
+          </ion-item>
+        </div>
       </div>
     </div>
-    <div v-if="selectedSegment === 'excercises'">
+    <div v-if="selectedSegment === 'excercises'" style="margin-top: 16px">
       <div class="suggested-exercise">Suggested Exercise</div>
 
       <div class="ion-padding-top ion-padding-bottom ion-padding-start">
@@ -123,17 +153,17 @@
                 class="progress-bar"
               ></ion-progress-bar>
             </div>
-            <ion-icon
+            <!-- <ion-icon
               src="/src/pictures/uil_arrow-right.svg"
               slot="end"
               size="large"
               class="arrow-back"
-            />
+            /> -->
           </div>
         </ion-card>
       </div>
 
-      <div class="ion-padding-top ion-padding-bottom ion-padding-start">
+      <!-- <div class="ion-padding-top ion-padding-bottom ion-padding-start">
         <span class="text-excersise-title">Suggested Exercises:</span>
       </div>
 
@@ -163,16 +193,15 @@
             <ion-text>{{ item.desc }} </ion-text>
           </div>
         </ion-card>
-      </div>
+      </div> -->
       <ion-button
         @click="navigate"
         class="ion-padding"
         expand="block"
         fill="outline"
-        >SEARCH OTHER</ion-button
+        >ADD MORE</ion-button
       >
-    </div>
-    <div v-if="selectedSegment === 'academicCourses'">
+
       <div class="suggested-exercise">Academic Courses</div>
       <div>
         <div class="ion-padding" slot="content">
@@ -208,8 +237,32 @@
         </div>
       </div>
     </div>
-    <div v-if="selectedSegment === 'surveyNotes'">
-      <div class="suggested-exercise">Team Survey Notes</div>
+
+    <div v-if="selectedSegment === 'surveyNotes'" style="margin-top: 20px">
+      <ion-accordion-group
+        :multiple="true"
+        v-for="(item, index) in surveyNotes"
+        :key="index"
+      >
+        <ion-accordion value="second">
+          <ion-item class="cus-item" slot="header">
+            <ion-label>
+              <div class="d-flex">
+                <span class="label1">{{ item.title }}</span>
+                <span class="label2"
+                  >{{ item.subTitle }}
+
+                  <span class="text-50">50</span>
+                </span>
+              </div>
+            </ion-label>
+          </ion-item>
+          <div class="ion-padding accordian-content" slot="content">
+            {{ item.desc }}
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+      <!-- <div class="suggested-exercise">Team Survey Notes</div>
       <div class="ion-padding">
         <ion-text>
           <h6>Energy</h6>
@@ -227,7 +280,7 @@
           nec sed gravida aliquam sagittis. Pretium volutpat sit elit sapien sed
           quam ornare.
         </p>
-      </div>
+      </div> -->
     </div>
   </div>
   <ion-popover
@@ -272,11 +325,13 @@ import {
   IonBadge,
   IonText,
   IonProgressBar,
+  IonAccordionGroup,
+  IonAccordion,
 } from "@ionic/vue";
 import { ref, onMounted, onUnmounted } from "vue";
 import { closeOutline, helpCircleOutline, play } from "ionicons/icons";
 import { useRouter } from "vue-router";
-const selectedSegment = ref("doingWell");
+const selectedSegment = ref("scoreOverview");
 
 function segmentChanged(event: Event) {
   const detail = (event as CustomEvent).detail;
@@ -361,6 +416,33 @@ const suggestedExercises = ref([
     desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. ",
   },
 ]);
+const surveyNotes = ref([
+  {
+    title: "Energy",
+    subTitle: "Total Notes:",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. Tortor commodo massa nisl massa netus. At cursus aenean pulvinar vivamus. Et dictumst egestas cursus quis. Convallis lorem est pulvinar nec sed gravida aliquam sagittis. Pretium volutpat sit elit sapien sed quam ornare. ",
+  },
+  {
+    title: "Psychological",
+    subTitle: "Total Notes:",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. Tortor commodo massa nisl massa netus. At cursus aenean pulvinar vivamus. Et dictumst egestas cursus quis. Convallis lorem est pulvinar nec sed gravida aliquam sagittis. Pretium volutpat sit elit sapien sed quam ornare. ",
+  },
+  {
+    title: "Desired Outcome",
+    subTitle: "Total Notes:",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. Tortor commodo massa nisl massa netus. At cursus aenean pulvinar vivamus. Et dictumst egestas cursus quis. Convallis lorem est pulvinar nec sed gravida aliquam sagittis. Pretium volutpat sit elit sapien sed quam ornare. ",
+  },
+  {
+    title: "Introspection",
+    subTitle: "Total Notes:",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. Tortor commodo massa nisl massa netus. At cursus aenean pulvinar vivamus. Et dictumst egestas cursus quis. Convallis lorem est pulvinar nec sed gravida aliquam sagittis. Pretium volutpat sit elit sapien sed quam ornare. ",
+  },
+  {
+    title: "Contribution",
+    subTitle: "Total Notes:",
+    desc: "Lorem ipsum dolor sit amet consectetur. Sem massa etiam amet aenean id. Tortor commodo massa nisl massa netus. At cursus aenean pulvinar vivamus. Et dictumst egestas cursus quis. Convallis lorem est pulvinar nec sed gravida aliquam sagittis. Pretium volutpat sit elit sapien sed quam ornare. ",
+  },
+]);
 </script>
 
 <style scoped>
@@ -440,7 +522,7 @@ ion-label {
   --progress-background: #e6e0e9;
   --progress-color: #a5ce3e;
   width: 100%;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 .drag-handle-icon {
@@ -564,5 +646,93 @@ ion-card {
 .ionText {
   margin-top: -30px;
   color: #000;
+}
+
+.com-border {
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 20px;
+}
+
+.doing-well {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  background: var(--tietiary, rgba(44, 58, 209, 0.5));
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  color: white;
+}
+
+.need-improv {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  background: #ff8512;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  color: white;
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.label1 {
+  color: #000;
+
+  /* mobile/Lable large */
+  font-family: Cabin;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
+}
+
+.label2 {
+  color: #808080;
+
+  /* mobile/Body small */
+  font-family: Cabin;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.text-50 {
+  color: var(--tietiary, rgba(44, 58, 209, 0.5));
+
+  /* mobile/Body small */
+  font-family: Cabin;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.accordian-content {
+  border-bottom: 1px solid #f2f2f2;
+  background: #f7f7f7;
+
+  color: #303030;
+
+  /* mobile/Body medium */
+  font-family: Cabin;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.25px;
 }
 </style>

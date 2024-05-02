@@ -46,7 +46,7 @@
           </ion-col>
         </ion-row>
         <ion-row class="pl-4">
-          <ion-col size="9">
+          <ion-col size="8">
             <div class="resource-details flex">
               <div class="resource-detail">
                 Video:
@@ -63,10 +63,12 @@
               </div>
             </div>
           </ion-col>
-          <div class="ion-text-end text-course flex font-xs" id="open-modal">
-            <span>Course Details</span>
-            <ion-icon :icon="informationCircleOutline"></ion-icon>
-          </div>
+          <ion-col size="4" class="font-xs" id="open-modal">
+            <div class="text-course">
+              <span>Course Details</span>
+              <ion-icon :icon="informationCircleOutline"></ion-icon>
+            </div>
+          </ion-col>
         </ion-row>
       </div>
       <VideoPlayer play="/src/videos/testvideo.mp4" />
@@ -103,10 +105,10 @@
         </div>
         <div class="content" v-if="loading">
           <!-- Content based on the active tab -->
-          <div v-if="activeTab === 'courses'">
-            <!-- <Description :summary="academyStore?.singleCourse?.summary"
-              :description="academyStore?.singleCourse?.description" :plays="academyStore?.singleCourse?.plays" /> -->
-          </div>
+          <!-- <div v-if="activeTab === 'courses'">
+            <Description :summary="academyStore?.singleCourse?.summary"
+              :description="academyStore?.singleCourse?.description" :plays="academyStore?.singleCourse?.plays" />
+          </div> -->
           <div v-if="activeTab === 'details'">
             <Details
               :id="academyStore?.singleCourse?.lessons[tempIndex]?.id"
@@ -569,6 +571,12 @@ ion-icon {
 
 .text-course {
   color: var(--tietiary, rgba(44, 58, 209, 0.5));
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  margin-right: 6px;
 }
 
 .ion-text-end {

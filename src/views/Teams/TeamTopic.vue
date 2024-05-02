@@ -17,6 +17,7 @@
           id="prev-icon"
           :disabled="currentSlideIndex === 1"
           @click="goToPreviousSlide"
+          class="background-slider-button"
         >
           <ion-icon
             :icon="chevronBackCircle"
@@ -50,6 +51,7 @@
           id="next-icon"
           :disabled="currentSlideIndex === slides.length"
           @click="goToNextSlide"
+          class="background-slider-button"
         >
           <ion-icon
             v-if="currentSlideIndex === slides.length"
@@ -435,5 +437,9 @@ ion-icon {
   font-weight: 500;
   line-height: 24px; /* 150% */
   letter-spacing: 0.15px;
+}
+
+.background-slider-button {
+  background: unset;
 }
 </style>
