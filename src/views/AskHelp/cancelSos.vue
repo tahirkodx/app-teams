@@ -5,11 +5,11 @@
             <ion-row class="ion-margin-top">
                 <ion-col class="ion-padding">
                     <ion-text class="font-medium ion-padding">Send SOS</ion-text>
-                    <div class="custom-container ion-text-center ion-margin-vertical">
+                    <ion-label class="custom-container ion-text-center ion-margin-vertical">
                         <ion-text class="font-lg">Sending request</ion-text>
                         <ion-text class="font-sm ion-padding">wait while we get you help or press cancel
                             to stop the SOS.</ion-text>
-                    </div>
+                        </ion-label>
                     <ion-img src="/src/pictures/Frame 2609454.svg" alt="Finished Success" class="ion-padding"></ion-img>
                     <ion-button expand="block" class="ion-margin-top ion-padding-vertical" router-link="/anotherSos"> Cancel sos
                         request</ion-button>

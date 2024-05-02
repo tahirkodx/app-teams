@@ -169,6 +169,14 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+  {
+    name: "chats",
+    path: "/chats",
+    component: () => import("@/views/AskHelp/chats.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
   //Surveys screens
   {
     name: "surveys",

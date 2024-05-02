@@ -5,7 +5,7 @@
       <ion-row>
         <ion-col class="ion-padding">
           <div class="custom-container ion-padding">
-            <div class="custom-container ion-text-center ion-margin-bottom">
+            <ion-label class="custom-container ion-text-center ion-margin-bottom">
               <ion-text class="font-lg">Reset new password</ion-text>
               <ion-text class="font-sm"
                 >Please enter the OTP code sent to email address
@@ -13,8 +13,8 @@
               <ion-text class="font-sm text-blue"
                 >(danielrussel @google.com)
               </ion-text>
-            </div>
-            <div class="input-box">
+            </ion-label>
+            <ion-text class="input-box">
               <v-otp-input
                 ref="otpInput"
                 input-classes="otp-input"
@@ -26,11 +26,12 @@
                 @on-change="handleOnChange"
                 @on-complete="handleOnComplete"
               />
-            </div>
+            </ion-text>
             <ion-button
               expand="block"
               class="ion-padding-vertical"
               router-link="/resetPassword"
+              :disabled="!isOtpComplete"
             >
               VERIFY EMAIL
             </ion-button>
@@ -42,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref,computed } from "vue";
 import {
   IonPage,
   IonContent,
@@ -63,6 +64,11 @@ const handleOnComplete = (value: string) => {
 const handleOnChange = (value: string) => {
   console.log("OTP changed: ", value);
 };
+
+const isOtpComplete = computed(() => {
+  // Check if OTP input is complete
+  return bindValue.value.length === 6;
+})
 </script>
 
 <style>
@@ -115,18 +121,4 @@ const handleOnChange = (value: string) => {
   display: flex;
   justify-content: center;
 }
-/* Background colour of an input field with value */
-/* .otp-input.is-complete {
-  background-color: #e4e4e4;
-}
-.otp-input::-webkit-inner-spin-button,
-.otp-input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input::placeholder {
-  font-size: 15px;
-  text-align: center;
-  font-weight: 600;
-} */
 </style>

@@ -5,10 +5,10 @@
       <ion-row>
         <ion-col class="ion-padding">
           <div class="custom-container ion-padding">
-            <div class="custom-container ion-text-center ion-margin-bottom">
+            <ion-label class="custom-container ion-text-center ion-margin-bottom">
               <ion-text class="font-lg">Change Password?</ion-text>
               <ion-text class="font-sm">We will send you a link to reset password</ion-text>
-            </div>
+            </ion-label>
             <ion-input
               fill="outline"
               placeholder="Enter password:*"

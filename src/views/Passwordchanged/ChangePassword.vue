@@ -20,6 +20,7 @@
             <ion-button
               expand="block"
               class="ion-padding-vertical"
+              :disabled="!isValidForm"
               router-link="/resetOtp"
             >
               SEND LINK
@@ -32,12 +33,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { IonPage, IonContent, IonRow, IonCol, IonButton, IonText } from "@ionic/vue";
 import Header from "@/components/Header/Header.vue";
 
 const emailInput = ref<HTMLElement | null>(null);
 const customErrorMessage = ref("");
+const emailValue = ref(""); // Store email value separately
 
 const validate = (ev: any) => {
   const value = ev.target.value;
@@ -45,6 +47,8 @@ const validate = (ev: any) => {
 
   inputElement?.classList.remove("ion-valid");
   inputElement?.classList.remove("ion-invalid");
+
+  emailValue.value = value; // Update email value
 
   if (value === "") {
     customErrorMessage.value = "Email is required";
@@ -65,6 +69,11 @@ const validateEmail = (email: string): boolean => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 };
+
+const isValidForm = computed(() => {
+  // Check if email value is not empty
+  return emailValue.value !== "" && customErrorMessage.value === "" && validateEmail(emailValue.value);
+});
 </script>
 
 <style scoped>
