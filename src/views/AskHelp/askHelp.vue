@@ -3,9 +3,7 @@
     <Header />
     <ion-content :fullscreen="true" class="ion-padding">
       <h3>Ask Help?</h3>
-
       <div class="title-line"></div>
-
       <div>
         <ion-list lines="full">
           <ion-item
@@ -27,7 +25,6 @@
     <ion-footer class="ion-padding footer-container">
       <ion-button class="ion-button" slot="end"
         >App usage guide
-
         <ion-icon
           src="/src/pictures/questionMark.svg"
           slot="end"
@@ -61,7 +58,7 @@ const data = ref([
   },
   {
     title: "Chat with ChatGPT",
-    href: "#",
+    href: "/ask-help/chatGpt",
   },
   {
     title: "Request help from your coach",
@@ -69,7 +66,7 @@ const data = ref([
   },
   {
     title: "Send SOS",
-    href: "#",
+    href:"/ask-help/sendSos",
   },
   {
     title: "Go to FAQ",
@@ -91,6 +88,12 @@ const handleItemClick = (item: any) => {
   if (item.href === "/ask-help/requestHelp") {
     router.push({ name: "requestHelp" });
   }
+  if (item.href === "/ask-help/sendSos") {
+    router.push({ name: "sendSos" });
+  }
+  if (item.href === "/ask-help/chatGpt") {
+    router.push({ name: "chatGpt" });
+  }
 };
 </script>
 
@@ -108,9 +111,7 @@ const handleItemClick = (item: any) => {
 
 .ion-button {
   --background: #2c3ad180;
-
   --color: white;
-
   --border-radius: 5px;
 }
 

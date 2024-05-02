@@ -137,7 +137,46 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
-
+  {
+    name: "sendSos",
+    path: "/ask-help/sendSos",
+    component: () => import("@/views/AskHelp/sendSos.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    name: "cancelSos",
+    path: "/cancelSos",
+    component: () => import("@/views/AskHelp/cancelSos.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    name: "anotherSos",
+    path: "/anotherSos",
+    component: () => import("@/views/AskHelp/anotherSos.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    name: "chatGpt",
+    path: "/ask-help/chatGpt",
+    component: () => import("@/views/AskHelp/chatGpt.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    name: "chats",
+    path: "/chats",
+    component: () => import("@/views/AskHelp/chats.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
   //Surveys screens
   {
     name: "surveys",

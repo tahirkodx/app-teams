@@ -8,11 +8,11 @@
         <ion-row>
           <ion-col class="ion-text-center ion-padding">
             <ion-text>
-              <h3 class="text-sm">Leadership Test Questions</h3>
-              <h6 class="custom-style">
-                The test requires you to fill in the gap to the <br />
-                sentences you see based on your understanding of it.
-              </h6>
+              <div class="text-sm">Leadership Test
+                Questions</div>
+              <div class="custom-style">
+                The test requires you to fill in the gap to the sentences you see based on your understanding of it.
+              </div>
             </ion-text>
             <ion-img
               src="/src/pictures/amico23.svg"
@@ -33,18 +33,18 @@
 </template>
 <script setup lang="ts">
 import Header from "@/components/Header/Header.vue";
+import router from "@/router/index";
 import {
   IonButton,
-  IonText,
-  IonRow,
   IonCol,
-  IonPage,
-  IonImg,
   IonContent,
-  IonHeader,
   IonGrid,
+  IonHeader,
+  IonImg,
+  IonPage,
+  IonRow,
+  IonText,
 } from "@ionic/vue";
-import router from "@/router/index";
 
 function handleNavigate() {
   router.push({ name: "question" });

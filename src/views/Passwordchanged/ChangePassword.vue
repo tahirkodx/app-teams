@@ -7,18 +7,20 @@
           <div class="custom-container ion-padding">
             <div class="custom-container ion-text-center ion-margin-bottom">
               <ion-text class="font-lg">Change Password?</ion-text>
-              <ion-text class="font-sm"
-                >We will send you a link to reset password
-              </ion-text>
+              <ion-text class="font-sm">We will send you a link to reset password</ion-text>
             </div>
             <ion-input
               fill="outline"
               placeholder="Enter email:*"
               class="custom-input ion-margin-bottom"
+              @ionInput="validate"
+              ref="emailInput"
             ></ion-input>
+            <ion-text color="danger">{{ customErrorMessage }}</ion-text>
             <ion-button
               expand="block"
               class="ion-padding-vertical"
+              :disabled="!isValidForm"
               router-link="/resetOtp"
             >
               SEND LINK
@@ -31,17 +33,50 @@
 </template>
 
 <script setup lang="ts">
-import {
-  IonPage,
-  IonContent,
-  IonRow,
-  IonCol,
-  IonButton,
-  IonText,
-} from "@ionic/vue";
+import { ref, computed } from "vue";
+import { IonPage, IonContent, IonRow, IonCol, IonButton, IonText } from "@ionic/vue";
 import Header from "@/components/Header/Header.vue";
+
+const emailInput = ref<HTMLElement | null>(null);
+const customErrorMessage = ref("");
+const emailValue = ref(""); // Store email value separately
+
+const validate = (ev: any) => {
+  const value = ev.target.value;
+  const inputElement = emailInput.value;
+
+  inputElement?.classList.remove("ion-valid");
+  inputElement?.classList.remove("ion-invalid");
+
+  emailValue.value = value; // Update email value
+
+  if (value === "") {
+    customErrorMessage.value = "Email is required";
+    return;
+  }
+
+  if (validateEmail(value)) {
+    inputElement?.classList.add("ion-valid");
+    customErrorMessage.value = ""; // No error message when valid
+  } else {
+    inputElement?.classList.add("ion-invalid");
+    customErrorMessage.value = "Invalid Email Format"; // Custom error message when invalid
+  }
+};
+
+// Function to validate email format
+const validateEmail = (email: string): boolean => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
+
+const isValidForm = computed(() => {
+  // Check if email value is not empty
+  return emailValue.value !== "" && customErrorMessage.value === "" && validateEmail(emailValue.value);
+});
 </script>
-<style scopped>
+
+<style scoped>
 .custom-container {
   display: flex;
   flex-direction: column;
@@ -55,12 +90,14 @@ import Header from "@/components/Header/Header.vue";
   font-weight: 500;
   line-height: 28px;
 }
+
 .custom-input {
   --background: #f2f2f2;
   --border-width: 0;
   --border-radius: 5px;
   margin-top: 10px;
 }
+
 .font-sm {
   color: #808080;
   font-size: 14px;

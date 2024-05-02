@@ -1,11 +1,9 @@
 <template>
   <ion-page>
-    <Header />
+    <Header is-back-button router-link="ask-help" />
     <ion-content :fullscreen="true" class="ion-padding">
       <h3>Request help?</h3>
-
       <div class="title-line"></div>
-
       <div class="text-today">
         <span>Today</span>
       </div>

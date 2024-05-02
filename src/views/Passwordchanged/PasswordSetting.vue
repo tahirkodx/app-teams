@@ -4,7 +4,7 @@
     <ion-content>
       <ion-row>
         <ion-col class="ion-padding">
-          <div class="custom-container">
+          <ion-label class="custom-container">
             <ion-text class="font-lg">Settings</ion-text>
             <ion-text class="font-sm"
               >For important updates regarding your Epicus activities.
@@ -22,7 +22,7 @@
                 <ion-icon :icon="arrowForward"></ion-icon>
               </button>
             </div>
-          </div>
+          </ion-label>
         </ion-col>
       </ion-row>
     </ion-content>
