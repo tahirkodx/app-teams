@@ -32,12 +32,12 @@
 <script setup lang="ts">
 import {
   IonButton,
-  IonText,
-  IonRow,
   IonCol,
-  IonPage,
-  IonImg,
   IonContent,
+  IonImg,
+  IonPage,
+  IonRow,
+  IonText,
 } from "@ionic/vue";
 </script>
 <style scoped>

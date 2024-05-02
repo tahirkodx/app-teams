@@ -65,13 +65,13 @@
 <script setup lang="ts">
 import {
   IonButton,
-  IonLabel,
-  IonText,
-  IonRow,
   IonCol,
-  IonPage,
   IonContent,
   IonInput,
+  IonLabel,
+  IonPage,
+  IonRow,
+  IonText,
 } from "@ionic/vue";
 // import router from "@/router";
 import { useRouter } from "vue-router";
